@@ -1,0 +1,14 @@
+.profile-github {
+  &__repo {
+    display: flex;
+    border-bottom: 1px solid $back-btn;
+    margin-bottom: 16pt;
+    &-title {
+      width: 50%;
+      display: flex;
+    }
+    &-info {
+      margin-top: 4pt;
+    }
+  }
+}

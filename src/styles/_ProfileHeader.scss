@@ -1,0 +1,27 @@
+.profile-header {
+  position: relative;
+
+  &__banner {
+    width: 100%;
+    height: 15em;
+    margin-bottom: 100px;
+
+    &-pic {
+      width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  &__logo {
+    width: 14em;
+    height: 14em;
+    position: absolute;
+    top: 100px;
+    left: 30px;
+
+    &-pic {
+      width: 100%;
+      border: 1px solid black;
+    }
+  }
+}

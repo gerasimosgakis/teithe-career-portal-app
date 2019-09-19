@@ -1,0 +1,12 @@
+.create-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__form {
+    width: 80%;
+    margin: auto;
+    &-buttons {
+      width: 100%;
+    }
+  }
+}

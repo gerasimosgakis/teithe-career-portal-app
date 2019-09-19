@@ -1,0 +1,13 @@
+.landing {
+  &__logo {
+    width: 100%;
+    text-align: center;
+    &-image {
+      max-height: 600px;
+      max-width: 100%;
+    }
+  }
+  &__slogan {
+    text-align: center;
+  }
+}

@@ -1,0 +1,32 @@
+.profile-skills {
+  &__content {
+    padding: 2em 0;
+    display: flex;
+    &-icon {
+      position: relative;
+      display: flex;
+      background-color: $lead;
+      color: white;
+      width: 5em;
+      height: 5em;
+      border-radius: 100%;
+      margin-right: 16pt;
+      align-items: center;
+      justify-content: center;
+    }
+    &-skills {
+      display: flex;
+      flex-wrap: wrap;
+      &-skill {
+        margin: 4pt;
+      }
+      &-skill--bordered {
+        border: 1px solid hsla(208, 80%, 19%, 1);
+        border-radius: 10pt;
+        padding: 4pt;
+      }
+    }
+  }
+  border-bottom: 1px solid $back-btn;
+  margin-bottom: 24pt;
+}

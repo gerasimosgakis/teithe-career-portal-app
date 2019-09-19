@@ -1,0 +1,33 @@
+@import "styles/colors";
+
+.profile-creds {
+  &__cred {
+    border: none;
+    padding: 2em 0;
+    &-info {
+      display: flex;
+      flex-direction: row;
+
+      &-icon {
+        position: relative;
+        display: flex;
+        background-color: $lead;
+        color: white;
+        width: 5em;
+        height: 5em;
+        border-radius: 100%;
+        margin-right: 16pt;
+        align-items: center;
+        justify-content: center;
+      }
+      &-details {
+        display: flex;
+        flex-direction: column;
+      }
+      &-description {
+        border-bottom: 1px solid $back-btn;
+        padding-bottom: 16pt;
+      }
+    }
+  }
+}
