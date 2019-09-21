@@ -1,4 +1,9 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL } from "../actions/types";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL
+} from "../actions/types";
 
 const initialState = {
   isAuthenticated: null,
@@ -19,6 +24,23 @@ export default function(state = initialState, action) {
         loading: false
       };
     case REGISTER_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        loading: false,
+        errors: payload
+      };
+    case LOGIN_SUCCESS:
+      console.log(payload);
+      return {
+        ...state,
+        user: {
+          ...payload
+        },
+        isAuthenticated: true,
+        loading: false
+      };
+    case LOGIN_FAIL:
       return {
         ...state,
         isAuthenticated: false,
