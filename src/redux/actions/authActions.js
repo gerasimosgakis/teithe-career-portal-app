@@ -3,7 +3,8 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  SET_USER
 } from "./types";
 
 export const registerUser = (userData, history) => async dispatch => {
