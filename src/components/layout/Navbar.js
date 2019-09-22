@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-// import { logoutUser } from "../../redux/actions/authActions";
+import { logoutUser } from "../../redux/actions/authActions";
 // import { clearCurrentProfile } from "../../redux/actions/profileActions";
 import { connect } from "react-redux";
 
@@ -15,6 +15,14 @@ class Navbar extends Component {
       errors: {}
     };
   }
+
+  onLogout = async e => {
+    // await Auth.signOut();
+    e.preventDefault();
+    // this.props.clearCurrentProfile();
+    this.props.logoutUser(this.props.history);
+    this.setState({ isAuthenticated: false });
+  };
 
   render() {
     const { auth } = this.props;
@@ -133,5 +141,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { logoutUser }
 )(withRouter(Navbar));

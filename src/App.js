@@ -13,6 +13,7 @@ import Spinner from "./components/shared/Spinner";
 import Routes from "./Routes";
 import { setUser } from "./redux/actions/authActions";
 import { SET_USER } from "./redux/actions/types";
+import gravatar from "gravatar";
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +31,12 @@ class App extends Component {
       console.log(currentAuthenticatedUser);
 
       this.userHasAuthenticated(true); // If the above succeeds it calls userHasAuthenticated function
+      const avatar = gravatar.url(currentAuthenticatedUser.attributes.email, {
+        s: "30", // size
+        r: "pg", // rating
+        d: "mm" //default
+      });
+      currentAuthenticatedUser.avatar = avatar;
       store.dispatch({
         type: SET_USER,
         payload: currentAuthenticatedUser
@@ -46,11 +53,6 @@ class App extends Component {
   };
 
   render() {
-    const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
-    };
-
     return (
       this.state.isAuthenticating && <Spinner />,
       !this.state.isAuthenticating && (
