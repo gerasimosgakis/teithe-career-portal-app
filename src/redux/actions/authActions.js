@@ -6,7 +6,9 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-  SET_LOADING
+  SET_LOADING,
+  CONFIRM_REGISTER_SUCCESS,
+  CONFIRM_REGISTER_FAIL
 } from "./types";
 import gravatar from "gravatar";
 
@@ -53,6 +55,21 @@ export const registerUser = (userData, history) => async dispatch => {
   }
 };
 
+export const confirmUser = (userData, history) => async dispatch => {
+  try {
+    await Auth.confirmSignUp(userData.email, userData.confirmationCode);
+    dispatch({
+      type: CONFIRM_REGISTER_SUCCESS
+    });
+    history.push("/login");
+  } catch (error) {
+    dispatch({
+      type: CONFIRM_REGISTER_FAIL,
+      payload: { message: error }
+    });
+  }
+};
+
 export const loginUser = (userData, history) => async dispatch => {
   dispatch({
     type: "SET_LOADING",
@@ -73,6 +90,7 @@ export const loginUser = (userData, history) => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: user
     });
+    history.push("/dashboard");
   } catch (error) {
     if (error.code === "UserNotConfirmedException") {
       history.push("/register");

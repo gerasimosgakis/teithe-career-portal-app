@@ -25,7 +25,7 @@ class App extends Component {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const currentAuthenticatedUser = await Auth.currentAuthenticatedUser(); // Gets the current session
       console.log(currentAuthenticatedUser);

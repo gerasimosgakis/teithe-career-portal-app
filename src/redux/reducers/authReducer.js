@@ -1,6 +1,8 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  CONFIRM_REGISTER_SUCCESS,
+  CONFIRM_REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   SET_USER,
@@ -11,6 +13,7 @@ import {
 
 const initialState = {
   isAuthenticated: null,
+  userConfirmed: null,
   loading: true,
   user: null,
   errors: null
@@ -37,13 +40,30 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ...payload,
-        isAuthenticated: true,
+        isAuthenticated: false,
+        userConfirmed: false,
         loading: false
       };
     case REGISTER_FAIL:
       return {
         ...state,
         isAuthenticated: false,
+        userConfirmed: false,
+        loading: false,
+        errors: payload
+      };
+    case CONFIRM_REGISTER_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+        userConfirmed: true,
+        loading: false
+      };
+    case CONFIRM_REGISTER_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        userConfirmed: false,
         loading: false,
         errors: payload
       };
