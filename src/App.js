@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import "./App.scss";
@@ -10,8 +10,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { Auth } from "aws-amplify";
 import Spinner from "./components/shared/Spinner";
-import Routes from "./Routes";
-import { setUser } from "./redux/actions/authActions";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
 
@@ -27,8 +25,8 @@ class App extends Component {
 
   async componentDidMount() {
     try {
-      const currentAuthenticatedUser = await Auth.currentAuthenticatedUser(); // Gets the current session
-      console.log(currentAuthenticatedUser);
+      // Gets the current user
+      const currentAuthenticatedUser = await Auth.currentAuthenticatedUser();
 
       this.userHasAuthenticated(true); // If the above succeeds it calls userHasAuthenticated function
       const avatar = gravatar.url(currentAuthenticatedUser.attributes.email, {
