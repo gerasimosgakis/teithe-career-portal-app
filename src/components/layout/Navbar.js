@@ -50,7 +50,7 @@ class Navbar extends Component {
               {this.props.auth.isAuthenticated ? (
                 <Fragment>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/profiles">
+                    <Link className="nav-link" to="/graduates">
                       {" "}
                       Graduates
                     </Link>
@@ -82,7 +82,7 @@ class Navbar extends Component {
               {this.props.auth.isAuthenticated ? (
                 <Fragment>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/dashboard">
+                    <Link className="nav-link" to="/profile">
                       <img
                         className="rounded-circle d-none d-md-block"
                         src={auth.user.avatar}

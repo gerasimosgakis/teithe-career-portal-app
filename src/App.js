@@ -5,6 +5,7 @@ import Landing from "./components/layout/Landing";
 import "./App.scss";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Profiles from "./components/profiles/Profiles";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -65,6 +66,8 @@ class App extends Component {
               <Switch>
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/graduates" component={Profiles} />
+                {/* <Route exact path="/profile" component={Profile} /> */}
               </Switch>
             </div>
           </div>

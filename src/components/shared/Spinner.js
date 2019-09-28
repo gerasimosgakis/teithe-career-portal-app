@@ -4,7 +4,6 @@ import spinner from "./spinner.gif";
 export default function Spinner() {
   return (
     <div>
-      <p>TEST</p>
       <img
         src={spinner}
         style={{ width: "200px", margin: "auto", display: "block" }}

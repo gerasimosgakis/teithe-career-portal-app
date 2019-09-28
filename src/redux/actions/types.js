@@ -9,5 +9,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAIL = "LOGOUT_FAIL";
+export const GET_PROFILES_SUCCESS = "GET_PROFILES_SUCCESS";
+export const GET_PROFILES_FAIL = "GET_PROFILES_FAIL";
 
 export const SET_LOADING = "SET_LOADING";
