@@ -6,7 +6,7 @@ class ProfileCreds extends Component {
     const { experience, education } = this.props;
 
     const expItems = experience.map(exp => (
-      <li key={exp._id} className="list-group-item profile-creds__cred">
+      <li key={exp.id} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
           <div className="profile-creds__cred-info-icon">
             <i className="fa fa-briefcase fa-3x" />
@@ -59,10 +59,10 @@ class ProfileCreds extends Component {
     ));
 
     const eduItems = education.map(edu => (
-      <li key={edu._id} className="list-group-item profile-creds__cred">
+      <li key={edu.id} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
           <div className="profile-creds__cred-info-icon">
-            <i class="fas fa-graduation-cap fa-3x" />
+            <i className="fas fa-graduation-cap fa-3x" />
           </div>
           <span className="profile-creds__cred-info-details">
             <p>{edu.degree}</p>
