@@ -89,7 +89,7 @@ export const loginUser = (userData, history) => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: user
     });
-    history.push("/dashboard");
+    history.push("/profile");
   } catch (error) {
     if (error.code === "UserNotConfirmedException") {
       history.push("/register");

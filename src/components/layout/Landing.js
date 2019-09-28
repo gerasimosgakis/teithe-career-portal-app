@@ -27,7 +27,7 @@ class Landing extends Component {
             Portal
           </p>
           {auth.isAuthenticated ? (
-            <Link to="/dashboard">
+            <Link to="/profile">
               <button className="button submit-btn">Go to Dashboard</button>
             </Link>
           ) : (
