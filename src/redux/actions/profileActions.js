@@ -9,6 +9,10 @@ import {
 // Get All Profiles
 export const getProfiles = () => async dispatch => {
   try {
+    dispatch({
+      type: "SET_LOADING",
+      payload: true
+    });
     const profiles = await API.get("teithe-career-portal-api", "/profiles");
     dispatch({
       type: GET_PROFILES_SUCCESS,
@@ -22,10 +26,46 @@ export const getProfiles = () => async dispatch => {
   }
 };
 
+// Get Profile By Id
+export const getProfileById = id => async dispatch => {
+  console.log(id);
+
+  try {
+    dispatch({
+      type: "SET_LOADING",
+      payload: true
+    });
+    const profile = await API.get(
+      "teithe-career-portal-api",
+      `/profiles/${id}`
+    );
+    const educations = await API.get(
+      "teithe-career-portal-api",
+      `/educations/${id}`
+    );
+    const experiences = await API.get(
+      "teithe-career-portal-api",
+      `/experiences/${id}`
+    );
+    console.log(profile);
+    dispatch({
+      type: GET_PROFILE_SUCCESS,
+      payload: {
+        profile: profile,
+        educations,
+        experiences
+      }
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_PROFILE_FAIL,
+      payload: error
+    });
+  }
+};
+
 // Get profile by handle
 export const getProfileByHandle = handle => async dispatch => {
-  // dispatch(setProfileLoading());
-  console.log(handle);
   try {
     dispatch({
       type: "SET_LOADING",

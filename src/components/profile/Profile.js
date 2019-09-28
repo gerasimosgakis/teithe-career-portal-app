@@ -7,12 +7,17 @@ import ProfileCreds from "./ProfileCreds";
 import ProfileGithub from "./ProfileGithub";
 import ProfileSkills from "./ProfileSkills";
 import Spinner from "../shared/Spinner";
-import { getProfileByHandle } from "../../redux/actions/profileActions";
+import {
+  getProfileByHandle,
+  getProfileById
+} from "../../redux/actions/profileActions";
 
 class Profile extends Component {
   componentDidMount() {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
+    } else {
+      this.props.getProfileById(this.props.auth.user.username);
     }
   }
 
@@ -45,14 +50,17 @@ class Profile extends Component {
 
 Profile.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
-  profiles: PropTypes.object.isRequired
+  getProfileById: PropTypes.func.isRequired,
+  profiles: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profiles: state.profiles
+  profiles: state.profiles,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getProfileByHandle }
+  { getProfileByHandle, getProfileById }
 )(Profile);
