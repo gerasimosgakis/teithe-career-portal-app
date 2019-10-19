@@ -42,3 +42,12 @@
     background: $back-btn-hover;
   }
 }
+
+.modal-button {
+  color: $submit-btn;
+  background: none;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}

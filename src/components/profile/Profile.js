@@ -21,6 +21,16 @@ class Profile extends Component {
     }
   }
 
+  handleShow = () =>
+    this.setState({
+      show: true
+    });
+
+  handleClose = () =>
+    this.setState({
+      show: false
+    });
+
   render() {
     const { profile, loading } = this.props.profiles;
     let profileContent;

@@ -112,18 +112,91 @@ class ProfileCreds extends Component {
 
     return (
       <div className="profile-creds contain">
-        <h3>Experience</h3>
+        <h3>
+          Experience <span>&nbsp;</span>
+          <button
+            className="modal-button"
+            data-toggle="modal"
+            data-target="#expModal"
+          >
+            <i className="fas fa-edit"></i>
+          </button>
+        </h3>
         {expItems.length > 0 ? (
           <ul className="list-group">{expItems}</ul>
         ) : (
           <p className="text-center">No Experience Listed</p>
         )}
-        <h3>Education</h3>
+        <h3>
+          Education <span>&nbsp;</span>
+          <button
+            className="modal-button"
+            data-toggle="modal"
+            data-target="#eduModal"
+          >
+            <i className="fas fa-edit"></i>
+          </button>
+        </h3>
         {eduItems.length > 0 ? (
           <ul className="list-group">{eduItems}</ul>
         ) : (
           <p className="text-center">No Education Listed</p>
         )}
+        <button type="button" data-toggle="modal" data-target="#expModal">
+          Open Modal
+        </button>
+
+        {/* Experience Edit Modal */}
+        <div className="modal fade" id="expModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Edit Experience</h4>
+                <button type="button" className="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Education Edit Modal */}
+        <div className="modal fade" id="eduModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Edit Educations</h4>
+                <button type="button" className="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       // <div className="row">
