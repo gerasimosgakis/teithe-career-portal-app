@@ -114,13 +114,15 @@ class ProfileCreds extends Component {
       <div className="profile-creds contain">
         <h3>
           Experience <span>&nbsp;</span>
-          <button
-            className="modal-button"
-            data-toggle="modal"
-            data-target="#expModal"
-          >
-            <i className="fas fa-edit"></i>
-          </button>
+          {this.props.edit && (
+            <button
+              className="modal-button"
+              data-toggle="modal"
+              data-target="#expModal"
+            >
+              <i className="fas fa-edit"></i>
+            </button>
+          )}
         </h3>
         {expItems.length > 0 ? (
           <ul className="list-group">{expItems}</ul>
@@ -129,22 +131,21 @@ class ProfileCreds extends Component {
         )}
         <h3>
           Education <span>&nbsp;</span>
-          <button
-            className="modal-button"
-            data-toggle="modal"
-            data-target="#eduModal"
-          >
-            <i className="fas fa-edit"></i>
-          </button>
+          {this.props.edit && (
+            <button
+              className="modal-button"
+              data-toggle="modal"
+              data-target="#eduModal"
+            >
+              <i className="fas fa-edit"></i>
+            </button>
+          )}
         </h3>
         {eduItems.length > 0 ? (
           <ul className="list-group">{eduItems}</ul>
         ) : (
           <p className="text-center">No Education Listed</p>
         )}
-        <button type="button" data-toggle="modal" data-target="#expModal">
-          Open Modal
-        </button>
 
         {/* Experience Edit Modal */}
         <div className="modal fade" id="expModal" role="dialog">

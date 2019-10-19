@@ -33,6 +33,7 @@ class Profile extends Component {
 
   render() {
     const { profile, loading } = this.props.profiles;
+    const { user } = this.props.auth;
     let profileContent;
 
     if (profile === null || loading) {
@@ -45,6 +46,7 @@ class Profile extends Component {
           <ProfileCreds
             education={profile.educations}
             experience={profile.experiences}
+            edit={profile.id === user.username}
           />
           <ProfileSkills profile={profile} />
           {profile.githubusername ? (
