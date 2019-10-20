@@ -6,7 +6,7 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import InputGroup from "../shared/InputGroup";
 import SelectListGroup from "../shared/SelectListGroup";
-// import { createProfile } from "../../redux/actions/profileActions";
+import { createProfile } from "../../redux/actions/profileActions";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -30,6 +30,42 @@ class CreateProfile extends Component {
       errors: {}
     };
   }
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const profileData = {
+      id: this.props.auth.user.username,
+      handle: this.state.handle.toLowerCase(),
+      name: this.props.auth.user.attributes.name.toLowerCase(),
+      company: this.state.company.toLowerCase(),
+      website: this.state.website.toLowerCase(),
+      location: this.state.location.toLowerCase(),
+      status: this.state.status.toLowerCase(),
+      skills: this.state.skills.toLowerCase(),
+      githubusername: this.state.githubusername.toLowerCase(),
+      bio: this.state.bio.toLowerCase(),
+      twitter: this.state.twitter.toLowerCase(),
+      facebook: this.state.facebook.toLowerCase(),
+      linkedin: this.state.linkedin.toLowerCase(),
+      youtube: this.state.youtube.toLowerCase(),
+      instagram: this.state.instagram.toLowerCase()
+    };
+
+    const currentUserId = this.props.auth.user.username;
+    const email = this.props.auth.user.attributes.email;
+
+    this.props.createProfile(
+      currentUserId,
+      email,
+      profileData,
+      this.props.history
+    );
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { displaySocialInputs } = this.state;
@@ -186,7 +222,7 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object
 };
 
 const mapStateToProps = state => ({
@@ -197,5 +233,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { createProfile }
 )(withRouter(CreateProfile));
