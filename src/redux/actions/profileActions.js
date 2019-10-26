@@ -6,7 +6,9 @@ import {
   GET_PROFILE_SUCCESS,
   GET_PROFILE_FAIL,
   CREATE_PROFILE_SUCCESS,
-  CREATE_PROFILE_FAIL
+  CREATE_PROFILE_FAIL,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAIL
 } from "./types";
 
 // Get All Profiles
@@ -139,11 +141,61 @@ export const createProfile = (
       //   "cognito-identity-id": user
       // }
     });
-    history.push("/dashboard");
+    history.push("/profile");
   } catch (err) {
     console.log(err);
     dispatch({
       type: CREATE_PROFILE_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Edit Profile
+export const editProfile = (
+  user,
+  email,
+  profileData,
+  history
+) => async dispatch => {
+  console.log(typeof profileData.skills, profileData);
+  //profileData.skills = profileData.skills ? profileData.skills.split(",") : [];
+  profileData.id = user;
+  // if (profileData.skills && typeof profileData.skills === "string") {
+  //   profileData.skills = profileData.skills.split(",");
+  // } else if (profileData.skills && typeof profileData.skills === "object") {
+  //   profileData.skills = profileData.skills;
+  // } else {
+  //   profileData.skills = [];
+  // }
+  const avatar = gravatar.url(email, {
+    s: "300", // size
+    r: "pg", // rating
+    d: "mm" //default
+  });
+  console.log(avatar);
+  profileData.avatar = avatar;
+  console.log(profileData);
+  try {
+    const editProfileResponse = await API.put(
+      "teithe-career-portal-api",
+      `/profiles/${profileData.id}`,
+      {
+        body: profileData
+        // headers: {
+        //   // set custom header id for testing
+        //   "cognito-identity-id": user
+        // }
+      }
+    );
+    dispatch({
+      type: EDIT_PROFILE_SUCCESS,
+      payload: editProfileResponse
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: EDIT_PROFILE_FAIL,
       payload: err
     });
   }

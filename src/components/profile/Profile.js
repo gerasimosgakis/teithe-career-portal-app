@@ -21,16 +21,6 @@ class Profile extends Component {
     }
   }
 
-  handleShow = () =>
-    this.setState({
-      show: true
-    });
-
-  handleClose = () =>
-    this.setState({
-      show: false
-    });
-
   render() {
     const { profile, loading } = this.props.profiles;
     const { user } = this.props.auth;
@@ -38,10 +28,18 @@ class Profile extends Component {
 
     if (profile === null || loading) {
       profileContent = <Spinner />;
-    } else {
+    }
+    // else if (!profile.id) {
+    //   // if the user has not added profile info
+    //   this.props.history.push("create-profile");
+    // }
+    else {
       profileContent = (
         <div>
-          <ProfileHeader profile={profile} />
+          <ProfileHeader
+            profile={profile}
+            edit={profile.id === user.username}
+          />
           <ProfileAbout profile={profile} />
           <ProfileCreds
             education={profile.educations}

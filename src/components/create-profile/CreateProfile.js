@@ -6,34 +6,44 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import InputGroup from "../shared/InputGroup";
 import SelectListGroup from "../shared/SelectListGroup";
-import { createProfile } from "../../redux/actions/profileActions";
+import { createProfile, editProfile } from "../../redux/actions/profileActions";
 
 class CreateProfile extends Component {
+  edit = this.props.profiles.profile ? true : false; // Variable we use so we know if we are editing an existing profile or creating a new one
   constructor(props) {
     super(props);
 
+    const { profile } = this.props.profiles;
+    console.log(profile);
+
     this.state = {
       displaySocialInputs: false,
-      handle: "",
-      company: "",
-      website: "",
-      location: "",
-      status: "",
-      skills: "",
-      githubusername: "",
-      bio: "",
-      twitter: "",
-      facebook: "",
-      linkedin: "",
-      youtube: "",
-      instagram: "",
+      handle: profile && profile.handle ? profile.handle : "",
+      company: profile && profile.company ? profile.company : "",
+      website: profile && profile.website ? profile.website : "",
+      location: profile && profile.location ? profile.location : "",
+      status: profile && profile.status ? profile.status : "",
+      skills: profile && profile.skills ? profile.skills : "",
+      githubusername:
+        profile && profile.githubusername ? profile.githubusername : "",
+      bio: profile && profile.bio ? profile.bio : "",
+      twitter: profile && profile.twitter ? profile.twitter : "",
+      facebook: profile && profile.facebook ? profile.facebook : "",
+      linkedin: profile && profile.linkedin ? profile.linkedin : "",
+      youtube: profile && profile.youtube ? profile.youtube : "",
+      instagram: profile && profile.instagram ? profile.instagram : "",
+      experiences: profile && profile.experiences ? profile.experiences : [],
+      educations: profile && profile.educations ? profile.educations : [],
       errors: {}
     };
   }
 
+  componentDidMount() {
+    console.log(this.props.profiles);
+  }
+
   onSubmit = e => {
     e.preventDefault();
-
     const profileData = {
       id: this.props.auth.user.username,
       handle: this.state.handle.toLowerCase(),
@@ -55,12 +65,19 @@ class CreateProfile extends Component {
     const currentUserId = this.props.auth.user.username;
     const email = this.props.auth.user.attributes.email;
 
-    this.props.createProfile(
-      currentUserId,
-      email,
-      profileData,
-      this.props.history
-    );
+    this.edit
+      ? this.props.editProfile(
+          currentUserId,
+          email,
+          profileData,
+          this.props.history
+        )
+      : this.props.createProfile(
+          currentUserId,
+          email,
+          profileData,
+          this.props.history
+        );
   };
 
   onChange = e => {
@@ -115,14 +132,14 @@ class CreateProfile extends Component {
     // Select options for status
     const options = [
       { label: "Select Professional Status", value: 0 },
-      { label: "Developer", value: "Developer" },
-      { label: "Junior Developer", value: "Junior Developer" },
-      { label: "Senior Developer", value: "Senior Developer" },
-      { label: "Manager", value: "Manager" },
-      { label: "Student / Learning", value: "Student / Learning" },
-      { label: "Instructor / Teacher", value: "Instructor / Teacher" },
-      { label: "Intern", value: "Intern" },
-      { label: "Other", value: "Other" }
+      { label: "Developer", value: "developer" },
+      { label: "Junior Developer", value: "junior developer" },
+      { label: "Senior Developer", value: "senior developer" },
+      { label: "Manager", value: "manager" },
+      { label: "Student / Learning", value: "student / learning" },
+      { label: "Instructor / Teacher", value: "instructor / teacher" },
+      { label: "Intern", value: "intern" },
+      { label: "Other", value: "other" }
     ];
     return (
       <div className="create-profile">
@@ -222,16 +239,16 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profile: PropTypes.object
+  profiles: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
+  profiles: state.profiles,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { createProfile, editProfile }
 )(withRouter(CreateProfile));

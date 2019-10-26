@@ -5,7 +5,9 @@ import {
   GET_PROFILE_SUCCESS,
   GET_PROFILE_FAIL,
   CREATE_PROFILE_SUCCESS,
-  CREATE_PROFILE_FAIL
+  CREATE_PROFILE_FAIL,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -58,6 +60,23 @@ export default function(state = initialState, action) {
         loading: false
       };
     case CREATE_PROFILE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case EDIT_PROFILE_SUCCESS:
+      console.log(action.payload.data);
+      return {
+        ...state,
+        profile: {
+          ...action.payload.data,
+          experiences: [...state.profile.experiences],
+          educations: [...state.profile.educations]
+        },
+        loading: false
+      };
+    case EDIT_PROFILE_FAIL:
       return {
         ...state,
         loading: false,

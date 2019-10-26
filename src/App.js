@@ -16,6 +16,7 @@ import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
 import CreateProfile from "./components/create-profile/CreateProfile";
+import AddExperience from "./components/add-experience/AddExperience";
 
 class App extends Component {
   constructor(props) {
@@ -77,7 +78,7 @@ class App extends Component {
                 <Route exact path="/graduates" component={Profiles} />
                 <Route exact path="/graduates/:handle" component={Profile} />
                 <Route exact path="/profile" component={Profile} />
-                {/* <Route exact path="/profile" component={Profile} /> */}
+                <Route exact path="/add-experience" component={AddExperience} />
               </Switch>
             </div>
           </div>

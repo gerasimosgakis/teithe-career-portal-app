@@ -1,18 +1,49 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
+import AddExperience from "../add-experience/AddExperience";
 
 class ProfileCreds extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentExperienceIndex: 0
+    };
+
+    this.setInd = this.setInd.bind(this);
+  }
+
+  setInd(idx) {
+    // this.setState({
+    //   currentExperienceIndex: this.state.currentExperienceIndex === 1 ? 0 : 1
+    // });
+    this.setState({
+      currentExperienceIndex: idx
+    });
+    console.log(this.state);
+  }
+
   render() {
     const { experience, education } = this.props;
 
-    const expItems = experience.map(exp => (
+    const expItems = experience.map((exp, index) => (
       <li key={exp.id} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
           <div className="profile-creds__cred-info-icon">
             <i className="fa fa-briefcase fa-3x" />
           </div>
           <span className="profile-creds__cred-info-details">
-            <p>{exp.title}</p>
+            <p>
+              {exp.title}{" "}
+              <button
+                className="modal-button"
+                data-toggle="modal"
+                data-target="#expModal"
+                onClick={() => this.setInd(index)}
+              >
+                <i className="fas fa-edit"></i>
+              </button>
+            </p>
             <p>{exp.company}</p>
             <p className="help-text">
               <Moment format="MMMM YYYY">{exp.from}</Moment> -{" "}
@@ -120,7 +151,7 @@ class ProfileCreds extends Component {
               data-toggle="modal"
               data-target="#expModal"
             >
-              <i className="fas fa-edit"></i>
+              <i className="fas fa-plus"></i>
             </button>
           )}
         </h3>
@@ -137,7 +168,7 @@ class ProfileCreds extends Component {
               data-toggle="modal"
               data-target="#eduModal"
             >
-              <i className="fas fa-edit"></i>
+              <i className="fas fa-plus"></i>
             </button>
           )}
         </h3>
@@ -158,7 +189,11 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <p>Some text in the modal.</p>
+                <AddExperience
+                  experiences={
+                    this.props.experience[this.state.currentExperienceIndex]
+                  }
+                ></AddExperience>
               </div>
               <div className="modal-footer">
                 <button
