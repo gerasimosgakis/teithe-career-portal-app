@@ -7,20 +7,15 @@ class ProfileCreds extends Component {
     super(props);
 
     this.state = {
+      current: this.props.experience[0].current,
+      location: this.props.experience[0].location,
+      description: this.props.experience[0].description,
+      title: this.props.experience[0].title,
+      start_date: this.props.experience[0].start_date,
+      end_date: this.props.experience[0].end_date,
+      company: this.props.experience[0].company,
       currentExperienceIndex: 0
     };
-
-    this.setInd = this.setInd.bind(this);
-  }
-
-  setInd(idx) {
-    // this.setState({
-    //   currentExperienceIndex: this.state.currentExperienceIndex === 1 ? 0 : 1
-    // });
-    this.setState({
-      currentExperienceIndex: idx
-    });
-    console.log(this.state);
   }
 
   render() {
@@ -39,7 +34,20 @@ class ProfileCreds extends Component {
                 className="modal-button"
                 data-toggle="modal"
                 data-target="#expModal"
-                onClick={() => this.setInd(index)}
+                onClick={() => {
+                  // this.currentExperienceIndex = index;
+                  this.setState({
+                    current: this.props.experience[index].current || "",
+                    location: this.props.experience[index].location || "",
+                    description: this.props.experience[index].description || "",
+                    title: this.props.experience[index].title || "",
+                    start_date: this.props.experience[index].start_date || "",
+                    end_date: this.props.experience[index].end_date || "",
+                    company: this.props.experience[index].company || "",
+                    currentExperienceIndex: index
+                  });
+                  // console.log(this.currentExperienceIndex);
+                }}
               >
                 <i className="fas fa-edit"></i>
               </button>
@@ -190,9 +198,14 @@ class ProfileCreds extends Component {
               </div>
               <div className="modal-body">
                 <AddExperience
-                  experiences={
-                    this.props.experience[this.state.currentExperienceIndex]
-                  }
+                  current={this.state.current}
+                  _location={this.state.location}
+                  description={this.state.description}
+                  title={this.state.title}
+                  start_date={this.state.start_date}
+                  end_date={this.state.end_date}
+                  company={this.state.company}
+                  currentExperienceIndex={this.state.currentExperienceIndex}
                 ></AddExperience>
               </div>
               <div className="modal-footer">
