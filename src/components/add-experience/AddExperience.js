@@ -11,6 +11,7 @@ class AddExperience extends Component {
 
     // Retrieve all the props and save them in variables
     const {
+      id,
       current,
       _location,
       description,
@@ -23,6 +24,7 @@ class AddExperience extends Component {
 
     // Initialise state with the received props
     this.state = {
+      id,
       current,
       _location,
       description,
@@ -39,9 +41,24 @@ class AddExperience extends Component {
    *  different experience to edit
    */
   static getDerivedStateFromProps(props, current_state) {
-    if (props.currentExperienceIndex !== current_state.currentExperienceIndex) {
+    if (props.currentExperienceIndex === null) {
+      return {
+        id: "",
+        current: "",
+        _location: "",
+        description: "",
+        title: "",
+        start_date: "",
+        end_date: "",
+        company: "",
+        currentExperienceIndex: ""
+      };
+    } else if (
+      props.currentExperienceIndex !== current_state.currentExperienceIndex
+    ) {
       // Check if we are using a different experience and update state if we do
       return {
+        id: props.id,
         current: props.current,
         _location: props._location !== null ? props._location : null,
         description: props.description,

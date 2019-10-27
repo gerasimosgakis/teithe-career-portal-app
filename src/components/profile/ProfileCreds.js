@@ -7,6 +7,7 @@ class ProfileCreds extends Component {
     super(props);
 
     this.state = {
+      id: this.props.experience[0].id,
       current: this.props.experience[0].current,
       location: this.props.experience[0].location,
       description: this.props.experience[0].description,
@@ -14,7 +15,7 @@ class ProfileCreds extends Component {
       start_date: this.props.experience[0].start_date,
       end_date: this.props.experience[0].end_date,
       company: this.props.experience[0].company,
-      currentExperienceIndex: 0
+      currentExperienceIndex: null
     };
   }
 
@@ -158,6 +159,12 @@ class ProfileCreds extends Component {
               className="modal-button"
               data-toggle="modal"
               data-target="#expModal"
+              onClick={() => {
+                // this.currentExperienceIndex = index;
+                this.setState({
+                  currentExperienceIndex: null
+                });
+              }}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -197,7 +204,33 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <AddExperience
+                {this.state.currentExperienceIndex >= 0 ? (
+                  <AddExperience
+                    id={this.state.id}
+                    current={this.state.current}
+                    _location={this.state.location}
+                    description={this.state.description}
+                    title={this.state.title}
+                    start_date={this.state.start_date}
+                    end_date={this.state.end_date}
+                    company={this.state.company}
+                    currentExperienceIndex={this.state.currentExperienceIndex}
+                  ></AddExperience>
+                ) : (
+                  <AddExperience
+                    id={null}
+                    current={null}
+                    _location={null}
+                    description={null}
+                    title={null}
+                    start_date={null}
+                    end_date={null}
+                    company={null}
+                    currentExperienceIndex={null}
+                  ></AddExperience>
+                )}
+                {/* <AddExperience
+                  id={this.state.id}
                   current={this.state.current}
                   _location={this.state.location}
                   description={this.state.description}
@@ -206,7 +239,7 @@ class ProfileCreds extends Component {
                   end_date={this.state.end_date}
                   company={this.state.company}
                   currentExperienceIndex={this.state.currentExperienceIndex}
-                ></AddExperience>
+                ></AddExperience> */}
               </div>
               <div className="modal-footer">
                 <button
