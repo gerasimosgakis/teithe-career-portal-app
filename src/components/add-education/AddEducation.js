@@ -7,8 +7,8 @@ import InputGroup from "../shared/InputGroup";
 import SelectListGroup from "../shared/SelectListGroup";
 import moment from "moment";
 import {
-  addExperience,
-  editExperience
+  addEducation,
+  editEducation
 } from "../../redux/actions/profileActions";
 class AddEducation extends Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class AddEducation extends Component {
       return {
         user_id: props.userId,
         id: props.id,
-        current: props.current,
+        current: props.current || false,
         school: props.school !== null ? props.school : null,
         description: props.description,
         degree: props.degree,
@@ -97,31 +97,31 @@ class AddEducation extends Component {
   onSubmit = e => {
     e.preventDefault();
     if (this.state.id) {
-      this.props.editExperience({
+      this.props.editEducation({
         user_id: this.state.user_id,
         id: this.state.id,
         current: this.state.current,
-        location: this.state._location,
+        school: this.state.school,
         description: this.state.description,
-        title: this.state.title,
+        degree: this.state.degree,
         start_date: moment(this.state.start_date),
         end_date: moment(this.state.end_date),
         // start_date: new Date(),
         // end_date: new Date(),
-        company: this.state.company
+        fieldofstudy: this.state.fieldofstudy
       });
     } else {
-      this.props.addExperience({
+      this.props.addEducation({
         user_id: this.state.user_id,
         current: this.state.current,
-        location: this.state._location,
+        school: this.state.school,
         description: this.state.description,
-        title: this.state.title,
+        degree: this.state.degree,
         start_date: moment(this.state.start_date),
         end_date: moment(this.state.end_date),
         // start_date: new Date(),
         // end_date: new Date(),
-        company: this.state.company
+        fieldofstudy: this.state.fieldofstudy
       });
     }
   };
@@ -183,7 +183,7 @@ class AddEducation extends Component {
                     name="current"
                     value={this.state.current}
                     checked={this.state.current}
-                    onChange={this.onCheck}
+                    onChange={this.onChange}
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
@@ -217,5 +217,5 @@ class AddEducation extends Component {
 
 export default connect(
   null,
-  { addExperience, editExperience }
+  { addEducation, editEducation }
 )(withRouter(AddEducation));

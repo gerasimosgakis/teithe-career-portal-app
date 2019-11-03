@@ -242,3 +242,45 @@ export const editExperience = expData => async dispatch => {
     // });
   }
 };
+
+// Add Education
+export const addEducation = eduData => async dispatch => {
+  console.log(eduData);
+
+  try {
+    await API.post("teithe-career-portal-api", `/educations`, {
+      body: eduData
+      // headers: {
+      //   // set custom header id for testing
+      //   "cognito-identity-id": user
+      // }
+    });
+  } catch (err) {
+    console.log(err);
+    // dispatch({
+    //   type: CREATE_PROFILE_FAIL,
+    //   payload: err
+    // });
+  }
+};
+
+// Edit Education
+export const editEducation = eduData => async dispatch => {
+  console.log(eduData);
+
+  try {
+    await API.put("teithe-career-portal-api", `/educations/${eduData.id}`, {
+      body: eduData
+      // headers: {
+      //   // set custom header id for testing
+      //   "cognito-identity-id": user
+      // }
+    });
+  } catch (err) {
+    console.log(err);
+    // dispatch({
+    //   type: CREATE_PROFILE_FAIL,
+    //   payload: err
+    // });
+  }
+};
