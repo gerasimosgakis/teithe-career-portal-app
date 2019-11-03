@@ -5,7 +5,11 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import InputGroup from "../shared/InputGroup";
 import SelectListGroup from "../shared/SelectListGroup";
-import { addExperience } from "../../redux/actions/profileActions";
+import moment from "moment";
+import {
+  addExperience,
+  editExperience
+} from "../../redux/actions/profileActions";
 class AddExperience extends Component {
   constructor(props) {
     super(props);
@@ -44,20 +48,26 @@ class AddExperience extends Component {
    *  different experience to edit
    */
   static getDerivedStateFromProps(props, current_state) {
-    if (props.currentExperienceIndex === null) {
+    if (
+      current_state.currentExperienceIndex !== -1 &&
+      props.currentExperienceIndex === null
+    ) {
+      console.log(props.currentExperienceIndex);
       return {
         user_id: props.userId,
         id: "",
-        current: "",
+        current: false,
         _location: "",
         description: "",
         title: "",
         start_date: "",
         end_date: "",
-        company: "",
-        currentExperienceIndex: ""
+        company: ""
+        // currentExperienceIndex: null
       };
-    } else if (
+    }
+    if (
+      current_state.currentExperienceIndex !== -1 &&
       props.currentExperienceIndex !== current_state.currentExperienceIndex
     ) {
       // Check if we are using a different experience and update state if we do
@@ -78,22 +88,42 @@ class AddExperience extends Component {
 
   onChange = e => {
     console.log(e);
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      currentExperienceIndex: -1,
+      [e.target.name]: e.target.value
+    });
   };
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.addExperience({
-      user_id: this.state.user_id,
-      // id: this.state.id,
-      current: this.state.current,
-      location: this.state._location,
-      description: this.state.description,
-      title: this.state.title,
-      start_date: this.state.start_date,
-      end_date: this.state.end_date,
-      company: this.state.company
-    });
+    if (this.state.id) {
+      this.props.editExperience({
+        user_id: this.state.user_id,
+        id: this.state.id,
+        current: this.state.current,
+        location: this.state._location,
+        description: this.state.description,
+        title: this.state.title,
+        start_date: moment(this.state.start_date),
+        end_date: moment(this.state.end_date),
+        // start_date: new Date(),
+        // end_date: new Date(),
+        company: this.state.company
+      });
+    } else {
+      this.props.addExperience({
+        user_id: this.state.user_id,
+        current: this.state.current,
+        location: this.state._location,
+        description: this.state.description,
+        title: this.state.title,
+        start_date: moment(this.state.start_date),
+        end_date: moment(this.state.end_date),
+        // start_date: new Date(),
+        // end_date: new Date(),
+        company: this.state.company
+      });
+    }
   };
 
   render() {
@@ -187,102 +217,5 @@ class AddExperience extends Component {
 
 export default connect(
   null,
-  { addExperience }
+  { addExperience, editExperience }
 )(withRouter(AddExperience));
-
-// import React from "react";
-// import TextFieldGroup from "../shared/TextFieldGroup";
-// import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
-// import InputGroup from "../shared/InputGroup";
-// import SelectListGroup from "../shared/SelectListGroup";
-
-// const AddExperience = ({
-//   current,
-//   location,
-//   description,
-//   title,
-//   start_date,
-//   end_date,
-//   company
-// }) => {
-//   return (
-//     <div className="create-profile">
-//       <div className="create-profile__header">
-//         <h1>Create Your Profile</h1>
-//         <p className="header-label">
-//           Let's get some information to make your profile stand out
-//         </p>
-//       </div>
-//       <div className="create-profile__form">
-//         <small className="small-text">* = required fields</small>
-//         <form className="mt1">
-//           {/* <TextFieldGroup
-//             placeholder="* Profile Handle"
-//             name="handle"
-//             value={this.state.handle}
-//             required
-//             onChange={this.onChange}
-//             info="A unique handle for your profile URL. Your full name, company name. nickname"
-//           /> */}
-//           {/* <SelectListGroup
-//             placeholder="Status"
-//             name="status"
-//             value={this.state.status}
-//             options={options}
-//             onChange={this.onChange}
-//             info="Where are you at in your career"
-//           /> */}
-//           <TextFieldGroup
-//             placeholder="Company"
-//             name="company"
-//             value={company}
-//             info="Your own company or the one you work for"
-//           />
-//           {/* <TextFieldGroup
-//             placeholder="Website"
-//             name="website"
-//             value={this.state.website}
-//             onChange={this.onChange}
-//             info="Your website or a company one"
-//           /> */}
-//           {/* <TextFieldGroup
-//             placeholder="Location"
-//             name="location"
-//             value={this.state.location}
-//             onChange={this.onChange}
-//             info="Your location (e.g. London, UK)"
-//           />
-//           <TextFieldGroup
-//             placeholder="Skills"
-//             name="skills"
-//             value={this.state.skills}
-//             onChange={this.onChange}
-//             info="Please use comma separated values (e.g. Javascript,Angular,React)"
-//           />
-//           <TextFieldGroup
-//             placeholder="Github Username"
-//             name="githubusername"
-//             value={this.state.githubusername}
-//             onChange={this.onChange}
-//             info="If you want your latest repos and a Github link include your username"
-//           />
-//           <TextAreaFieldGroup
-//             placeholder="Short Bio"
-//             name="bio"
-//             value={this.state.bio}
-//             onChange={this.onChange}
-//             info="Let us know a little more about yourself"
-//           /> */}
-
-//           <input
-//             type="submit"
-//             value="Submit"
-//             className="btn btn-info btn-block mt-4"
-//           />
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AddExperience;

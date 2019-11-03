@@ -209,7 +209,7 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/* {this.state.currentExperienceIndex >= 0 ? (
+                {this.state.currentExperienceIndex >= 0 ? (
                   <AddExperience
                     userId={this.state.exp_userId}
                     id={this.state.exp_id}
@@ -226,17 +226,17 @@ class ProfileCreds extends Component {
                   <AddExperience
                     userId={this.state.exp_userId}
                     id={""}
-                    current={""}
+                    current={false}
                     _location={""}
                     description={""}
                     title={""}
                     start_date={""}
                     end_date={""}
                     company={""}
-                    currentExperienceIndex={""}
+                    // currentExperienceIndex={null}
                   ></AddExperience>
-                )} */}
-                <AddExperience
+                )}
+                {/* <AddExperience
                   userId={this.state.exp_userId}
                   id={this.state.exp_id}
                   current={this.state.exp_current}
@@ -247,7 +247,7 @@ class ProfileCreds extends Component {
                   end_date={this.state.exp_end_date}
                   company={this.state.exp_company}
                   currentExperienceIndex={this.state.currentExperienceIndex}
-                ></AddExperience>
+                ></AddExperience> */}
                 {/* <AddExperience
                   id={this.state.id}
                   current={this.state.current}
