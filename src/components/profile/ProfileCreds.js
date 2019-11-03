@@ -7,14 +7,15 @@ class ProfileCreds extends Component {
     super(props);
 
     this.state = {
-      id: this.props.experience[0].id,
-      current: this.props.experience[0].current,
-      location: this.props.experience[0].location,
-      description: this.props.experience[0].description,
-      title: this.props.experience[0].title,
-      start_date: this.props.experience[0].start_date,
-      end_date: this.props.experience[0].end_date,
-      company: this.props.experience[0].company,
+      exp_userId: this.props.experience[0].user_id,
+      exp_id: this.props.experience[0].id,
+      exp_current: this.props.experience[0].current,
+      exp_location: this.props.experience[0].location,
+      exp_description: this.props.experience[0].description,
+      exp_title: this.props.experience[0].title,
+      exp_start_date: this.props.experience[0].start_date,
+      exp_end_date: this.props.experience[0].end_date,
+      exp_company: this.props.experience[0].company,
       currentExperienceIndex: null
     };
   }
@@ -38,13 +39,17 @@ class ProfileCreds extends Component {
                 onClick={() => {
                   // this.currentExperienceIndex = index;
                   this.setState({
-                    current: this.props.experience[index].current || "",
-                    location: this.props.experience[index].location || "",
-                    description: this.props.experience[index].description || "",
-                    title: this.props.experience[index].title || "",
-                    start_date: this.props.experience[index].start_date || "",
-                    end_date: this.props.experience[index].end_date || "",
-                    company: this.props.experience[index].company || "",
+                    exp_userId: this.props.experience[index].user_id || "",
+                    exp_id: this.props.experience[index].id || "",
+                    exp_current: this.props.experience[index].current || "",
+                    exp_location: this.props.experience[index].location || "",
+                    exp_description:
+                      this.props.experience[index].description || "",
+                    exp_title: this.props.experience[index].title || "",
+                    exp_start_date:
+                      this.props.experience[index].start_date || "",
+                    exp_end_date: this.props.experience[index].end_date || "",
+                    exp_company: this.props.experience[index].company || "",
                     currentExperienceIndex: index
                   });
                   // console.log(this.currentExperienceIndex);
@@ -204,31 +209,45 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentExperienceIndex >= 0 ? (
+                {/* {this.state.currentExperienceIndex >= 0 ? (
                   <AddExperience
-                    id={this.state.id}
-                    current={this.state.current}
-                    _location={this.state.location}
-                    description={this.state.description}
-                    title={this.state.title}
-                    start_date={this.state.start_date}
-                    end_date={this.state.end_date}
-                    company={this.state.company}
+                    userId={this.state.exp_userId}
+                    id={this.state.exp_id}
+                    current={this.state.exp_current}
+                    _location={this.state.exp_location}
+                    description={this.state.exp_description}
+                    title={this.state.exp_title}
+                    start_date={this.state.exp_start_date}
+                    end_date={this.state.exp_end_date}
+                    company={this.state.exp_company}
                     currentExperienceIndex={this.state.currentExperienceIndex}
                   ></AddExperience>
                 ) : (
                   <AddExperience
-                    id={null}
-                    current={null}
-                    _location={null}
-                    description={null}
-                    title={null}
-                    start_date={null}
-                    end_date={null}
-                    company={null}
-                    currentExperienceIndex={null}
+                    userId={this.state.exp_userId}
+                    id={""}
+                    current={""}
+                    _location={""}
+                    description={""}
+                    title={""}
+                    start_date={""}
+                    end_date={""}
+                    company={""}
+                    currentExperienceIndex={""}
                   ></AddExperience>
-                )}
+                )} */}
+                <AddExperience
+                  userId={this.state.exp_userId}
+                  id={this.state.exp_id}
+                  current={this.state.exp_current}
+                  _location={this.state.exp_location}
+                  description={this.state.exp_description}
+                  title={this.state.exp_title}
+                  start_date={this.state.exp_start_date}
+                  end_date={this.state.exp_end_date}
+                  company={this.state.exp_company}
+                  currentExperienceIndex={this.state.currentExperienceIndex}
+                ></AddExperience>
                 {/* <AddExperience
                   id={this.state.id}
                   current={this.state.current}

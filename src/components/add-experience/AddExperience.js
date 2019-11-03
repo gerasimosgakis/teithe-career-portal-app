@@ -5,12 +5,14 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import InputGroup from "../shared/InputGroup";
 import SelectListGroup from "../shared/SelectListGroup";
+import { addExperience } from "../../redux/actions/profileActions";
 class AddExperience extends Component {
   constructor(props) {
     super(props);
 
     // Retrieve all the props and save them in variables
     const {
+      userId,
       id,
       current,
       _location,
@@ -24,6 +26,7 @@ class AddExperience extends Component {
 
     // Initialise state with the received props
     this.state = {
+      user_id: userId,
       id,
       current,
       _location,
@@ -43,6 +46,7 @@ class AddExperience extends Component {
   static getDerivedStateFromProps(props, current_state) {
     if (props.currentExperienceIndex === null) {
       return {
+        user_id: props.userId,
         id: "",
         current: "",
         _location: "",
@@ -58,6 +62,7 @@ class AddExperience extends Component {
     ) {
       // Check if we are using a different experience and update state if we do
       return {
+        user_id: props.userId,
         id: props.id,
         current: props.current,
         _location: props._location !== null ? props._location : null,
@@ -72,7 +77,23 @@ class AddExperience extends Component {
   }
 
   onChange = e => {
+    console.log(e);
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.addExperience({
+      user_id: this.state.user_id,
+      // id: this.state.id,
+      current: this.state.current,
+      location: this.state._location,
+      description: this.state.description,
+      title: this.state.title,
+      start_date: this.state.start_date,
+      end_date: this.state.end_date,
+      company: this.state.company
+    });
   };
 
   render() {
@@ -104,7 +125,7 @@ class AddExperience extends Component {
                 />
                 <TextFieldGroup
                   placeholder="Location"
-                  name="location"
+                  name="_location"
                   value={this.state._location}
                   onChange={this.onChange}
                 />
@@ -166,7 +187,7 @@ class AddExperience extends Component {
 
 export default connect(
   null,
-  {}
+  { addExperience }
 )(withRouter(AddExperience));
 
 // import React from "react";

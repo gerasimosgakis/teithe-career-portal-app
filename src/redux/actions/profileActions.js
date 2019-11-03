@@ -200,3 +200,24 @@ export const editProfile = (
     });
   }
 };
+
+// Add Experience
+export const addExperience = expData => async dispatch => {
+  console.log(expData);
+
+  try {
+    await API.post("teithe-career-portal-api", `/experiences`, {
+      body: expData
+      // headers: {
+      //   // set custom header id for testing
+      //   "cognito-identity-id": user
+      // }
+    });
+  } catch (err) {
+    console.log(err);
+    // dispatch({
+    //   type: CREATE_PROFILE_FAIL,
+    //   payload: err
+    // });
+  }
+};
