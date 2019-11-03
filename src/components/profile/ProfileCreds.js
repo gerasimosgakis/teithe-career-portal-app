@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
 import AddExperience from "../add-experience/AddExperience";
+import AddEducation from "../add-education/AddEducation";
 
 class ProfileCreds extends Component {
   constructor(props) {
@@ -16,7 +17,17 @@ class ProfileCreds extends Component {
       exp_start_date: this.props.experience[0].start_date,
       exp_end_date: this.props.experience[0].end_date,
       exp_company: this.props.experience[0].company,
-      currentExperienceIndex: null
+      currentExperienceIndex: null,
+      edu_userId: this.props.education[0].user_id,
+      edu_id: this.props.education[0].id,
+      edu_current: this.props.education[0].current,
+      edu_fieldofstudy: this.props.education[0].fieldofstudy,
+      edu_description: this.props.education[0].description,
+      edu_degree: this.props.education[0].degree,
+      edu_start_date: this.props.education[0].start_date,
+      edu_end_date: this.props.education[0].end_date,
+      edu_school: this.props.education[0].school,
+      currentEducationIndex: null
     };
   }
 
@@ -73,44 +84,44 @@ class ProfileCreds extends Component {
           {exp.description}
         </div>
       </li>
-      // <li key={exp._id} className="list-group-item">
-      //   <h4>{exp.company}</h4>
-      // <p>
-      //   <Moment format="MMMM YYYY">{exp.from}</Moment> -{" "}
-      //   {exp.to === null ? (
-      //     "Now"
-      //   ) : (
-      //     <Moment format="MMMM YYYY">{exp.to}</Moment>
-      //   )}
-      // </p>
-      // <p>
-      //   <strong>Position:</strong> {exp.title}
-      // </p>
-      //   <p>
-      //     {exp.location === "" ? null : (
-      //       <span>
-      //         <strong>Location:</strong> {exp.location}
-      //       </span>
-      //     )}
-      //   </p>
-      //   <p>
-      //     {exp.description === "" ? null : (
-      //       <span>
-      //         <strong>Description:</strong> {exp.description}
-      //       </span>
-      //     )}
-      //   </p>
-      // </li>
     ));
 
-    const eduItems = education.map(edu => (
+    const eduItems = education.map((edu, index) => (
       <li key={edu.id} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
           <div className="profile-creds__cred-info-icon">
             <i className="fas fa-graduation-cap fa-3x" />
           </div>
           <span className="profile-creds__cred-info-details">
-            <p>{edu.degree}</p>
+            <p>
+              {edu.degree}{" "}
+              <button
+                className="modal-button"
+                data-toggle="modal"
+                data-target="#eduModal"
+                onClick={() => {
+                  // this.currentExperienceIndex = index;
+                  this.setState({
+                    edu_userId: this.props.education[index].user_id || "",
+                    edu_id: this.props.education[index].id || "",
+                    edu_current: this.props.education[index].current || "",
+                    edu_school: this.props.education[index].school || "",
+                    edu_description:
+                      this.props.education[index].description || "",
+                    edu_degree: this.props.education[index].degree || "",
+                    edu_start_date:
+                      this.props.education[index].start_date || "",
+                    edu_end_date: this.props.education[index].end_date || "",
+                    edu_fieldofstudy:
+                      this.props.education[index].fieldofstudy || "",
+                    currentEducationIndex: index
+                  });
+                  // console.log(this.currentExperienceIndex);
+                }}
+              >
+                <i className="fas fa-edit"></i>
+              </button>
+            </p>
             <p>{edu.school}</p>
             <p className="help-text">
               <Moment format="MMMM YYYY">{edu.from}</Moment> -{" "}
@@ -127,6 +138,31 @@ class ProfileCreds extends Component {
         </div>
       </li>
     ));
+
+    // const eduItems = education.map(edu => (
+    //   <li key={edu.id} className="list-group-item profile-creds__cred">
+    //     <div className="profile-creds__cred-info">
+    //       <div className="profile-creds__cred-info-icon">
+    //         <i className="fas fa-graduation-cap fa-3x" />
+    //       </div>
+    //       <span className="profile-creds__cred-info-details">
+    //         <p>{edu.degree}</p>
+    //         <p>{edu.school}</p>
+    //         <p className="help-text">
+    //           <Moment format="MMMM YYYY">{edu.from}</Moment> -{" "}
+    //           {edu.to === null ? (
+    //             "Now"
+    //           ) : (
+    //             <Moment format="MMMM YYYY">{edu.to}</Moment>
+    //           )}
+    //         </p>
+    //       </span>
+    //     </div>
+    //     <div className="profile-creds__cred-info-description">
+    //       {edu.description}
+    //     </div>
+    //   </li>
+    // ));
 
     // const eduItems = education.map(edu => (
     //   <li key={edu._id}>
@@ -187,6 +223,12 @@ class ProfileCreds extends Component {
               className="modal-button"
               data-toggle="modal"
               data-target="#eduModal"
+              onClick={() => {
+                // this.currentExperienceIndex = index;
+                this.setState({
+                  currentEducationIndex: null
+                });
+              }}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -278,13 +320,39 @@ class ProfileCreds extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">Edit Educations</h4>
+                <h4 className="modal-title">Edit Education</h4>
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
               </div>
               <div className="modal-body">
-                <p>Some text in the modal.</p>
+                {this.state.currentEducationIndex >= 0 ? (
+                  <AddEducation
+                    userId={this.state.edu_userId}
+                    id={this.state.edu_id}
+                    current={this.state.edu_current}
+                    school={this.state.edu_school}
+                    description={this.state.edu_description}
+                    degree={this.state.edu_degree}
+                    start_date={this.state.edu_start_date}
+                    end_date={this.state.edu_end_date}
+                    fieldofstudy={this.state.edu_fieldofstudy}
+                    currentEducationIndex={this.state.currentEducationIndex}
+                  ></AddEducation>
+                ) : (
+                  <AddEducation
+                    userId={this.state.edu_userId}
+                    id={""}
+                    current={false}
+                    school={""}
+                    description={""}
+                    degree={""}
+                    start_date={""}
+                    end_date={""}
+                    fieldofstudy={""}
+                    // currentExperienceIndex={null}
+                  ></AddEducation>
+                )}
               </div>
               <div className="modal-footer">
                 <button
