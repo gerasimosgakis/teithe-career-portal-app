@@ -23,18 +23,28 @@ class Profile extends Component {
 
   render() {
     const { profile, loading } = this.props.profiles;
+    const { user } = this.props.auth;
     let profileContent;
 
     if (profile === null || loading) {
       profileContent = <Spinner />;
-    } else {
+    }
+    // else if (!profile.id) {
+    //   // if the user has not added profile info
+    //   this.props.history.push("create-profile");
+    // }
+    else {
       profileContent = (
         <div>
-          <ProfileHeader profile={profile} />
+          <ProfileHeader
+            profile={profile}
+            edit={profile.id === user.username}
+          />
           <ProfileAbout profile={profile} />
           <ProfileCreds
             education={profile.educations}
             experience={profile.experiences}
+            edit={profile.id === user.username}
           />
           <ProfileSkills profile={profile} />
           {profile.githubusername ? (

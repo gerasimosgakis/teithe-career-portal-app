@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/isEmpty";
 import banner from "../../banner.jpg";
+import CreateProfile from "../create-profile/CreateProfile";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
-
+    let modalShow = false;
     return (
       <div className="profile-header">
         <div className="profile-header__banner">
@@ -19,7 +20,18 @@ class ProfileHeader extends Component {
         </div>
         <div className="contain">
           <div className="profile-header__heading">
-            <h2>{profile.name}</h2>
+            <h2>
+              {profile.name}
+              {this.props.edit && (
+                <button
+                  className="modal-button"
+                  data-toggle="modal"
+                  data-target="#profileModal"
+                >
+                  <i className="fas fa-edit"></i>
+                </button>
+              )}
+            </h2>
             <p className="lead-text">
               {profile.status}{" "}
               {isEmpty(profile.company) ? null : (
@@ -93,6 +105,32 @@ class ProfileHeader extends Component {
             </p>
           </div>
           <hr />
+        </div>
+
+        {/* Profile Edit Modal */}
+        <div className="modal fade" id="profileModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Edit Profile</h4>
+                <button type="button" className="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div className="modal-body">
+                <CreateProfile></CreateProfile>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       // <div className="row">

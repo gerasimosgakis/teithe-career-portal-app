@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -14,6 +15,8 @@ import { Auth } from "aws-amplify";
 import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
+import CreateProfile from "./components/create-profile/CreateProfile";
+import AddExperience from "./components/add-experience/AddExperience";
 
 class App extends Component {
   constructor(props) {
@@ -67,10 +70,15 @@ class App extends Component {
               <Switch>
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <Route
+                  exact
+                  path="/create-profile"
+                  component={CreateProfile}
+                ></Route>
                 <Route exact path="/graduates" component={Profiles} />
                 <Route exact path="/graduates/:handle" component={Profile} />
                 <Route exact path="/profile" component={Profile} />
-                {/* <Route exact path="/profile" component={Profile} /> */}
+                <Route exact path="/add-experience" component={AddExperience} />
               </Switch>
             </div>
           </div>
