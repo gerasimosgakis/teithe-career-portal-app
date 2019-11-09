@@ -8,7 +8,9 @@ import {
   CREATE_PROFILE_SUCCESS,
   CREATE_PROFILE_FAIL,
   EDIT_PROFILE_SUCCESS,
-  EDIT_PROFILE_FAIL
+  EDIT_PROFILE_FAIL,
+  EDIT_EXPERIENCE_SUCCESS,
+  EDIT_EXPERIENCE_FAIL
 } from "./types";
 
 // Get All Profiles
@@ -234,12 +236,16 @@ export const editExperience = expData => async dispatch => {
       //   "cognito-identity-id": user
       // }
     });
+    dispatch({
+      type: EDIT_EXPERIENCE_SUCCESS,
+      payload: expData
+    });
   } catch (err) {
     console.log(err);
-    // dispatch({
-    //   type: CREATE_PROFILE_FAIL,
-    //   payload: err
-    // });
+    dispatch({
+      type: EDIT_EXPERIENCE_FAIL,
+      payload: err
+    });
   }
 };
 

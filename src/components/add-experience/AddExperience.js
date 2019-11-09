@@ -94,8 +94,16 @@ class AddExperience extends Component {
     });
   };
 
+  onCheck = e => {
+    this.setState({
+      disabled: !this.state.disabled,
+      current: !this.state.current
+    });
+  };
+
   onSubmit = e => {
     e.preventDefault();
+    console.log(this.state);
     if (this.state.id) {
       this.props.editExperience({
         user_id: this.state.user_id,
@@ -104,8 +112,8 @@ class AddExperience extends Component {
         location: this.state._location,
         description: this.state.description,
         title: this.state.title,
-        start_date: moment(this.state.start_date),
-        end_date: moment(this.state.end_date),
+        start_date: moment(this.state.start_date).toDate(),
+        end_date: moment(this.state.end_date).toDate(),
         // start_date: new Date(),
         // end_date: new Date(),
         company: this.state.company
@@ -162,17 +170,17 @@ class AddExperience extends Component {
                 <h6>From Date</h6>
                 <TextFieldGroup
                   placeholder="from"
-                  name="from"
+                  name="start_date"
                   type="month"
-                  value={this.state.from}
+                  value={this.state.start_date}
                   onChange={this.onChange}
                 />
                 <h6>To Date</h6>
                 <TextFieldGroup
                   placeholder="to"
-                  name="to"
+                  name="end_date"
                   type="month"
-                  value={this.state.to}
+                  value={this.state.end_date}
                   onChange={this.onChange}
                   disabled={this.state.disabled ? "disabled" : ""}
                 />

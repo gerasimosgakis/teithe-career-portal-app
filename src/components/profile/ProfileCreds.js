@@ -71,11 +71,11 @@ class ProfileCreds extends Component {
             </p>
             <p>{exp.company}</p>
             <p className="help-text">
-              <Moment format="MMMM YYYY">{exp.from}</Moment> -{" "}
+              <Moment format="MMMM YYYY">{exp.start_date}</Moment> -{" "}
               {exp.to === null ? (
                 "Now"
               ) : (
-                <Moment format="MMMM YYYY">{exp.to}</Moment>
+                <Moment format="MMMM YYYY">{exp.end_date}</Moment>
               )}
             </p>
           </span>

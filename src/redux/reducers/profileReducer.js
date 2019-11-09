@@ -7,7 +7,9 @@ import {
   CREATE_PROFILE_SUCCESS,
   CREATE_PROFILE_FAIL,
   EDIT_PROFILE_SUCCESS,
-  EDIT_PROFILE_FAIL
+  EDIT_PROFILE_FAIL,
+  EDIT_EXPERIENCE_SUCCESS,
+  EDIT_EXPERIENCE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -66,7 +68,6 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case EDIT_PROFILE_SUCCESS:
-      console.log(action.payload.data);
       return {
         ...state,
         profile: {
@@ -77,6 +78,27 @@ export default function(state = initialState, action) {
         loading: false
       };
     case EDIT_PROFILE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case EDIT_EXPERIENCE_SUCCESS:
+      const experiences = [...state.profile.experiences];
+      const changedExpIndex = experiences.findIndex(item => {
+        return item.id === action.payload.id;
+      });
+      experiences[changedExpIndex] = action.payload;
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          experiences,
+          educations: [...state.profile.educations]
+        },
+        loading: false
+      };
+    case EDIT_EXPERIENCE_FAIL:
       return {
         ...state,
         loading: false,
