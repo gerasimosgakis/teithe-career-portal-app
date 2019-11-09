@@ -33,6 +33,7 @@ class AddExperience extends Component {
       user_id: userId,
       id,
       current,
+      disabled: current ? true : false,
       _location,
       description,
       title,
@@ -57,6 +58,7 @@ class AddExperience extends Component {
         user_id: props.userId,
         id: "",
         current: false,
+        disabled: false,
         _location: "",
         description: "",
         title: "",
@@ -75,6 +77,7 @@ class AddExperience extends Component {
         user_id: props.userId,
         id: props.id,
         current: props.current,
+        disabled: props.current ? true : false,
         _location: props._location !== null ? props._location : null,
         description: props.description,
         title: props.title,
@@ -83,6 +86,8 @@ class AddExperience extends Component {
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };
+    } else {
+      return null;
     }
   }
 
@@ -113,7 +118,9 @@ class AddExperience extends Component {
         description: this.state.description,
         title: this.state.title,
         start_date: moment(this.state.start_date).toDate(),
-        end_date: moment(this.state.end_date).toDate(),
+        end_date: this.state.current
+          ? moment().toDate()
+          : moment(this.state.end_date).toDate(),
         // start_date: new Date(),
         // end_date: new Date(),
         company: this.state.company
@@ -125,8 +132,10 @@ class AddExperience extends Component {
         location: this.state._location,
         description: this.state.description,
         title: this.state.title,
-        start_date: moment(this.state.start_date),
-        end_date: moment(this.state.end_date),
+        start_date: moment(this.state.start_date).toDate(),
+        end_date: this.state.current
+          ? moment().toDate()
+          : moment(this.state.end_date).toDate(),
         // start_date: new Date(),
         // end_date: new Date(),
         company: this.state.company

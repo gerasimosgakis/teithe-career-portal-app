@@ -9,7 +9,11 @@ import {
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAIL,
   EDIT_EXPERIENCE_SUCCESS,
-  EDIT_EXPERIENCE_FAIL
+  EDIT_EXPERIENCE_FAIL,
+  ADD_EXPERIENCE_SUCCESS,
+  ADD_EXPERIENCE_FAIL,
+  DELETE_EXPERIENCE_SUCCESS,
+  DELETE_EXPERIENCE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -93,12 +97,47 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          experiences,
-          educations: [...state.profile.educations]
+          experiences
         },
         loading: false
       };
     case EDIT_EXPERIENCE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case ADD_EXPERIENCE_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          experiences: [...state.profile.experiences, action.payload]
+        },
+        loading: false
+      };
+    case ADD_EXPERIENCE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case DELETE_EXPERIENCE_SUCCESS:
+      const newExperiences = [...state.profile.experiences];
+      const deletedExpIndex = state.profile.experiences.findIndex(item => {
+        return item.id === action.payload;
+      });
+
+      newExperiences.splice(deletedExpIndex, 1);
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          experiences: newExperiences
+        },
+        loading: false
+      };
+    case DELETE_EXPERIENCE_FAIL:
       return {
         ...state,
         loading: false,

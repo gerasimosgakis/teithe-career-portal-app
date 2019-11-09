@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Moment from "react-moment";
 import AddExperience from "../add-experience/AddExperience";
 import AddEducation from "../add-education/AddEducation";
+import { deleteExperience } from "../../redux/actions/profileActions";
 
 class ProfileCreds extends Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class ProfileCreds extends Component {
     const { experience, education } = this.props;
 
     const expItems = experience.map((exp, index) => (
-      <li key={exp.id} className="list-group-item profile-creds__cred">
+      <li key={index} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
           <div className="profile-creds__cred-info-icon">
             <i className="fa fa-briefcase fa-3x" />
@@ -67,6 +69,16 @@ class ProfileCreds extends Component {
                 }}
               >
                 <i className="fas fa-edit"></i>
+              </button>
+              <button
+                className="modal-button"
+                onClick={() => {
+                  // this.currentExperienceIndex = index;
+                  this.props.deleteExperience(exp.id);
+                  // console.log(this.currentExperienceIndex);
+                }}
+              >
+                <i className="fas fa-times"></i>
               </button>
             </p>
             <p>{exp.company}</p>
@@ -391,4 +403,7 @@ class ProfileCreds extends Component {
   }
 }
 
-export default ProfileCreds;
+export default connect(
+  null,
+  { deleteExperience }
+)(ProfileCreds);

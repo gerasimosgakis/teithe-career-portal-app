@@ -9,7 +9,8 @@ import ProfileSkills from "./ProfileSkills";
 import Spinner from "../shared/Spinner";
 import {
   getProfileByHandle,
-  getProfileById
+  getProfileById,
+  deleteExperience
 } from "../../redux/actions/profileActions";
 
 class Profile extends Component {
@@ -72,5 +73,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfileByHandle, getProfileById }
+  { getProfileByHandle, getProfileById, deleteExperience }
 )(Profile);

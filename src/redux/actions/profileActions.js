@@ -10,7 +10,11 @@ import {
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAIL,
   EDIT_EXPERIENCE_SUCCESS,
-  EDIT_EXPERIENCE_FAIL
+  EDIT_EXPERIENCE_FAIL,
+  ADD_EXPERIENCE_SUCCESS,
+  ADD_EXPERIENCE_FAIL,
+  DELETE_EXPERIENCE_SUCCESS,
+  DELETE_EXPERIENCE_FAIL
 } from "./types";
 
 // Get All Profiles
@@ -208,19 +212,28 @@ export const addExperience = expData => async dispatch => {
   console.log(expData);
 
   try {
-    await API.post("teithe-career-portal-api", `/experiences`, {
-      body: expData
-      // headers: {
-      //   // set custom header id for testing
-      //   "cognito-identity-id": user
-      // }
+    const response = await API.post(
+      "teithe-career-portal-api",
+      `/experiences`,
+      {
+        body: expData
+        // headers: {
+        //   // set custom header id for testing
+        //   "cognito-identity-id": user
+        // }
+      }
+    );
+    console.log(response);
+    dispatch({
+      type: ADD_EXPERIENCE_SUCCESS,
+      payload: response.data
     });
   } catch (err) {
     console.log(err);
-    // dispatch({
-    //   type: CREATE_PROFILE_FAIL,
-    //   payload: err
-    // });
+    dispatch({
+      type: ADD_EXPERIENCE_FAIL,
+      payload: err
+    });
   }
 };
 
@@ -244,6 +257,23 @@ export const editExperience = expData => async dispatch => {
     console.log(err);
     dispatch({
       type: EDIT_EXPERIENCE_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Delete Experience
+export const deleteExperience = id => async dispatch => {
+  try {
+    await API.del("teithe-career-portal-api", `/experiences/${id}`);
+    dispatch({
+      type: DELETE_EXPERIENCE_SUCCESS,
+      payload: id
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: DELETE_EXPERIENCE_FAIL,
       payload: err
     });
   }
