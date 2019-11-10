@@ -12,7 +12,11 @@ const initialState = {
   name: "",
   school: "",
   graduate_date_before: "",
-  graduate_date_after: ""
+  graduate_date_after: "",
+  company: "",
+  status: "",
+  skills: "",
+  degree: ""
 };
 
 class Search extends Component {
@@ -68,23 +72,24 @@ class Search extends Component {
             value={this.state.school}
             onChange={this.onChange}
           ></TextFieldGroup>
-          {/* <h6>Start Date On or Before</h6>
           <TextFieldGroup
-            placeholder="From"
-            name="start_date"
-            type="month"
-            value={this.state.start_date}
+            placeholder="Degree"
+            name="degree"
+            value={this.state.degree}
             onChange={this.onChange}
           ></TextFieldGroup>
-          <h6>End Date On Or After</h6>
           <TextFieldGroup
-            placeholder="To"
-            name="end_date"
-            type="month"
-            value={this.state.end_date}
+            placeholder="Company"
+            name="company"
+            value={this.state.company}
             onChange={this.onChange}
-          ></TextFieldGroup> */}
-
+          ></TextFieldGroup>
+          <TextFieldGroup
+            placeholder="Skills"
+            name="skills"
+            value={this.state.skills}
+            onChange={this.onChange}
+          ></TextFieldGroup>
           <h6>Graduate Before</h6>
           <TextFieldGroup
             placeholder="To"
