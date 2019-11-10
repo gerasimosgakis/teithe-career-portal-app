@@ -37,8 +37,8 @@ class AddExperience extends Component {
       _location,
       description,
       title,
-      start_date,
-      end_date,
+      start_date: start_date ? start_date.slice(0, 7) : null,
+      end_date: end_date ? end_date.slice(0, 7) : null,
       company: company,
       currentExperienceIndex
     };
@@ -53,7 +53,6 @@ class AddExperience extends Component {
       current_state.currentExperienceIndex !== -1 &&
       props.currentExperienceIndex === null
     ) {
-      console.log(props.currentExperienceIndex);
       return {
         user_id: props.userId,
         id: "",
@@ -81,8 +80,8 @@ class AddExperience extends Component {
         _location: props._location !== null ? props._location : null,
         description: props.description,
         title: props.title,
-        start_date: props.start_date,
-        end_date: props.end_date,
+        start_date: props.start_date.slice(0, 7),
+        end_date: props.end_date.slice(0, 7),
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };
@@ -121,8 +120,6 @@ class AddExperience extends Component {
         end_date: this.state.current
           ? moment().toDate()
           : moment(this.state.end_date).toDate(),
-        // start_date: new Date(),
-        // end_date: new Date(),
         company: this.state.company
       });
     } else {
@@ -136,8 +133,6 @@ class AddExperience extends Component {
         end_date: this.state.current
           ? moment().toDate()
           : moment(this.state.end_date).toDate(),
-        // start_date: new Date(),
-        // end_date: new Date(),
         company: this.state.company
       });
     }
@@ -161,34 +156,39 @@ class AddExperience extends Component {
                 <TextFieldGroup
                   placeholder="* Company"
                   name="company"
+                  required
                   value={this.state.company}
                   onChange={this.onChange}
                 />
                 <TextFieldGroup
                   placeholder="* Job Title"
                   name="title"
+                  required
                   value={this.state.title}
                   onChange={this.onChange}
                 />
                 <TextFieldGroup
                   placeholder="Location"
                   name="_location"
+                  required
                   value={this.state._location}
                   onChange={this.onChange}
                 />
-                <h6>From Date</h6>
+                <h6>* From Date</h6>
                 <TextFieldGroup
                   placeholder="from"
                   name="start_date"
                   type="month"
+                  required
                   value={this.state.start_date}
                   onChange={this.onChange}
                 />
-                <h6>To Date</h6>
+                <h6>* To Date</h6>
                 <TextFieldGroup
                   placeholder="to"
                   name="end_date"
                   type="month"
+                  required
                   value={this.state.end_date}
                   onChange={this.onChange}
                   disabled={this.state.disabled ? "disabled" : ""}

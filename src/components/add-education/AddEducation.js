@@ -33,11 +33,12 @@ class AddEducation extends Component {
       user_id: userId,
       id,
       current,
+      disabled: current ? true : false,
       school,
       description,
       degree,
-      start_date,
-      end_date,
+      start_date: start_date ? start_date.slice(0, 7) : null,
+      end_date: end_date ? end_date.slice(0, 7) : null,
       fieldofstudy,
       currentEducationIndex
     };
@@ -52,7 +53,6 @@ class AddEducation extends Component {
       current_state.currentEducationIndex !== -1 &&
       props.currentEducationIndex === null
     ) {
-      console.log(props.currentEducationIndex);
       return {
         user_id: props.userId,
         id: "",
@@ -75,14 +75,17 @@ class AddEducation extends Component {
         user_id: props.userId,
         id: props.id,
         current: props.current || false,
+        disabled: props.current ? true : false,
         school: props.school !== null ? props.school : null,
         description: props.description,
         degree: props.degree,
-        start_date: props.start_date,
-        end_date: props.end_date,
+        start_date: props.start_date.slice(0, 7),
+        end_date: props.end_date.slice(0, 7),
         fieldofstudy: props.fieldofstudy,
         currentEducationIndex: props.currentEducationIndex
       };
+    } else {
+      return null;
     }
   }
 
@@ -94,9 +97,17 @@ class AddEducation extends Component {
     });
   };
 
+  onCheck = e => {
+    this.setState({
+      disabled: !this.state.disabled,
+      current: !this.state.current
+    });
+  };
+
   onSubmit = e => {
     e.preventDefault();
-    if (this.state.id) {
+    console.log(this.state);
+    if (this.state.id && this.state.id !== "") {
       this.props.editEducation({
         user_id: this.state.user_id,
         id: this.state.id,
@@ -104,10 +115,10 @@ class AddEducation extends Component {
         school: this.state.school,
         description: this.state.description,
         degree: this.state.degree,
-        start_date: moment(this.state.start_date),
-        end_date: moment(this.state.end_date),
-        // start_date: new Date(),
-        // end_date: new Date(),
+        start_date: moment(this.state.start_date).toDate(),
+        end_date: this.state.current
+          ? moment().toDate()
+          : moment(this.state.end_date).toDate(),
         fieldofstudy: this.state.fieldofstudy
       });
     } else {
@@ -117,10 +128,10 @@ class AddEducation extends Component {
         school: this.state.school,
         description: this.state.description,
         degree: this.state.degree,
-        start_date: moment(this.state.start_date),
-        end_date: moment(this.state.end_date),
-        // start_date: new Date(),
-        // end_date: new Date(),
+        start_date: moment(this.state.start_date).toDate(),
+        end_date: this.state.current
+          ? moment().toDate()
+          : moment(this.state.end_date).toDate(),
         fieldofstudy: this.state.fieldofstudy
       });
     }
@@ -137,19 +148,21 @@ class AddEducation extends Component {
               </Link> */}
               <h1 className="display-4 text-center">Add Education</h1>
               <p className="lead text-center">
-                Add any job or position that you have had in the past or current
+                Add any degree that you have had in the past or current
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="* School"
                   name="school"
+                  required
                   value={this.state.school}
                   onChange={this.onChange}
                 />
                 <TextFieldGroup
                   placeholder="* Degree"
                   name="degree"
+                  required
                   value={this.state.degree}
                   onChange={this.onChange}
                 />
@@ -159,20 +172,22 @@ class AddEducation extends Component {
                   value={this.state.fieldofstudy}
                   onChange={this.onChange}
                 />
-                <h6>From Date</h6>
+                <h6>* From Date</h6>
                 <TextFieldGroup
                   placeholder="from"
-                  name="from"
+                  name="start_date"
                   type="month"
-                  value={this.state.from}
+                  required
+                  value={this.state.start_date}
                   onChange={this.onChange}
                 />
-                <h6>To Date</h6>
+                <h6>* To Date</h6>
                 <TextFieldGroup
                   placeholder="to"
-                  name="to"
+                  name="end_date"
                   type="month"
-                  value={this.state.to}
+                  required
+                  value={this.state.end_date}
                   onChange={this.onChange}
                   disabled={this.state.disabled ? "disabled" : ""}
                 />
@@ -183,15 +198,15 @@ class AddEducation extends Component {
                     name="current"
                     value={this.state.current}
                     checked={this.state.current}
-                    onChange={this.onChange}
+                    onChange={this.onCheck}
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
-                    Current Job
+                    Current Degree
                   </label>
                 </div>
                 <TextAreaFieldGroup
-                  placeholder="Job Description"
+                  placeholder="Study Description"
                   name="description"
                   value={this.state.description}
                   onChange={this.onChange}

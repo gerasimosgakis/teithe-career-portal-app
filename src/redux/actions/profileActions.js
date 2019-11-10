@@ -14,7 +14,13 @@ import {
   ADD_EXPERIENCE_SUCCESS,
   ADD_EXPERIENCE_FAIL,
   DELETE_EXPERIENCE_SUCCESS,
-  DELETE_EXPERIENCE_FAIL
+  DELETE_EXPERIENCE_FAIL,
+  EDIT_EDUCATION_SUCCESS,
+  EDIT_EDUCATION_FAIL,
+  ADD_EDUCATION_SUCCESS,
+  ADD_EDUCATION_FAIL,
+  DELETE_EDUCATION_SUCCESS,
+  DELETE_EDUCATION_FAIL
 } from "./types";
 
 // Get All Profiles
@@ -279,24 +285,71 @@ export const deleteExperience = id => async dispatch => {
   }
 };
 
+// // Add Education
+// export const addEducation = eduData => async dispatch => {
+//   console.log(eduData);
+
+//   try {
+//     await API.post("teithe-career-portal-api", `/educations`, {
+//       body: eduData
+//       // headers: {
+//       //   // set custom header id for testing
+//       //   "cognito-identity-id": user
+//       // }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     // dispatch({
+//     //   type: CREATE_PROFILE_FAIL,
+//     //   payload: err
+//     // });
+//   }
+// };
+
+// // Edit Education
+// export const editEducation = eduData => async dispatch => {
+//   console.log(eduData);
+
+//   try {
+//     await API.put("teithe-career-portal-api", `/educations/${eduData.id}`, {
+//       body: eduData
+//       // headers: {
+//       //   // set custom header id for testing
+//       //   "cognito-identity-id": user
+//       // }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     // dispatch({
+//     //   type: CREATE_PROFILE_FAIL,
+//     //   payload: err
+//     // });
+//   }
+// };
+
 // Add Education
 export const addEducation = eduData => async dispatch => {
   console.log(eduData);
 
   try {
-    await API.post("teithe-career-portal-api", `/educations`, {
+    const response = await API.post("teithe-career-portal-api", `/educations`, {
       body: eduData
       // headers: {
       //   // set custom header id for testing
       //   "cognito-identity-id": user
       // }
     });
+    console.log(response);
+    dispatch({
+      type: ADD_EDUCATION_SUCCESS,
+      payload: response.data
+    });
   } catch (err) {
     console.log(err);
-    // dispatch({
-    //   type: CREATE_PROFILE_FAIL,
-    //   payload: err
-    // });
+    dispatch({
+      type: ADD_EDUCATION_FAIL,
+      payload: err
+    });
   }
 };
 
@@ -312,11 +365,32 @@ export const editEducation = eduData => async dispatch => {
       //   "cognito-identity-id": user
       // }
     });
+    dispatch({
+      type: EDIT_EDUCATION_SUCCESS,
+      payload: eduData
+    });
   } catch (err) {
     console.log(err);
-    // dispatch({
-    //   type: CREATE_PROFILE_FAIL,
-    //   payload: err
-    // });
+    dispatch({
+      type: EDIT_EDUCATION_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Delete Education
+export const deleteEducation = id => async dispatch => {
+  try {
+    await API.del("teithe-career-portal-api", `/educations/${id}`);
+    dispatch({
+      type: DELETE_EDUCATION_SUCCESS,
+      payload: id
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: DELETE_EDUCATION_FAIL,
+      payload: err
+    });
   }
 };

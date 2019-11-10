@@ -3,39 +3,90 @@ import { connect } from "react-redux";
 import Moment from "react-moment";
 import AddExperience from "../add-experience/AddExperience";
 import AddEducation from "../add-education/AddEducation";
-import { deleteExperience } from "../../redux/actions/profileActions";
+import {
+  deleteExperience,
+  deleteEducation
+} from "../../redux/actions/profileActions";
 
 class ProfileCreds extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      exp_userId: this.props.experience[0].user_id,
-      exp_id: this.props.experience[0].id,
-      exp_current: this.props.experience[0].current,
-      exp_location: this.props.experience[0].location,
-      exp_description: this.props.experience[0].description,
-      exp_title: this.props.experience[0].title,
-      exp_start_date: this.props.experience[0].start_date,
-      exp_end_date: this.props.experience[0].end_date,
-      exp_company: this.props.experience[0].company,
+      exp_userId: this.props.userId,
+      exp_id:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].id
+          : null,
+      exp_current:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].current
+          : null,
+      exp_location:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].location
+          : null,
+      exp_description:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].description
+          : null,
+      exp_title:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].title
+          : null,
+      exp_start_date:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].start_date
+          : null,
+      exp_end_date:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].end_date
+          : null,
+      exp_company:
+        this.props.experience && this.props.experience.length > 0
+          ? this.props.experience[0].company
+          : null,
       currentExperienceIndex: null,
-      edu_userId: this.props.education[0].user_id,
-      edu_id: this.props.education[0].id,
-      edu_current: this.props.education[0].current,
-      edu_fieldofstudy: this.props.education[0].fieldofstudy,
-      edu_description: this.props.education[0].description,
-      edu_degree: this.props.education[0].degree,
-      edu_start_date: this.props.education[0].start_date,
-      edu_end_date: this.props.education[0].end_date,
-      edu_school: this.props.education[0].school,
+      edu_userId: this.props.userId,
+      edu_id:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].id
+          : null,
+      edu_current:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].current
+          : null,
+      edu_fieldofstudy:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].fieldofstudy
+          : null,
+      edu_description:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].description
+          : null,
+      edu_degree:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].degree
+          : null,
+      edu_start_date:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].start_date
+          : null,
+      edu_end_date:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].end_date
+          : null,
+      edu_school:
+        this.props.education && this.props.education.length > 0
+          ? this.props.education[0].school
+          : null,
       currentEducationIndex: null
     };
   }
 
   render() {
     const { experience, education } = this.props;
-
+    console.log(this.props.userId);
     const expItems = experience.map((exp, index) => (
       <li key={index} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
@@ -52,7 +103,7 @@ class ProfileCreds extends Component {
                 onClick={() => {
                   // this.currentExperienceIndex = index;
                   this.setState({
-                    exp_userId: this.props.experience[index].user_id || "",
+                    exp_userId: this.props.userId || "",
                     exp_id: this.props.experience[index].id || "",
                     exp_current: this.props.experience[index].current || "",
                     exp_location: this.props.experience[index].location || "",
@@ -73,9 +124,7 @@ class ProfileCreds extends Component {
               <button
                 className="modal-button"
                 onClick={() => {
-                  // this.currentExperienceIndex = index;
                   this.props.deleteExperience(exp.id);
-                  // console.log(this.currentExperienceIndex);
                 }}
               >
                 <i className="fas fa-times"></i>
@@ -114,7 +163,7 @@ class ProfileCreds extends Component {
                 onClick={() => {
                   // this.currentExperienceIndex = index;
                   this.setState({
-                    edu_userId: this.props.education[index].user_id || "",
+                    edu_userId: this.props.user_id || "",
                     edu_id: this.props.education[index].id || "",
                     edu_current: this.props.education[index].current || "",
                     edu_school: this.props.education[index].school || "",
@@ -133,14 +182,22 @@ class ProfileCreds extends Component {
               >
                 <i className="fas fa-edit"></i>
               </button>
+              <button
+                className="modal-button"
+                onClick={() => {
+                  this.props.deleteEducation(edu.id);
+                }}
+              >
+                <i className="fas fa-times"></i>
+              </button>
             </p>
             <p>{edu.school}</p>
             <p className="help-text">
-              <Moment format="MMMM YYYY">{edu.from}</Moment> -{" "}
+              <Moment format="MMMM YYYY">{edu.start_date}</Moment> -{" "}
               {edu.to === null ? (
                 "Now"
               ) : (
-                <Moment format="MMMM YYYY">{edu.to}</Moment>
+                <Moment format="MMMM YYYY">{edu.end_date}</Moment>
               )}
             </p>
           </span>
@@ -265,7 +322,7 @@ class ProfileCreds extends Component {
               <div className="modal-body">
                 {this.state.currentExperienceIndex >= 0 ? (
                   <AddExperience
-                    userId={this.state.exp_userId}
+                    userId={this.props.userId}
                     id={this.state.exp_id}
                     current={this.state.exp_current}
                     _location={this.state.exp_location}
@@ -278,7 +335,7 @@ class ProfileCreds extends Component {
                   ></AddExperience>
                 ) : (
                   <AddExperience
-                    userId={this.state.exp_userId}
+                    userId={this.props.userId}
                     id={""}
                     current={false}
                     _location={""}
@@ -340,7 +397,7 @@ class ProfileCreds extends Component {
               <div className="modal-body">
                 {this.state.currentEducationIndex >= 0 ? (
                   <AddEducation
-                    userId={this.state.edu_userId}
+                    userId={this.props.userId}
                     id={this.state.edu_id}
                     current={this.state.edu_current}
                     school={this.state.edu_school}
@@ -353,7 +410,7 @@ class ProfileCreds extends Component {
                   ></AddEducation>
                 ) : (
                   <AddEducation
-                    userId={this.state.edu_userId}
+                    userId={this.props.userId}
                     id={""}
                     current={false}
                     school={""}
@@ -405,5 +462,5 @@ class ProfileCreds extends Component {
 
 export default connect(
   null,
-  { deleteExperience }
+  { deleteExperience, deleteEducation }
 )(ProfileCreds);

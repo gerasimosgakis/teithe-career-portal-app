@@ -43,6 +43,7 @@ class Profile extends Component {
           />
           <ProfileAbout profile={profile} />
           <ProfileCreds
+            userId={user.username}
             education={profile.educations}
             experience={profile.experiences}
             edit={profile.id === user.username}
