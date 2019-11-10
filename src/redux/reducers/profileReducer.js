@@ -19,7 +19,8 @@ import {
   ADD_EDUCATION_SUCCESS,
   ADD_EDUCATION_FAIL,
   DELETE_EDUCATION_SUCCESS,
-  DELETE_EDUCATION_FAIL
+  DELETE_EDUCATION_FAIL,
+  SEARCH_GRADUATES_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -205,6 +206,11 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         errors: action.payload
+      };
+    case SEARCH_GRADUATES_SUCCESS:
+      return {
+        ...state,
+        profiles: action.payload.profiles
       };
     default:
       return state;

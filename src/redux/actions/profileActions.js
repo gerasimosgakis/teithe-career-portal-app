@@ -20,7 +20,9 @@ import {
   ADD_EDUCATION_SUCCESS,
   ADD_EDUCATION_FAIL,
   DELETE_EDUCATION_SUCCESS,
-  DELETE_EDUCATION_FAIL
+  DELETE_EDUCATION_FAIL,
+  SEARCH_GRADUATES_SUCCESS,
+  SEARCH_GRADUATES_FAIL
 } from "./types";
 
 // Get All Profiles
@@ -116,6 +118,25 @@ export const getProfileByHandle = handle => async dispatch => {
     dispatch({
       type: GET_PROFILE_FAIL,
       payload: error
+    });
+  }
+};
+
+// Search Graduates
+export const searchGraduates = params => async dispatch => {
+  try {
+    const profiles = await API.post("teithe-career-portal-api", "/search", {
+      body: params
+    });
+    dispatch({
+      type: SEARCH_GRADUATES_SUCCESS,
+      payload: { profiles }
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: SEARCH_GRADUATES_FAIL,
+      payload: err
     });
   }
 };

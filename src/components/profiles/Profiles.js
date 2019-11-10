@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../shared/Spinner";
 import ProfileItem from "./ProfileItem";
+import Search from "../search/Search";
 import { getProfiles } from "../../redux/actions/profileActions";
 
 class Profiles extends Component {
@@ -35,6 +36,7 @@ class Profiles extends Component {
               <p className="lead text-center">
                 Browse and connect with developers
               </p>
+              <Search></Search>
               {profileItems}
             </div>
           </div>
