@@ -45,7 +45,10 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@pusher/chatkit-client-react": "^0.1.2",
+    "@pusher/chatkit-server": "^2.1.1"
+  },
   "author": "Gerasimos Gakis",
   "license": "ISC"
 }
