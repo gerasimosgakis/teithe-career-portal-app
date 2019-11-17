@@ -67,6 +67,7 @@ class Chat extends Component {
       } else {
         this.setState({ otherUserId: profiles[1].id });
       }
+      console.log(this.state);
       profiles.map(profile => {
         if (profile.id === this.props.userId) {
           this.setState({

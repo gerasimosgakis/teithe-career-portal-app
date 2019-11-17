@@ -59,8 +59,8 @@ const UserList = props => {
   );
   return (
     <div className="">
-      {allUsers}
-      <div className="UserList__titlebar">
+      <ul className="UserList__container__list">{allUsers}</ul>
+      {/* <div className="UserList__titlebar">
         <img
           src={defaultAvatar}
           className="UserList__titlebar__avatar"
@@ -143,9 +143,9 @@ const UserList = props => {
             <div className="UserList__container__list__item__time">
               Yesterday
             </div>
-          </li>
+          </li> 
         </ul>
-      </div>
+        */}
     </div>
   );
 };
