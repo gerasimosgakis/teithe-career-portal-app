@@ -22,6 +22,8 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import AddExperience from "./components/add-experience/AddExperience";
 import Chat from "./components/chat/Chat";
 import AppliedRoute from "./components/AppliedRoute";
+import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 
 // Chatkit constants
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
@@ -145,6 +147,8 @@ class App extends Component {
                   props={{ userId: this.state.userId }}
                   component={Chat}
                 />
+                <Route exact path="/feed" component={Posts} />
+                <Route exact path="/post/:id" component={Post} />
                 {/* <Route exact path="/add-experience" component={AddExperience} /> */}
                 {/* <Route exact path="/add-experience" component={AddExperience} /> */}
               </Switch>
