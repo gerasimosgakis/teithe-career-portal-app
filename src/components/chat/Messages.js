@@ -47,7 +47,7 @@ function Messages(props) {
     <div className="Messages">
       <div className="Messages__titlebar">
         <img
-          src={defaultAvatar}
+          src={props && props.user ? props.user.avatar : defaultAvatar}
           className="Messages__titlebar__avatar"
           alt="avatar"
         />

@@ -79,7 +79,8 @@ class Chat extends Component {
         this.createUser(userId, userName);
         users.push({
           id: profile.id,
-          handle: profile.handle
+          handle: profile.handle,
+          avatar: profile.avatar
         });
       });
       this.setState({ users });
@@ -97,6 +98,14 @@ class Chat extends Component {
     console.log(this.state);
   };
 
+  findUser = userId => {
+    console.log(
+      this.state,
+      this.state.users.filter(user => user.id === userId)
+    );
+    return this.state.users.filter(user => user.id === userId)[0];
+  };
+
   render() {
     return (
       <div className="Chat">
@@ -106,13 +115,16 @@ class Chat extends Component {
             users={this.state.users}
             onClick={this.handleChildClick}
           />
-          {this.state.otherUserId && this.state.show ? (
+          {this.state.otherUserId && this.state.show && this.state.users ? (
             <ChatkitProvider
               instanceLocator={instanceLocator}
               tokenProvider={tokenProvider}
               userId={this.props.userId}
             >
-              <Messages otherUserId={this.state.otherUserId} />
+              <Messages
+                otherUserId={this.state.otherUserId}
+                user={this.findUser(this.state.otherUserId)}
+              />
             </ChatkitProvider>
           ) : (
             ""

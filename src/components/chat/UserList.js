@@ -1,6 +1,5 @@
 import React from "react";
 import "./UserList.scss";
-import defaultAvatar from "./default-avatar.png";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 import Moment from "react-moment";
 
@@ -16,7 +15,10 @@ const UserList = props => {
           <li className="UserList__container__list__item" key={index}>
             <div>
               <img
-                src={defaultAvatar}
+                src={
+                  user.avatar ||
+                  "//www.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=300&r=pg&d=mm"
+                }
                 className="UserList__container__list__item__avatar"
                 alt="avatar"
               />
