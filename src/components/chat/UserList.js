@@ -1,9 +1,62 @@
 import React from "react";
 import "./UserList.scss";
 import defaultAvatar from "./default-avatar.png";
+import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
+import Moment from "react-moment";
 
-const UserList = ({ userName, users, onClick }) => {
-  const allUsers = users.map(user => <p>{user.handle}</p>);
+const UserList = props => {
+  console.log(props);
+  const allUsers = props.users.map(
+    (user, index) =>
+      user.handle !== props.userName && (
+        <li className="UserList__container__list__item" key={index}>
+          <a onClick={() => props.onClick(user.id)}>
+            <div>
+              <img
+                src={defaultAvatar}
+                className="UserList__container__list__item__avatar"
+                alt="avatar"
+              />
+            </div>
+            <div className="UserList__container__list__item__content">
+              <p className="UserList__container__list__item__content__name">
+                {user.handle}
+              </p>
+              <p className="UserList__container__list__item__content__text">
+                {props &&
+                props.chatkit.messages.length > 0 &&
+                props.chatkit.messages[props.chatkit.messages.length - 1] &&
+                props.chatkit.messages[props.chatkit.messages.length - 1].parts
+                  .length > 0
+                  ? props.chatkit.messages[props.chatkit.messages.length - 1]
+                      .parts[0].payload.content
+                  : ""}
+              </p>
+            </div>
+            <div className="UserList__container__list__item__time">
+              {props &&
+              props.chatkit.messages.length > 0 &&
+              props.chatkit.messages[props.chatkit.messages.length - 1] ? (
+                <Moment
+                  calendar={{
+                    sameDay: "LT",
+                    lastDay: "[Yesterday at] LT",
+                    lastWeek: "[last] dddd [at] LT"
+                  }}
+                >
+                  {
+                    props.chatkit.messages[props.chatkit.messages.length - 1]
+                      .createdAt
+                  }
+                </Moment>
+              ) : (
+                ""
+              )}
+            </div>
+          </a>
+        </li>
+      )
+  );
   return (
     <div className="">
       {allUsers}
@@ -13,13 +66,17 @@ const UserList = ({ userName, users, onClick }) => {
           className="UserList__titlebar__avatar"
           alt="avatar"
         />
-        <span className="UserList__titlebar__logged-in-as">{userName}</span>
+        <span className="UserList__titlebar__logged-in-as">
+          {props.userName}
+        </span>
       </div>
       <div className="UserList__container">
         <ul className="UserList__container__list">
           <li className="UserList__container__list__item">
             <button
-              onClick={() => onClick("85ab6b9e-c439-4b4a-b7f8-adee53ef2e70")}
+              onClick={() =>
+                props.onClick("85ab6b9e-c439-4b4a-b7f8-adee53ef2e70")
+              }
             >
               <div>
                 <img
@@ -43,7 +100,9 @@ const UserList = ({ userName, users, onClick }) => {
           </li>
           <li className="UserList__container__list__item UserList__container__list__item--selected">
             <button
-              onClick={() => onClick("79cba60d-8463-4015-92da-091384babbff")}
+              onClick={() =>
+                props.onClick("79cba60d-8463-4015-92da-091384babbff")
+              }
             >
               <div>
                 <img
@@ -91,4 +150,4 @@ const UserList = ({ userName, users, onClick }) => {
   );
 };
 
-export default UserList;
+export default withChatkitOneToOne(UserList);

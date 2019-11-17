@@ -62,7 +62,11 @@ class Chat extends Component {
     try {
       const profiles = await API.get("teithe-career-portal-api", "/profiles");
       const users = [];
-      console.log(profiles, this.props.userId);
+      if (profiles[0].id !== this.props.userId) {
+        this.setState({ otherUserId: profiles[0].id });
+      } else {
+        this.setState({ otherUserId: profiles[1].id });
+      }
       profiles.map(profile => {
         if (profile.id === this.props.userId) {
           this.setState({
@@ -95,17 +99,18 @@ class Chat extends Component {
   render() {
     return (
       <div>
-        <UserList
-          userName={this.state.currentUserName}
-          users={this.state.users}
-          onClick={this.handleChildClick}
-        />
         {this.state.otherUserId && this.state.show ? (
           <ChatkitProvider
             instanceLocator={instanceLocator}
             tokenProvider={tokenProvider}
             userId={this.props.userId}
           >
+            <UserList
+              userName={this.state.currentUserName}
+              users={this.state.users}
+              onClick={this.handleChildClick}
+              otherUserId={this.state.otherUserId}
+            />
             <Messages otherUserId={this.state.otherUserId} />
           </ChatkitProvider>
         ) : (

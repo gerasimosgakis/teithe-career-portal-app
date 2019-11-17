@@ -6,7 +6,6 @@ import "./Chat.css";
 import defaultAvatar from "./default-avatar.png";
 
 function Messages(props) {
-  console.log(props);
   const [pendingMessage, setPendingMessage] = useState("");
   const messageList = React.createRef();
 
