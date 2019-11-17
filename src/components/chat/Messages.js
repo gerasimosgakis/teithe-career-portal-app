@@ -2,7 +2,7 @@ import Moment from "react-moment";
 import React, { useState, useEffect } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
-import "./Chat.css";
+import "./Messages.scss";
 import defaultAvatar from "./default-avatar.png";
 
 function Messages(props) {
@@ -44,14 +44,14 @@ function Messages(props) {
   }));
 
   return (
-    <div className="Chat">
-      <div className="Chat__titlebar">
+    <div className="Messages">
+      <div className="Messages__titlebar">
         <img
           src={defaultAvatar}
-          className="Chat__titlebar__avatar"
+          className="Messages__titlebar__avatar"
           alt="avatar"
         />
-        <div className="Chat__titlebar__details">
+        <div className="Messages__titlebar__details">
           {/*TODO: Get other user's name from Chatkit */}
           <span>
             {props.chatkit.isLoading
@@ -60,21 +60,24 @@ function Messages(props) {
           </span>
         </div>
       </div>
-      <div className="Chat__messages" ref={messageList}>
+      <div className="Messages__messages" ref={messageList}>
         {messages.map(m => (
           <Message key={m.id} {...m} />
         ))}
       </div>
-      <div className="Chat__compose">
+      <div className="Messages__compose">
         <input
-          className="Chat__compose__input"
+          className="Messages__compose__input"
           type="text"
           placeholder="Type a message..."
           value={pendingMessage}
           onChange={handleMessageChange}
           onKeyDown={handleMessageKeyDown}
         />
-        <button className="Chat__compose__button" onClick={handleSendMessage}>
+        <button
+          className="Messages__compose__button"
+          onClick={handleSendMessage}
+        >
           Send
         </button>
       </div>
@@ -87,20 +90,22 @@ function Message({ isOwnMessage, isLatestMessage, createdAt, textContent }) {
     <div
       className={
         isOwnMessage
-          ? "Chat__messages__message__wrapper Chat__messages__message__wrapper--self"
-          : "Chat__messages__message__wrapper Chat__messages__message__wrapper--other"
+          ? "Messages__messages__message__wrapper Messages__messages__message__wrapper--self"
+          : "Messages__messages__message__wrapper Messages__messages__message__wrapper--other"
       }
     >
-      <div className="Chat__messages__message__wrapper__inner">
+      <div className="Messages__messages__message__wrapper__inner">
         <div
           className={
             isOwnMessage
-              ? "Chat__messages__message Chat__messages__message--self"
-              : "Chat__messages__message Chat__messages__message--other"
+              ? "Messages__messages__message Messages__messages__message--self"
+              : "Messages__messages__message Messages__messages__message--other"
           }
         >
-          <div className="Chat__messages__message__content">{textContent}</div>
-          <div className="Chat__messages__message__time">
+          <div className="Messages__messages__message__content">
+            {textContent}
+          </div>
+          <div className="Messages__messages__message__time">
             <Moment
               calendar={{
                 sameDay: "LT",
@@ -114,8 +119,8 @@ function Message({ isOwnMessage, isLatestMessage, createdAt, textContent }) {
           <div
             className={
               isOwnMessage
-                ? "Chat__messages__message__arrow alt"
-                : "Chat__messages__message__arrow"
+                ? "Messages__messages__message__arrow alt"
+                : "Messages__messages__message__arrow"
             }
           />
         </div>

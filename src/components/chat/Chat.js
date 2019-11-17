@@ -4,7 +4,7 @@ import Chatkit from "@pusher/chatkit-server";
 import { API } from "aws-amplify";
 import UserList from "./UserList";
 import Messages from "./Messages";
-
+import "./Chat.scss";
 // Chatkit constants
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
 
@@ -99,24 +99,25 @@ class Chat extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.otherUserId && this.state.show ? (
-          <ChatkitProvider
-            instanceLocator={instanceLocator}
-            tokenProvider={tokenProvider}
-            userId={this.props.userId}
-          >
-            <UserList
-              userName={this.state.currentUserName}
-              users={this.state.users}
-              onClick={this.handleChildClick}
-              otherUserId={this.state.otherUserId}
-            />
-            <Messages otherUserId={this.state.otherUserId} />
-          </ChatkitProvider>
-        ) : (
-          ""
-        )}
+      <div className="Chat">
+        <div className="Chat__chatwindow">
+          <UserList
+            userName={this.state.currentUserName}
+            users={this.state.users}
+            onClick={this.handleChildClick}
+          />
+          {this.state.otherUserId && this.state.show ? (
+            <ChatkitProvider
+              instanceLocator={instanceLocator}
+              tokenProvider={tokenProvider}
+              userId={this.props.userId}
+            >
+              <Messages otherUserId={this.state.otherUserId} />
+            </ChatkitProvider>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     );
   }

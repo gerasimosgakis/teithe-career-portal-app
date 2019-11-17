@@ -9,8 +9,11 @@ const UserList = props => {
   const allUsers = props.users.map(
     (user, index) =>
       user.handle !== props.userName && (
-        <li className="UserList__container__list__item" key={index}>
-          <a onClick={() => props.onClick(user.id)}>
+        <a
+          className="UserList__container__list__item__link"
+          onClick={() => props.onClick(user.id)}
+        >
+          <li className="UserList__container__list__item" key={index}>
             <div>
               <img
                 src={defaultAvatar}
@@ -22,7 +25,7 @@ const UserList = props => {
               <p className="UserList__container__list__item__content__name">
                 {user.handle}
               </p>
-              <p className="UserList__container__list__item__content__text">
+              {/* <p className="UserList__container__list__item__content__text">
                 {props &&
                 props.chatkit.messages.length > 0 &&
                 props.chatkit.messages[props.chatkit.messages.length - 1] &&
@@ -31,9 +34,9 @@ const UserList = props => {
                   ? props.chatkit.messages[props.chatkit.messages.length - 1]
                       .parts[0].payload.content
                   : ""}
-              </p>
+              </p> */}
             </div>
-            <div className="UserList__container__list__item__time">
+            {/* <div className="UserList__container__list__item__time">
               {props &&
               props.chatkit.messages.length > 0 &&
               props.chatkit.messages[props.chatkit.messages.length - 1] ? (
@@ -52,13 +55,13 @@ const UserList = props => {
               ) : (
                 ""
               )}
-            </div>
-          </a>
-        </li>
+            </div> */}
+          </li>
+        </a>
       )
   );
   return (
-    <div className="">
+    <div className="UserList__container">
       <ul className="UserList__container__list">{allUsers}</ul>
       {/* <div className="UserList__titlebar">
         <img
@@ -150,4 +153,4 @@ const UserList = props => {
   );
 };
 
-export default withChatkitOneToOne(UserList);
+export default UserList;

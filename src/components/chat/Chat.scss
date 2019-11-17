@@ -1,0 +1,21 @@
+.Chat {
+  display: flex;
+  justify-content: center;
+}
+
+.Chat__chatwindow {
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d0d0d0;
+  display: flex;
+  margin-top: 40px;
+  width: 70%;
+  height: 700px;
+}
+
+@media only screen and (max-width: 900px) {
+  .Chat__chatwindow {
+    margin-top: 0;
+    width: 100%;
+    height: 100vh;
+  }
+}
