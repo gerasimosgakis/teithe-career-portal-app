@@ -5,8 +5,8 @@ import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 import "./Chat.css";
 import defaultAvatar from "./default-avatar.png";
 
-function Messages(props, test) {
-  console.log("hi", props, test);
+function Messages(props) {
+  console.log(props);
   const [pendingMessage, setPendingMessage] = useState("");
   const messageList = React.createRef();
 

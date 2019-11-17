@@ -2,9 +2,11 @@ import React from "react";
 import "./UserList.scss";
 import defaultAvatar from "./default-avatar.png";
 
-const UserList = ({ userName, onClick }) => {
+const UserList = ({ userName, users, onClick }) => {
+  const allUsers = users.map(user => <p>{user.handle}</p>);
   return (
     <div className="">
+      {allUsers}
       <div className="UserList__titlebar">
         <img
           src={defaultAvatar}

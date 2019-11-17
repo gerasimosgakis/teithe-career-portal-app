@@ -25,7 +25,9 @@ class Chat extends Component {
 
     this.state = {
       currentUserName: "",
-      otherUserId: ""
+      otherUserId: "",
+      users: [],
+      show: true
     };
   }
   createUser = (userId, userName) => {
@@ -59,6 +61,7 @@ class Chat extends Component {
   async componentDidMount() {
     try {
       const profiles = await API.get("teithe-career-portal-api", "/profiles");
+      const users = [];
       console.log(profiles, this.props.userId);
       profiles.map(profile => {
         if (profile.id === this.props.userId) {
@@ -69,7 +72,12 @@ class Chat extends Component {
         const userId = profile.id;
         const userName = profile.handle;
         this.createUser(userId, userName);
+        users.push({
+          id: profile.id,
+          handle: profile.handle
+        });
       });
+      this.setState({ users });
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +85,10 @@ class Chat extends Component {
 
   handleChildClick = id => {
     console.log(id);
-    this.setState({ otherUserId: id });
+    this.setState({ otherUserId: id, show: false });
+    setTimeout(() => {
+      this.setState({ show: true });
+    }, 200);
     console.log(this.state);
   };
 
@@ -86,16 +97,16 @@ class Chat extends Component {
       <div>
         <UserList
           userName={this.state.currentUserName}
+          users={this.state.users}
           onClick={this.handleChildClick}
         />
-        {this.state.otherUserId !== "" ? (
+        {this.state.otherUserId && this.state.show ? (
           <ChatkitProvider
             instanceLocator={instanceLocator}
             tokenProvider={tokenProvider}
             userId={this.props.userId}
-            otherUserId={this.state.otherUserId}
           >
-            <Messages otherUserId={this.state.otherUserId} test="hi" />
+            <Messages otherUserId={this.state.otherUserId} />
           </ChatkitProvider>
         ) : (
           ""
