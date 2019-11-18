@@ -26,12 +26,13 @@ class PostForm extends Component {
     const email = this.props.auth.user.attributes.email;
 
     const postData = {
-      userId: currentUserId,
+      user_id: currentUserId,
       text: this.state.text,
-      name: this.props.auth.user.attributes.name
+      user_name: this.props.auth.user.attributes.name,
+      avatar: this.props.auth.user.avatar
     };
 
-    this.props.addPost(currentUserId, email, postData, this.props.history);
+    this.props.addPost(postData);
     this.setState({ text: "" });
   };
 

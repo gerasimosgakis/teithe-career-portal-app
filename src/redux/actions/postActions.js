@@ -1,5 +1,10 @@
 import { API } from "aws-amplify";
-import { GET_POSTS_SUCCESS, GET_POSTS_FAIL } from "./types";
+import {
+  GET_POSTS_SUCCESS,
+  GET_POSTS_FAIL,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAIL
+} from "./types";
 // Get All Posts
 export const getPosts = () => async dispatch => {
   try {
@@ -21,7 +26,8 @@ export const getPosts = () => async dispatch => {
 };
 
 // Add new Post
-export const addPost = () => async dispatch => {
+export const addPost = data => async dispatch => {
+  console.log(data);
   // try {
   //   dispatch({
   //     type: "SET_LOADING",
@@ -38,4 +44,21 @@ export const addPost = () => async dispatch => {
   //     payload: error
   //   });
   // }
+  try {
+    const post = await API.post("teithe-career-portal-api", "/posts", {
+      body: data
+    });
+
+    console.log(post);
+    dispatch({
+      type: ADD_POST_SUCCESS,
+      payload: post.data
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ADD_POST_FAIL,
+      payload: error
+    });
+  }
 };
