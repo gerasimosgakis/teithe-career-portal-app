@@ -9,7 +9,10 @@ import SelectListGroup from "../shared/SelectListGroup";
 import { createProfile, editProfile } from "../../redux/actions/profileActions";
 
 class CreateProfile extends Component {
-  edit = this.props.profiles.profile ? true : false; // Variable we use so we know if we are editing an existing profile or creating a new one
+  edit =
+    this.props.profiles.profile && this.props.profiles.profile.name
+      ? true
+      : false; // Variable we use so we know if we are editing an existing profile or creating a new one
   constructor(props) {
     super(props);
 
@@ -248,7 +251,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { createProfile, editProfile }
-)(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, editProfile })(
+  withRouter(CreateProfile)
+);

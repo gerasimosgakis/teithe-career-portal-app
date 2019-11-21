@@ -12,6 +12,9 @@ import {
   getProfileById,
   deleteExperience
 } from "../../redux/actions/profileActions";
+import CreateProfile from "../create-profile/CreateProfile";
+import AddEducation from "../add-education/AddEducation";
+import AddExperience from "../add-experience/AddExperience";
 
 class Profile extends Component {
   componentDidMount() {
@@ -29,12 +32,22 @@ class Profile extends Component {
 
     if (profile === null || loading) {
       profileContent = <Spinner />;
-    }
-    // else if (!profile.id) {
-    //   // if the user has not added profile info
-    //   this.props.history.push("create-profile");
-    // }
-    else {
+    } else if (profile && !profile.name) {
+      profileContent = <CreateProfile></CreateProfile>;
+    } else if (profile && profile.name && profile.educations.length <= 0) {
+      profileContent = (
+        <AddEducation userId={this.props.auth.user.username}></AddEducation>
+      );
+    } else if (
+      profile &&
+      profile.name &&
+      profile.educations.length > 0 &&
+      profile.experiences.length <= 0
+    ) {
+      profileContent = (
+        <AddExperience userId={this.props.auth.user.username}></AddExperience>
+      );
+    } else {
       profileContent = (
         <div>
           <ProfileHeader
@@ -72,7 +85,8 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { getProfileByHandle, getProfileById, deleteExperience }
-)(Profile);
+export default connect(mapStateToProps, {
+  getProfileByHandle,
+  getProfileById,
+  deleteExperience
+})(Profile);

@@ -149,6 +149,7 @@ class App extends Component {
                 />
                 <Route exact path="/feed" component={Posts} />
                 <Route exact path="/post/:id" component={Post} />
+                <Route exact path="/create-profile" component={CreateProfile} />
                 {/* <Route exact path="/add-experience" component={AddExperience} /> */}
                 {/* <Route exact path="/add-experience" component={AddExperience} /> */}
               </Switch>
