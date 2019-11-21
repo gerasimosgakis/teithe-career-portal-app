@@ -70,7 +70,7 @@ class Navbar extends Component {
                 </Fragment>
               ) : (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/profiles">
+                  <Link className="nav-link" to="/graduates">
                     {" "}
                     Graduates
                   </Link>
@@ -139,7 +139,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
