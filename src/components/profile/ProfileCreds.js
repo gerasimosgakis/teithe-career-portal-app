@@ -86,7 +86,6 @@ class ProfileCreds extends Component {
 
   render() {
     const { experience, education } = this.props;
-    console.log(this.props.userId);
     const expItems = experience.map((exp, index) => (
       <li key={index} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
@@ -460,7 +459,6 @@ class ProfileCreds extends Component {
   }
 }
 
-export default connect(
-  null,
-  { deleteExperience, deleteEducation }
-)(ProfileCreds);
+export default connect(null, { deleteExperience, deleteEducation })(
+  ProfileCreds
+);
