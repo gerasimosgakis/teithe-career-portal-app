@@ -30,6 +30,7 @@
   border-radius: 4px;
   &:hover {
     background: $submit-btn-hover;
+    box-shadow: 0 0 0 1pt $submit-btn-hover;
   }
 }
 
@@ -42,14 +43,22 @@
   }
 }
 
+.transparent-btn {
+  border: 1pt solid $transparent-btn;
+  border-radius: 4px;
+  &:hover {
+    box-shadow: 0 0 0 1pt $transparent-btn-hover;
+  }
+}
+
 .modal-button {
-  color: $icon-btn;
+  color: $transparent-btn;
   background: none;
   border: none;
   &:focus {
     outline: none;
   }
   &:hover {
-    color: $icon-btn-hover;
+    color: $transparent-btn-hover;
   }
 }
