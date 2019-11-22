@@ -37,7 +37,8 @@ class CreateProfile extends Component {
       instagram: profile && profile.instagram ? profile.instagram : "",
       experiences: profile && profile.experiences ? profile.experiences : [],
       educations: profile && profile.educations ? profile.educations : [],
-      errors: {}
+      errors: {},
+      value: null
     };
   }
 
@@ -146,15 +147,18 @@ class CreateProfile extends Component {
     ];
     return (
       <div className="create-profile">
-        <div className="create-profile__header">
-          <h1>Create Your Profile</h1>
-          <p className="header-label">
-            Let's get some information to make your profile stand out
-          </p>
-        </div>
+        {this.props.header && (
+          <div className="create-profile__header">
+            <h1>Create Your Profile</h1>
+            <p className="header-label">
+              Let's get some information to make your profile stand out
+            </p>
+          </div>
+        )}
         <div className="create-profile__form">
           <small className="small-text">* = required fields</small>
           <form className="mt1" onSubmit={this.onSubmit}>
+            <p>{this.props.ownProps}</p>
             <TextFieldGroup
               placeholder="* Profile Handle"
               name="handle"
@@ -245,11 +249,14 @@ CreateProfile.propTypes = {
   profiles: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  profiles: state.profiles,
-  errors: state.errors
-});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    header: ownProps.header,
+    auth: state.auth,
+    profiles: state.profiles,
+    errors: state.errors
+  };
+};
 
 export default connect(mapStateToProps, { createProfile, editProfile })(
   withRouter(CreateProfile)

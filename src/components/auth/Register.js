@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { registerUser, confirmUser } from "../../redux/actions/authActions";
 import TextFieldGroup from "../shared/TextFieldGroup";
 
@@ -58,6 +58,7 @@ class Register extends Component {
   renderForm() {
     return (
       <form onSubmit={this.onSubmit}>
+        <div className="form__field-label">Name</div>
         <TextFieldGroup
           placeholder="Name"
           name="name"
@@ -65,6 +66,7 @@ class Register extends Component {
           value={this.state.name}
           onChange={this.onChange}
         />
+        <div className="form__field-label">Email Address</div>
         <TextFieldGroup
           placeholder="Email Address"
           name="email"
@@ -72,6 +74,7 @@ class Register extends Component {
           value={this.state.email}
           onChange={this.onChange}
         />
+        <div className="form__field-label">Password</div>
         <TextFieldGroup
           placeholder="Password"
           name="password"
@@ -79,6 +82,7 @@ class Register extends Component {
           value={this.state.password}
           onChange={this.onChange}
         />
+        <div className="form__field-label">Confirm Password</div>
         <TextFieldGroup
           placeholder="Confirm Password"
           name="confirmPassword"
@@ -95,9 +99,12 @@ class Register extends Component {
           text="Signup"
           loadingText="Signing up…"
         /> */}
-        <button className="register__form-buttons button submit-btn">
-          Sign Up
-        </button>
+        <div className="btn-group right">
+          <Link to="/" className="button back-btn mr-1">
+            Back
+          </Link>
+          <button className="button submit-btn">Sign Up</button>
+        </div>
       </form>
     );
   }
@@ -131,7 +138,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { registerUser, confirmUser }
-)(withRouter(Register));
+export default connect(mapStateToProps, { registerUser, confirmUser })(
+  withRouter(Register)
+);

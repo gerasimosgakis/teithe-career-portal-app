@@ -108,7 +108,7 @@ class App extends Component {
       //   console.log(error);
       // }
     } catch (error) {
-      if (error !== "No current user") alert(error);
+      if (error !== "No current user") console.log(error);
     }
 
     this.setState({ isAuthenticating: false });
@@ -136,7 +136,9 @@ class App extends Component {
                 <Route
                   exact
                   path="/create-profile"
-                  component={CreateProfile}
+                  component={() => (
+                    <CreateProfile header={true}></CreateProfile>
+                  )}
                 ></Route>
                 <Route exact path="/graduates" component={Profiles} />
                 <Route exact path="/graduates/:handle" component={Profile} />
