@@ -15,6 +15,7 @@
 @import "styles/ProfileCreds";
 @import "styles/ProfileSkills";
 @import "styles/ProfileGithub";
+@import "styles/Posts";
 @import "styles/utils";
 @import "styles/forms";
 
@@ -45,7 +46,7 @@ a {
 }
 
 .navbar {
-  background: #236d7f;
+  background: $main-color;
 }
 
 .landing {

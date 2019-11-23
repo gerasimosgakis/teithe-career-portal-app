@@ -1,3 +1,18 @@
 .full-width {
   width: 100%;
 }
+
+.btn-group,
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+
+  &.right,
+  &--right {
+    justify-content: flex-end;
+  }
+  &.center,
+  &--center {
+    justify-content: center;
+  }
+}

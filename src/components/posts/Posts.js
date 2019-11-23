@@ -12,7 +12,6 @@ class Posts extends Component {
   }
 
   render() {
-    console.log(this.props.posts);
     const { posts, loading } = this.props.posts;
     let postContent;
 
@@ -23,15 +22,14 @@ class Posts extends Component {
     }
 
     return (
-      <div className="feed">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <PostForm />
-              {postContent}
-            </div>
-          </div>
-        </div>
+      <div className="feed contain">
+        {/* <div className="container"> */}
+        {/* <div className="row">
+          <div className="col-md-12"> */}
+        <PostForm />
+        {postContent}
+        {/* </div>
+        </div> */}
       </div>
     );
   }
