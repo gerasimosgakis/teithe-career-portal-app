@@ -69,3 +69,18 @@
     font-size: 12pt;
   }
 }
+
+.thumbs-button {
+  background: none;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    color: $transparent-btn-hover;
+  }
+
+  &--small {
+    font-size: 12pt;
+  }
+}

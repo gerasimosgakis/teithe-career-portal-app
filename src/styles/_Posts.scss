@@ -1,0 +1,37 @@
+.posts {
+  &__post-form {
+    &-header {
+      background: $main-color;
+    }
+  }
+
+  &__post-item {
+    &-body {
+      display: flex;
+      flex-direction: row;
+    }
+    &-body-details {
+      display: flex;
+      flex-direction: column;
+      // flex-grow: 0;
+      // flex-shrink: 0;
+      flex-basis: 15%;
+      text-align: center;
+      margin-right: 32pt;
+    }
+    &-body-main {
+      flex-basis: 85%;
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: space-between;
+      &-likes {
+        color: $help;
+      }
+      &-likes--active {
+        color: $lead;
+      }
+    }
+  }
+}

@@ -35,5 +35,7 @@ export const GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS";
 export const GET_POSTS_FAIL = "GET_POSTS_FAIL";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAIL = "ADD_POST_FAIL";
+export const ADD_LIKE_SUCCESS = "ADD_LIKE_SUCCESS";
+export const ADD_LIKE_FAIL = "ADD_LIKE_FAIL";
 
 export const SET_LOADING = "SET_LOADING";

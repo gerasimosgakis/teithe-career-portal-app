@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import { addPost } from "../../redux/actions/postActions";
+import gravatar from "gravatar";
 
 class PostForm extends Component {
   constructor(props) {
@@ -24,12 +25,16 @@ class PostForm extends Component {
 
     const currentUserId = this.props.auth.user.username;
     const email = this.props.auth.user.attributes.email;
-
+    const avatar = gravatar.url(email, {
+      s: "150", // size
+      r: "pg", // rating
+      d: "mm" //default});
+    });
     const postData = {
       user_id: currentUserId,
       text: this.state.text,
       user_name: this.props.auth.user.attributes.name,
-      avatar: this.props.auth.user.avatar
+      avatar
     };
 
     this.props.addPost(postData);

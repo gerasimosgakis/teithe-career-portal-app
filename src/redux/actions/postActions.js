@@ -3,7 +3,9 @@ import {
   GET_POSTS_SUCCESS,
   GET_POSTS_FAIL,
   ADD_POST_SUCCESS,
-  ADD_POST_FAIL
+  ADD_POST_FAIL,
+  ADD_LIKE_SUCCESS,
+  ADD_LIKE_FAIL
 } from "./types";
 // Get All Posts
 export const getPosts = () => async dispatch => {
@@ -58,6 +60,33 @@ export const addPost = data => async dispatch => {
     console.log(error);
     dispatch({
       type: ADD_POST_FAIL,
+      payload: error
+    });
+  }
+};
+
+// Add new Like
+export const addLike = (postId, userId, username, liked) => async dispatch => {
+  console.log(postId, userId, username, liked);
+  try {
+    const addLike = await API.post("teithe-career-portal-api", "/likes", {
+      body: {
+        post_id: postId,
+        user_id: userId,
+        username,
+        liked
+      }
+    });
+
+    console.log(addLike);
+    dispatch({
+      type: ADD_LIKE_SUCCESS,
+      payload: { data: addLike.data, action: addLike.action }
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ADD_LIKE_FAIL,
       payload: error
     });
   }
