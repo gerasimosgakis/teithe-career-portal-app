@@ -99,6 +99,13 @@ class Search extends Component {
           </div>
           {this.state.expandFields ? (
             <div>
+              <div className="form__field-label">Handle</div>
+              <TextFieldGroup
+                placeholder="Handle"
+                name="handle"
+                value={this.state.handle}
+                onChange={this.onChange}
+              ></TextFieldGroup>
               <div className="form__field-label">School</div>
               <TextFieldGroup
                 placeholder="School"
@@ -154,7 +161,11 @@ class Search extends Component {
               className="btn btn-info btn-block mt-4 mb-4"
               onClick={this.getAllProfiles}
             /> */}
-            <button type="button" className="button transparent-btn mr1">
+            <button
+              type="button"
+              className="button transparent-btn mr1"
+              onClick={this.getAllProfiles}
+            >
               Get All
             </button>
             <button className="button submit-btn">Submit</button>

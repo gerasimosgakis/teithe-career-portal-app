@@ -124,10 +124,10 @@ export const loginUser = (userData, history) => async dispatch => {
 export const logoutUser = history => async dispatch => {
   try {
     await Auth.signOut();
+    history.push("/");
     dispatch({
       type: LOGOUT_SUCCESS
     });
-    history.push("/");
   } catch (error) {
     dispatch({
       type: LOGOUT_FAIL,

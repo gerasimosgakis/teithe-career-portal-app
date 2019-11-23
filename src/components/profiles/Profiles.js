@@ -19,29 +19,39 @@ class Profiles extends Component {
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
-        profileItems = profiles.map(profile => (
-          <ProfileItem key={profile.id} profile={profile} />
-        ));
+        profileItems = (
+          <div className="flex group-contain">
+            {profiles.map(profile => (
+              <ProfileItem key={profile.id} profile={profile} />
+            ))}
+          </div>
+        );
       } else {
         profileItems = <h4>No profiles found...</h4>;
       }
     }
 
     return (
-      <div className="profiles">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4 text-center">Developer Profiles</h1>
-              <p className="lead text-center">
-                Browse and connect with developers
-              </p>
-              <Search></Search>
-              {profileItems}
-            </div>
-          </div>
-        </div>
+      <div className="profiles contain">
+        <h1 className="display-4 text-center">Developer Profiles</h1>{" "}
+        <p className="lead text-center">Browse and connect with developers </p>
+        <Search></Search>
+        {profileItems}
       </div>
+      // <div className="profiles">
+      //   <div className="container">
+      //     <div className="row">
+      //       <div className="col-md-12">
+      //         <h1 className="display-4 text-center">Developer Profiles</h1>
+      //         <p className="lead text-center">
+      //           Browse and connect with developers
+      //         </p>
+      //         <Search></Search>
+      //         {profileItems}
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }

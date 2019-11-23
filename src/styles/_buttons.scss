@@ -23,6 +23,9 @@
   &:focus {
     outline: none;
   }
+  &--small {
+    height: 30pt;
+  }
 }
 
 .submit-btn {

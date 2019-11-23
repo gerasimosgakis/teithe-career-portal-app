@@ -3,8 +3,14 @@
   padding: 32pt 0;
 }
 
+.group-contain {
+  border: 1px solid lightgray;
+  padding: 16pt;
+}
+
 .flex {
   display: flex;
+  flex-flow: row wrap;
 }
 
 .flex-grow {
