@@ -51,7 +51,7 @@
   }
 }
 
-.modal-button {
+.icon-button {
   color: $transparent-btn;
   background: none;
   border: none;
@@ -60,5 +60,9 @@
   }
   &:hover {
     color: $transparent-btn-hover;
+  }
+
+  &--small {
+    font-size: 12pt;
   }
 }
