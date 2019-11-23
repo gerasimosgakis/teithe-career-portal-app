@@ -7,6 +7,7 @@ import {
   deleteExperience,
   deleteEducation
 } from "../../redux/actions/profileActions";
+import titleCase from "../../shared/functions/titleCase";
 
 class ProfileCreds extends Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class ProfileCreds extends Component {
           </div>
           <span className="profile-creds__cred-info-details">
             <p>
-              {exp.title}{" "}
+              {titleCase(exp.title)}{" "}
               <button
                 className="icon-button"
                 data-toggle="modal"
@@ -129,7 +130,7 @@ class ProfileCreds extends Component {
                 <i className="fas fa-times"></i>
               </button>
             </p>
-            <p>{exp.company}</p>
+            <p>{titleCase(exp.company)}</p>
             <p className="help-text">
               <Moment format="MMMM YYYY">{exp.start_date}</Moment> -{" "}
               {exp.to === null ? (
@@ -154,7 +155,7 @@ class ProfileCreds extends Component {
           </div>
           <span className="profile-creds__cred-info-details">
             <p>
-              {edu.degree}{" "}
+              {titleCase(edu.degree)}{" "}
               <button
                 className="icon-button"
                 data-toggle="modal"
@@ -190,7 +191,7 @@ class ProfileCreds extends Component {
                 <i className="fas fa-times"></i>
               </button>
             </p>
-            <p>{edu.school}</p>
+            <p>{titleCase(edu.school)}</p>
             <p className="help-text">
               <Moment format="MMMM YYYY">{edu.start_date}</Moment> -{" "}
               {edu.to === null ? (
