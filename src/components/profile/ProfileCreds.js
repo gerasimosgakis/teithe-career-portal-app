@@ -96,7 +96,7 @@ class ProfileCreds extends Component {
             <p>
               {exp.title}{" "}
               <button
-                className="modal-button"
+                className="icon-button"
                 data-toggle="modal"
                 data-target="#expModal"
                 onClick={() => {
@@ -121,7 +121,7 @@ class ProfileCreds extends Component {
                 <i className="fas fa-edit"></i>
               </button>
               <button
-                className="modal-button"
+                className="icon-button"
                 onClick={() => {
                   this.props.deleteExperience(exp.id);
                 }}
@@ -156,7 +156,7 @@ class ProfileCreds extends Component {
             <p>
               {edu.degree}{" "}
               <button
-                className="modal-button"
+                className="icon-button"
                 data-toggle="modal"
                 data-target="#eduModal"
                 onClick={() => {
@@ -182,7 +182,7 @@ class ProfileCreds extends Component {
                 <i className="fas fa-edit"></i>
               </button>
               <button
-                className="modal-button"
+                className="icon-button"
                 onClick={() => {
                   this.props.deleteEducation(edu.id);
                 }}
@@ -265,7 +265,7 @@ class ProfileCreds extends Component {
           Experience <span>&nbsp;</span>
           {this.props.edit && (
             <button
-              className="modal-button"
+              className="icon-button"
               data-toggle="modal"
               data-target="#expModal"
               onClick={() => {
@@ -288,7 +288,7 @@ class ProfileCreds extends Component {
           Education <span>&nbsp;</span>
           {this.props.edit && (
             <button
-              className="modal-button"
+              className="icon-button"
               data-toggle="modal"
               data-target="#eduModal"
               onClick={() => {

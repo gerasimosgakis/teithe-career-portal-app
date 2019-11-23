@@ -36,7 +36,7 @@ class Landing extends Component {
                 <button className="button submit-btn mr1">Sign Up</button>
               </Link>
               <Link to="/login">
-                <button className="button back-btn">Login</button>
+                <button className="button transparent-btn">Login</button>
               </Link>
             </Fragment>
           )}
@@ -56,7 +56,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Landing));
+export default connect(mapStateToProps, null)(withRouter(Landing));

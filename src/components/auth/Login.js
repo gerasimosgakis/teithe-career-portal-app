@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import { loginUser } from "../../redux/actions/authActions";
@@ -35,12 +35,13 @@ class Login extends Component {
   render() {
     return (
       <div className="login contain">
-        <div className="login__header">
+        <div className="login__header mb2">
           <h1>Log In</h1>
           <p className="header-label">Sign in to your DevPals account</p>
         </div>
         <div className="login__form">
           <form onSubmit={this.onSubmit}>
+            <div className="form__field-label">Email Address</div>
             <TextFieldGroup
               placeholder="Email Address"
               name="email"
@@ -49,6 +50,7 @@ class Login extends Component {
               onChange={this.onChange}
               required
             />
+            <div className="form__field-label">Password</div>
             <TextFieldGroup
               placeholder="Password"
               name="password"
@@ -62,9 +64,12 @@ class Login extends Component {
                   : ""
               }
             />
-            <button className="login__form-buttons button submit-btn">
-              Log In
-            </button>
+            <div className="btn-group right">
+              <Link to="/" className="button back-btn mr-1">
+                Back
+              </Link>
+              <button className="button submit-btn">Log In</button>
+            </div>
           </form>
         </div>
       </div>
@@ -82,7 +87,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(withRouter(Login));
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

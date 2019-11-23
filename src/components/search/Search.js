@@ -67,9 +67,28 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form className="mt1" onSubmit={this.onSubmit}>
+        <h2>
+          Search{" "}
+          <button
+            type="button"
+            className="icon-button icon-button--small"
+            onClick={this.onExpand}
+          >
+            <i
+              className={
+                this.state.expandFields
+                  ? "fa fa-chevron-up"
+                  : "fa fa-chevron-down"
+              }
+              aria-hidden="true"
+            ></i>
+          </button>
+        </h2>
+
+        <form className="mt1 mb2" onSubmit={this.onSubmit}>
           <div className="flex">
             <div className="flex-grow">
+              <div className="form__field-label">Name</div>
               <TextFieldGroup
                 placeholder="Name"
                 name="name"
@@ -77,51 +96,38 @@ class Search extends Component {
                 onChange={this.onChange}
               ></TextFieldGroup>
             </div>
-            <button type="button" className="button" onClick={this.onExpand}>
-              <i
-                className={
-                  this.state.expandFields
-                    ? "fa fa-chevron-up"
-                    : "fa fa-chevron-down"
-                }
-                aria-hidden="true"
-              ></i>
-            </button>
           </div>
           {this.state.expandFields ? (
             <div>
-              <TextFieldGroup
-                placeholder="Handle"
-                name="handle"
-                value={this.state.handle}
-                onChange={this.onChange}
-              ></TextFieldGroup>
-
+              <div className="form__field-label">School</div>
               <TextFieldGroup
                 placeholder="School"
                 name="school"
                 value={this.state.school}
                 onChange={this.onChange}
               ></TextFieldGroup>
+              <div className="form__field-label">Degree</div>
               <TextFieldGroup
                 placeholder="Degree"
                 name="degree"
                 value={this.state.degree}
                 onChange={this.onChange}
               ></TextFieldGroup>
+              <div className="form__field-label">Company</div>
               <TextFieldGroup
                 placeholder="Company"
                 name="company"
                 value={this.state.company}
                 onChange={this.onChange}
               ></TextFieldGroup>
+              <div className="form__field-label">Skills</div>
               <TextFieldGroup
                 placeholder="Skills"
                 name="skills"
                 value={this.state.skills}
                 onChange={this.onChange}
               ></TextFieldGroup>
-              <h6>Graduate Before</h6>
+              <div className="form__field-label">Graduate Before</div>
               <TextFieldGroup
                 placeholder="To"
                 name="graduate_date_before"
@@ -129,7 +135,7 @@ class Search extends Component {
                 value={this.state.graduate_date_before}
                 onChange={this.onChange}
               ></TextFieldGroup>
-              <h6>Graduate After</h6>
+              <div className="form__field-label">Graduate After</div>
               <TextFieldGroup
                 placeholder="From"
                 name="graduate_date_after"
@@ -141,24 +147,22 @@ class Search extends Component {
           ) : (
             ""
           )}
-          <input
-            type="submit"
-            value="Submit"
-            className="btn btn-info btn-block mt-4 mb-4"
-          />
-          <input
-            type="button"
-            value="Get All"
-            className="btn btn-info btn-block mt-4 mb-4"
-            onClick={this.getAllProfiles}
-          />
+          <div className="btn-group right">
+            {/* <input
+              type="button"
+              value="Get All"
+              className="btn btn-info btn-block mt-4 mb-4"
+              onClick={this.getAllProfiles}
+            /> */}
+            <button type="button" className="button transparent-btn mr1">
+              Get All
+            </button>
+            <button className="button submit-btn">Submit</button>
+          </div>
         </form>
       </div>
     );
   }
 }
 
-export default connect(
-  null,
-  { searchGraduates, getProfiles }
-)(Search);
+export default connect(null, { searchGraduates, getProfiles })(Search);

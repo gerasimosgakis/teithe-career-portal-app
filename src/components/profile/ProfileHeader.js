@@ -24,7 +24,7 @@ class ProfileHeader extends Component {
               {profile.name}
               {this.props.edit && (
                 <button
-                  className="modal-button"
+                  className="icon-button"
                   data-toggle="modal"
                   data-target="#profileModal"
                 >
