@@ -67,6 +67,12 @@ class Navbar extends Component {
                       Chat
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/job-search">
+                      {" "}
+                      Job Search
+                    </Link>
+                  </li>
                 </Fragment>
               ) : (
                 <li className="nav-item">
