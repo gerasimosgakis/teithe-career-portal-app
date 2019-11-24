@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { geolocated } from "react-geolocated";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import JobItem from "./JobItem";
 import Spinner from "../shared/Spinner";
 
-export default class JobSearch extends Component {
+class JobSearch extends Component {
   constructor(props) {
     super(props);
 
@@ -27,9 +28,36 @@ export default class JobSearch extends Component {
       error: null
     };
   }
-  // componentDidMount() {
-  //   this.getJobs();
-  // }
+  componentDidMount() {}
+
+  async getLocation(latitude, longitude) {
+    var apikey = "d68690d89dff4842a10bc42493a2a90e";
+
+    var api_url = "https://api.opencagedata.com/geocode/v1/json";
+
+    var request_url =
+      api_url +
+      "?" +
+      "key=" +
+      apikey +
+      "&q=" +
+      encodeURIComponent(latitude + "," + longitude) +
+      "&pretty=1" +
+      "&no_annotations=1";
+    try {
+      const location = await axios.get(request_url);
+      return location.data.results[0].components.postcode;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  setLocation = async coords => {
+    const postcode = await this.getLocation(coords.latitude, coords.longitude);
+    this.setState({
+      locationName: postcode
+    });
+  };
 
   async getJobs(keywords, locationName) {
     try {
@@ -46,7 +74,7 @@ export default class JobSearch extends Component {
         loading: false,
         jobs: jobs.data.results
       });
-      console.log(this.state.jobs);
+      console.log(JSON.stringify(jobs.data.results[0]));
     } catch (error) {
       this.setState({ error });
     }
@@ -88,14 +116,25 @@ export default class JobSearch extends Component {
                 />
               </div>
               <div className="search-jobs__form-basic-field">
-                <div className="form__field-label">Location</div>
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="locationName"
-                  value={this.state.locationName}
-                  required
-                  onChange={this.onChange}
-                />
+                <div className="form__field-label">Location </div>
+                <div className="form-group search-jobs__form-basic-field-location">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg search-jobs__form-basic-field-location-input"
+                    placeholder="Location"
+                    name="locationName"
+                    value={this.state.locationName}
+                    required
+                    onChange={this.onChange}
+                  />
+                  <button
+                    className="icon-button search-jobs__form-basic-field-location-button"
+                    disabled={!this.props.coords}
+                    onClick={() => this.setLocation(this.props.coords)}
+                  >
+                    <i className="fas fa-search-location fa-2x"></i>
+                  </button>
+                </div>
               </div>
             </div>
             <div className="btn-group right">
@@ -124,3 +163,10 @@ export default class JobSearch extends Component {
     );
   }
 }
+
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(JobSearch);

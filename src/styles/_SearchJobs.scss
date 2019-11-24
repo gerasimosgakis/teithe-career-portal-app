@@ -4,5 +4,14 @@
     &-field {
       flex-grow: 1;
     }
+    &-field-location {
+      display: flex;
+      position: relative;
+    }
+    &-field-location-button {
+      position: absolute;
+      right: 8pt;
+      align-self: center;
+    }
   }
 }
