@@ -23,7 +23,9 @@
 $color_1: #bbb;
 $background_color_1: rgba(0, 0, 0, 0.7);
 
-body {
+body,
+html {
+  height: 100%;
   font: $font;
   line-height: 1;
   background: hsla(0, 0%, 94%, 1);

@@ -13,18 +13,19 @@ class JobSearch extends Component {
       keywords: "",
       locationName: "",
       distanceFromLocation: 10,
-      permanent: true,
-      contract: false,
-      temp: false,
-      partTime: false,
-      fullTime: true,
+      permanent: "",
+      contract: "",
+      temp: "",
+      partTime: "",
+      fullTime: "",
       minimumSalary: 0,
       maximumSalary: 100000,
-      graduate: true,
-      resultsToTake: 100,
+      graduate: "",
+      resultsToTake: 20,
       resultsToSkip: 0,
       jobs: [],
       loading: false,
+      moreLoading: false,
       error: null
     };
   }
@@ -59,10 +60,10 @@ class JobSearch extends Component {
     });
   };
 
-  async getJobs(keywords, locationName) {
+  async getJobs(keywords, locationName, resultsToTake, resultsToSkip) {
     try {
       const jobs = await axios.get(
-        `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=15`,
+        `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=15&fullTime=${""}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
         {
           headers: {
             Authorization:
@@ -70,11 +71,7 @@ class JobSearch extends Component {
           }
         }
       );
-      this.setState({
-        loading: false,
-        jobs: jobs.data.results
-      });
-      console.log(JSON.stringify(jobs.data.results[0]));
+      return jobs.data.results;
     } catch (error) {
       this.setState({ error });
     }
@@ -83,14 +80,48 @@ class JobSearch extends Component {
   onSubmit = async event => {
     event.preventDefault();
     this.setState({
-      loading: true,
-      jobs: []
+      loading: true
     });
-    this.getJobs(this.state.keywords, this.state.locationName);
+    const { keywords, locationName, resultsToTake } = this.state;
+    const jobs = await this.getJobs(keywords, locationName, resultsToTake, 0);
+    console.log(jobs);
+    this.setState({
+      loading: false,
+      jobs,
+      resultsToSkip: 20
+    });
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onCheck = e => {
+    this.setState({
+      [e]: this.state[e] === "" || !this.state[e] ? true : false
+    });
+  };
+
+  loadMore = async () => {
+    const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
+    this.setState({
+      ...this.state,
+      resultsToSkip: this.state.jobs.length,
+      moreLoading: true
+    });
+    const moreJobs = await this.getJobs(
+      keywords,
+      locationName,
+      resultsToTake,
+      this.state.jobs.length
+    );
+    console.log(moreJobs);
+    console.log(this.state);
+    this.setState({
+      jobs: [...this.state.jobs, ...moreJobs],
+      moreLoading: false
+    });
+    console.log(this.state);
   };
 
   render() {
@@ -143,22 +174,132 @@ class JobSearch extends Component {
           </form>
         </div>
 
-        {/* Items */}
+        <div className="search-jobs__results">
+          <div className="search-jobs__results-side">
+            {/* Filters */}
+            <div className="search-jobs__results-side-filters mr2">
+              <h2>Filters</h2>
+              <form>
+                <div className="form__field-label">Minimum Salary</div>
+                <TextFieldGroup
+                  placeholder="Minimum Salary"
+                  name="minimumSalary"
+                  value={this.state.minimumSalary}
+                  onChange={this.onChange}
+                />
+                <div className="form__field-label">Maximum Salary</div>
+                <TextFieldGroup
+                  placeholder="Maximum Salary"
+                  name="maximumSalary"
+                  value={this.state.maximumSalary}
+                  required
+                  onChange={this.onChange}
+                />
 
-        {this.state.loading ? (
-          <Spinner />
-        ) : this.state.error ? (
-          <div>
-            <h2>Jobs</h2>
-            <div className="card card-body">
-              <p className="error-text">There was an error...</p>
+                {/* <fieldset> */}
+                <div className="form__field-label">Job Type</div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="permanent"
+                    checked={this.state.permanent}
+                    onChange={() => this.onCheck("permanent")}
+                    id="permanent"
+                  />
+                  <label className="form-check-label" htmlFor="permanent">
+                    Permanent
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="temp"
+                    checked={this.state.temp}
+                    onChange={() => this.onCheck("temp")}
+                    value={this.state.temp}
+                  />
+                  <label className="form-check-label" htmlFor="temp">
+                    Temporary
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="contract"
+                    checked={this.state.contract}
+                    onChange={() => this.onCheck("contract")}
+                    value={this.state.contract}
+                  />
+                  <label className="form-check-label" htmlFor="contract">
+                    Contract
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="fullTime"
+                    checked={this.state.fullTime}
+                    onChange={() => this.onCheck("fullTime")}
+                    value={this.state.fullTime}
+                  />
+                  <label className="form-check-label" htmlFor="fullTime">
+                    Full-time
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="partTime"
+                    checked={this.state.partTime}
+                    onChange={() => this.onCheck("partTime")}
+                    value={this.state.partTime}
+                  />
+                  <label className="form-check-label" htmlFor="partTime">
+                    Part-time
+                  </label>
+                </div>
+                {/* </fieldset> */}
+              </form>
             </div>
           </div>
-        ) : (
-          this.state.jobs.map((job, index) => (
-            <JobItem key={job.jobId} job={job}></JobItem>
-          ))
-        )}
+          <div className="search-jobs__results-main">
+            {/* Items */}
+            <div className="search-jobs__results-main-jobs">
+              {this.state.loading ? (
+                <Spinner />
+              ) : this.state.error ? (
+                <div>
+                  <h2>Jobs</h2>
+                  <div className="card card-body">
+                    <p className="error-text">There was an error...</p>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  {this.state.jobs.length > 0 && <h2>Jobs</h2>}
+                  {this.state.jobs.map((job, index) => (
+                    <JobItem key={job.jobId} job={job}></JobItem>
+                  ))}
+                  {this.state.jobs.length > 0 && (
+                    <div className="btn-group right">
+                      <button
+                        className="button transparent-btn"
+                        onClick={this.loadMore}
+                      >
+                        {this.state.moreLoading ? "Loading..." : "Load More"}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -14,4 +14,21 @@
       align-self: center;
     }
   }
+
+  &__results {
+    display: flex;
+    &-side {
+      flex-basis: 30%;
+      &-filters {
+        border-radius: 4pt;
+        border: 1px solid $font;
+        padding: 16pt;
+        position: sticky;
+        top: 8pt;
+      }
+    }
+    &-main {
+      flex-basis: 70%;
+    }
+  }
 }

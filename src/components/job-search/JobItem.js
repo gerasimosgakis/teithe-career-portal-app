@@ -33,9 +33,11 @@ class JobItem extends Component {
       jobDescription,
       jobUrl
     } = this.state.job;
-    const transformedDate = moment(date)
-      .add(365, "day")
-      .format("LL");
+    const transformedDate = date
+      ? moment(new Date(date))
+          .add(365, "day")
+          .format("LL")
+      : null;
     return (
       <div className="card mb2">
         <div className="card-body">
@@ -45,8 +47,7 @@ class JobItem extends Component {
             </a>
           </h2>
           <div className="mb2">
-            {transformedDate} <span className="help-text">posted by</span>{" "}
-            {employerName}
+            {date} <span className="help-text">posted by</span> {employerName}
           </div>
           <div className="flex mb2">
             {minimumSalary && maximumSalary && (
