@@ -13,7 +13,6 @@ const TextFieldGroup = ({
   required,
   disabled
 }) => {
-  console.log(value);
   return (
     <div className="form-group">
       <input

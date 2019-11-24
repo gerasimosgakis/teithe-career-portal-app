@@ -48,7 +48,8 @@
   "main": "index.js",
   "devDependencies": {
     "@pusher/chatkit-client-react": "^0.1.2",
-    "@pusher/chatkit-server": "^2.1.1"
+    "@pusher/chatkit-server": "^2.1.1",
+    "axios": "^0.19.0"
   },
   "author": "Gerasimos Gakis",
   "license": "ISC"

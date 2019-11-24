@@ -1,0 +1,8 @@
+.search-jobs {
+  &__form-basic {
+    display: flex;
+    &-field {
+      flex-grow: 1;
+    }
+  }
+}
