@@ -69,7 +69,12 @@ class PostItem extends Component {
               {post.likes}
             </span>
             <span>
-              <button className="thumbs-button">
+              <button
+                className="thumbs-button"
+                // onClick={() => {
+                //   this.onLikeClick(post.id, false);
+                // }}
+              >
                 <i className="fas fa-thumbs-down mr-half"></i>{" "}
               </button>
               0
