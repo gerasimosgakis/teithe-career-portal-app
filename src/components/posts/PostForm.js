@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import { addPost } from "../../redux/actions/postActions";
+import gravatar from "gravatar";
 
 class PostForm extends Component {
   constructor(props) {
@@ -24,12 +25,16 @@ class PostForm extends Component {
 
     const currentUserId = this.props.auth.user.username;
     const email = this.props.auth.user.attributes.email;
-
+    const avatar = gravatar.url(email, {
+      s: "150", // size
+      r: "pg", // rating
+      d: "mm" //default});
+    });
     const postData = {
       user_id: currentUserId,
       text: this.state.text,
       user_name: this.props.auth.user.attributes.name,
-      avatar: this.props.auth.user.avatar
+      avatar
     };
 
     this.props.addPost(postData);
@@ -42,9 +47,11 @@ class PostForm extends Component {
 
   render() {
     return (
-      <div className="post-form mb-3">
+      <div className="posts__post-form mb2">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">Say Something...</div>
+          <div className="card-header posts__post-form-header text-white">
+            Say Something...
+          </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
@@ -55,9 +62,11 @@ class PostForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
-                Submit
-              </button>
+              <div className="btn-group right">
+                <button type="submit" className="button submit-btn">
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>

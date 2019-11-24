@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import isEmpty from "../../validation/isEmpty";
 import banner from "../../banner.jpg";
 import CreateProfile from "../create-profile/CreateProfile";
+import titleCase from "../../shared/functions/titleCase";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
@@ -21,7 +22,7 @@ class ProfileHeader extends Component {
         <div className="contain">
           <div className="profile-header__heading">
             <h2>
-              {profile.name}
+              {titleCase(profile.name)}
               {this.props.edit && (
                 <button
                   className="icon-button"
@@ -33,13 +34,13 @@ class ProfileHeader extends Component {
               )}
             </h2>
             <p className="lead-text">
-              {profile.status}{" "}
+              {titleCase(profile.status)}{" "}
               {isEmpty(profile.company) ? null : (
-                <span>at {profile.company}</span>
+                <span>at {titleCase(profile.company)}</span>
               )}
             </p>
             {isEmpty(profile.location) ? null : (
-              <p className="help-text">{profile.location}</p>
+              <p className="help-text">{titleCase(profile.location)}</p>
             )}
             <p>
               {isEmpty(profile.website) ? null : (

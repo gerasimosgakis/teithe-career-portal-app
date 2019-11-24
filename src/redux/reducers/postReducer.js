@@ -3,7 +3,9 @@ import {
   GET_POSTS_SUCCESS,
   GET_POSTS_FAIL,
   ADD_POST_SUCCESS,
-  ADD_POST_FAIL
+  ADD_POST_FAIL,
+  ADD_LIKE_SUCCESS,
+  ADD_LIKE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -40,6 +42,27 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        errors: action.payload
+      };
+    case ADD_LIKE_SUCCESS:
+      const posts = [...state.posts];
+      const postIndex = posts.findIndex(
+        post => post.id === action.payload.data.post_id
+      );
+
+      if (action.payload.action === "added") {
+        posts[postIndex].likes += 1;
+      } else if (action.payload.action === "removed") {
+        posts[postIndex].likes -= 1;
+      }
+      console.log(posts);
+      return {
+        ...state,
+        posts
+      };
+    case ADD_LIKE_FAIL:
+      return {
+        ...state,
         errors: action.payload
       };
     default:
