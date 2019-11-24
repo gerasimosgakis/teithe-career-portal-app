@@ -10,6 +10,7 @@ const TextFieldGroup = ({
   type,
   error,
   onChange,
+  onKeyPress,
   required,
   disabled
 }) => {
@@ -22,6 +23,7 @@ const TextFieldGroup = ({
         name={name}
         value={value}
         onChange={onChange}
+        onKeyPress={onKeyPress}
         disabled={disabled}
         required={required}
       />
@@ -39,6 +41,7 @@ TextFieldGroup.prototypes = {
   type: PropTypes.string,
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
   disabled: PropTypes.string
 };
 

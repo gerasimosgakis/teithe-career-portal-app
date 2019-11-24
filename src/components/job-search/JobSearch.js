@@ -60,10 +60,26 @@ class JobSearch extends Component {
     });
   };
 
-  async getJobs(keywords, locationName, resultsToTake, resultsToSkip) {
+  async getJobs() {
+    const {
+      keywords,
+      locationName,
+      distanceFromLocation,
+      permanent,
+      contract,
+      temp,
+      partTime,
+      fullTime,
+      minimumSalary,
+      maximumSalary,
+      graduate,
+      resultsToTake,
+      resultsToSkip
+    } = this.state;
     try {
       const jobs = await axios.get(
-        `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=15&fullTime=${""}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
+        `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=${distanceFromLocation ||
+          15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
         {
           headers: {
             Authorization:
@@ -79,11 +95,47 @@ class JobSearch extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-    this.setState({
+    await this.setState({
       loading: true
     });
-    const { keywords, locationName, resultsToTake } = this.state;
-    const jobs = await this.getJobs(keywords, locationName, resultsToTake, 0);
+    const jobs = await this.getJobs();
+    console.log(jobs);
+    await this.setState({
+      loading: false,
+      jobs,
+      resultsToSkip: 20
+    });
+  };
+
+  onChange = async e => {
+    await this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.minimumSalary);
+  };
+
+  keyPressed = async event => {
+    console.log(event.key);
+    if (event.key === "Enter") {
+      await this.setState({
+        resultsToSkip: 0,
+        loading: true
+      });
+      const jobs = await this.getJobs();
+      console.log(jobs);
+      this.setState({
+        loading: false,
+        jobs,
+        resultsToSkip: 20
+      });
+    }
+  };
+
+  onCheck = async e => {
+    await this.setState({
+      [e]: this.state[e] === "" || !this.state[e] ? true : false,
+      resultsToSkip: 0,
+      loading: true
+    });
+    const jobs = await this.getJobs();
     console.log(jobs);
     this.setState({
       loading: false,
@@ -92,29 +144,14 @@ class JobSearch extends Component {
     });
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onCheck = e => {
-    this.setState({
-      [e]: this.state[e] === "" || !this.state[e] ? true : false
-    });
-  };
-
   loadMore = async () => {
     const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
-    this.setState({
+    await this.setState({
       ...this.state,
       resultsToSkip: this.state.jobs.length,
       moreLoading: true
     });
-    const moreJobs = await this.getJobs(
-      keywords,
-      locationName,
-      resultsToTake,
-      this.state.jobs.length
-    );
+    const moreJobs = await this.getJobs();
     console.log(moreJobs);
     console.log(this.state);
     this.setState({
@@ -186,6 +223,7 @@ class JobSearch extends Component {
                   name="minimumSalary"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
+                  onKeyPress={this.keyPressed}
                 />
                 <div className="form__field-label">Maximum Salary</div>
                 <TextFieldGroup
@@ -194,6 +232,7 @@ class JobSearch extends Component {
                   value={this.state.maximumSalary}
                   required
                   onChange={this.onChange}
+                  onKeyPress={this.keyPressed}
                 />
 
                 {/* <fieldset> */}
@@ -289,6 +328,7 @@ class JobSearch extends Component {
                     <div className="btn-group right">
                       <button
                         className="button transparent-btn"
+                        disabled={this.state.moreLoading}
                         onClick={this.loadMore}
                       >
                         {this.state.moreLoading ? "Loading..." : "Load More"}
