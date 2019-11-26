@@ -12,7 +12,7 @@ class JobSearch extends Component {
     this.state = {
       keywords: "",
       locationName: "",
-      distanceFromLocation: 10,
+      distanceFromLocation: 15,
       permanent: "",
       contract: "",
       temp: "",

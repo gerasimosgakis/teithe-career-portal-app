@@ -22,13 +22,13 @@ Amplify.configure({
   API: {
     endpoints: [
       // {
-      //   name: "april-devpals-app-api",
-      //   endpoint: config.apiGateway.URL,
+      //   name: "teithe-career-portal-api",
+      //   endpoint: "http://localhost:3000",
       //   region: config.apiGateway.REGION
       // }
       {
         name: "teithe-career-portal-api",
-        endpoint: "http://localhost:3000",
+        endpoint: "https://nhtejhx2s8.execute-api.us-east-1.amazonaws.com/dev",
         region: config.apiGateway.REGION
       }
     ]

@@ -54,10 +54,7 @@ export const getProfileById = id => async dispatch => {
       type: "SET_LOADING",
       payload: true
     });
-    const profile = await API.get(
-      "teithe-career-portal-api",
-      `/profiles/${id}`
-    );
+    const profile = await API.get("teithe-career-portal-api", `/profile/${id}`);
     const educations = await API.get(
       "teithe-career-portal-api",
       `/educations/${id}`
@@ -269,13 +266,17 @@ export const editExperience = expData => async dispatch => {
   console.log(expData);
 
   try {
-    await API.put("teithe-career-portal-api", `/experiences/${expData.id}`, {
-      body: expData
-      // headers: {
-      //   // set custom header id for testing
-      //   "cognito-identity-id": user
-      // }
-    });
+    await API.put(
+      "teithe-career-portal-api",
+      `/experiences/update/${expData.id}`,
+      {
+        body: expData
+        // headers: {
+        //   // set custom header id for testing
+        //   "cognito-identity-id": user
+        // }
+      }
+    );
     dispatch({
       type: EDIT_EXPERIENCE_SUCCESS,
       payload: expData
@@ -292,7 +293,7 @@ export const editExperience = expData => async dispatch => {
 // Delete Experience
 export const deleteExperience = id => async dispatch => {
   try {
-    await API.del("teithe-career-portal-api", `/experiences/${id}`);
+    await API.del("teithe-career-portal-api", `/experiences/delete/${id}`);
     dispatch({
       type: DELETE_EXPERIENCE_SUCCESS,
       payload: id
@@ -379,13 +380,17 @@ export const editEducation = eduData => async dispatch => {
   console.log(eduData);
 
   try {
-    await API.put("teithe-career-portal-api", `/educations/${eduData.id}`, {
-      body: eduData
-      // headers: {
-      //   // set custom header id for testing
-      //   "cognito-identity-id": user
-      // }
-    });
+    await API.put(
+      "teithe-career-portal-api",
+      `/educations/update/${eduData.id}`,
+      {
+        body: eduData
+        // headers: {
+        //   // set custom header id for testing
+        //   "cognito-identity-id": user
+        // }
+      }
+    );
     dispatch({
       type: EDIT_EDUCATION_SUCCESS,
       payload: eduData
@@ -402,7 +407,7 @@ export const editEducation = eduData => async dispatch => {
 // Delete Education
 export const deleteEducation = id => async dispatch => {
   try {
-    await API.del("teithe-career-portal-api", `/educations/${id}`);
+    await API.del("teithe-career-portal-api", `/educations/delete/${id}`);
     dispatch({
       type: DELETE_EDUCATION_SUCCESS,
       payload: id
