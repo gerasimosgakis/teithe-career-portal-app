@@ -15,6 +15,7 @@ export const getPosts = () => async dispatch => {
       payload: true
     });
     const posts = await API.get("teithe-career-portal-api", "/posts");
+    console.log(posts);
     dispatch({
       type: GET_POSTS_SUCCESS,
       payload: posts
