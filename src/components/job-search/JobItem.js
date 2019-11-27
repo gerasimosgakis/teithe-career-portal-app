@@ -70,10 +70,9 @@ class JobItem extends Component {
     if (jobIndex < 0) {
       this.setState({ liked: [...this.state.liked, jobId] });
     } else {
-      this.setState({ liked: [...this.state.liked.split(jobIndex, 1)] });
+      this.setState({ liked: [...this.state.liked.splice(jobIndex, 1)] });
     }
 
-    this.props.addJob({ job_id: jobId, user_id: currentUserId });
     console.log(jobIndex);
     // this.setState({
     //   liked: !this.state.liked.includes(jobId)
@@ -105,12 +104,12 @@ class JobItem extends Component {
         <div className="card-body job-item__body">
           <button
             className={
-              this.state.liked.includes(jobId.toString()) ||
               this.props.favoriteJob
                 ? "button job-item__body-like-btn job-item__body-like-btn--full"
                 : "button job-item__body-like-btn job-item__body-like-btn--empty"
             }
-            onClick={() => this.addRemoveFav(jobId)}
+            // onClick={() => this.addRemoveFav(jobId)}
+            onClick={() => this.props.onClick(jobId)}
           >
             <i className="fas fa-heart"></i>
           </button>
@@ -149,7 +148,7 @@ class JobItem extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   auth: state.auth,
-  favoriteJobs: ownProps.favoriteJob,
+  favoriteJob: ownProps.favoriteJob,
   errors: state.errors
 });
 

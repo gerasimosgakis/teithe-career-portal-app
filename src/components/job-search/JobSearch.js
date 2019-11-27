@@ -28,6 +28,7 @@ class JobSearch extends Component {
       jobs: [],
       loading: false,
       moreLoading: false,
+      favoriteJobs: [],
       error: null
     };
   }
@@ -35,6 +36,8 @@ class JobSearch extends Component {
   async componentDidMount() {
     const currentUserId = this.props.auth.user.username;
     await this.props.getFavJobs(currentUserId);
+    this.setState({ favoriteJobs: this.props.favoriteJobs });
+    console.log(this.state);
   }
 
   async getLocation(latitude, longitude) {
@@ -166,6 +169,21 @@ class JobSearch extends Component {
       moreLoading: false
     });
     console.log(this.state);
+  };
+
+  onFavoriteClick = jobId => {
+    console.log(jobId);
+    const currentUserId = this.props.auth.user.username;
+    console.log(jobId, currentUserId);
+    const jobIndex = this.state.favoriteJobs.findIndex(item => item === jobId);
+    console.log(jobIndex);
+    if (jobIndex < 0) {
+      this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
+    } else {
+      this.setState({
+        favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
+      });
+    }
   };
 
   render() {
@@ -332,9 +350,10 @@ class JobSearch extends Component {
                     <JobItem
                       key={job.jobId}
                       job={job}
-                      favoriteJob={this.props.favoriteJobs.includes(
+                      favoriteJob={this.state.favoriteJobs.includes(
                         job.jobId.toString()
                       )}
+                      onClick={this.onFavoriteClick}
                     ></JobItem>
                   ))}
                   {this.state.jobs.length > 0 && (
