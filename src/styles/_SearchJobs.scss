@@ -32,3 +32,22 @@
     }
   }
 }
+
+.job-item {
+  &__body {
+    position: relative;
+
+    &-like-btn {
+      position: absolute;
+      top: 2pt;
+      right: 2pt;
+      color: $help;
+    }
+    &-like-btn--empty {
+      color: $help;
+    }
+    &-like-btn--full {
+      color: red;
+    }
+  }
+}
