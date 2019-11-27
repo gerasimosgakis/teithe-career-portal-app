@@ -41,9 +41,14 @@ html {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: #454545;
+  color: $anchor;
+  font-weight: 500;
   &:hover {
-    color: #454545;
+    color: $anchor;
+    text-decoration: none;
+  }
+  &:visited {
+    color: $anchor;
     text-decoration: none;
   }
 }

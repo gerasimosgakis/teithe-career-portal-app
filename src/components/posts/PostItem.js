@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import Linkify from "react-linkify";
 import titleCase from "../../shared/functions/titleCase";
 import { addLike } from "../../redux/actions/postActions";
 // import {
@@ -53,7 +53,9 @@ class PostItem extends Component {
             </span>
             <p className="text-center">{titleCase(post.user_name)}</p>
           </div>
-          <div className="posts__post-item-body-main">{post.text}</div>
+          <div className="posts__post-item-body-main">
+            <Linkify>{post.text}</Linkify>
+          </div>
         </div>
         <div className="card-footer posts__post-item-footer">
           <div className="posts__post-item-footer-likes">

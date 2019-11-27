@@ -4,6 +4,8 @@ import { geolocated } from "react-geolocated";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import JobItem from "./JobItem";
 import Spinner from "../shared/Spinner";
+import { connect } from "react-redux";
+import { getFavJobs } from "../../redux/actions/jobActions";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -29,7 +31,11 @@ class JobSearch extends Component {
       error: null
     };
   }
-  componentDidMount() {}
+
+  async componentDidMount() {
+    const currentUserId = this.props.auth.user.username;
+    await this.props.getFavJobs(currentUserId);
+  }
 
   async getLocation(latitude, longitude) {
     var apikey = "d68690d89dff4842a10bc42493a2a90e";
@@ -61,6 +67,7 @@ class JobSearch extends Component {
   };
 
   async getJobs() {
+    console.log(this.props.favoriteJobs);
     const {
       keywords,
       locationName,
@@ -322,7 +329,13 @@ class JobSearch extends Component {
                 <div>
                   {this.state.jobs.length > 0 && <h2>Jobs</h2>}
                   {this.state.jobs.map((job, index) => (
-                    <JobItem key={job.jobId} job={job}></JobItem>
+                    <JobItem
+                      key={job.jobId}
+                      job={job}
+                      favoriteJob={this.props.favoriteJobs.includes(
+                        job.jobId.toString()
+                      )}
+                    ></JobItem>
                   ))}
                   {this.state.jobs.length > 0 && (
                     <div className="btn-group right">
@@ -345,9 +358,15 @@ class JobSearch extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  favoriteJobs: state.jobs.favoriteJobs,
+  errors: state.errors
+});
+
 export default geolocated({
   positionOptions: {
     enableHighAccuracy: false
   },
   userDecisionTimeout: 5000
-})(JobSearch);
+})(connect(mapStateToProps, { getFavJobs })(JobSearch));
