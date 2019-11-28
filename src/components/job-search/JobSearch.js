@@ -5,7 +5,7 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import JobItem from "./JobItem";
 import Spinner from "../shared/Spinner";
 import { connect } from "react-redux";
-import { getFavJobs } from "../../redux/actions/jobActions";
+import { getFavJobs, addJob, removeJob } from "../../redux/actions/jobActions";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -115,6 +115,7 @@ class JobSearch extends Component {
       jobs,
       resultsToSkip: 20
     });
+    console.log(this.state);
   };
 
   onChange = async e => {
@@ -179,10 +180,12 @@ class JobSearch extends Component {
     console.log(jobIndex);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
+      this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
     } else {
       this.setState({
         favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
       });
+      this.props.removeJob(jobId);
     }
   };
 
@@ -348,7 +351,7 @@ class JobSearch extends Component {
                   {this.state.jobs.length > 0 && <h2>Jobs</h2>}
                   {this.state.jobs.map((job, index) => (
                     <JobItem
-                      key={job.jobId}
+                      key={index}
                       job={job}
                       favoriteJob={this.state.favoriteJobs.includes(
                         job.jobId.toString()
@@ -388,4 +391,4 @@ export default geolocated({
     enableHighAccuracy: false
   },
   userDecisionTimeout: 5000
-})(connect(mapStateToProps, { getFavJobs })(JobSearch));
+})(connect(mapStateToProps, { getFavJobs, addJob, removeJob })(JobSearch));
