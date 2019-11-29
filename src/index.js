@@ -21,17 +21,17 @@ Amplify.configure({
   },
   API: {
     endpoints: [
-      {
-        name: "teithe-career-portal-api",
-        endpoint: "http://localhost:3000",
-        region: config.apiGateway.REGION
-      }
-      // prod environment
       // {
       //   name: "teithe-career-portal-api",
-      //   endpoint: "https://tc44jbacuh.execute-api.us-east-1.amazonaws.com/dev",
+      //   endpoint: "http://localhost:3000",
       //   region: config.apiGateway.REGION
       // }
+      // prod environment
+      {
+        name: "teithe-career-portal-api",
+        endpoint: "https://tc44jbacuh.execute-api.us-east-1.amazonaws.com/dev",
+        region: config.apiGateway.REGION
+      }
     ]
   }
 });
