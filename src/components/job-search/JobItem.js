@@ -12,7 +12,12 @@
 
 import React, { Component } from "react";
 import moment from "moment";
-import axios from "axios";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2
+} from "react-html-parser";
+
 import { connect } from "react-redux";
 import { addJob } from "../../redux/actions/jobActions";
 
@@ -141,7 +146,7 @@ class JobItem extends Component {
               <span className="bolded">{locationName}</span>
             </div>
           </div>
-          <p>{jobDescription}</p>
+          <p>{ReactHtmlParser(jobDescription)}</p>
         </div>
       </div>
     );
