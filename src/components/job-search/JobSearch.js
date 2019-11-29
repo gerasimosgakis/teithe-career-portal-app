@@ -5,7 +5,7 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import JobItem from "./JobItem";
 import Spinner from "../shared/Spinner";
 import { connect } from "react-redux";
-import { getFavJobs } from "../../redux/actions/jobActions";
+import { getFavJobs, addJob, removeJob } from "../../redux/actions/jobActions";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class JobSearch extends Component {
       loading: false,
       moreLoading: false,
       favoriteJobs: [],
+      favoriteJobsDetails: [],
       error: null
     };
   }
@@ -38,6 +39,13 @@ class JobSearch extends Component {
     await this.props.getFavJobs(currentUserId);
     this.setState({ favoriteJobs: this.props.favoriteJobs });
     console.log(this.state);
+    this.setState({
+      loading: true
+    });
+    await this.getFavoriteJobsDetails();
+    this.setState({
+      loading: false
+    });
   }
 
   async getLocation(latitude, longitude) {
@@ -69,7 +77,38 @@ class JobSearch extends Component {
     });
   };
 
-  async getJobs() {
+  getFavoriteJobsDetails = async () => {
+    try {
+      const favoriteJobs = await Promise.all(
+        this.state.favoriteJobs.map(jobId => {
+          const job = axios.get(
+            `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/jobs/${parseInt(
+              jobId
+            )}`,
+            {
+              headers: {
+                Authorization:
+                  "Basic " + btoa("e4e25b88-7602-4b5f-835b-1fb30806b0d8:")
+              }
+            }
+          );
+          return job;
+        })
+      );
+      const favoriteJobsDetails = favoriteJobs.map(job => {
+        return job.data;
+      });
+
+      this.setState({
+        favoriteJobsDetails: [...favoriteJobsDetails]
+      });
+      console.log(this.state.favoriteJobsDetails);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getJobs = async () => {
     console.log(this.props.favoriteJobs);
     const {
       keywords,
@@ -101,10 +140,11 @@ class JobSearch extends Component {
     } catch (error) {
       this.setState({ error });
     }
-  }
+  };
 
   onSubmit = async event => {
     event.preventDefault();
+    await this.getFavoriteJobsDetails();
     await this.setState({
       loading: true
     });
@@ -115,6 +155,7 @@ class JobSearch extends Component {
       jobs,
       resultsToSkip: 20
     });
+    console.log(this.state);
   };
 
   onChange = async e => {
@@ -175,14 +216,19 @@ class JobSearch extends Component {
     console.log(jobId);
     const currentUserId = this.props.auth.user.username;
     console.log(jobId, currentUserId);
-    const jobIndex = this.state.favoriteJobs.findIndex(item => item === jobId);
+    const jobIndex = this.state.favoriteJobs.findIndex(
+      item => item === jobId.toString()
+    );
     console.log(jobIndex);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
+      this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
     } else {
       this.setState({
         favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
       });
+      console.log(this.state);
+      this.props.removeJob(jobId);
     }
   };
 
@@ -345,10 +391,11 @@ class JobSearch extends Component {
                 </div>
               ) : (
                 <div>
-                  {this.state.jobs.length > 0 && <h2>Jobs</h2>}
-                  {this.state.jobs.map((job, index) => (
+                  {(this.state.jobs.length > 0 ||
+                    this.state.favoriteJobsDetails.length > 0) && <h2>Jobs</h2>}
+                  {this.state.favoriteJobsDetails.map((job, index) => (
                     <JobItem
-                      key={job.jobId}
+                      key={index}
                       job={job}
                       favoriteJob={this.state.favoriteJobs.includes(
                         job.jobId.toString()
@@ -356,6 +403,21 @@ class JobSearch extends Component {
                       onClick={this.onFavoriteClick}
                     ></JobItem>
                   ))}
+                  {this.state.jobs.map(
+                    (job, index) =>
+                      !this.state.favoriteJobs.includes(
+                        job.jobId.toString()
+                      ) && (
+                        <JobItem
+                          key={index + this.state.favoriteJobsDetails.length}
+                          job={job}
+                          favoriteJob={this.state.favoriteJobs.includes(
+                            job.jobId.toString()
+                          )}
+                          onClick={this.onFavoriteClick}
+                        ></JobItem>
+                      )
+                  )}
                   {this.state.jobs.length > 0 && (
                     <div className="btn-group right">
                       <button
@@ -388,4 +450,4 @@ export default geolocated({
     enableHighAccuracy: false
   },
   userDecisionTimeout: 5000
-})(connect(mapStateToProps, { getFavJobs })(JobSearch));
+})(connect(mapStateToProps, { getFavJobs, addJob, removeJob })(JobSearch));

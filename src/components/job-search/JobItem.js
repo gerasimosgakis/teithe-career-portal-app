@@ -12,7 +12,12 @@
 
 import React, { Component } from "react";
 import moment from "moment";
-import axios from "axios";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2
+} from "react-html-parser";
+
 import { connect } from "react-redux";
 import { addJob } from "../../redux/actions/jobActions";
 
@@ -22,7 +27,7 @@ class JobItem extends Component {
 
     this.state = {
       job: this.props.job,
-      liked: []
+      liked: this.props.favoriteJob
     };
   }
 
@@ -64,16 +69,18 @@ class JobItem extends Component {
   }
 
   addRemoveFav = jobId => {
-    const currentUserId = this.props.auth.user.username;
-    console.log(jobId, currentUserId);
-    const jobIndex = this.state.liked.findIndex(item => item === jobId);
-    if (jobIndex < 0) {
-      this.setState({ liked: [...this.state.liked, jobId] });
-    } else {
-      this.setState({ liked: [...this.state.liked.splice(jobIndex, 1)] });
-    }
+    // const currentUserId = this.props.auth.user.username;
+    // console.log(jobId, currentUserId);
+    // const jobIndex = this.state.liked.findIndex(item => item === jobId);
+    // if (jobIndex < 0) {
+    //   this.setState({ liked: [...this.state.liked, jobId] });
+    // } else {
+    //   this.setState({ liked: [...this.state.liked.splice(jobIndex, 1)] });
+    // }
+    this.setState({ liked: !this.state.liked });
+    this.props.onClick(jobId);
 
-    console.log(jobIndex);
+    // console.log(jobIndex);
     // this.setState({
     //   liked: !this.state.liked.includes(jobId)
     //     ? [...this.state.liked, jobId]
@@ -104,12 +111,12 @@ class JobItem extends Component {
         <div className="card-body job-item__body">
           <button
             className={
-              this.props.favoriteJob
+              this.state.liked
                 ? "button job-item__body-like-btn job-item__body-like-btn--full"
                 : "button job-item__body-like-btn job-item__body-like-btn--empty"
             }
-            // onClick={() => this.addRemoveFav(jobId)}
-            onClick={() => this.props.onClick(jobId)}
+            onClick={() => this.addRemoveFav(jobId)}
+            // onClick={() => this.props.onClick(jobId)}
           >
             <i className="fas fa-heart"></i>
           </button>
@@ -139,7 +146,11 @@ class JobItem extends Component {
               <span className="bolded">{locationName}</span>
             </div>
           </div>
-          <p>{jobDescription}</p>
+          <div>
+            {this.state.liked
+              ? ReactHtmlParser(jobDescription.substring(0, 450) + "...")
+              : jobDescription}
+          </div>
         </div>
       </div>
     );

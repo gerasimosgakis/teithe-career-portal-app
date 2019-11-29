@@ -2,6 +2,8 @@ import { API } from "aws-amplify";
 import {
   ADD_FAVORITE_JOB_SUCCESS,
   ADD_FAVORITE_JOB_FAIL,
+  REMOVE_FAVORITE_JOB_SUCCESS,
+  REMOVE_FAVORITE_JOB_FAIL,
   GET_FAVORITE_JOBS_SUCCESS,
   GET_FAVORITE_JOBS_FAIL
 } from "./types";
@@ -47,6 +49,27 @@ export const addJob = data => async dispatch => {
     console.log(error);
     dispatch({
       type: ADD_FAVORITE_JOB_FAIL,
+      payload: error
+    });
+  }
+};
+
+// Remove Favorite Job
+export const removeJob = jobId => async dispatch => {
+  try {
+    const result = await API.del(
+      "teithe-career-portal-api",
+      `/favorite-jobs/remove/${jobId}`
+    );
+
+    dispatch({
+      type: REMOVE_FAVORITE_JOB_SUCCESS,
+      payload: result
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: REMOVE_FAVORITE_JOB_FAIL,
       payload: error
     });
   }
