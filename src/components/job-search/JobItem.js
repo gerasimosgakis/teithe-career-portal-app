@@ -146,7 +146,11 @@ class JobItem extends Component {
               <span className="bolded">{locationName}</span>
             </div>
           </div>
-          <p>{ReactHtmlParser(jobDescription)}</p>
+          <div>
+            {this.state.liked
+              ? ReactHtmlParser(jobDescription.substring(0, 450) + "...")
+              : jobDescription}
+          </div>
         </div>
       </div>
     );
