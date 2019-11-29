@@ -405,6 +405,7 @@ class JobSearch extends Component {
                   ))}
                   {this.state.jobs.map(
                     (job, index) =>
+                      this.state.favoriteJobsDetails &&
                       !this.state.favoriteJobs.includes(
                         job.jobId.toString()
                       ) && (
