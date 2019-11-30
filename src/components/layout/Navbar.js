@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { logoutUser } from "../../redux/actions/authActions";
 // import { clearCurrentProfile } from "../../redux/actions/profileActions";
 import { connect } from "react-redux";
+import AddCV from "../add-cv/AddCV";
 
 class Navbar extends Component {
   constructor(props) {
@@ -88,6 +89,16 @@ class Navbar extends Component {
               {this.props.auth.isAuthenticated ? (
                 <Fragment>
                   <li className="nav-item">
+                    <button
+                      data-toggle="modal"
+                      data-target="#cvModal"
+                      rel="noopener noreferrer"
+                      className="nav-link mt-half button"
+                    >
+                      Add CV
+                    </button>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" to="/profile">
                       <img
                         className="rounded-circle d-none d-md-block"
@@ -127,6 +138,31 @@ class Navbar extends Component {
                 </Fragment>
               )}
             </ul>
+          </div>
+        </div>
+        {/* Add CV Modal */}
+        <div className="modal fade" id="cvModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Add CV</h4>
+                <button type="button" className="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div className="modal-body">
+                <AddCV></AddCV>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
