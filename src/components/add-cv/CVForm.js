@@ -3,8 +3,8 @@ import config from "../../config";
 import { API } from "aws-amplify";
 import { s3Upload } from "../../shared/functions/aws";
 
-const CVForm = () => {
-  const file = useRef(null);
+const CVForm = ({ user }) => {
+  let file = useRef(null);
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,7 +30,8 @@ const CVForm = () => {
     setIsLoading(true);
 
     try {
-      await s3Upload(file.current);
+      await s3Upload(file.current, user);
+      file = null;
     } catch (error) {
       alert(error);
       setIsLoading(false);
@@ -39,10 +40,15 @@ const CVForm = () => {
 
   return (
     <div>
+      {user}
       <form onSubmit={handleSubmit}>
-        <input type="textarea" onChange={e => setContent(e.target.value)} />
-        <input type="file" onChange={handleFileChange} />
-        <button>Submit</button>
+        <input
+          type="file"
+          className="inputfile mr2"
+          onChange={handleFileChange}
+          value={file.current && file.current.name ? file.current.name : null}
+        />
+        <button className="button submit-btn">Submit</button>
       </form>
     </div>
   );
