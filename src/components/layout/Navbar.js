@@ -74,6 +74,16 @@ class Navbar extends Component {
                       Job Search
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <a
+                      data-toggle="modal"
+                      data-target="#cvModal"
+                      rel="noopener noreferrer"
+                      className="nav-link"
+                    >
+                      Add CV
+                    </a>
+                  </li>
                 </Fragment>
               ) : (
                 <li className="nav-item">
@@ -88,16 +98,6 @@ class Navbar extends Component {
             <ul className="navbar-nav ml-auto">
               {this.props.auth.isAuthenticated ? (
                 <Fragment>
-                  <li className="nav-item">
-                    <button
-                      data-toggle="modal"
-                      data-target="#cvModal"
-                      rel="noopener noreferrer"
-                      className="nav-link mt-half button"
-                    >
-                      Add CV
-                    </button>
-                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/profile">
                       <img

@@ -8,8 +8,14 @@ const CVForm = ({ user }) => {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  function validateForm() {
-    return content.length > 0;
+  function validateForm(filename) {
+    return (
+      filename.endsWith(".pdf") ||
+      filename.endsWith(".doc") ||
+      filename.endsWith(
+        ".docx" || filename.endsWith(".odt") || filename.endsWith(".txt")
+      )
+    );
   }
 
   function handleFileChange(event) {
