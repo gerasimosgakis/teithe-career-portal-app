@@ -89,6 +89,7 @@ class AddCV extends Component {
             <Spinner></Spinner>
           ) : (
             <form onSubmit={this.handleSubmit}>
+              <div className="form__field-label">CV</div>
               <input
                 type="file"
                 className="inputfile mr2"

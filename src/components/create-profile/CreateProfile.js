@@ -155,6 +155,7 @@ class CreateProfile extends Component {
             </p>
           </div>
         )}
+        <h1 className="display-4 text-center">Profile</h1>
         <div className="create-profile__form">
           <small className="small-text">* = required fields</small>
           <form className="mt1" onSubmit={this.onSubmit}>
