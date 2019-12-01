@@ -70,7 +70,7 @@ class PostItem extends Component {
               </button>
               {post.likes}
             </span>
-            <span>
+            {/* <span>
               <button
                 className="thumbs-button"
                 // onClick={() => {
@@ -80,7 +80,7 @@ class PostItem extends Component {
                 <i className="fas fa-thumbs-down mr-half"></i>{" "}
               </button>
               0
-            </span>
+            </span> */}
           </div>
         </div>
       </div>
