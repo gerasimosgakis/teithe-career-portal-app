@@ -25,6 +25,7 @@ import AppliedRoute from "./components/AppliedRoute";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 import JobSearch from "./components/job-search/JobSearch";
+import AddCV from "./components/add-cv/AddCV";
 
 // Chatkit constants
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
@@ -154,6 +155,7 @@ class App extends Component {
                 <Route exact path="/post/:id" component={Post} />
                 <Route exact path="/create-profile" component={CreateProfile} />
                 <Route exact path="/job-search" component={JobSearch} />
+                <Route exact path="/add-cv" component={AddCV} />
                 {/* <Route exact path="/add-experience" component={AddExperience} /> */}
                 {/* <Route exact path="/add-experience" component={AddExperience} /> */}
               </Switch>

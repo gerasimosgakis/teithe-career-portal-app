@@ -48,6 +48,13 @@ class ProfileAbout extends Component {
             <span>{profile.bio}</span>
           )}
         </p>
+        {profile.cv_name && (
+          <div>
+            <a href={profile.cv_url} target="_blank">
+              <i className="fas fa-download"></i> Download CV
+            </a>
+          </div>
+        )}
       </div>
     );
   }
