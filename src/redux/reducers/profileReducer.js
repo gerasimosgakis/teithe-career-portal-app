@@ -20,7 +20,9 @@ import {
   ADD_EDUCATION_FAIL,
   DELETE_EDUCATION_SUCCESS,
   DELETE_EDUCATION_FAIL,
-  SEARCH_GRADUATES_SUCCESS
+  SEARCH_GRADUATES_SUCCESS,
+  ADD_CV_SUCCESS,
+  ADD_CV_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -211,6 +213,22 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profiles: action.payload.profiles
+      };
+    case ADD_CV_SUCCESS:
+      const { cv_name, cv_url } = action.payload.cv;
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          cv_name,
+          cv_url
+        }
+      };
+    case ADD_CV_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
       };
     default:
       return state;

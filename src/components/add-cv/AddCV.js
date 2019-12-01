@@ -6,12 +6,14 @@ import CVFormNew from "./CVFormNew";
 import config from "../../config";
 import { s3Upload } from "../../shared/functions/aws";
 import Spinner from "../shared/Spinner";
+import { addCVToProfile } from "../../redux/actions/profileActions";
 
 class AddCV extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      cvName: null,
       cvURL: null,
       file: null,
       user: this.props.auth.user.username,
@@ -53,6 +55,9 @@ class AddCV extends Component {
       await s3Upload(this.state.file, this.state.user);
       // file = null;
       this.setState({ saved: true, loading: false });
+      const cvURL = await Storage.get(this.props.auth.user.username);
+      console.log(this.state.user, this.state.file.name, cvURL);
+      this.props.addCVToProfile(this.state.user, this.state.file.name, cvURL);
     } catch (error) {
       this.setState({ loading: false });
       alert(error);
@@ -110,4 +115,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, null)(AddCV);
+export default connect(mapStateToProps, { addCVToProfile })(AddCV);

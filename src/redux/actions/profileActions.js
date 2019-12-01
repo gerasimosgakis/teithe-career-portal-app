@@ -22,7 +22,9 @@ import {
   DELETE_EDUCATION_SUCCESS,
   DELETE_EDUCATION_FAIL,
   SEARCH_GRADUATES_SUCCESS,
-  SEARCH_GRADUATES_FAIL
+  SEARCH_GRADUATES_FAIL,
+  ADD_CV_FAIL,
+  ADD_CV_SUCCESS
 } from "./types";
 
 // Get All Profiles
@@ -307,48 +309,6 @@ export const deleteExperience = id => async dispatch => {
   }
 };
 
-// // Add Education
-// export const addEducation = eduData => async dispatch => {
-//   console.log(eduData);
-
-//   try {
-//     await API.post("teithe-career-portal-api", `/educations`, {
-//       body: eduData
-//       // headers: {
-//       //   // set custom header id for testing
-//       //   "cognito-identity-id": user
-//       // }
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     // dispatch({
-//     //   type: CREATE_PROFILE_FAIL,
-//     //   payload: err
-//     // });
-//   }
-// };
-
-// // Edit Education
-// export const editEducation = eduData => async dispatch => {
-//   console.log(eduData);
-
-//   try {
-//     await API.put("teithe-career-portal-api", `/educations/${eduData.id}`, {
-//       body: eduData
-//       // headers: {
-//       //   // set custom header id for testing
-//       //   "cognito-identity-id": user
-//       // }
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     // dispatch({
-//     //   type: CREATE_PROFILE_FAIL,
-//     //   payload: err
-//     // });
-//   }
-// };
-
 // Add Education
 export const addEducation = eduData => async dispatch => {
   console.log(eduData);
@@ -417,6 +377,28 @@ export const deleteEducation = id => async dispatch => {
     dispatch({
       type: DELETE_EDUCATION_FAIL,
       payload: err
+    });
+  }
+};
+
+// Save cv url
+export const addCVToProfile = (user, cvName, cvURL) => async dispatch => {
+  try {
+    const response = await API.put(
+      "teithe-career-portal-api",
+      `/add-cv/${user}`,
+      {
+        body: { cv_name: cvName, cv_url: cvURL }
+      }
+    );
+    dispatch({
+      type: ADD_CV_SUCCESS,
+      payload: response
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_CV_FAIL,
+      payload: error
     });
   }
 };
