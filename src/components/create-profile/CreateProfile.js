@@ -158,7 +158,7 @@ class CreateProfile extends Component {
         <div className="create-profile__form">
           <small className="small-text">* = required fields</small>
           <form className="mt1" onSubmit={this.onSubmit}>
-            <p>{this.props.ownProps}</p>
+            <div className="form__field-label">Handle</div>
             <TextFieldGroup
               placeholder="* Profile Handle"
               name="handle"
@@ -167,6 +167,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="A unique handle for your profile URL. Your full name, company name. nickname"
             />
+            <div className="form__field-label">Professional Status</div>
             <SelectListGroup
               placeholder="Status"
               name="status"
@@ -175,6 +176,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="Where are you at in your career"
             />
+            <div className="form__field-label">Company</div>
             <TextFieldGroup
               placeholder="Company"
               name="company"
@@ -182,6 +184,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="Your own company or the one you work for"
             />
+            <div className="form__field-label">Website</div>
             <TextFieldGroup
               placeholder="Website"
               name="website"
@@ -189,6 +192,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="Your website or a company one"
             />
+            <div className="form__field-label">Location</div>
             <TextFieldGroup
               placeholder="Location"
               name="location"
@@ -196,6 +200,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="Your location (e.g. London, UK)"
             />
+            <div className="form__field-label">Skills</div>
             <TextFieldGroup
               placeholder="Skills"
               name="skills"
@@ -203,6 +208,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="Please use comma separated values (e.g. Javascript,Angular,React)"
             />
+            <div className="form__field-label">Github Username</div>
             <TextFieldGroup
               placeholder="Github Username"
               name="githubusername"
@@ -210,6 +216,7 @@ class CreateProfile extends Component {
               onChange={this.onChange}
               info="If you want your latest repos and a Github link include your username"
             />
+            <div className="form__field-label">Short Bio</div>
             <TextAreaFieldGroup
               placeholder="Short Bio"
               name="bio"

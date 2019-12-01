@@ -16,7 +16,7 @@ class AddCV extends Component {
       cvName: null,
       cvURL: null,
       file: null,
-      user: this.props.auth.user.username,
+      user: this.props.auth.user ? this.props.auth.user.username : null,
       saved: false,
       loading: false
     };

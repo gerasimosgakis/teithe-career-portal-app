@@ -37,7 +37,7 @@ class Login extends Component {
       <div className="login contain">
         <div className="login__header mb2">
           <h1>Log In</h1>
-          <p className="header-label">Sign in to your DevPals account</p>
+          <p className="header-label">Sign in to your career portal account</p>
         </div>
         <div className="login__form">
           <form onSubmit={this.onSubmit}>

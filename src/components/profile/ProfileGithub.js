@@ -63,9 +63,9 @@ class ProfileGithub extends Component {
         <div className="profile-github__repo-title">
           <i class="fab fa-github fa-2x mr2" />
           <h4>
-            <Link to={repo.html_url} target="_blank">
+            <a href={repo.html_url} target="_blank">
               {repo.name}
-            </Link>
+            </a>
           </h4>
           <p>{repo.description}</p>
         </div>
@@ -79,7 +79,8 @@ class ProfileGithub extends Component {
             Watch: {repo.watchers_count}
           </span>
           <span className="badge badge-success">
-            <i class="fas fa-code-branch mr-half" />Fork: {repo.forks_count}
+            <i class="fas fa-code-branch mr-half" />
+            Fork: {repo.forks_count}
           </span>
         </div>
       </div>

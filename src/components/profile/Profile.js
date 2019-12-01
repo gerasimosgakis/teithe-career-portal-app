@@ -18,8 +18,8 @@ import AddExperience from "../add-experience/AddExperience";
 
 class Profile extends Component {
   componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
+    if (this.props.match.params.id) {
+      this.props.getProfileById(this.props.match.params.id);
     } else {
       this.props.getProfileById(this.props.auth.user.username);
     }
