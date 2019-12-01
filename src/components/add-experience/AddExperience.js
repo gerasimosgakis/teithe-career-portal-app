@@ -51,7 +51,7 @@ class AddExperience extends Component {
   static getDerivedStateFromProps(props, current_state) {
     if (
       current_state.currentExperienceIndex !== -1 &&
-      props.currentExperienceIndex === null
+      props.currentExperienceIndex < 0
     ) {
       return {
         user_id: props.userId,
@@ -66,9 +66,8 @@ class AddExperience extends Component {
         company: ""
         // currentExperienceIndex: null
       };
-    }
-    if (
-      current_state.currentExperienceIndex !== -1 &&
+    } else if (
+      props.currentExperienceIndex !== -1 &&
       props.currentExperienceIndex !== current_state.currentExperienceIndex
     ) {
       // Check if we are using a different experience and update state if we do
@@ -91,9 +90,7 @@ class AddExperience extends Component {
   }
 
   onChange = e => {
-    console.log(e);
     this.setState({
-      currentExperienceIndex: -1,
       [e.target.name]: e.target.value
     });
   };
@@ -232,7 +229,6 @@ class AddExperience extends Component {
 //   profiles: state.profiles
 // });
 
-export default connect(
-  null,
-  { addExperience, editExperience }
-)(withRouter(AddExperience));
+export default connect(null, { addExperience, editExperience })(
+  withRouter(AddExperience)
+);

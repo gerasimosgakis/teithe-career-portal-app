@@ -47,7 +47,7 @@ class ProfileCreds extends Component {
         this.props.experience && this.props.experience.length > 0
           ? this.props.experience[0].company
           : null,
-      currentExperienceIndex: null,
+      currentExperienceIndex: -1,
       edu_userId: this.props.userId,
       edu_id:
         this.props.education && this.props.education.length > 0
@@ -81,7 +81,7 @@ class ProfileCreds extends Component {
         this.props.education && this.props.education.length > 0
           ? this.props.education[0].school
           : null,
-      currentEducationIndex: null
+      currentEducationIndex: -1
     };
   }
 
@@ -272,7 +272,7 @@ class ProfileCreds extends Component {
               onClick={() => {
                 // this.currentExperienceIndex = index;
                 this.setState({
-                  currentExperienceIndex: null
+                  currentExperienceIndex: -1
                 });
               }}
             >
@@ -295,7 +295,7 @@ class ProfileCreds extends Component {
               onClick={() => {
                 // this.currentExperienceIndex = index;
                 this.setState({
-                  currentEducationIndex: null
+                  currentEducationIndex: -1
                 });
               }}
             >
