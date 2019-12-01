@@ -166,7 +166,10 @@ class Navbar extends Component {
                       />
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    className="nav-item"
+                    onClick={() => this.setState({ activeTabClassName: "" })}
+                  >
                     <a
                       href="_target"
                       rel="noopener noreferrer"
