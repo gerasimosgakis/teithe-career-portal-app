@@ -42,6 +42,15 @@ class ProfileItem extends Component {
             <span data-tip={profile.skills}>...</span>
           )}
         </div>
+        <div className="profile-item__cv-container mt2">
+          {profile.cv_name && (
+            <div>
+              <a href={profile.cv_url} target="_blank">
+                <i className="fas fa-download"></i> Download CV
+              </a>
+            </div>
+          )}
+        </div>
         <div className="profile-item__button-container">
           <Link
             to={`/graduates/${profile.handle}`}
