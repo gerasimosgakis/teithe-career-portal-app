@@ -53,7 +53,7 @@ class ProfileItem extends Component {
         </div>
         <div className="profile-item__button-container">
           <Link
-            to={`/graduates/${profile.handle}`}
+            to={`/graduates/${profile.id}`}
             className="profile-item__button-container-button button button--small transparent-btn"
           >
             Visit

@@ -11,6 +11,7 @@ class Navbar extends Component {
     super(props);
 
     this.state = {
+      activeTabClassName: null,
       isLoading: false,
       isAuthenticated: false,
       errors: {}
@@ -31,7 +32,11 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <Link
+            className="navbar-brand"
+            onClick={() => this.setState({ activeTabClassName: "" })}
+            to="/"
+          >
             Careers
           </Link>
           <button
@@ -50,31 +55,76 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               {this.props.auth.isAuthenticated ? (
                 <Fragment>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "graduates" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "graduates"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <Link className="nav-link" to="/graduates">
                       {" "}
                       Graduates
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "feed" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "feed"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <Link className="nav-link" to="/feed">
                       {" "}
                       Post Feed
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "chat" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "chat"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <Link className="nav-link" to="/chat">
                       {" "}
                       Chat
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "job-search" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "job-search"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <Link className="nav-link" to="/job-search">
                       {" "}
                       Job Search
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "add-cv" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "add-cv"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <a
                       data-toggle="modal"
                       data-target="#cvModal"
@@ -86,7 +136,16 @@ class Navbar extends Component {
                   </li>
                 </Fragment>
               ) : (
-                <li className="nav-item">
+                <li
+                  onClick={() =>
+                    this.setState({ activeTabClassName: "graduates" })
+                  }
+                  className={
+                    this.state.activeTabClassName === "graduates"
+                      ? "nav-item active"
+                      : "nav-item"
+                  }
+                >
                   <Link className="nav-link" to="/graduates">
                     {" "}
                     Graduates
@@ -107,7 +166,10 @@ class Navbar extends Component {
                       />
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    className="nav-item"
+                    onClick={() => this.setState({ activeTabClassName: "" })}
+                  >
                     <a
                       href="_target"
                       rel="noopener noreferrer"
@@ -125,12 +187,30 @@ class Navbar extends Component {
                 </Fragment>
               ) : (
                 <Fragment>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "signup" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "signup"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <Link className="nav-link" to="/register">
                       Sign Up
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "login" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "login"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
                     <Link className="nav-link" to="/login">
                       Login
                     </Link>
