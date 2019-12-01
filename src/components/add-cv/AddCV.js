@@ -64,11 +64,11 @@ class AddCV extends Component {
     }
   };
 
-  listCVs = async () => {
-    console.log(this.props.auth.user.username);
-    const cvURL = await Storage.get(this.props.auth.user.username);
-    this.setState({ cvURL });
-  };
+  // listCVs = async () => {
+  //   console.log(this.props.auth.user.username);
+  //   const cvURL = await Storage.get(this.props.auth.user.username);
+  //   this.setState({ cvURL });
+  // };
 
   // downloadFile = () => {
   //   // const data = new Blob([this.state.cvURL], { type: "text/csv" });
@@ -100,11 +100,11 @@ class AddCV extends Component {
             </form>
           )}
         </div>
-        {this.state.saved && <button onClick={this.listCVs}>Show cvs</button>}
-        {this.state.cvURL && (
-          <a href={this.state.cvURL} target="_blank">
-            View
-          </a>
+        {this.state.saved && (
+          <p className="mt4 text-center">
+            <i className="fas fa-check-circle green-text"></i> The cv has been
+            successfully submitted.
+          </p>
         )}
       </div>
     );
