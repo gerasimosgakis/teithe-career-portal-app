@@ -77,43 +77,14 @@ class JobSearch extends Component {
     });
   };
 
-  // getFavoriteJobsDetails = async () => {
-  //   try {
-  //     const favoriteJobs = await Promise.all(
-  //       this.state.favoriteJobs.map(jobId => {
-  //         const job = axios.get(
-  //           `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/jobs/${parseInt(
-  //             jobId
-  //           )}`,
-  //           {
-  //             headers: {
-  //               Authorization:
-  //                 "Basic " + btoa("e4e25b88-7602-4b5f-835b-1fb30806b0d8:")
-  //             }
-  //           }
-  //         );
-  //         return job;
-  //       })
-  //     );
-  //     const favoriteJobsDetails = favoriteJobs.map(job => {
-  //       return job.data;
-  //     });
-
-  //     this.setState({
-  //       favoriteJobsDetails: [...favoriteJobsDetails]
-  //     });
-  //     console.log(this.state.favoriteJobsDetails);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   getFavoriteJobsDetails = async () => {
     try {
       const favoriteJobs = await Promise.all(
         this.state.favoriteJobs.map(jobId => {
           const job = axios.get(
-            `https://www.reed.co.uk/api/1.0/jobs/${parseInt(jobId)}`,
+            `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/jobs/${parseInt(
+              jobId
+            )}`,
             {
               headers: {
                 Authorization:
@@ -137,40 +108,6 @@ class JobSearch extends Component {
     }
   };
 
-  // getJobs = async () => {
-  //   console.log(this.props.favoriteJobs);
-  //   const {
-  //     keywords,
-  //     locationName,
-  //     distanceFromLocation,
-  //     permanent,
-  //     contract,
-  //     temp,
-  //     partTime,
-  //     fullTime,
-  //     minimumSalary,
-  //     maximumSalary,
-  //     graduate,
-  //     resultsToTake,
-  //     resultsToSkip
-  //   } = this.state;
-  //   try {
-  //     const jobs = await axios.get(
-  //       `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=${distanceFromLocation ||
-  //         15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
-  //       {
-  //         headers: {
-  //           Authorization:
-  //             "Basic " + btoa("e4e25b88-7602-4b5f-835b-1fb30806b0d8:")
-  //         }
-  //       }
-  //     );
-  //     return jobs.data.results;
-  //   } catch (error) {
-  //     this.setState({ error });
-  //   }
-  // };
-
   getJobs = async () => {
     console.log(this.props.favoriteJobs);
     const {
@@ -190,11 +127,10 @@ class JobSearch extends Component {
     } = this.state;
     try {
       const jobs = await axios.get(
-        `https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=${distanceFromLocation ||
+        `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=${distanceFromLocation ||
           15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
         {
           headers: {
-            "content-type": "application/json",
             Authorization:
               "Basic " + btoa("e4e25b88-7602-4b5f-835b-1fb30806b0d8:")
           }
