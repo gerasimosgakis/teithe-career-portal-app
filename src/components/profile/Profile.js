@@ -17,13 +17,13 @@ import AddEducation from "../add-education/AddEducation";
 import AddExperience from "../add-experience/AddExperience";
 
 class Profile extends Component {
-  componentDidMount() {
+  componentDidMount = async () => {
     if (this.props.match.params.id) {
       this.props.getProfileById(this.props.match.params.id);
     } else {
       this.props.getProfileById(this.props.auth.user.username);
     }
-  }
+  };
 
   render() {
     const { profile, loading } = this.props.profiles;

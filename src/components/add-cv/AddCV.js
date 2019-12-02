@@ -57,7 +57,11 @@ class AddCV extends Component {
       this.setState({ saved: true, loading: false });
       const cvURL = await Storage.get(this.props.auth.user.username);
       console.log(this.state.user, this.state.file.name, cvURL);
-      this.props.addCVToProfile(this.state.user, this.state.file.name, cvURL);
+      this.props.addCVToProfile(
+        this.state.user,
+        this.state.file.name,
+        this.state.user
+      );
     } catch (error) {
       this.setState({ loading: false });
       alert(error);

@@ -1,8 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "../../validation/isEmpty";
-
+import { s3GetURL, getCV } from "../../shared/functions/aws";
+import { withRouter } from "react-router-dom";
 class ProfileAbout extends Component {
+  constructor(props) {
+    super(props);
+  }
+  async componentDidMount() {
+    console.log(await s3GetURL("79cba60d-8463-4015-92da-091384babbff"));
+    // console.log(url);
+  }
+
+  // getCV = async key => {
+  //   const url = await s3GetURL(key);
+  //   window.open(url, "_blank");
+  // };
+
   render() {
     const { profile } = this.props;
 
@@ -50,9 +64,15 @@ class ProfileAbout extends Component {
         </p>
         {profile.cv_name && (
           <div>
-            <a href={profile.cv_url} target="_blank">
+            {/* <a href={profile.cv_url} target="_blank">
               <i className="fas fa-download"></i> Download CV
-            </a>
+            </a> */}
+            <button
+              className="icon-button icon-button--small"
+              onClick={() => getCV(profile.cv_url)}
+            >
+              <i className="fas fa-download"></i> Download CV
+            </button>
           </div>
         )}
       </div>
@@ -64,4 +84,4 @@ ProfileAbout.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
-export default ProfileAbout;
+export default withRouter(ProfileAbout);
