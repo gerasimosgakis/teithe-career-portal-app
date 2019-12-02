@@ -194,6 +194,7 @@ class JobSearch extends Component {
           15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
         {
           headers: {
+            "content-type": "application/json",
             Authorization:
               "Basic " + btoa("e4e25b88-7602-4b5f-835b-1fb30806b0d8:")
           }
