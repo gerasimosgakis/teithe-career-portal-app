@@ -115,16 +115,7 @@ class Navbar extends Component {
                       Job Search
                     </Link>
                   </li>
-                  <li
-                    onClick={() =>
-                      this.setState({ activeTabClassName: "add-cv" })
-                    }
-                    className={
-                      this.state.activeTabClassName === "add-cv"
-                        ? "nav-item active"
-                        : "nav-item"
-                    }
-                  >
+                  <li className="nav-item">
                     <a
                       data-toggle="modal"
                       data-target="#cvModal"

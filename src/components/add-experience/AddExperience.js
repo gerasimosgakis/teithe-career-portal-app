@@ -144,7 +144,7 @@ class AddExperience extends Component {
               {/* <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link> */}
-              <h1 className="display-4 text-center">Add Experience</h1>
+              <h1 className="display-4 text-center">Experience</h1>
               <p className="lead text-center">
                 Add any job or position that you have had in the past or current
               </p>

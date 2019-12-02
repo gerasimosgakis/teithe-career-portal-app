@@ -145,7 +145,7 @@ class AddEducation extends Component {
               {/* <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link> */}
-              <h1 className="display-4 text-center">Add Education</h1>
+              <h1 className="display-4 text-center">Education</h1>
               <p className="lead text-center">
                 Add any degree that you have had in the past or current
               </p>

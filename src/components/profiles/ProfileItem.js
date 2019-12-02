@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import isEmpty from "../../validation/isEmpty";
 import titleCase from "../../shared/functions/titleCase";
 import ReactTooltip from "react-tooltip";
+import { getCV } from "../../shared/functions/aws";
 
 class ProfileItem extends Component {
   render() {
@@ -45,9 +46,15 @@ class ProfileItem extends Component {
         <div className="profile-item__cv-container mt2">
           {profile.cv_name && (
             <div>
-              <a href={profile.cv_url} target="_blank">
+              {/* <a href={profile.cv_url} target="_blank">
                 <i className="fas fa-download"></i> Download CV
-              </a>
+              </a> */}
+              <button
+                className="icon-button icon-button--small"
+                onClick={() => getCV(profile.cv_url)}
+              >
+                <i className="fas fa-download"></i> Download CV
+              </button>
             </div>
           )}
         </div>

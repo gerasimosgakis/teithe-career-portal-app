@@ -9,3 +9,13 @@ export async function s3Upload(file, filename) {
 
   return stored.key;
 }
+
+export async function s3GetURL(key) {
+  const presignedURL = await Storage.get(key);
+  return presignedURL;
+}
+
+export async function getCV(key) {
+  const url = await s3GetURL(key);
+  window.open(url, "_blank");
+}
