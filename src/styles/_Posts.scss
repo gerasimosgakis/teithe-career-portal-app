@@ -25,12 +25,18 @@
 
     &-footer {
       display: flex;
-      justify-content: space-between;
-      &-likes {
-        color: $help;
-      }
-      &-likes--active {
-        color: $lead;
+      flex-direction: column;
+      // justify-content: space-between;
+      &-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        &-button {
+          color: $help;
+        }
+        &-button--active {
+          color: $lead;
+        }
       }
     }
   }

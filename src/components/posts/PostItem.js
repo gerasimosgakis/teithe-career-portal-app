@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Linkify from "react-linkify";
 import titleCase from "../../shared/functions/titleCase";
 import { addLike } from "../../redux/actions/postActions";
+import TextFieldGroup from "../shared/TextFieldGroup";
 // import {
 //   deletePost,
 //   addLike,
@@ -15,7 +16,8 @@ class PostItem extends Component {
     super(props);
 
     this.state = {
-      post: this.props.post
+      post: this.props.post,
+      showComments: false
     };
   }
 
@@ -58,19 +60,21 @@ class PostItem extends Component {
           </div>
         </div>
         <div className="card-footer posts__post-item-footer">
-          <div className="posts__post-item-footer-likes">
-            <span className="mr1">
-              <button
-                className="thumbs-button"
-                onClick={() => {
-                  this.onLikeClick(post.id, true);
-                }}
-              >
-                <i className="fas fa-thumbs-up mr-half"></i>
-              </button>
-              {post.likes}
-            </span>
-            {/* <span>
+          <div className="posts__post-item-footer-buttons">
+            <div className="posts__post-item-footer-buttons-button">
+              <span className="mr1">
+                <button
+                  className="thumbs-button"
+                  onClick={() => {
+                    this.onLikeClick(post.id, true);
+                  }}
+                >
+                  <i className="fas fa-thumbs-up mr-half"></i>
+                </button>
+                {post.likes}
+              </span>
+
+              {/* <span>
               <button
                 className="thumbs-button"
                 // onClick={() => {
@@ -81,7 +85,38 @@ class PostItem extends Component {
               </button>
               0
             </span> */}
+            </div>
+            <div className="posts__post-item-footer-buttons-button">
+              <button
+                className="button button--small transparent-btn"
+                onClick={() =>
+                  this.setState({ showComments: !this.state.showComments })
+                }
+              >
+                Comment
+              </button>
+            </div>
           </div>
+          {this.state.showComments && (
+            <form onSubmit={this.onSubmit}>
+              <div className="form-group mt2">
+                <TextFieldGroup
+                  placeholder="Reply to post"
+                  name="text"
+                  value={this.state.text}
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className="btn-group right">
+                <button
+                  type="submit"
+                  className="button button--small submit-btn"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
       // <div className="card card-body mb2">
