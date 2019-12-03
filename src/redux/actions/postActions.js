@@ -14,7 +14,7 @@ export const getPosts = () => async dispatch => {
       type: "SET_LOADING",
       payload: true
     });
-    const posts = await API.get("teithe-career-portal-api", "/posts");
+    const posts = await API.get("teithe-career-portal-posts-api", "/posts");
     console.log(posts);
     dispatch({
       type: GET_POSTS_SUCCESS,
@@ -48,7 +48,7 @@ export const addPost = data => async dispatch => {
   //   });
   // }
   try {
-    const post = await API.post("teithe-career-portal-api", "/posts", {
+    const post = await API.post("teithe-career-portal-posts-api", "/posts", {
       body: data
     });
 
@@ -70,7 +70,7 @@ export const addPost = data => async dispatch => {
 export const addLike = (postId, userId, username, liked) => async dispatch => {
   console.log(postId, userId, username, liked);
   try {
-    const addLike = await API.post("teithe-career-portal-api", "/likes", {
+    const addLike = await API.post("teithe-career-portal-posts-api", "/likes", {
       body: {
         post_id: postId,
         user_id: userId,

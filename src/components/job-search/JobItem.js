@@ -118,7 +118,7 @@ class JobItem extends Component {
             onClick={() => this.addRemoveFav(jobId)}
             // onClick={() => this.props.onClick(jobId)}
           >
-            <i className="fas fa-heart"></i>
+            <i className="fas fa-star"></i>
           </button>
           <h2>
             <a className="link-decoration" href={jobUrl} target="_blank">
@@ -147,9 +147,10 @@ class JobItem extends Component {
             </div>
           </div>
           <div>
-            {this.state.liked
+            {/* {this.state.liked
               ? ReactHtmlParser(jobDescription.substring(0, 450) + "...")
-              : jobDescription}
+              : jobDescription} */}
+            {ReactHtmlParser(jobDescription)}
           </div>
         </div>
       </div>

@@ -21,17 +21,27 @@ Amplify.configure({
   },
   API: {
     endpoints: [
-      // {
-      //   name: "teithe-career-portal-api",
-      //   endpoint: "http://localhost:3000",
-      //   region: config.apiGateway.REGION
-      // }
-      // prod environment
       {
         name: "teithe-career-portal-api",
-        endpoint: "https://tc44jbacuh.execute-api.us-east-1.amazonaws.com/dev",
+        endpoint: "http://localhost:3001",
+        region: config.apiGateway.REGION
+      },
+      {
+        name: "teithe-career-portal-posts-api",
+        endpoint: "http://localhost:3002",
         region: config.apiGateway.REGION
       }
+      // prod environment
+      // {
+      //   name: "teithe-career-portal-api",
+      //   endpoint: "https://tc44jbacuh.execute-api.us-east-1.amazonaws.com/dev",
+      //   region: config.apiGateway.REGION
+      // },
+      // {
+      //   name: "teithe-career-portal-posts-api",
+      //   endpoint: "https://vka3j9daw5.execute-api.us-east-1.amazonaws.com/dev",
+      //   region: config.apiGateway.REGION
+      // }
     ]
   }
 });

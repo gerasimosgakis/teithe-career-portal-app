@@ -219,7 +219,7 @@ class JobSearch extends Component {
     const jobIndex = this.state.favoriteJobs.findIndex(
       item => item === jobId.toString()
     );
-    console.log(jobIndex);
+    console.log(jobIndex, this.state.favoriteJobs);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
       this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
