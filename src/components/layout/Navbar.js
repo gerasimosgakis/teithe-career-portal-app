@@ -53,7 +53,61 @@ class Navbar extends Component {
 
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
-              {this.props.auth.isAuthenticated ? (
+              {this.props.auth.isAuthenticated &&
+              this.props.auth.user.attributes["custom:role"] === "recruiter" ? (
+                <Fragment>
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "chat" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "chat"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" to="/chat">
+                      {" "}
+                      Chat
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "job-search" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "job-search"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" to="/job-search">
+                      {" "}
+                      Job Search
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() =>
+                      this.setState({ activeTabClassName: "add-job-post" })
+                    }
+                    className={
+                      this.state.activeTabClassName === "add-job-post"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" to="/add-job-post">
+                      {" "}
+                      Add Job Post
+                    </Link>
+                  </li>
+                </Fragment>
+              ) : (
+                <li></li>
+              )}
+              {this.props.auth.isAuthenticated &&
+              !this.props.auth.user.attributes["custom:role"] ===
+                "recruiter" ? (
                 <Fragment>
                   <li
                     onClick={() =>

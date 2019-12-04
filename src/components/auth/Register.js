@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { registerUser, confirmUser } from "../../redux/actions/authActions";
 import TextFieldGroup from "../shared/TextFieldGroup";
+import SelectListGroup from "../shared/SelectListGroup";
 
 class Register extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Register extends Component {
       isLoading: false,
       name: "",
       email: "",
+      role: "",
       password: "",
       confirmPassword: "",
       confirmationCode: "",
@@ -25,13 +27,31 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onSubmit = async e => {
+    e.preventDefault();
+
+    this.setState({ isLoading: true });
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      role: this.state.role,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword
+    };
+
+    this.props.registerUser(newUser, this.props.history);
+
+    this.setState({ isLoading: false });
+  };
+
   onConfirmationSubmit = async e => {
     e.preventDefault();
 
     this.setState({ isLoading: true });
 
     const userConfirm = {
-      email: this.props.auth.user.user.username,
+      email: this.props.auth.user.username,
       confirmationCode: this.state.confirmationCode
     };
 
@@ -56,6 +76,12 @@ class Register extends Component {
   }
 
   renderForm() {
+    // Select options for role
+    const options = [
+      { label: "Select Role", value: 0 },
+      { label: "Alumni", value: "alumni" },
+      { label: "Recruiter", value: "recruiter" }
+    ];
     return (
       <form onSubmit={this.onSubmit}>
         <div className="form__field-label">Name</div>
@@ -72,6 +98,15 @@ class Register extends Component {
           name="email"
           type="email"
           value={this.state.email}
+          onChange={this.onChange}
+        />
+        <div className="form__field-label">Role</div>
+        <SelectListGroup
+          placeholder="role"
+          name="role"
+          value={this.state.role}
+          options={options}
+          required
           onChange={this.onChange}
         />
         <div className="form__field-label">Password</div>
@@ -117,7 +152,11 @@ class Register extends Component {
           <h1>Sign Up</h1>
           <p className="header-label">Create your Career Portal profile</p>
           <div className="register__form">
-            {auth.isAuthenticated && !auth.userConfirmed
+            {auth &&
+            auth.user &&
+            auth.user.username &&
+            !auth.isAuthenticated &&
+            !auth.userConfirmed
               ? this.renderConfirmationForm()
               : this.renderForm()}
           </div>

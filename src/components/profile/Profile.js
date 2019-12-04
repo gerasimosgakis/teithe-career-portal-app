@@ -17,6 +17,14 @@ import AddEducation from "../add-education/AddEducation";
 import AddExperience from "../add-experience/AddExperience";
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    // this.state = {
+    //   profile: this.props.profiles.profile,
+    //   loading: this.props.profiles.loading
+    // };
+  }
   componentDidMount = async () => {
     if (this.props.match.params.id) {
       this.props.getProfileById(this.props.match.params.id);
@@ -26,7 +34,7 @@ class Profile extends Component {
   };
 
   render() {
-    const { profile, loading } = this.props.profiles;
+    const { profile, loading } = this.props;
     const { user } = this.props.auth;
     let profileContent;
 
@@ -34,7 +42,12 @@ class Profile extends Component {
       profileContent = <Spinner />;
     } else if (profile && !profile.name) {
       profileContent = <CreateProfile></CreateProfile>;
-    } else if (profile && profile.name && profile.educations.length <= 0) {
+    } else if (
+      profile &&
+      profile.name &&
+      profile.educations.length <= 0 &&
+      this.props.auth.user.attributes["custom:role"] !== "recruiter"
+    ) {
       profileContent = (
         <AddEducation userId={this.props.auth.user.username}></AddEducation>
       );
@@ -42,7 +55,8 @@ class Profile extends Component {
       profile &&
       profile.name &&
       profile.educations.length > 0 &&
-      profile.experiences.length <= 0
+      profile.experiences.length <= 0 &&
+      this.props.auth.user.attributes["custom:role"] !== "recruiter"
     ) {
       profileContent = (
         <AddExperience userId={this.props.auth.user.username}></AddExperience>
@@ -55,14 +69,19 @@ class Profile extends Component {
             edit={profile.id === user.username}
           />
           <ProfileAbout profile={profile} />
-          <ProfileCreds
-            userId={user.username}
-            education={profile.educations}
-            experience={profile.experiences}
-            edit={profile.id === user.username}
-          />
-          <ProfileSkills profile={profile} />
-          {profile.githubusername ? (
+          {user.attributes["custom:role"] !== "recruiter" && (
+            <ProfileCreds
+              userId={user.username}
+              education={profile.educations}
+              experience={profile.experiences}
+              edit={profile.id === user.username}
+            />
+          )}
+          {user.attributes["custom:role"] !== "recruiter" && (
+            <ProfileSkills profile={profile} />
+          )}
+          {profile.githubusername &&
+          user.attributes["custom:role"] !== "recruiter" ? (
             <ProfileGithub username={profile.githubusername} />
           ) : null}
         </div>
@@ -82,6 +101,8 @@ Profile.propTypes = {
 
 const mapStateToProps = state => ({
   profiles: state.profiles,
+  loading: state.profiles.loading,
+  profile: state.profiles.profile,
   auth: state.auth
 });
 
