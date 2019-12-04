@@ -63,7 +63,8 @@ class CreateProfile extends Component {
       facebook: this.state.facebook.toLowerCase(),
       linkedin: this.state.linkedin.toLowerCase(),
       youtube: this.state.youtube.toLowerCase(),
-      instagram: this.state.instagram.toLowerCase()
+      instagram: this.state.instagram.toLowerCase(),
+      type: this.props.auth.user.attributes["custom:role"]
     };
 
     const currentUserId = this.props.auth.user.username;

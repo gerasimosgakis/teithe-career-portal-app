@@ -21,9 +21,12 @@ class Profiles extends Component {
       if (profiles.length > 0) {
         profileItems = (
           <div className="flex group-contain">
-            {profiles.map(profile => (
-              <ProfileItem key={profile.id} profile={profile} />
-            ))}
+            {profiles.map(
+              profile =>
+                profile.type !== "recruiter" && (
+                  <ProfileItem key={profile.id} profile={profile} />
+                )
+            )}
           </div>
         );
       } else {
