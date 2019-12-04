@@ -69,14 +69,19 @@ class Profile extends Component {
             edit={profile.id === user.username}
           />
           <ProfileAbout profile={profile} />
-          <ProfileCreds
-            userId={user.username}
-            education={profile.educations}
-            experience={profile.experiences}
-            edit={profile.id === user.username}
-          />
-          <ProfileSkills profile={profile} />
-          {profile.githubusername ? (
+          {user.attributes["custom:role"] !== "recruiter" && (
+            <ProfileCreds
+              userId={user.username}
+              education={profile.educations}
+              experience={profile.experiences}
+              edit={profile.id === user.username}
+            />
+          )}
+          {user.attributes["custom:role"] !== "recruiter" && (
+            <ProfileSkills profile={profile} />
+          )}
+          {profile.githubusername &&
+          user.attributes["custom:role"] !== "recruiter" ? (
             <ProfileGithub username={profile.githubusername} />
           ) : null}
         </div>

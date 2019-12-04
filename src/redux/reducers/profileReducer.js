@@ -67,7 +67,6 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case CREATE_PROFILE_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         profile: {
