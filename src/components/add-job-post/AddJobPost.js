@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
+import { addInternalJob } from "../../redux/actions/internalJobActions";
 
-export default class AddJobPost extends Component {
+class AddJobPost extends Component {
   constructor(props) {
     super(props);
 
@@ -14,6 +17,20 @@ export default class AddJobPost extends Component {
       description: ""
     };
   }
+
+  onSubmit = event => {
+    event.preventDefault();
+    const userId = this.props.auth.user.username;
+    console.log(this.state, userId);
+    this.props.addInternalJob({
+      user_id: userId,
+      title: this.state.title,
+      recruiter: this.state.recruiter,
+      min_salary: this.state.minSalary,
+      max_salary: this.state.maxSalary,
+      description: this.state.description
+    });
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -47,7 +64,6 @@ export default class AddJobPost extends Component {
               placeholder="Minimum Salary"
               name="minSalary"
               value={this.state.minSalary}
-              required
               type="number"
               onChange={this.onChange}
             />
@@ -56,7 +72,6 @@ export default class AddJobPost extends Component {
               placeholder="Maximum Salary"
               name="maxSalary"
               value={this.state.maxSalary}
-              required
               type="number"
               onChange={this.onChange}
             />
@@ -135,3 +150,13 @@ export default class AddJobPost extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps, { addInternalJob })(
+  withRouter(AddJobPost)
+);
