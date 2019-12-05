@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  internalJobs: [],
+  internalJobs: null,
   loading: false
 };
 
@@ -21,10 +21,22 @@ export default function(state = initialState, action) {
     case ADD_JOB_POST_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         internalJobs: [...state.internalJobs, action.payload]
       };
     case ADD_JOB_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case GET_JOB_POSTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        internalJobs: [...action.payload]
+      };
+    case GET_JOB_POSTS_FAIL:
       return {
         ...state,
         loading: false,
