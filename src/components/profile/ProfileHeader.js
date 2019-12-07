@@ -3,6 +3,7 @@ import isEmpty from "../../validation/isEmpty";
 import banner from "../../banner.jpg";
 import CreateProfile from "../create-profile/CreateProfile";
 import titleCase from "../../shared/functions/titleCase";
+import { Logo } from "../shared/Logo";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
@@ -19,6 +20,7 @@ class ProfileHeader extends Component {
             alt="logo"
           />
         </div>
+        {/* <Logo name={profile.name}></Logo> */}
         <div className="contain">
           <div className="profile-header__heading">
             <h2>

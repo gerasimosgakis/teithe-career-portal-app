@@ -12,6 +12,7 @@ class AddJobPost extends Component {
     this.state = {
       title: "",
       recruiter: "",
+      location: "",
       minSalary: null,
       maxSalary: null,
       description: ""
@@ -28,7 +29,8 @@ class AddJobPost extends Component {
       recruiter: this.state.recruiter,
       min_salary: this.state.minSalary,
       max_salary: this.state.maxSalary,
-      description: this.state.description
+      description: this.state.description,
+      location: this.state.location
     });
   };
 
@@ -56,6 +58,14 @@ class AddJobPost extends Component {
               placeholder="* Recruiter"
               name="recruiter"
               value={this.state.recruiter}
+              required
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Location</div>
+            <TextFieldGroup
+              placeholder="* Location"
+              name="location"
+              value={this.state.location}
               required
               onChange={this.onChange}
             />

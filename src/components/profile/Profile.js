@@ -19,11 +19,6 @@ import AddExperience from "../add-experience/AddExperience";
 class Profile extends Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   profile: this.props.profiles.profile,
-    //   loading: this.props.profiles.loading
-    // };
   }
   componentDidMount = async () => {
     if (this.props.match.params.id) {

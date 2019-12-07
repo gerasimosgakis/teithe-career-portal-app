@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getInternalJobs } from "../../redux/actions/internalJobActions";
 import Spinner from "../shared/Spinner";
+import InternalJobItem from "./InternalJobItem";
 
 class InternalJobs extends Component {
   constructor(props) {
@@ -20,9 +21,19 @@ class InternalJobs extends Component {
     if (internalJobs === null || loading) {
       content = <Spinner />;
     } else {
-      content = <div>INTERNAL JOBS</div>;
+      content = internalJobs.map(job => (
+        <InternalJobItem job={job}></InternalJobItem>
+      ));
     }
-    return <div className="contain">{content}</div>;
+    return (
+      <div className="search-jobs contain">
+        <div className="search-jobs__header mb4">
+          <h1>Internal Job Search</h1>
+          <p className="header-label">Let's get hired!</p>
+        </div>
+        <div className="search-jobs__results-main">{content}</div>
+      </div>
+    );
   }
 }
 
