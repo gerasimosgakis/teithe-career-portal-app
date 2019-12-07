@@ -154,7 +154,7 @@ class Register extends Component {
           <div className="register__form">
             {auth &&
             auth.user &&
-            auth.user.username &&
+            auth.username &&
             !auth.isAuthenticated &&
             !auth.userConfirmed
               ? this.renderConfirmationForm()

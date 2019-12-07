@@ -5,7 +5,9 @@ import {
   ADD_POST_SUCCESS,
   ADD_POST_FAIL,
   ADD_LIKE_SUCCESS,
-  ADD_LIKE_FAIL
+  ADD_LIKE_FAIL,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -39,6 +41,21 @@ export default function(state = initialState, action) {
         loading: false
       };
     case ADD_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case DELETE_POST_SUCCESS:
+      const postsdAfterDelete = [...state.posts].filter(post => {
+        return post.id !== action.payload;
+      });
+      return {
+        ...state,
+        posts: postsdAfterDelete,
+        loading: false
+      };
+    case DELETE_POST_FAIL:
       return {
         ...state,
         loading: false,

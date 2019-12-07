@@ -3,13 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Linkify from "react-linkify";
 import titleCase from "../../shared/functions/titleCase";
-import { addLike } from "../../redux/actions/postActions";
+import { addLike, deletePost } from "../../redux/actions/postActions";
 import TextFieldGroup from "../shared/TextFieldGroup";
-// import {
-//   deletePost,
-//   addLike,
-//   removeLike
-// } from "../../redux/actions/postActions";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 class PostItem extends Component {
   constructor(props) {
@@ -22,7 +19,33 @@ class PostItem extends Component {
   }
 
   onDeleteClick(id) {
-    this.props.deletePost(id);
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui card card-body text-center">
+            <h2>Are you sure?</h2>
+            <p>You want to delete this post?</p>
+            <div className="text-center">
+              <button
+                className="button button--small transparent-btn mr1"
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className="button button--small danger-btn"
+                onClick={() => {
+                  this.props.deletePost(id);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        );
+      }
+    });
   }
 
   onLikeClick = (id, liked) => {
@@ -39,7 +62,6 @@ class PostItem extends Component {
 
   render() {
     const { post, auth, showActions } = this.props;
-    console.log(post);
 
     return (
       <div className="card posts__post-item mb2">
@@ -88,13 +110,21 @@ class PostItem extends Component {
             </div>
             <div className="posts__post-item-footer-buttons-button">
               <button
-                className="button button--small transparent-btn"
+                className="button button--small transparent-btn mr1"
                 onClick={() =>
                   this.setState({ showComments: !this.state.showComments })
                 }
               >
                 Comment
               </button>
+              {auth.user.username === post.user_id && (
+                <button
+                  className="button button--small danger-btn"
+                  onClick={() => this.onDeleteClick(post.id)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
           {this.state.showComments && (
@@ -197,4 +227,4 @@ const mapStateToProps = state => ({
 //   PostItem
 // );
 
-export default connect(mapStateToProps, { addLike })(PostItem);
+export default connect(mapStateToProps, { addLike, deletePost })(PostItem);

@@ -5,7 +5,9 @@ import {
   ADD_POST_SUCCESS,
   ADD_POST_FAIL,
   ADD_LIKE_SUCCESS,
-  ADD_LIKE_FAIL
+  ADD_LIKE_FAIL,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAIL
 } from "./types";
 // Get All Posts
 export const getPosts = () => async dispatch => {
@@ -30,23 +32,6 @@ export const getPosts = () => async dispatch => {
 
 // Add new Post
 export const addPost = data => async dispatch => {
-  console.log(data);
-  // try {
-  //   dispatch({
-  //     type: "SET_LOADING",
-  //     payload: true
-  //   });
-  //   const posts = await API.get("teithe-career-portal-api", "/posts");
-  //   dispatch({
-  //     type: GET_POSTS_SUCCESS,
-  //     payload: posts
-  //   });
-  // } catch (error) {
-  //   dispatch({
-  //     type: GET_POSTS_FAIL,
-  //     payload: error
-  //   });
-  // }
   try {
     const post = await API.post("teithe-career-portal-posts-api", "/posts", {
       body: data
@@ -61,6 +46,28 @@ export const addPost = data => async dispatch => {
     console.log(error);
     dispatch({
       type: ADD_POST_FAIL,
+      payload: error
+    });
+  }
+};
+
+// Delete Post
+export const deletePost = id => async dispatch => {
+  try {
+    const response = await API.del(
+      "teithe-career-portal-posts-api",
+      `/posts/${id}`
+    );
+
+    console.log(response);
+    dispatch({
+      type: DELETE_POST_SUCCESS,
+      payload: response.id
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: DELETE_POST_FAIL,
       payload: error
     });
   }

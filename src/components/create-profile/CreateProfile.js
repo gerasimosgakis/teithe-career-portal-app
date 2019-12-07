@@ -17,7 +17,6 @@ class CreateProfile extends Component {
     super(props);
 
     const { profile } = this.props.profiles;
-    console.log(profile);
 
     this.state = {
       displaySocialInputs: false,
@@ -37,13 +36,8 @@ class CreateProfile extends Component {
       instagram: profile && profile.instagram ? profile.instagram : "",
       experiences: profile && profile.experiences ? profile.experiences : [],
       educations: profile && profile.educations ? profile.educations : [],
-      errors: {},
-      value: null
+      errors: {}
     };
-  }
-
-  componentDidMount() {
-    console.log(this.props.profiles);
   }
 
   onSubmit = e => {

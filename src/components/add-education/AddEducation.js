@@ -80,7 +80,7 @@ class AddEducation extends Component {
         description: props.description,
         degree: props.degree,
         start_date: props.start_date.slice(0, 7),
-        end_date: props.end_date.slice(0, 7),
+        end_date: props.current ? null : props.end_date.slice(0, 7),
         fieldofstudy: props.fieldofstudy,
         currentEducationIndex: props.currentEducationIndex
       };
@@ -90,7 +90,6 @@ class AddEducation extends Component {
   }
 
   onChange = e => {
-    console.log(e);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -105,7 +104,6 @@ class AddEducation extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     if (this.state.id && this.state.id !== "") {
       this.props.editEducation({
         user_id: this.state.user_id,
@@ -116,7 +114,7 @@ class AddEducation extends Component {
         degree: this.state.degree,
         start_date: moment(this.state.start_date).toDate(),
         end_date: this.state.current
-          ? moment().toDate()
+          ? null
           : moment(this.state.end_date).toDate(),
         fieldofstudy: this.state.fieldofstudy
       });
@@ -129,7 +127,7 @@ class AddEducation extends Component {
         degree: this.state.degree,
         start_date: moment(this.state.start_date).toDate(),
         end_date: this.state.current
-          ? moment().toDate()
+          ? null
           : moment(this.state.end_date).toDate(),
         fieldofstudy: this.state.fieldofstudy
       });
@@ -142,9 +140,6 @@ class AddEducation extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              {/* <Link to="/dashboard" className="btn btn-light">
-                Go Back
-              </Link> */}
               <h1 className="display-4 text-center">Education</h1>
               <p className="lead text-center">
                 Add any degree that you have had in the past or current
@@ -224,10 +219,6 @@ class AddEducation extends Component {
     );
   }
 }
-
-// const mapStateToProps = state => ({
-//   profiles: state.profiles
-// });
 
 export default connect(null, { addEducation, editEducation })(
   withRouter(AddEducation)
