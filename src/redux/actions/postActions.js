@@ -7,7 +7,12 @@ import {
   ADD_LIKE_SUCCESS,
   ADD_LIKE_FAIL,
   DELETE_POST_SUCCESS,
-  DELETE_POST_FAIL
+  DELETE_POST_FAIL,
+  ADD_COMMENT_FAIL,
+  ADD_COMMENT_SUCCESS,
+  SET_LOADING,
+  GET_COMMENTS_BY_POST_SUCCESS,
+  GET_COMMENTS_BY_POST_FAIL
 } from "./types";
 // Get All Posts
 export const getPosts = () => async dispatch => {
@@ -33,6 +38,9 @@ export const getPosts = () => async dispatch => {
 // Add new Post
 export const addPost = data => async dispatch => {
   try {
+    dispatch({
+      type: SET_LOADING
+    });
     const post = await API.post("teithe-career-portal-posts-api", "/posts", {
       body: data
     });
@@ -96,6 +104,55 @@ export const addLike = (postId, userId, username, liked) => async dispatch => {
     dispatch({
       type: ADD_LIKE_FAIL,
       payload: error
+    });
+  }
+};
+
+// Add comment
+export const addComment = data => async dispatch => {
+  try {
+    const response = await API.post(
+      "teithe-career-portal-posts-api",
+      "/comments",
+      {
+        body: data
+      }
+    );
+    dispatch({
+      type: ADD_COMMENT_SUCCESS,
+      payload: response.data
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: ADD_COMMENT_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Get Comments by Post
+export const getCommentsByPost = (postId, postIndex) => async dispatch => {
+  try {
+    // dispatch({
+    //   type: SET_LOADING
+    // });
+    console.log(postId);
+    const response = await API.get(
+      "teithe-career-portal-posts-api",
+      `/comments/${postId}`
+    );
+    console.log(response);
+
+    dispatch({
+      type: GET_COMMENTS_BY_POST_SUCCESS,
+      payload: { comments: response.data, postIndex }
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: GET_COMMENTS_BY_POST_FAIL,
+      payload: err
     });
   }
 };
