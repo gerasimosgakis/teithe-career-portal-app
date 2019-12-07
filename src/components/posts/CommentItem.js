@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import titleCase from "../../shared/functions/titleCase";
-
+import Linkify from "react-linkify";
 export default class CommentItem extends Component {
   render() {
     return (
@@ -19,7 +19,12 @@ export default class CommentItem extends Component {
             <span className="mr1 bolded">
               {titleCase(this.props.comment.user_name)}
             </span>
-            {this.props.comment.text}
+            <Linkify>{this.props.comment.text}</Linkify>
+            <p className="mt1 help-text">
+              {new Date(
+                parseInt(this.props.comment.created_at)
+              ).toLocaleDateString()}
+            </p>
           </p>
         </div>
       </div>

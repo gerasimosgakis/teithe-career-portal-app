@@ -138,6 +138,7 @@ export const getCommentsByPost = (postId, postIndex) => async dispatch => {
       "teithe-career-portal-posts-api",
       `/comments/${postId}`
     );
+    console.log(response);
 
     dispatch({
       type: GET_COMMENTS_BY_POST_SUCCESS,

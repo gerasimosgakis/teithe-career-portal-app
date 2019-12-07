@@ -78,7 +78,6 @@ class PostItem extends Component {
     const currentUserId = this.props.auth.user.username;
     const currentUserName = this.props.auth.user.attributes.name;
     const avatar = this.props.auth.user.avatar;
-    console.log(profile);
     return (
       <div className="card posts__post-item mb2">
         <div className="card-body card posts__post-item-body">
@@ -95,6 +94,9 @@ class PostItem extends Component {
           </div>
           <div className="posts__post-item-body-main">
             <Linkify>{post.text}</Linkify>
+            <p className="mt1 help-text">
+              {new Date(parseInt(post.created_at)).toLocaleDateString()}
+            </p>
           </div>
         </div>
         <div className="card-footer posts__post-item-footer">
