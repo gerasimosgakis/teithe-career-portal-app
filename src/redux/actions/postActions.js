@@ -38,6 +38,9 @@ export const getPosts = () => async dispatch => {
 // Add new Post
 export const addPost = data => async dispatch => {
   try {
+    dispatch({
+      type: SET_LOADING
+    });
     const post = await API.post("teithe-career-portal-posts-api", "/posts", {
       body: data
     });
@@ -134,6 +137,7 @@ export const getCommentsByPost = (postId, postIndex) => async dispatch => {
     // dispatch({
     //   type: SET_LOADING
     // });
+    console.log(postId);
     const response = await API.get(
       "teithe-career-portal-posts-api",
       `/comments/${postId}`
