@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Linkify from "react-linkify";
 import titleCase from "../../shared/functions/titleCase";
-import { addLike, deletePost } from "../../redux/actions/postActions";
+import {
+  addLike,
+  deletePost,
+  getCommentsByPost
+} from "../../redux/actions/postActions";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import CommentForm from "./CommentForm";
+import CommentFeed from "./CommentFeed";
 
 class PostItem extends Component {
   constructor(props) {
@@ -60,9 +66,19 @@ class PostItem extends Component {
     this.props.removeLike(id, currentUserId, currentUserName);
   }
 
-  render() {
-    const { post, auth, showActions } = this.props;
+  showComments = () => {
+    if (!this.state.showComments) {
+      this.props.getCommentsByPost(this.state.post.id, this.props.index);
+    }
+    this.setState({ showComments: !this.state.showComments });
+  };
 
+  render() {
+    const { post, auth, profile, showActions } = this.props;
+    const currentUserId = this.props.auth.user.username;
+    const currentUserName = this.props.auth.user.attributes.name;
+    const avatar = this.props.auth.user.avatar;
+    console.log(profile);
     return (
       <div className="card posts__post-item mb2">
         <div className="card-body card posts__post-item-body">
@@ -111,9 +127,7 @@ class PostItem extends Component {
             <div className="posts__post-item-footer-buttons-button">
               <button
                 className="button button--small transparent-btn mr1"
-                onClick={() =>
-                  this.setState({ showComments: !this.state.showComments })
-                }
+                onClick={() => this.showComments()}
               >
                 Comment
               </button>
@@ -128,24 +142,19 @@ class PostItem extends Component {
             </div>
           </div>
           {this.state.showComments && (
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group mt2">
-                <TextFieldGroup
-                  placeholder="Reply to post"
-                  name="text"
-                  value={this.state.text}
-                  onChange={this.onChange}
-                />
-              </div>
-              <div className="btn-group right">
-                <button
-                  type="submit"
-                  className="button button--small submit-btn"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+            <div>
+              <CommentForm
+                postId={post.id}
+                currentUserId={currentUserId}
+                currentUserName={currentUserName}
+                avatar={avatar}
+              />
+              {this.state.post.comments && this.state.post.comments.length > 0 && (
+                <div className="mt2">
+                  <CommentFeed comments={this.state.post.comments} />
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -220,6 +229,7 @@ PostItem.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profiles,
   posts: state.posts
 });
 
@@ -227,4 +237,8 @@ const mapStateToProps = state => ({
 //   PostItem
 // );
 
-export default connect(mapStateToProps, { addLike, deletePost })(PostItem);
+export default connect(mapStateToProps, {
+  addLike,
+  deletePost,
+  getCommentsByPost
+})(PostItem);

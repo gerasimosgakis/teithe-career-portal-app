@@ -41,3 +41,10 @@
     }
   }
 }
+
+.comments {
+  &__comment {
+    display: flex;
+    flex-direction: row;
+  }
+}

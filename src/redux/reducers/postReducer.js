@@ -7,7 +7,11 @@ import {
   ADD_LIKE_SUCCESS,
   ADD_LIKE_FAIL,
   DELETE_POST_SUCCESS,
-  DELETE_POST_FAIL
+  DELETE_POST_FAIL,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAIL,
+  GET_COMMENTS_BY_POST_SUCCESS,
+  GET_COMMENTS_BY_POST_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -35,9 +39,10 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case ADD_POST_SUCCESS:
+      const currentPost = { ...action.payload, likes: 0 };
       return {
         ...state,
-        posts: [action.payload, ...state.posts],
+        posts: [currentPost, ...state.posts],
         loading: false
       };
     case ADD_POST_FAIL:
@@ -80,6 +85,46 @@ export default function(state = initialState, action) {
     case ADD_LIKE_FAIL:
       return {
         ...state,
+        errors: action.payload
+      };
+    case ADD_COMMENT_SUCCESS:
+      console.log(action.payload);
+      const commentedPostIndex = state.posts.findIndex(
+        post => post.id === action.payload.post_id
+      );
+      console.log(commentedPostIndex);
+      const newPosts = [...state.posts];
+      if (!newPosts[commentedPostIndex].comments) {
+        newPosts[commentedPostIndex].comments = [];
+      }
+      newPosts[commentedPostIndex].comments.unshift(action.payload);
+      return {
+        ...state,
+        posts: newPosts,
+        loading: false
+      };
+    case ADD_COMMENT_FAIL:
+      return {
+        ...state,
+        errors: action.payload
+      };
+    case GET_COMMENTS_BY_POST_SUCCESS:
+      console.log(action.payload);
+      // const postsWithComments = ([...state.posts][action.payload.postIndex][
+      //   "comments"
+      // ] = [...action.payload.comments]);
+      const postsWithComments = [...state.posts];
+      postsWithComments[action.payload.postIndex]["comments"] =
+        action.payload.comments;
+      return {
+        ...state,
+        posts: postsWithComments,
+        loading: false
+      };
+    case GET_COMMENTS_BY_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
         errors: action.payload
       };
     default:
