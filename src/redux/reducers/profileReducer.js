@@ -70,7 +70,9 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: {
-          ...action.payload.profile
+          ...action.payload.profile,
+          educations: [],
+          experiences: []
         },
         loading: false
       };

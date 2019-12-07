@@ -38,6 +38,16 @@
   }
 }
 
+.danger-btn {
+  background: $danger-btn;
+  color: white;
+  border-radius: 4px;
+  &:hover {
+    background: $danger-btn-hover;
+    box-shadow: 0 0 0 1pt red;
+  }
+}
+
 .back-btn {
   background: $back-btn;
   color: $font;

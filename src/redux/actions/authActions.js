@@ -24,7 +24,8 @@ export const registerUser = (userData, history) => async dispatch => {
       username: userData.email,
       password: userData.password,
       attributes: {
-        name: userData.name
+        name: userData.name,
+        "custom:role": userData.role
       }
     });
     dispatch({
@@ -38,7 +39,8 @@ export const registerUser = (userData, history) => async dispatch => {
         username: userData.email,
         password: userData.password,
         attributes: {
-          name: userData.name
+          name: userData.name,
+          "custom:role": userData.role
         }
       };
       dispatch({

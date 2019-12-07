@@ -8,7 +8,9 @@ class PostFeed extends Component {
     const { posts } = this.props.posts;
     console.log(posts);
 
-    return posts.map(post => <PostItem key={post.postId} post={post} />);
+    return posts.map((post, index) => (
+      <PostItem key={post.postId} post={post} index={index} />
+    ));
   }
 }
 

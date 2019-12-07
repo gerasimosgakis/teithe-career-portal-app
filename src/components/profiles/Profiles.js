@@ -21,9 +21,12 @@ class Profiles extends Component {
       if (profiles.length > 0) {
         profileItems = (
           <div className="flex group-contain">
-            {profiles.map(profile => (
-              <ProfileItem key={profile.id} profile={profile} />
-            ))}
+            {profiles.map(
+              profile =>
+                profile.type !== "recruiter" && (
+                  <ProfileItem key={profile.id} profile={profile} />
+                )
+            )}
           </div>
         );
       } else {
@@ -38,20 +41,6 @@ class Profiles extends Component {
         <Search></Search>
         {profileItems}
       </div>
-      // <div className="profiles">
-      //   <div className="container">
-      //     <div className="row">
-      //       <div className="col-md-12">
-      //         <h1 className="display-4 text-center">Developer Profiles</h1>
-      //         <p className="lead text-center">
-      //           Browse and connect with developers
-      //         </p>
-      //         <Search></Search>
-      //         {profileItems}
-      //       </div>
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }

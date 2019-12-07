@@ -17,7 +17,6 @@ class CreateProfile extends Component {
     super(props);
 
     const { profile } = this.props.profiles;
-    console.log(profile);
 
     this.state = {
       displaySocialInputs: false,
@@ -37,13 +36,8 @@ class CreateProfile extends Component {
       instagram: profile && profile.instagram ? profile.instagram : "",
       experiences: profile && profile.experiences ? profile.experiences : [],
       educations: profile && profile.educations ? profile.educations : [],
-      errors: {},
-      value: null
+      errors: {}
     };
-  }
-
-  componentDidMount() {
-    console.log(this.props.profiles);
   }
 
   onSubmit = e => {
@@ -63,7 +57,8 @@ class CreateProfile extends Component {
       facebook: this.state.facebook.toLowerCase(),
       linkedin: this.state.linkedin.toLowerCase(),
       youtube: this.state.youtube.toLowerCase(),
-      instagram: this.state.instagram.toLowerCase()
+      instagram: this.state.instagram.toLowerCase(),
+      type: this.props.auth.user.attributes["custom:role"]
     };
 
     const currentUserId = this.props.auth.user.username;

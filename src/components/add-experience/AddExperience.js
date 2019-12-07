@@ -80,7 +80,7 @@ class AddExperience extends Component {
         description: props.description,
         title: props.title,
         start_date: props.start_date.slice(0, 7),
-        end_date: props.end_date.slice(0, 7),
+        end_date: props.current ? null : props.end_date.slice(0, 7),
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };
@@ -115,7 +115,7 @@ class AddExperience extends Component {
         title: this.state.title,
         start_date: moment(this.state.start_date).toDate(),
         end_date: this.state.current
-          ? moment().toDate()
+          ? null
           : moment(this.state.end_date).toDate(),
         company: this.state.company
       });
@@ -128,7 +128,7 @@ class AddExperience extends Component {
         title: this.state.title,
         start_date: moment(this.state.start_date).toDate(),
         end_date: this.state.current
-          ? moment().toDate()
+          ? null
           : moment(this.state.end_date).toDate(),
         company: this.state.company
       });
@@ -141,9 +141,6 @@ class AddExperience extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              {/* <Link to="/dashboard" className="btn btn-light">
-                Go Back
-              </Link> */}
               <h1 className="display-4 text-center">Experience</h1>
               <p className="lead text-center">
                 Add any job or position that you have had in the past or current
@@ -224,10 +221,6 @@ class AddExperience extends Component {
     );
   }
 }
-
-// const mapStateToProps = state => ({
-//   profiles: state.profiles
-// });
 
 export default connect(null, { addExperience, editExperience })(
   withRouter(AddExperience)

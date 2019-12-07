@@ -166,14 +166,19 @@ export const createProfile = (
   profileData.avatar = avatar;
   console.log(profileData);
   try {
-    await API.post("teithe-career-portal-api", `/profiles`, {
+    const result = await API.post("teithe-career-portal-api", `/profiles`, {
       body: profileData
       // headers: {
       //   // set custom header id for testing
       //   "cognito-identity-id": user
       // }
     });
-    history.push("/profile");
+    console.log(result);
+    dispatch({
+      type: CREATE_PROFILE_SUCCESS,
+      payload: { profile: result.data }
+    });
+    // history.push("/profile");
   } catch (err) {
     console.log(err);
     dispatch({

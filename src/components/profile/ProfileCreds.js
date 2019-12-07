@@ -133,8 +133,8 @@ class ProfileCreds extends Component {
             <p>{titleCase(exp.company)}</p>
             <p className="help-text">
               <Moment format="MMMM YYYY">{exp.start_date}</Moment> -{" "}
-              {exp.to === null ? (
-                "Now"
+              {exp.end_date === null ? (
+                "Present"
               ) : (
                 <Moment format="MMMM YYYY">{exp.end_date}</Moment>
               )}
@@ -194,8 +194,8 @@ class ProfileCreds extends Component {
             <p>{titleCase(edu.school)}</p>
             <p className="help-text">
               <Moment format="MMMM YYYY">{edu.start_date}</Moment> -{" "}
-              {edu.to === null ? (
-                "Now"
+              {edu.end_date === null ? (
+                "Present"
               ) : (
                 <Moment format="MMMM YYYY">{edu.end_date}</Moment>
               )}

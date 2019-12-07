@@ -22,6 +22,8 @@ import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 import JobSearch from "./components/job-search/JobSearch";
 import AddCV from "./components/add-cv/AddCV";
+import AddJobPost from "./components/add-job-post/AddJobPost";
+import InternalJobs from "./components/internal-jobs/InternalJobs";
 
 class App extends Component {
   constructor(props) {
@@ -97,6 +99,8 @@ class App extends Component {
                 <Route exact path="/create-profile" component={CreateProfile} />
                 <Route exact path="/job-search" component={JobSearch} />
                 <Route exact path="/add-cv" component={AddCV} />
+                <Route exact path="/add-job-post" component={AddJobPost} />
+                <Route exact path="/internal-jobs" component={InternalJobs} />
               </Switch>
             </div>
           </div>
