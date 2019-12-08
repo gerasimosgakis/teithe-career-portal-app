@@ -1,124 +1,242 @@
-.chat-button {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background: #5e0565;
-  height: 50px;
-  font-size: 16px;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  border: 0;
-  box-shadow: 1px 1px 4px 1px grey;
-  cursor: pointer;
-}
-.form-container {
-  height: 400px;
-  border: 1px solid #5e0565;
-}
-.form-container h1 {
-  padding: 10px;
-  background-color: #5e0565;
-  font-size: 20px;
-  color: white;
-  margin: 0;
-  margin-bottom: 10px;
-}
-.form {
-  padding: 30px;
-}
-.input {
-  display: block;
-  width: 100%;
-  margin: 20px auto;
-  height: 50px;
-  font-size: 20px;
-}
-.submit {
-  height: 40px;
-  padding: 0 20px;
-  background-color: #5e0565;
-  color: white;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.chat-container {
-  // position: fixed;
-  // right: 10px;
-  // bottom: 0;
-  // width: 350px;
-  border: 1px solid #ccc;
-  &__inner {
-    position: relative;
-  }
-}
-.form {
-  padding: 30px;
-}
-.input {
-  display: block;
-  width: 100%;
-  margin: 20px auto;
-  height: 50px;
-  font-size: 20px;
-}
-.submit {
-  height: 40px;
-  padding: 0 20px;
-  background-color: #5e0565;
-  color: white;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.chatapp {
-  margin: 0 auto;
-  height: 80vh;
-  border: 1px solid #a1a1a4;
-}
-.header {
-  padding: 20px;
-  color: white;
-  margin-top: 0;
-  text-align: left;
-  border-bottom: 1px solid #343a40;
-  background-color: #343a40;
-}
-.message-list {
-  list-style-type: none;
-  padding: 0px 20px;
-  overflow: scroll;
-  max-height: calc(100vh - 150px);
-  margin-bottom: 35px;
-}
-.message-sender {
-  font-weight: bold;
-  font-size: 1em;
-  margin: 0;
-}
-.message-text {
-  margin-bottom: 20px;
-  margin-top: 5px;
-}
-.message-input {
-  width: 70%;
-  height: 50px;
-  border: 0;
-  border-top: 1px solid #e0e0e0;
-  font-size: 18px;
-  padding-left: 2px;
-}
-.message-submit {
-  width: 30%;
-  background-color: #f98866;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-.input-field {
-  position: absolute;
-  bottom: -30px;
-  width: 100%;
+.Chat {
   display: flex;
+  justify-content: center;
+}
+
+.Chat__chatwindow {
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  // border: 1px solid #d0d0d0;
+  display: flex;
+  // margin-top: 40px;
+  width: 100%;
+  height: 700px;
+}
+
+.UserList {
+  border-right: 1px solid #e0e0e0;
+  background: #fefefe;
+  height: 100%;
+  max-width: 30vw;
+  display: flex;
+  flex-direction: column;
+  cursor: not-allowed;
+}
+
+.UserList__titlebar {
+  display: flex;
+  align-items: center;
+  background: #ededed;
+  padding: 0rem 0.5rem;
+  height: 4rem;
+}
+
+.UserList__titlebar__avatar {
+  width: 3rem;
+  border-radius: 1.5rem;
+}
+
+.UserList__titlebar__logged-in-as {
+  margin: 0 0 0 0.5rem;
+}
+
+.UserList__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.UserList__container__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.UserList__container__list__item {
+  display: flex;
+  padding: 1rem;
+}
+
+.UserList__container__list__item__link {
+  display: inline;
+}
+
+.UserList__container__list__item--selected {
+  background: #f2f2f2;
+}
+
+.UserList__container__list__item__avatar {
+  height: 4.2rem;
+  border-radius: 2.1rem;
+  margin-right: 1rem;
+}
+
+.UserList__container__list__item__content {
+  padding: 0.5rem;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+.UserList__container__list__item__content__name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.UserList__container__list__item__content__text {
+  color: #606060;
+  margin: 0;
+  margin-top: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.UserList__container__list__item__time {
+  color: #a0a0a0;
+  padding: 0.5rem;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.Messages {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.Messages__titlebar {
+  display: flex;
+  align-items: center;
+  background: #ededed;
+  padding: 0rem 0.5rem;
+  height: 4rem;
+}
+
+.Messages__titlebar__avatar {
+  width: 3rem;
+  border-radius: 1.5rem;
+  margin-right: 1rem;
+}
+
+.Messages__titlebar__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.Messages__titlebar__details__presence {
+  font-size: 0.8em;
+  opacity: 0.5;
+  margin-top: 0.2rem;
+}
+
+.Messages__messages {
+  background-image: linear-gradient(#d3d3d3, #d0d0d0);
+  flex: 1;
+  padding: 2rem 4rem;
+  overflow-y: scroll;
+}
+
+.Messages__messages__message__wrapper {
+  display: flex;
+}
+
+.Messages__messages__message__wrapper--other {
+  justify-content: flex-start;
+}
+
+.Messages__messages__message__wrapper--self {
+  justify-content: flex-end;
+}
+
+.Messages__messages__message__wrapper__inner {
+  margin-bottom: 1rem;
+}
+
+.Messages__messages__message {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  padding-bottom: 0.5rem;
+  min-width: 300px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  display: block;
+  position: relative;
+}
+
+.Messages__messages__message__seen {
+  text-align: right;
+  padding-top: 0.2rem;
+  padding-right: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.Messages__messages__message__arrow {
+  position: absolute;
+  width: 0;
+  bottom: 42px;
+  left: -16px;
+  height: 0;
+}
+
+.Messages__messages__message__arrow.alt {
+  right: -2px;
+  bottom: 40px;
+  left: auto;
+}
+
+.Messages__messages__message__arrow:after {
+  content: "";
+  position: absolute;
+  border: 0 solid transparent;
+  border-top: 9px solid #ffffff;
+  border-radius: 0 20px 0;
+  width: 15px;
+  height: 30px;
+  transform: rotate(145deg);
+}
+
+.Messages__messages__message__arrow.alt:after {
+  transform: rotate(45deg) scaleY(-1);
+  border-top: 9px solid #236d7f;
+}
+
+.Messages__messages__message--other {
+  background: #fefefe;
+}
+
+.Messages__messages__message--self {
+  background: #236d7f;
+  color: #ffffff;
+}
+
+.Messages__messages__message__time {
+  text-align: right;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.Messages__compose {
+  box-sizing: border-box;
+  padding: 1rem;
+  background: #ededed;
+  display: flex;
+}
+
+.Messages__compose__input {
+  box-sizing: border-box;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 900px) {
+  .UserList {
+    display: none;
+  }
+  .Chat__chatwindow {
+    margin-top: 0;
+    width: 100%;
+    height: 100vh;
+  }
 }
