@@ -4,7 +4,7 @@ import Chatkit from "@pusher/chatkit-server";
 import { API } from "aws-amplify";
 import UserList from "./UserList";
 import Messages from "./Messages";
-import "./Chat.scss";
+// import "./Chat.scss";
 // Chatkit constants
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
 

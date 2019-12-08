@@ -2,9 +2,8 @@ import Moment from "react-moment";
 import React, { useState, useEffect } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
-import "./Messages.scss";
-import defaultAvatar from "./default-avatar.png";
 import Avatar from "react-avatar";
+import TextFieldGroup from "../shared/TextFieldGroup";
 
 function Messages(props) {
   console.log(props);
@@ -74,17 +73,14 @@ function Messages(props) {
       </div>
       <div className="Messages__compose">
         <input
-          className="Messages__compose__input"
+          className="Messages__compose__input mr1"
           type="text"
           placeholder="Type a message..."
           value={pendingMessage}
           onChange={handleMessageChange}
           onKeyDown={handleMessageKeyDown}
         />
-        <button
-          className="Messages__compose__button"
-          onClick={handleSendMessage}
-        >
+        <button className="button transparent-btn" onClick={handleSendMessage}>
           Send
         </button>
       </div>
