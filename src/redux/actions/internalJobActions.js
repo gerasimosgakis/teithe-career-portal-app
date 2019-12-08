@@ -6,7 +6,9 @@ import {
   GET_JOB_POSTS_FAIL,
   SET_LOADING,
   GET_JOB_POSTS_BY_USER_SUCCESS,
-  GET_JOB_POSTS_BY_USER_FAIL
+  GET_JOB_POSTS_BY_USER_FAIL,
+  EDIT_JOB_POST_SUCCESS,
+  EDIT_JOB_POST_FAIL
 } from "./types";
 import { actionButton } from "@aws-amplify/ui";
 
@@ -68,6 +70,30 @@ export const addInternalJob = data => async dispatch => {
     console.log(err);
     dispatch({
       type: ADD_JOB_POST_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Edit new internal job
+export const editInternalJob = (id, data) => async dispatch => {
+  try {
+    const job = await API.put(
+      "teithe-career-portal-posts-api",
+      `/job-posts/update/${id}`,
+      {
+        body: data
+      }
+    );
+    console.log(job);
+    dispatch({
+      type: EDIT_JOB_POST_SUCCESS,
+      payload: { id, data: job.data }
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: EDIT_JOB_POST_FAIL,
       payload: err
     });
   }

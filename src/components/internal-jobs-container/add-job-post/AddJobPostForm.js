@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addInternalJob } from "../../../redux/actions/internalJobActions";
+import {
+  addInternalJob,
+  editInternalJob
+} from "../../../redux/actions/internalJobActions";
 import TextFieldGroup from "../../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 
@@ -37,15 +40,27 @@ class AddJobPostForm extends Component {
     event.preventDefault();
     const userId = this.props.auth.user.username;
     console.log(this.state.id);
-    // this.props.addInternalJob({
-    //   user_id: userId,
-    //   title: this.state.title,
-    //   recruiter: this.state.recruiter,
-    //   min_salary: this.state.min_salary,
-    //   max_salary: this.state.max_salary,
-    //   description: this.state.description,
-    //   location: this.state.location
-    // });
+    if (this.state.id) {
+      this.props.editInternalJob(this.state.id, {
+        user_id: userId,
+        title: this.state.title,
+        recruiter: this.state.recruiter,
+        min_salary: this.state.min_salary,
+        max_salary: this.state.max_salary,
+        description: this.state.description,
+        location: this.state.location
+      });
+    } else {
+      this.props.addInternalJob({
+        user_id: userId,
+        title: this.state.title,
+        recruiter: this.state.recruiter,
+        min_salary: this.state.min_salary,
+        max_salary: this.state.max_salary,
+        description: this.state.description,
+        location: this.state.location
+      });
+    }
   };
 
   /** Get Derived State From Props method
@@ -160,5 +175,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, {
-  addInternalJob
+  addInternalJob,
+  editInternalJob
 })(AddJobPostForm);

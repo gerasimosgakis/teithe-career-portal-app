@@ -2,6 +2,8 @@ import {
   SET_LOADING,
   ADD_JOB_POST_SUCCESS,
   ADD_JOB_POST_FAIL,
+  EDIT_JOB_POST_SUCCESS,
+  EDIT_JOB_POST_FAIL,
   GET_JOB_POSTS_SUCCESS,
   GET_JOB_POSTS_FAIL,
   GET_JOB_POSTS_BY_USER_SUCCESS,
@@ -24,9 +26,27 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        internalJobs: [...state.internalJobs, action.payload]
+        internalJobs: [action.payload, ...state.internalJobs]
       };
     case ADD_JOB_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case EDIT_JOB_POST_SUCCESS:
+      const jobIndex = state.internalJobs.findIndex(item => {
+        return item.id === action.payload.id;
+      });
+      console.log(jobIndex);
+      const updatedJobs = [...state.internalJobs];
+      updatedJobs[jobIndex] = { ...action.payload.data };
+      return {
+        ...state,
+        loading: false,
+        internalJobs: updatedJobs
+      };
+    case EDIT_JOB_POST_FAIL:
       return {
         ...state,
         loading: false,
