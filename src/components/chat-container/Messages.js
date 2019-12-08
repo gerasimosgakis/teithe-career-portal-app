@@ -4,6 +4,7 @@ import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
 import "./Messages.scss";
 import defaultAvatar from "./default-avatar.png";
+import Avatar from "react-avatar";
 
 function Messages(props) {
   console.log(props);
@@ -46,12 +47,18 @@ function Messages(props) {
   return (
     <div className="Messages">
       <div className="Messages__titlebar">
-        <img
+        {/* <img
           src={props && props.user ? props.user.avatar : defaultAvatar}
           className="Messages__titlebar__avatar"
           alt="avatar"
+        /> */}
+        <Avatar
+          email={props && props.user ? props.user.email : null}
+          name={props && props.user ? props.user.name : null}
+          round={true}
+          size="30"
         />
-        <div className="Messages__titlebar__details">
+        <div className="Messages__titlebar__details ml1">
           {/*TODO: Get other user's name from Chatkit */}
           <span>
             {props.chatkit.isLoading
