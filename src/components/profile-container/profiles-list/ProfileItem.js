@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import isEmpty from "../../validation/isEmpty";
-import titleCase from "../../shared/functions/titleCase";
+import titleCase from "../../../shared/functions/titleCase";
 import ReactTooltip from "react-tooltip";
-import { getCV } from "../../shared/functions/aws";
+import { getCV } from "../../../shared/functions/aws";
+import isEmpty from "../../../shared/functions/isEmpty";
 
 class ProfileItem extends Component {
   render() {

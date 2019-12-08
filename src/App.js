@@ -21,8 +21,9 @@ import AddCV from "./components/add-cv-container/AddCV";
 import AddJobPost from "./components/internal-jobs-container/add-job-post/AddJobPost";
 import InternalJobs from "./components/internal-jobs-container/internal-jobs-search/InternalJobs";
 import CreateProfile from "./components/profile-container/create-profile/CreateProfile";
-import ProfileSkills from "./components/profile-container/profile-dashboard/ProfileSkills";
+import Profiles from "./components/profile-container/profiles-list/Profiles";
 import Profile from "./components/profile-container/profile-dashboard/Profile";
+// import Profile from "./components/profile-container/";
 
 class App extends Component {
   constructor(props) {
@@ -84,7 +85,7 @@ class App extends Component {
                     <CreateProfile header={true}></CreateProfile>
                   )}
                 ></Route>
-                <Route exact path="/graduates" component={ProfileSkills} />
+                <Route exact path="/graduates" component={Profiles} />
                 <Route exact path="/graduates/:id" component={Profile} />
                 <Route exact path="/profile" component={Profile} />
                 <AppliedRoute
