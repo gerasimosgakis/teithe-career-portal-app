@@ -52,27 +52,29 @@ class InternalJobs extends Component {
       content = internalJobs.map((job, index) => (
         <div className="internal-jobs__job">
           <InternalJobItem job={job}></InternalJobItem>
-          <button
-            className="icon-button icon-button--small internal-jobs__job-edit-button"
-            data-toggle="modal"
-            data-target="#editModal"
-            onClick={() => {
-              // this.currentExperienceIndex = index;
-              this.setState({
-                id: job.id,
-                title: job.title,
-                recruiter: job.recruiter,
-                location: job.location,
-                min_salary: job.min_salary,
-                max_salary: job.max_salary,
-                description: job.description,
-                currentJobIndex: index
-              });
-              // console.log(this.currentExperienceIndex);
-            }}
-          >
-            <i className="fas fa-edit"></i>
-          </button>
+          {this.props.auth.user.username === job.user_id && (
+            <button
+              className="icon-button icon-button--small internal-jobs__job-edit-button"
+              data-toggle="modal"
+              data-target="#editModal"
+              onClick={() => {
+                // this.currentExperienceIndex = index;
+                this.setState({
+                  id: job.id,
+                  title: job.title,
+                  recruiter: job.recruiter,
+                  location: job.location,
+                  min_salary: job.min_salary,
+                  max_salary: job.max_salary,
+                  description: job.description,
+                  currentJobIndex: index
+                });
+                // console.log(this.currentExperienceIndex);
+              }}
+            >
+              <i className="fas fa-edit"></i>
+            </button>
+          )}
         </div>
       ));
     }
