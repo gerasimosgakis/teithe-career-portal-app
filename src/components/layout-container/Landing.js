@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import logo from "../../logo_tei.jpg";
+// import logo from "../../logo_tei.jpg";
+import logo from "../../assets/hatchful/logo_transparent.png";
 import PropTypes from "prop-types";
 
 class Landing extends Component {
@@ -23,8 +24,8 @@ class Landing extends Component {
         </div>
         <div className="landing__slogan mt-4">
           <p className="landing__slogan-text lead-text">
-            Αλεξάνδρειο Τεχνολογικό Εκπαιδευτικό Ίδρυμα Θεσσαλονίκης - Career
-            Portal
+            The best platform for developers and recruiters - Communicate and
+            find your dream career
           </p>
           {auth.isAuthenticated ? (
             <Link to="/profile">

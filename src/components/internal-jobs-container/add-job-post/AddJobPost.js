@@ -5,6 +5,7 @@ import TextFieldGroup from "../../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import { addInternalJob } from "../../../redux/actions/internalJobActions";
 import { getInternalJobsByUser } from "../../../redux/actions/internalJobActions";
+import InternalJobs from "../internal-jobs-search/InternalJobs";
 
 class AddJobPost extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class AddJobPost extends Component {
       location: "",
       minSalary: null,
       maxSalary: null,
-      description: ""
+      description: "",
+      showForm: false
     };
   }
 
@@ -45,64 +47,70 @@ class AddJobPost extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="display-4 text-center">Add Job Post</h1>
-        <div className="create-profile__form">
-          <small className="small-text">* = required fields</small>
-          <form className="mt1" onSubmit={this.onSubmit}>
-            <div className="form__field-label">* Title</div>
-            <TextFieldGroup
-              placeholder="* Title"
-              name="title"
-              value={this.state.title}
-              required
-              onChange={this.onChange}
-            />
-            <div className="form__field-label">* Recruiter</div>
-            <TextFieldGroup
-              placeholder="* Recruiter"
-              name="recruiter"
-              value={this.state.recruiter}
-              required
-              onChange={this.onChange}
-            />
-            <div className="form__field-label">* Location</div>
-            <TextFieldGroup
-              placeholder="* Location"
-              name="location"
-              value={this.state.location}
-              required
-              onChange={this.onChange}
-            />
-            <div className="form__field-label">Minimum Salary</div>
-            <TextFieldGroup
-              placeholder="Minimum Salary"
-              name="minSalary"
-              value={this.state.minSalary}
-              type="number"
-              onChange={this.onChange}
-            />
-            <div className="form__field-label">Maximum Salary</div>
-            <TextFieldGroup
-              placeholder="Maximum Salary"
-              name="maxSalary"
-              value={this.state.maxSalary}
-              type="number"
-              onChange={this.onChange}
-            />
-            <div className="form__field-label">Description</div>
-            <TextAreaFieldGroup
-              placeholder="Description"
-              name="description"
-              value={this.state.description}
-              onChange={this.onChange}
-            />
-            <input
-              type="submit"
-              value="Submit"
-              className="btn btn-info btn-block mt-4"
-            />
-          </form>
+      <div className="contain">
+        <h1 className="display-4 text-center">Job Posts</h1>
+        {this.state.showForm && (
+          <div>
+            <small className="small-text">* = required fields</small>
+            <form className="mt1" onSubmit={this.onSubmit}>
+              <div className="form__field-label">* Title</div>
+              <TextFieldGroup
+                placeholder="* Title"
+                name="title"
+                value={this.state.title}
+                required
+                onChange={this.onChange}
+              />
+              <div className="form__field-label">* Recruiter</div>
+              <TextFieldGroup
+                placeholder="* Recruiter"
+                name="recruiter"
+                value={this.state.recruiter}
+                required
+                onChange={this.onChange}
+              />
+              <div className="form__field-label">* Location</div>
+              <TextFieldGroup
+                placeholder="* Location"
+                name="location"
+                value={this.state.location}
+                required
+                onChange={this.onChange}
+              />
+              <div className="form__field-label">Minimum Salary</div>
+              <TextFieldGroup
+                placeholder="Minimum Salary"
+                name="minSalary"
+                value={this.state.minSalary}
+                type="number"
+                onChange={this.onChange}
+              />
+              <div className="form__field-label">Maximum Salary</div>
+              <TextFieldGroup
+                placeholder="Maximum Salary"
+                name="maxSalary"
+                value={this.state.maxSalary}
+                type="number"
+                onChange={this.onChange}
+              />
+              <div className="form__field-label">Description</div>
+              <TextAreaFieldGroup
+                placeholder="Description"
+                name="description"
+                value={this.state.description}
+                onChange={this.onChange}
+              />
+              <input
+                type="submit"
+                value="Submit"
+                className="btn btn-info btn-block mt-4"
+              />
+            </form>
+          </div>
+        )}
+        <div className="mt2">
+          <h2>My Jobs</h2>
+          <InternalJobs />
         </div>
       </div>
     );

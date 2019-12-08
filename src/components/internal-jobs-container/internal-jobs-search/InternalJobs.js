@@ -26,11 +26,13 @@ class InternalJobs extends Component {
       ));
     }
     return (
-      <div className="search-jobs contain">
-        <div className="search-jobs__header mb4">
-          <h1>Internal Job Search</h1>
-          <p className="header-label">Let's get hired!</p>
-        </div>
+      <div className="search-jobs">
+        {this.props.header && (
+          <div className="search-jobs__header mb4">
+            <h1>Internal Job Search</h1>
+            <p className="header-label">Let's get hired!</p>
+          </div>
+        )}
         <div className="search-jobs__results-main">{content}</div>
       </div>
     );

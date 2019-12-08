@@ -101,7 +101,16 @@ class App extends Component {
                 <Route exact path="/job-search" component={JobSearch} />
                 <Route exact path="/add-cv" component={AddCV} />
                 <Route exact path="/add-job-post" component={AddJobPost} />
-                <Route exact path="/internal-jobs" component={InternalJobs} />
+                {/* <Route exact path="/internal-jobs" component={InternalJobs} /> */}
+                <Route
+                  exact
+                  path="/internal-jobs"
+                  component={() => (
+                    <div class="contain">
+                      <InternalJobs header={true} />
+                    </div>
+                  )}
+                ></Route>
               </Switch>
             </div>
           </div>
