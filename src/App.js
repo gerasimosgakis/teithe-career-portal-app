@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
+import Navbar from "./components/layout-container/Navbar";
+import Landing from "./components/layout-container/Landing";
 import "./App.scss";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
+import Login from "./components/auth-container/Login";
+import Register from "./components/auth-container/Register";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 // Redux
@@ -16,14 +16,14 @@ import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
 import CreateProfile from "./components/create-profile/CreateProfile";
-import Chat from "./components/chat/Chat";
-import AppliedRoute from "./components/AppliedRoute";
-import Posts from "./components/posts/Posts";
+import Chat from "./components/chat-container/Chat";
+import AppliedRoute from "./AppliedRoute";
+import Posts from "./components/posts-container/Posts";
 import Post from "./components/post/Post";
-import JobSearch from "./components/job-search/JobSearch";
-import AddCV from "./components/add-cv/AddCV";
+import JobSearch from "./components/job-search-container/JobSearch";
+import AddCV from "./components/add-cv-container/AddCV";
 import AddJobPost from "./components/add-job-post/AddJobPost";
-import InternalJobs from "./components/internal-jobs/InternalJobs";
+import InternalJobs from "./components/internal-jobs-container/internal-jobs-search/InternalJobs";
 
 class App extends Component {
   constructor(props) {

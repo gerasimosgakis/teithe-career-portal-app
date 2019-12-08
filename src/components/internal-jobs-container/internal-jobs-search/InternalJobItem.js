@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import titleCase from "../../shared/functions/titleCase";
+import titleCase from "../../../shared/functions/titleCase";
 import ReactHtmlParser, {
   processNodes,
   convertNodeToElement,

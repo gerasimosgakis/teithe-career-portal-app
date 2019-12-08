@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import TextFieldGroup from "../shared/TextFieldGroup";
+import TextFieldGroup from "../../shared/TextFieldGroup";
 import { connect } from "react-redux";
 import {
   searchGraduates,
   getProfiles
-} from "../../redux/actions/profileActions";
+} from "../../../redux/actions/profileActions";
 import moment from "moment";
 
 const initialState = {

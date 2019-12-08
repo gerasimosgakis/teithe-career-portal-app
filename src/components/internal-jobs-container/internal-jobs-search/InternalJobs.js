@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getInternalJobs } from "../../redux/actions/internalJobActions";
-import Spinner from "../shared/Spinner";
+import { getInternalJobs } from "../../../redux/actions/internalJobActions";
+import Spinner from "../../shared/Spinner";
 import InternalJobItem from "./InternalJobItem";
 
 class InternalJobs extends Component {

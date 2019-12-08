@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { logoutUser } from "../../redux/actions/authActions";
 // import { clearCurrentProfile } from "../../redux/actions/profileActions";
 import { connect } from "react-redux";
-import AddCV from "../add-cv/AddCV";
+import AddCV from "../add-cv-container/AddCV";
 
 class Navbar extends Component {
   constructor(props) {
