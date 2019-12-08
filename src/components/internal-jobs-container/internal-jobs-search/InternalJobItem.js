@@ -9,6 +9,9 @@ import ReactHtmlParser, {
 } from "react-html-parser";
 
 class InternalJobItem extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     const { job } = this.props;
     const transformedDate = job.created_at

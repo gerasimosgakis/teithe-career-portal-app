@@ -6,6 +6,7 @@ import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import { addInternalJob } from "../../../redux/actions/internalJobActions";
 import { getInternalJobsByUser } from "../../../redux/actions/internalJobActions";
 import InternalJobs from "../internal-jobs-search/InternalJobs";
+import AddJobPostForm from "./AddJobPostForm";
 
 class AddJobPost extends Component {
   constructor(props) {
@@ -49,68 +50,56 @@ class AddJobPost extends Component {
     return (
       <div className="contain">
         <h1 className="display-4 text-center">Job Posts</h1>
-        {this.state.showForm && (
-          <div>
-            <small className="small-text">* = required fields</small>
-            <form className="mt1" onSubmit={this.onSubmit}>
-              <div className="form__field-label">* Title</div>
-              <TextFieldGroup
-                placeholder="* Title"
-                name="title"
-                value={this.state.title}
-                required
-                onChange={this.onChange}
-              />
-              <div className="form__field-label">* Recruiter</div>
-              <TextFieldGroup
-                placeholder="* Recruiter"
-                name="recruiter"
-                value={this.state.recruiter}
-                required
-                onChange={this.onChange}
-              />
-              <div className="form__field-label">* Location</div>
-              <TextFieldGroup
-                placeholder="* Location"
-                name="location"
-                value={this.state.location}
-                required
-                onChange={this.onChange}
-              />
-              <div className="form__field-label">Minimum Salary</div>
-              <TextFieldGroup
-                placeholder="Minimum Salary"
-                name="minSalary"
-                value={this.state.minSalary}
-                type="number"
-                onChange={this.onChange}
-              />
-              <div className="form__field-label">Maximum Salary</div>
-              <TextFieldGroup
-                placeholder="Maximum Salary"
-                name="maxSalary"
-                value={this.state.maxSalary}
-                type="number"
-                onChange={this.onChange}
-              />
-              <div className="form__field-label">Description</div>
-              <TextAreaFieldGroup
-                placeholder="Description"
-                name="description"
-                value={this.state.description}
-                onChange={this.onChange}
-              />
-              <input
-                type="submit"
-                value="Submit"
-                className="btn btn-info btn-block mt-4"
-              />
-            </form>
-          </div>
-        )}
+        {this.state.showForm && <AddJobPostForm />}
         <div className="mt2">
-          <h2>My Jobs</h2>
+          <h2>
+            My Jobs{" "}
+            <button
+              className="button transparent-btn transparent-btn--small ml1"
+              data-toggle="modal"
+              data-target="#addModal"
+            >
+              Add new
+            </button>
+          </h2>
           <InternalJobs />
+        </div>
+        {/* Job Add Modal */}
+        <div className="modal fade" id="addModal" role="dialog">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Add Job</h4>
+                <button type="button" className="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+              <div className="modal-body">
+                {this.state.currentJobIndex >= 0 ? (
+                  <AddJobPostForm
+                  // title={''}
+                  // recruiter={''}
+                  // location={this.state.location}
+                  // min_salary={this.state.min_salary}
+                  // max_salary={this.state.max_salary}
+                  // description={this.state.description}
+                  // currentJobIndex={this.state.currentJobIndex}
+                  />
+                ) : (
+                  <AddJobPostForm title={""} />
+                )}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
