@@ -49,19 +49,19 @@ class AddJobPost extends Component {
   render() {
     return (
       <div className="contain">
-        <h1 className="display-4 text-center">
-          Job Posts
-          <button
-            className="icon-button icon-button--small"
-            data-toggle="modal"
-            data-target="#addModal"
-          >
-            <i className="fas fa-plus"></i>
-          </button>
-        </h1>
+        <h1 className="display-4 text-center">Job Posts</h1>
         {this.state.showForm && <AddJobPostForm />}
         <div className="mt2">
-          <h2>My Jobs</h2>
+          <h2>
+            My Jobs{" "}
+            <button
+              className="button transparent-btn transparent-btn--small ml1"
+              data-toggle="modal"
+              data-target="#addModal"
+            >
+              Add new
+            </button>
+          </h2>
           <InternalJobs />
         </div>
         {/* Job Add Modal */}

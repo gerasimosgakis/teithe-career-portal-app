@@ -1,0 +1,10 @@
+.internal-jobs {
+  &__job {
+    position: relative;
+  }
+  &__job-edit-button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+}

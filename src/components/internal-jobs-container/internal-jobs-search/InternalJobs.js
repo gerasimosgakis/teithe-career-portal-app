@@ -50,10 +50,10 @@ class InternalJobs extends Component {
       content = <Spinner />;
     } else {
       content = internalJobs.map((job, index) => (
-        <div>
+        <div className="internal-jobs__job">
           <InternalJobItem job={job}></InternalJobItem>
           <button
-            className="icon-button icon-button--small"
+            className="icon-button icon-button--small internal-jobs__job-edit-button"
             data-toggle="modal"
             data-target="#editModal"
             onClick={() => {
