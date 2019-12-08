@@ -13,6 +13,7 @@ import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import CommentForm from "./CommentForm";
 import CommentFeed from "./CommentFeed";
+import Avatar from "react-avatar";
 
 class PostItem extends Component {
   constructor(props) {
@@ -77,17 +78,24 @@ class PostItem extends Component {
     const { post, auth, profile, showActions } = this.props;
     const currentUserId = this.props.auth.user.username;
     const currentUserName = this.props.auth.user.attributes.name;
+    const currentUserEmail = this.props.auth.user.attributes.email;
     const avatar = this.props.auth.user.avatar;
     return (
       <div className="card posts__post-item mb2">
         <div className="card-body card posts__post-item-body">
           <div className="posts__post-item-body-details">
             <span className="mb-2">
-              <img
+              {/* <img
                 className="rounded-circle"
                 width="50px"
                 src={this.state.post.avatar}
                 alt=""
+              /> */}
+              <Avatar
+                email={this.state.post.user_email}
+                name={this.state.post.user_name}
+                round={true}
+                size="50"
               />
             </span>
             <p className="text-center">{titleCase(post.user_name)}</p>
@@ -149,6 +157,7 @@ class PostItem extends Component {
                 postId={post.id}
                 currentUserId={currentUserId}
                 currentUserName={currentUserName}
+                currentUserEmail={currentUserEmail}
                 avatar={avatar}
               />
               {this.state.post.comments && this.state.post.comments.length > 0 && (

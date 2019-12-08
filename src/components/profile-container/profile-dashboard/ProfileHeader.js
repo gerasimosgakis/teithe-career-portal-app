@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import banner from "../../../banner.jpg";
+import { logo } from "../../../logo_tei.jpg";
 import CreateProfile from "../create-profile/CreateProfile";
 import titleCase from "../../../shared/functions/titleCase";
 import isEmpty from "../../../shared/functions/isEmpty";
+import Avatar from "react-avatar";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
@@ -13,13 +15,18 @@ class ProfileHeader extends Component {
           <img src={banner} alt="" className="profile-header__banner-pic" />
         </div>
         <div className="profile-header__logo">
-          <img
+          {/* <img
             className="rounded-circle profile-header__logo-pic"
             src={profile.avatar}
             alt="logo"
+          /> */}
+          <Avatar
+            email={this.props.user.attributes.email}
+            name={profile.name}
+            round={true}
+            size="200"
           />
         </div>
-        {/* <Logo name={profile.name}></Logo> */}
         <div className="contain">
           <div className="profile-header__heading">
             <h2>

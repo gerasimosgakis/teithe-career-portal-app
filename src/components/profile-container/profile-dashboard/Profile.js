@@ -61,6 +61,7 @@ class Profile extends Component {
         <div>
           <ProfileHeader
             profile={profile}
+            user={user}
             edit={profile.id === user.username}
           />
           <ProfileAbout profile={profile} />

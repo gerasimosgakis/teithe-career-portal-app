@@ -34,6 +34,7 @@ class PostForm extends Component {
       user_id: currentUserId,
       text: this.state.text,
       user_name: this.props.auth.user.attributes.name,
+      user_email: email,
       avatar
     };
 
