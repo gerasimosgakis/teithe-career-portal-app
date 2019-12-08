@@ -43,6 +43,16 @@ class ProfileHeader extends Component {
             {isEmpty(profile.location) ? null : (
               <p className="help-text">{titleCase(profile.location)}</p>
             )}
+            {isEmpty(profile.phone) ? null : (
+              <p className="help-text">
+                <i className="fas fa-phone mr1"></i> {profile.phone}
+              </p>
+            )}
+            {isEmpty(profile.email) ? null : (
+              <p className="help-text">
+                <i className="fas fa-at mr1"></i> {profile.email}
+              </p>
+            )}
             <p>
               {isEmpty(profile.website) ? null : (
                 <a

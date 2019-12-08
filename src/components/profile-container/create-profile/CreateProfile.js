@@ -27,6 +27,8 @@ class CreateProfile extends Component {
       company: profile && profile.company ? profile.company : "",
       website: profile && profile.website ? profile.website : "",
       location: profile && profile.location ? profile.location : "",
+      phone: profile && profile.phone ? profile.phone : "",
+      email: profile && profile.email ? profile.email : "",
       status: profile && profile.status ? profile.status : "",
       skills: profile && profile.skills ? profile.skills : "",
       githubusername:
@@ -52,6 +54,8 @@ class CreateProfile extends Component {
       company: this.state.company.toLowerCase(),
       website: this.state.website.toLowerCase(),
       location: this.state.location.toLowerCase(),
+      phone: this.state.phone.toLowerCase(),
+      email: this.state.email.toLowerCase(),
       status: this.state.status.toLowerCase(),
       skills: this.state.skills.toLowerCase(),
       githubusername: this.state.githubusername.toLowerCase(),
@@ -198,6 +202,22 @@ class CreateProfile extends Component {
               value={this.state.location}
               onChange={this.onChange}
               info="Your location (e.g. London, UK)"
+            />
+            <div className="form__field-label">Phone Number</div>
+            <TextFieldGroup
+              placeholder="Phone Number"
+              name="phone"
+              value={this.state.phone}
+              onChange={this.onChange}
+              info="Your phone number"
+            />
+            <div className="form__field-label">Email Address</div>
+            <TextFieldGroup
+              placeholder="Email Address"
+              name="email"
+              value={this.state.email}
+              onChange={this.onChange}
+              info="Your email address"
             />
             <div className="form__field-label">Skills</div>
             <TextFieldGroup

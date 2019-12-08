@@ -261,7 +261,7 @@ class ProfileCreds extends Component {
     // ));
 
     return (
-      <div className="profile-creds contain">
+      <div className="profile-creds">
         <h3>
           Experience <span>&nbsp;</span>
           {this.props.edit && (

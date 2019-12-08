@@ -4,7 +4,9 @@ import {
   ADD_JOB_POST_FAIL,
   GET_JOB_POSTS_SUCCESS,
   GET_JOB_POSTS_FAIL,
-  SET_LOADING
+  SET_LOADING,
+  GET_JOB_POSTS_BY_USER_SUCCESS,
+  GET_JOB_POSTS_BY_USER_FAIL
 } from "./types";
 import { actionButton } from "@aws-amplify/ui";
 
@@ -29,25 +31,27 @@ export const getInternalJobs = () => async dispatch => {
   }
 };
 
-// export const getPosts = () => async dispatch => {
-//   try {
-//     dispatch({
-//       type: "SET_LOADING",
-//       payload: true
-//     });
-//     const posts = await API.get("teithe-career-portal-posts-api", "/posts");
-//     console.log(posts);
-//     dispatch({
-//       type: GET_POSTS_SUCCESS,
-//       payload: posts
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: GET_POSTS_FAIL,
-//       payload: error
-//     });
-//   }
-// };
+// Get All Internal Jobs By User
+export const getInternalJobsByUser = userId => async dispatch => {
+  try {
+    dispatch({
+      type: SET_LOADING
+    });
+    const jobs = await API.get(
+      "teithe-career-portal-posts-api",
+      `/job-posts/${userId}`
+    );
+    dispatch({
+      type: GET_JOB_POSTS_BY_USER_SUCCESS,
+      payload: jobs.data
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_JOB_POSTS_BY_USER_FAIL,
+      payload: err
+    });
+  }
+};
 
 // Add new internal job
 export const addInternalJob = data => async dispatch => {

@@ -3,7 +3,9 @@ import {
   ADD_JOB_POST_SUCCESS,
   ADD_JOB_POST_FAIL,
   GET_JOB_POSTS_SUCCESS,
-  GET_JOB_POSTS_FAIL
+  GET_JOB_POSTS_FAIL,
+  GET_JOB_POSTS_BY_USER_SUCCESS,
+  GET_JOB_POSTS_BY_USER_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -37,6 +39,18 @@ export default function(state = initialState, action) {
         internalJobs: [...action.payload]
       };
     case GET_JOB_POSTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case GET_JOB_POSTS_BY_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        internalJobs: [...action.payload]
+      };
+    case GET_JOB_POSTS_BY_USER_FAIL:
       return {
         ...state,
         loading: false,

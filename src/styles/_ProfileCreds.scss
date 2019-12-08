@@ -1,6 +1,8 @@
 @import "styles/colors";
 
 .profile-creds {
+  margin: 0 2em;
+  padding: 32pt 0;
   &__cred {
     border: none;
     padding: 2em 0;
@@ -27,6 +29,7 @@
       &-description {
         border-bottom: 1px solid $back-btn;
         padding-bottom: 16pt;
+        white-space: pre-line;
       }
     }
   }
