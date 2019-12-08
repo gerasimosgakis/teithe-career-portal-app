@@ -6,8 +6,6 @@ import Landing from "./components/layout-container/Landing";
 import "./App.scss";
 import Login from "./components/auth-container/Login";
 import Register from "./components/auth-container/Register";
-import Profiles from "./components/profiles/Profiles";
-import Profile from "./components/profile/Profile";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -15,15 +13,16 @@ import { Auth } from "aws-amplify";
 import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
-import CreateProfile from "./components/create-profile/CreateProfile";
 import Chat from "./components/chat-container/Chat";
 import AppliedRoute from "./AppliedRoute";
 import Posts from "./components/posts-container/Posts";
-import Post from "./components/post/Post";
 import JobSearch from "./components/job-search-container/JobSearch";
 import AddCV from "./components/add-cv-container/AddCV";
-import AddJobPost from "./components/add-job-post/AddJobPost";
+import AddJobPost from "./components/internal-jobs-container/add-job-post/AddJobPost";
 import InternalJobs from "./components/internal-jobs-container/internal-jobs-search/InternalJobs";
+import CreateProfile from "./components/profile-container/create-profile/CreateProfile";
+import ProfileSkills from "./components/profile-container/profile-dashboard/ProfileSkills";
+import Profile from "./components/profile-container/profile-dashboard/Profile";
 
 class App extends Component {
   constructor(props) {
@@ -85,7 +84,7 @@ class App extends Component {
                     <CreateProfile header={true}></CreateProfile>
                   )}
                 ></Route>
-                <Route exact path="/graduates" component={Profiles} />
+                <Route exact path="/graduates" component={ProfileSkills} />
                 <Route exact path="/graduates/:id" component={Profile} />
                 <Route exact path="/profile" component={Profile} />
                 <AppliedRoute
@@ -95,7 +94,7 @@ class App extends Component {
                   component={Chat}
                 />
                 <Route exact path="/feed" component={Posts} />
-                <Route exact path="/post/:id" component={Post} />
+                {/* <Route exact path="/post/:id" component={Post} /> */}
                 <Route exact path="/create-profile" component={CreateProfile} />
                 <Route exact path="/job-search" component={JobSearch} />
                 <Route exact path="/add-cv" component={AddCV} />

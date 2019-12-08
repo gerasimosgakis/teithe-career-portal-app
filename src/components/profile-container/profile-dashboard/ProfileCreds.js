@@ -6,8 +6,8 @@ import AddEducation from "../add-education/AddEducation";
 import {
   deleteExperience,
   deleteEducation
-} from "../../redux/actions/profileActions";
-import titleCase from "../../shared/functions/titleCase";
+} from "../../../redux/actions/profileActions";
+import titleCase from "../../../shared/functions/titleCase";
 
 class ProfileCreds extends Component {
   constructor(props) {

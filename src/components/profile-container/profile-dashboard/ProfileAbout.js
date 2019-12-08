@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "../../validation/isEmpty";
-import { s3GetURL, getCV } from "../../shared/functions/aws";
+import { s3GetURL, getCV } from "../../../shared/functions/aws";
 import { withRouter } from "react-router-dom";
+import isEmpty from "../../../shared/functions/isEmpty";
 class ProfileAbout extends Component {
   constructor(props) {
     super(props);

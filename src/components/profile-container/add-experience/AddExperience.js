@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import TextFieldGroup from "../shared/TextFieldGroup";
-import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
-import InputGroup from "../shared/InputGroup";
-import SelectListGroup from "../shared/SelectListGroup";
+import TextFieldGroup from "../../shared/TextFieldGroup";
+import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import moment from "moment";
 import {
   addExperience,
   editExperience
-} from "../../redux/actions/profileActions";
+} from "../../../redux/actions/profileActions";
 class AddExperience extends Component {
   constructor(props) {
     super(props);

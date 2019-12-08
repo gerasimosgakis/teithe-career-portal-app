@@ -6,12 +6,12 @@ import ProfileAbout from "./ProfileAbout";
 import ProfileCreds from "./ProfileCreds";
 import ProfileGithub from "./ProfileGithub";
 import ProfileSkills from "./ProfileSkills";
-import Spinner from "../shared/Spinner";
+import Spinner from "../../shared/Spinner";
 import {
   getProfileByHandle,
   getProfileById,
   deleteExperience
-} from "../../redux/actions/profileActions";
+} from "../../../redux/actions/profileActions";
 import CreateProfile from "../create-profile/CreateProfile";
 import AddEducation from "../add-education/AddEducation";
 import AddExperience from "../add-experience/AddExperience";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Spinner from "../shared/Spinner";
+import Spinner from "../../shared/Spinner";
 import ProfileItem from "./ProfileItem";
 import Search from "../search/Search";
 import { getProfiles } from "../../redux/actions/profileActions";

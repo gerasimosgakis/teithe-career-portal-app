@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "../../validation/isEmpty";
-import titleCase from "../../shared/functions/titleCase";
+import titleCase from "../../../shared/functions/titleCase";
+import isEmpty from "../../../shared/functions/isEmpty";
 
 class ProfileSkills extends Component {
   render() {
     const { profile } = this.props;
+    console.log(profile);
 
     // Get first name
     const firstName = profile.name.trim().split(" ")[0];

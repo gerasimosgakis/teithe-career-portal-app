@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import isEmpty from "../../validation/isEmpty";
-import banner from "../../banner.jpg";
+import banner from "../../../banner.jpg";
 import CreateProfile from "../create-profile/CreateProfile";
-import titleCase from "../../shared/functions/titleCase";
-import { Logo } from "../shared/Logo";
+import titleCase from "../../../shared/functions/titleCase";
+import isEmpty from "../../../shared/functions/isEmpty";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;

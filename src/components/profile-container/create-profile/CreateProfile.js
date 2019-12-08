@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import TextFieldGroup from "../shared/TextFieldGroup";
-import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
-import InputGroup from "../shared/InputGroup";
-import SelectListGroup from "../shared/SelectListGroup";
-import { createProfile, editProfile } from "../../redux/actions/profileActions";
+import TextFieldGroup from "../../shared/TextFieldGroup";
+import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
+import InputGroup from "../../shared/InputGroup";
+import SelectListGroup from "../../shared/SelectListGroup";
+import {
+  createProfile,
+  editProfile
+} from "../../../redux/actions/profileActions";
 
 class CreateProfile extends Component {
   edit =
