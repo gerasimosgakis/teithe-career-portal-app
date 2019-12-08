@@ -5,6 +5,7 @@ import { logoutUser } from "../../redux/actions/authActions";
 // import { clearCurrentProfile } from "../../redux/actions/profileActions";
 import { connect } from "react-redux";
 import AddCV from "../add-cv-container/AddCV";
+import Avatar from "react-avatar";
 
 class Navbar extends Component {
   constructor(props) {
@@ -188,10 +189,16 @@ class Navbar extends Component {
         <Fragment>
           <li className="nav-item">
             <Link className="nav-link" to="/profile">
-              <img
+              {/* <img
                 className="rounded-circle d-none d-md-block"
                 src={auth.user.avatar}
                 alt="avatar"
+              /> */}
+              <Avatar
+                email={this.props.auth.user.attributes.email}
+                name={this.props.auth.user.attributes.name}
+                round={true}
+                size="30"
               />
             </Link>
           </li>

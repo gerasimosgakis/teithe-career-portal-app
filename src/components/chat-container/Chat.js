@@ -80,7 +80,8 @@ class Chat extends Component {
         users.push({
           id: profile.id,
           handle: profile.handle,
-          avatar: profile.avatar
+          name: profile.name,
+          email: profile.email
         });
       });
       this.setState({ users });

@@ -5,6 +5,7 @@ import titleCase from "../../../shared/functions/titleCase";
 import ReactTooltip from "react-tooltip";
 import { getCV } from "../../../shared/functions/aws";
 import isEmpty from "../../../shared/functions/isEmpty";
+import Avatar from "react-avatar";
 
 class ProfileItem extends Component {
   render() {
@@ -14,10 +15,16 @@ class ProfileItem extends Component {
       <div className="profile-item mb2">
         <ReactTooltip></ReactTooltip>
         <div className="profile-item__image-container">
-          <img
+          {/* <img
             src={profile.avatar}
             alt="avatar"
             className="rounded-circle profile-item__image-container-image"
+          /> */}
+          <Avatar
+            email={profile.email}
+            name={profile.name}
+            round={true}
+            size="100"
           />
         </div>
         <div className="profile-item__title-container">

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import TextFieldGroup from "../../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import { addInternalJob } from "../../../redux/actions/internalJobActions";
+import { getInternalJobsByUser } from "../../../redux/actions/internalJobActions";
 
 class AddJobPost extends Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class AddJobPost extends Component {
       maxSalary: null,
       description: ""
     };
+  }
+
+  componentDidMount() {
+    this.props.getInternalJobsByUser(this.props.auth.user.username);
   }
 
   onSubmit = event => {
@@ -110,6 +115,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { addInternalJob })(
-  withRouter(AddJobPost)
-);
+export default connect(mapStateToProps, {
+  addInternalJob,
+  getInternalJobsByUser
+})(withRouter(AddJobPost));

@@ -2,6 +2,7 @@ import React from "react";
 import "./UserList.scss";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 import Moment from "react-moment";
+import Avatar from "react-avatar";
 
 const UserList = props => {
   console.log(props);
@@ -14,13 +15,19 @@ const UserList = props => {
         >
           <li className="UserList__container__list__item" key={index}>
             <div>
-              <img
+              {/* <img
                 src={
                   user.avatar ||
                   "//www.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=300&r=pg&d=mm"
                 }
                 className="UserList__container__list__item__avatar"
                 alt="avatar"
+              /> */}
+              <Avatar
+                email={user.email}
+                name={user.name}
+                round={true}
+                size="30"
               />
             </div>
             <div className="UserList__container__list__item__content">

@@ -11,6 +11,7 @@ class CommentForm extends Component {
       post_id: this.props.postId,
       user_id: this.props.currentUserId,
       user_name: this.props.currentUserName,
+      user_email: this.props.currentUserEmail,
       avatar: this.props.avatar,
       text: ""
     };
