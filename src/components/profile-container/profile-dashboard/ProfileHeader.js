@@ -12,7 +12,7 @@ class ProfileHeader extends Component {
     return (
       <div className="profile-header">
         <div className="profile-header__banner">
-          <img src={banner} alt="" className="profile-header__banner-pic" />
+          {/* <img src={banner} alt="" className="profile-header__banner-pic" /> */}
         </div>
         <div className="profile-header__logo">
           {/* <img
