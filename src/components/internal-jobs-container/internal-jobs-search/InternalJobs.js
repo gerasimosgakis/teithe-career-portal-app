@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { geolocated } from "react-geolocated";
+import axios from "axios";
 import {
   getInternalJobs,
   deleteInternalJob
@@ -43,7 +44,27 @@ class InternalJobs extends Component {
       description:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].description
-          : null
+          : null,
+      // Search
+      keywords: "",
+      locationName: "",
+      distanceFromLocation: 15,
+      permanent: "",
+      contract: "",
+      temp: "",
+      partTime: "",
+      fullTime: "",
+      minimumSalary: 0,
+      maximumSalary: 100000,
+      graduate: "",
+      resultsToTake: 20,
+      resultsToSkip: 0,
+      jobs: null,
+      loading: false,
+      moreLoading: false,
+      favoriteJobs: [],
+      favoriteJobsDetails: [],
+      error: null
     };
   }
 
@@ -80,6 +101,40 @@ class InternalJobs extends Component {
       }
     });
   }
+
+  async getLocation(latitude, longitude) {
+    var apikey = "d68690d89dff4842a10bc42493a2a90e";
+
+    var api_url = "https://api.opencagedata.com/geocode/v1/json";
+
+    var request_url =
+      api_url +
+      "?" +
+      "key=" +
+      apikey +
+      "&q=" +
+      encodeURIComponent(latitude + "," + longitude) +
+      "&pretty=1" +
+      "&no_annotations=1";
+    try {
+      const location = await axios.get(request_url);
+      return location.data.results[0].components.postcode;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  setLocation = async coords => {
+    const postcode = await this.getLocation(coords.latitude, coords.longitude);
+    this.setState({
+      locationName: postcode
+    });
+  };
+
+  onChange = async e => {
+    await this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.minimumSalary);
+  };
 
   render() {
     const { internalJobs, loading } = this.props.internalJobs;
@@ -329,6 +384,11 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { getInternalJobs, deleteInternalJob })(
-  withRouter(InternalJobs)
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(
+  connect(mapStateToProps, { getInternalJobs, deleteInternalJob })(InternalJobs)
 );
