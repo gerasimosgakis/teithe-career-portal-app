@@ -9,6 +9,7 @@ import Spinner from "../../shared/Spinner";
 import InternalJobItem from "./InternalJobItem";
 import AddJobPostForm from "../add-job-post/AddJobPostForm";
 import { confirmAlert } from "react-confirm-alert";
+import TextFieldGroup from "../../shared/TextFieldGroup";
 
 class InternalJobs extends Component {
   constructor(props) {
@@ -137,7 +138,146 @@ class InternalJobs extends Component {
             <p className="header-label">Let's get hired!</p>
           </div>
         )}
-        <div className="search-jobs__results-main">{content}</div>
+        {/* Form */}
+        <div className="search-jobs__form mb2">
+          <form onSubmit={this.onSubmit}>
+            <div className="search-jobs__form-basic">
+              <div className="search-jobs__form-basic-field mr2">
+                <div className="form__field-label">Role</div>
+                <TextFieldGroup
+                  placeholder="Role"
+                  name="keywords"
+                  value={this.state.keywords}
+                  required
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className="search-jobs__form-basic-field">
+                <div className="form__field-label">Location </div>
+                <div className="form-group search-jobs__form-basic-field-location">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg search-jobs__form-basic-field-location-input"
+                    placeholder="Location"
+                    name="locationName"
+                    value={this.state.locationName}
+                    required
+                    onChange={this.onChange}
+                  />
+                  <button
+                    className="icon-button search-jobs__form-basic-field-location-button"
+                    disabled={!this.props.coords}
+                    onClick={() => this.setLocation(this.props.coords)}
+                  >
+                    <i className="fas fa-search-location fa-2x"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="btn-group right">
+              <button className="button submit-btn">Search</button>
+            </div>
+          </form>
+        </div>
+        {/* Results */}
+        <div className="search-jobs__results">
+          <div className="search-jobs__results-side">
+            {/* Filters */}
+            <div className="search-jobs__results-side-filters mr2">
+              <h2>Filters</h2>
+              <form>
+                <div className="form__field-label">Minimum Salary</div>
+                <TextFieldGroup
+                  placeholder="Minimum Salary"
+                  name="minimumSalary"
+                  value={this.state.minimumSalary}
+                  onChange={this.onChange}
+                  onKeyPress={this.keyPressed}
+                />
+                <div className="form__field-label">Maximum Salary</div>
+                <TextFieldGroup
+                  placeholder="Maximum Salary"
+                  name="maximumSalary"
+                  value={this.state.maximumSalary}
+                  required
+                  onChange={this.onChange}
+                  onKeyPress={this.keyPressed}
+                />
+
+                {/* <fieldset> */}
+                <div className="form__field-label">Job Type</div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="permanent"
+                    checked={this.state.permanent}
+                    onChange={() => this.onCheck("permanent")}
+                    id="permanent"
+                  />
+                  <label className="form-check-label" htmlFor="permanent">
+                    Permanent
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="temp"
+                    checked={this.state.temp}
+                    onChange={() => this.onCheck("temp")}
+                    value={this.state.temp}
+                  />
+                  <label className="form-check-label" htmlFor="temp">
+                    Temporary
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="contract"
+                    checked={this.state.contract}
+                    onChange={() => this.onCheck("contract")}
+                    value={this.state.contract}
+                  />
+                  <label className="form-check-label" htmlFor="contract">
+                    Contract
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="fullTime"
+                    checked={this.state.fullTime}
+                    onChange={() => this.onCheck("fullTime")}
+                    value={this.state.fullTime}
+                  />
+                  <label className="form-check-label" htmlFor="fullTime">
+                    Full-time
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    name="partTime"
+                    checked={this.state.partTime}
+                    onChange={() => this.onCheck("partTime")}
+                    value={this.state.partTime}
+                  />
+                  <label className="form-check-label" htmlFor="partTime">
+                    Part-time
+                  </label>
+                </div>
+                {/* </fieldset> */}
+              </form>
+            </div>
+          </div>
+          {/* Jobs display */}
+          <div className="search-jobs__results-main">{content}</div>
+        </div>
         {/* Job Edit Modal */}
         <div className="modal fade" id="editModal" role="dialog">
           <div className="modal-dialog">
