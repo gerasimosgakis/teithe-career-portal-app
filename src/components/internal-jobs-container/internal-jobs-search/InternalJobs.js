@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getInternalJobs } from "../../../redux/actions/internalJobActions";
+import {
+  getInternalJobs,
+  deleteInternalJob
+} from "../../../redux/actions/internalJobActions";
 import Spinner from "../../shared/Spinner";
 import InternalJobItem from "./InternalJobItem";
 import AddJobPostForm from "../add-job-post/AddJobPostForm";
+import { confirmAlert } from "react-confirm-alert";
 
 class InternalJobs extends Component {
   constructor(props) {
@@ -22,6 +26,10 @@ class InternalJobs extends Component {
       location:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].location
+          : null,
+      type:
+        this.props.internalJobs && this.props.internalJobs.length > 0
+          ? this.props.internalJobs[0].type
           : null,
       min_salary:
         this.props.internalJobs && this.props.internalJobs.length > 0
@@ -42,6 +50,36 @@ class InternalJobs extends Component {
     this.props.getInternalJobs();
   }
 
+  onDeleteClick(id) {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui card card-body text-center">
+            <h2>Are you sure?</h2>
+            <p>You want to delete this job post?</p>
+            <div className="text-center">
+              <button
+                className="button button--small transparent-btn mr1"
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className="button button--small danger-btn"
+                onClick={() => {
+                  this.props.deleteInternalJob(id);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        );
+      }
+    });
+  }
+
   render() {
     const { internalJobs, loading } = this.props.internalJobs;
     let content;
@@ -53,31 +91,44 @@ class InternalJobs extends Component {
         <div className="internal-jobs__job">
           <InternalJobItem job={job}></InternalJobItem>
           {this.props.auth.user.username === job.user_id && (
-            <button
-              className="icon-button icon-button--small internal-jobs__job-edit-button"
-              data-toggle="modal"
-              data-target="#editModal"
-              onClick={() => {
-                // this.currentExperienceIndex = index;
-                this.setState({
-                  id: job.id,
-                  title: job.title,
-                  recruiter: job.recruiter,
-                  location: job.location,
-                  min_salary: job.min_salary,
-                  max_salary: job.max_salary,
-                  description: job.description,
-                  currentJobIndex: index
-                });
-                // console.log(this.currentExperienceIndex);
-              }}
-            >
-              <i className="fas fa-edit"></i>
-            </button>
+            <div className="internal-jobs__job-edit-buttons">
+              <button
+                className="icon-button icon-button--small "
+                data-toggle="modal"
+                data-target="#editModal"
+                onClick={() => {
+                  // this.currentExperienceIndex = index;
+                  this.setState({
+                    id: job.id,
+                    title: job.title,
+                    recruiter: job.recruiter,
+                    location: job.location,
+                    type: job.type,
+                    min_salary: job.min_salary,
+                    max_salary: job.max_salary,
+                    description: job.description,
+                    currentJobIndex: index
+                  });
+                  // console.log(this.currentExperienceIndex);
+                }}
+              >
+                <i className="fas fa-edit"></i>
+              </button>
+              <button
+                className="icon-button icon-button--small icon-button--danger"
+                onClick={() => {
+                  this.onDeleteClick(job.id);
+                }}
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            // job-posts/delete/{id}
           )}
         </div>
       ));
     }
+
     return (
       <div className="search-jobs">
         {this.props.header && (
@@ -104,6 +155,7 @@ class InternalJobs extends Component {
                     title={this.state.title}
                     recruiter={this.state.recruiter}
                     location={this.state.location}
+                    type={this.state.type}
                     min_salary={this.state.min_salary}
                     max_salary={this.state.max_salary}
                     description={this.state.description}
@@ -137,6 +189,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { getInternalJobs })(
+export default connect(mapStateToProps, { getInternalJobs, deleteInternalJob })(
   withRouter(InternalJobs)
 );

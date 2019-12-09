@@ -7,7 +7,9 @@ import {
   GET_JOB_POSTS_SUCCESS,
   GET_JOB_POSTS_FAIL,
   GET_JOB_POSTS_BY_USER_SUCCESS,
-  GET_JOB_POSTS_BY_USER_FAIL
+  GET_JOB_POSTS_BY_USER_FAIL,
+  DELETE_JOB_POST_SUCCESS,
+  DELETE_JOB_POST_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -47,6 +49,26 @@ export default function(state = initialState, action) {
         internalJobs: updatedJobs
       };
     case EDIT_JOB_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case DELETE_JOB_POST_SUCCESS:
+      console.log(action.payload);
+      const deletedJobIndex = state.internalJobs.findIndex(item => {
+        return item.id === action.payload;
+      });
+      console.log(action.payload, deletedJobIndex);
+      const newUpdatedJobs = [...state.internalJobs];
+      newUpdatedJobs.splice(deletedJobIndex, 1);
+      // updatedJobs[jobIndex] = { ...action.payload.data };
+      return {
+        ...state,
+        loading: false,
+        internalJobs: newUpdatedJobs
+      };
+    case DELETE_JOB_POST_FAIL:
       return {
         ...state,
         loading: false,

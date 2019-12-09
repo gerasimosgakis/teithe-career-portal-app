@@ -40,11 +40,19 @@ class InternalJobItem extends Component {
               </div>
             )}
             {job.location && (
-              <div>
+              <div className="mr2">
                 <span className="mr-half">
                   <i className="fas fa-map-marker-alt"></i>
                 </span>
-                <span className="bolded">{job.location}</span>
+                <span className="bolded">{titleCase(job.location)}</span>
+              </div>
+            )}
+            {job.type && (
+              <div>
+                <span className="mr-half">
+                  <i className="far fa-clock"></i>
+                </span>
+                <span className="bolded">{titleCase(job.type)}</span>
               </div>
             )}
           </div>

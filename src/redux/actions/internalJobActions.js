@@ -8,7 +8,9 @@ import {
   GET_JOB_POSTS_BY_USER_SUCCESS,
   GET_JOB_POSTS_BY_USER_FAIL,
   EDIT_JOB_POST_SUCCESS,
-  EDIT_JOB_POST_FAIL
+  EDIT_JOB_POST_FAIL,
+  DELETE_JOB_POST_SUCCESS,
+  DELETE_JOB_POST_FAIL
 } from "./types";
 import { actionButton } from "@aws-amplify/ui";
 
@@ -75,7 +77,7 @@ export const addInternalJob = data => async dispatch => {
   }
 };
 
-// Edit new internal job
+// Edit internal job
 export const editInternalJob = (id, data) => async dispatch => {
   try {
     const job = await API.put(
@@ -94,6 +96,22 @@ export const editInternalJob = (id, data) => async dispatch => {
     console.log(err);
     dispatch({
       type: EDIT_JOB_POST_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Delete internal job
+export const deleteInternalJob = id => async dispatch => {
+  try {
+    await API.del("teithe-career-portal-posts-api", `/job-posts/delete/${id}`);
+    dispatch({
+      type: DELETE_JOB_POST_SUCCESS,
+      payload: id
+    });
+  } catch (err) {
+    dispatch({
+      type: DELETE_JOB_POST_FAIL,
       payload: err
     });
   }

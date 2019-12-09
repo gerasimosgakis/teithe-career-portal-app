@@ -6,8 +6,18 @@ import {
 } from "../../../redux/actions/internalJobActions";
 import TextFieldGroup from "../../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
+import SelectListGroup from "../../shared/SelectListGroup";
 
 class AddJobPostForm extends Component {
+  defaultState = {
+    title: "",
+    recruiter: "",
+    location: "",
+    type: "",
+    min_salary: null,
+    max_salary: null,
+    description: ""
+  };
   constructor(props) {
     super(props);
 
@@ -19,6 +29,7 @@ class AddJobPostForm extends Component {
       title,
       recruiter,
       location,
+      type,
       min_salary,
       max_salary,
       description
@@ -30,6 +41,7 @@ class AddJobPostForm extends Component {
       title,
       recruiter,
       location,
+      type,
       min_salary,
       max_salary,
       description
@@ -48,7 +60,8 @@ class AddJobPostForm extends Component {
         min_salary: this.state.min_salary,
         max_salary: this.state.max_salary,
         description: this.state.description,
-        location: this.state.location
+        location: this.state.location,
+        type: this.state.type
       });
     } else {
       this.props.addInternalJob({
@@ -58,9 +71,11 @@ class AddJobPostForm extends Component {
         min_salary: this.state.min_salary,
         max_salary: this.state.max_salary,
         description: this.state.description,
-        location: this.state.location
+        location: this.state.location,
+        type: this.state.type
       });
     }
+    this.setState({ ...this.defaultState });
   };
 
   /** Get Derived State From Props method
@@ -106,6 +121,15 @@ class AddJobPostForm extends Component {
   };
 
   render() {
+    // Select options for job type
+    const options = [
+      { label: "Select Job Type", value: 0 },
+      { label: "Permanent", value: "permanent" },
+      { label: "Temporary", value: "temporary" },
+      { label: "Contract", value: "contract" },
+      { label: "Full-time", value: "full-time" },
+      { label: "Part-time", value: "part-time" }
+    ];
     return (
       <div>
         <small className="small-text">* = required fields</small>
@@ -132,6 +156,14 @@ class AddJobPostForm extends Component {
             name="location"
             value={this.state.location}
             required
+            onChange={this.onChange}
+          />
+          <div className="form__field-label">Type</div>
+          <SelectListGroup
+            placeholder="Type"
+            name="type"
+            value={this.state.type}
+            options={options}
             onChange={this.onChange}
           />
           <div className="form__field-label">Minimum Salary</div>

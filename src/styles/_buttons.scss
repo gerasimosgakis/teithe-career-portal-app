@@ -79,6 +79,13 @@
   &--small {
     font-size: 12pt;
   }
+
+  &--danger {
+    color: $danger-btn;
+    &:hover {
+      color: $danger-btn-hover;
+    }
+  }
 }
 
 .thumbs-button {
