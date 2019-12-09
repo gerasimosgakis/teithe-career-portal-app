@@ -21,7 +21,7 @@ class ProfileHeader extends Component {
             alt="logo"
           /> */}
           <Avatar
-            email={this.props.user.attributes.email}
+            email={profile.email}
             name={profile.name}
             round={true}
             size="200"
