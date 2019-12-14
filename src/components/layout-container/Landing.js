@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-// import logo from "../../logo_tei.jpg";
 import logo from "../../assets/hatchful/logo_transparent.png";
 import PropTypes from "prop-types";
 
@@ -10,8 +9,6 @@ class Landing extends Component {
     super(props);
 
     this.state = {
-      isLoading: false,
-      isAuthenticated: false,
       errors: {}
     };
   }
