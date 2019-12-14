@@ -40,8 +40,8 @@ class ProfileItem extends Component {
           {profile.skills
             .split(",")
             .slice(0, 2)
-            .map(skill => (
-              <span className="mr1">
+            .map((skill, index) => (
+              <span key={index} className="mr1">
                 <i className="fa fa-check pr-1" />
                 {skill}
               </span>

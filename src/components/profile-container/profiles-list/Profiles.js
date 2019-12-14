@@ -8,7 +8,7 @@ import Search from "../search-profiles/Search";
 
 class Profiles extends Component {
   componentDidMount() {
-    this.props.getProfiles();
+    this.props.getProfiles(); // Gets all profiles when the component mounts
   }
 
   render() {
