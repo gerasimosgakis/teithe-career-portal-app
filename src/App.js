@@ -46,7 +46,6 @@ class App extends Component {
         r: "pg", // rating
         d: "mm" //default
       });
-      console.log(avatar);
       currentAuthenticatedUser.avatar = avatar;
       store.dispatch({
         type: SET_USER,

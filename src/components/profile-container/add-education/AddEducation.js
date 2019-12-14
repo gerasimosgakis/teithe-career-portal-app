@@ -200,7 +200,7 @@ class AddEducation extends Component {
                     value={this.state.current}
                     checked={this.state.current}
                     onChange={this.onCheck}
-                    id="current"
+                    id="currentEdu"
                   />
                   <label htmlFor="current" className="form-check-label">
                     Current Degree

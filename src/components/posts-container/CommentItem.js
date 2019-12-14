@@ -56,7 +56,7 @@ class CommentItem extends Component {
               size="30"
             />
           </span>
-          <p>
+          <div>
             <span className="mr1 bolded">
               {titleCase(this.props.comment.user_name)}
             </span>
@@ -66,7 +66,7 @@ class CommentItem extends Component {
                 parseInt(this.props.comment.created_at)
               ).toLocaleDateString()}
             </p>
-          </p>
+          </div>
         </div>
         <button
           className="comments__delete-button icon-button icon-button--small icon-button--danger"

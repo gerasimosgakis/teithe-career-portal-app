@@ -14,28 +14,27 @@ class PostForm extends Component {
     };
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-    }
-  }
+  // UNSAFE_componentWillReceiveProps(newProps) {
+  //   if (newProps.errors) {
+  //     this.setState({ errors: newProps.errors });
+  //   }
+  // }
 
   onSubmit = e => {
     e.preventDefault();
 
     const currentUserId = this.props.auth.user.username;
     const email = this.props.auth.user.attributes.email;
-    const avatar = gravatar.url(email, {
-      s: "150", // size
-      r: "pg", // rating
-      d: "mm" //default});
-    });
+    // const avatar = gravatar.url(email, {
+    //   s: "150", // size
+    //   r: "pg", // rating
+    //   d: "mm" //default});
+    // });
     const postData = {
       user_id: currentUserId,
       text: this.state.text,
       user_name: this.props.auth.user.attributes.name,
-      user_email: email,
-      avatar
+      user_email: email
     };
 
     this.props.addPost(postData);
@@ -79,7 +78,7 @@ class PostForm extends Component {
 PostForm.propTypes = {
   addPost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object
 };
 
 const mapStateToProps = state => ({

@@ -426,8 +426,8 @@ class ProfileCreds extends Component {
 
 ProfileCreds.propTypes = {
   userId: PropTypes.string.isRequired,
-  experience: PropTypes.object.isRequired,
-  education: PropTypes.object.isRequired,
+  experience: PropTypes.array.isRequired,
+  education: PropTypes.array.isRequired,
   edit: PropTypes.bool
 };
 

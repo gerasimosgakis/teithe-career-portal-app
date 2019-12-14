@@ -14,12 +14,10 @@ class CommentFeed extends Component {
   }
 
   render() {
-    console.log(this.props.comments);
-    // const { comments } = this.props;
     return (
       <div>
-        {this.props.comments.map(comment => (
-          <CommentItem comment={comment} />
+        {this.props.comments.map((comment, index) => (
+          <CommentItem key={index} comment={comment} />
         ))}
       </div>
     );

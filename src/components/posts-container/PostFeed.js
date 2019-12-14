@@ -6,16 +6,15 @@ import PostItem from "./PostItem";
 class PostFeed extends Component {
   render() {
     const { posts } = this.props.posts;
-    console.log(posts);
 
     return posts.map((post, index) => (
-      <PostItem key={post.postId} post={post} index={index} />
+      <PostItem key={index} post={post} index={index} />
     ));
   }
 }
 
 PostFeed.propTypes = {
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

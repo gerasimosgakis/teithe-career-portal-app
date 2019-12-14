@@ -16,7 +16,6 @@ const SelectListGroup = ({
       {option.label}
     </option>
   ));
-  console.log(value);
   return (
     <div className="form-group">
       <select
