@@ -62,6 +62,9 @@ export const addPost = data => async dispatch => {
 // Delete Post
 export const deletePost = id => async dispatch => {
   try {
+    dispatch({
+      type: SET_LOADING
+    });
     const response = await API.del(
       "teithe-career-portal-posts-api",
       `/posts/${id}`
