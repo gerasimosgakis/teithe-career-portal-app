@@ -152,7 +152,7 @@ class Navbar extends Component {
               data-toggle="modal"
               data-target="#cvModal"
               rel="noopener noreferrer"
-              className="nav-link button button--small"
+              className="nav-link nav-button"
             >
               Add CV
             </button>
