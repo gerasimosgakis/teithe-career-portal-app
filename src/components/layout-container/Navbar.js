@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { logoutUser } from "../../redux/actions/authActions";
-// import { clearCurrentProfile } from "../../redux/actions/profileActions";
 import { connect } from "react-redux";
 import AddCV from "../add-cv-container/AddCV";
 import Avatar from "react-avatar";
@@ -13,18 +12,13 @@ class Navbar extends Component {
 
     this.state = {
       activeTabClassName: null,
-      isLoading: false,
-      isAuthenticated: false,
       errors: {}
     };
   }
 
   onLogout = async e => {
-    // await Auth.signOut();
     e.preventDefault();
-    // this.props.clearCurrentProfile();
     this.props.logoutUser(this.props.history);
-    this.setState({ isAuthenticated: false });
   };
 
   render() {
@@ -32,8 +26,8 @@ class Navbar extends Component {
     let leftLinks, rightLinks;
     // Left Links
     if (
-      this.props.auth.isAuthenticated &&
-      this.props.auth.user.attributes["custom:role"] === "recruiter"
+      auth.isAuthenticated &&
+      auth.user.attributes["custom:role"] === "recruiter"
     ) {
       leftLinks = (
         <Fragment>
@@ -81,8 +75,8 @@ class Navbar extends Component {
         </Fragment>
       );
     } else if (
-      this.props.auth.isAuthenticated &&
-      this.props.auth.user.attributes["custom:role"] !== "recruiter"
+      auth.isAuthenticated &&
+      auth.user.attributes["custom:role"] !== "recruiter"
     ) {
       leftLinks = (
         <Fragment>
@@ -154,14 +148,14 @@ class Navbar extends Component {
             </Link>
           </li>
           <li className="nav-item">
-            <a
+            <button
               data-toggle="modal"
               data-target="#cvModal"
               rel="noopener noreferrer"
-              className="nav-link"
+              className="nav-link button button--small"
             >
               Add CV
-            </a>
+            </button>
           </li>
         </Fragment>
       );
@@ -184,19 +178,14 @@ class Navbar extends Component {
     }
 
     // Right Links
-    if (this.props.auth.isAuthenticated) {
+    if (auth.isAuthenticated) {
       rightLinks = (
         <Fragment>
           <li className="nav-item">
             <Link className="nav-link" to="/profile">
-              {/* <img
-                className="rounded-circle d-none d-md-block"
-                src={auth.user.avatar}
-                alt="avatar"
-              /> */}
               <Avatar
-                email={this.props.auth.user.attributes.email}
-                name={this.props.auth.user.attributes.name}
+                email={auth.user.attributes.email}
+                name={auth.user.attributes.name}
                 round={true}
                 size="30"
               />
@@ -312,6 +301,7 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
   errors: PropTypes.object
 };
 

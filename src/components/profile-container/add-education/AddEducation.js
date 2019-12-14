@@ -26,19 +26,19 @@ class AddEducation extends Component {
       currentEducationIndex
     } = this.props;
 
-    // Initialise state with the received props
+    // Initialise state with the received props or fallback
     this.state = {
-      user_id: userId,
-      id,
-      current,
+      user_id: userId ? userId : "",
+      id: id ? id : "",
+      current: current ? current : false,
       disabled: current ? true : false,
-      school,
-      description,
-      degree,
+      school: school ? school : "",
+      description: description ? description : "",
+      degree: degree ? degree : "",
       start_date: start_date ? start_date.slice(0, 7) : null,
       end_date: end_date ? end_date.slice(0, 7) : null,
-      fieldofstudy,
-      currentEducationIndex
+      fieldofstudy: fieldofstudy ? fieldofstudy : "",
+      currentEducationIndex: currentEducationIndex ? currentEducationIndex : -1
     };
   }
 
@@ -61,7 +61,6 @@ class AddEducation extends Component {
         start_date: "",
         end_date: "",
         fieldofstudy: ""
-        // currentExperienceIndex: null
       };
     }
     if (
@@ -78,7 +77,7 @@ class AddEducation extends Component {
         description: props.description,
         degree: props.degree,
         start_date: props.start_date.slice(0, 7),
-        end_date: props.current ? null : props.end_date.slice(0, 7),
+        end_date: props.current ? "" : props.end_date.slice(0, 7),
         fieldofstudy: props.fieldofstudy,
         currentEducationIndex: props.currentEducationIndex
       };
@@ -93,6 +92,9 @@ class AddEducation extends Component {
     });
   };
 
+  /**
+   * On current checkbox check
+   */
   onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
@@ -102,7 +104,9 @@ class AddEducation extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    // Check if we are editing an education
     if (this.state.id && this.state.id !== "") {
+      // call the edit function
       this.props.editEducation({
         user_id: this.state.user_id,
         id: this.state.id,
@@ -117,6 +121,7 @@ class AddEducation extends Component {
         fieldofstudy: this.state.fieldofstudy
       });
     } else {
+      // Otherwise call the add function
       this.props.addEducation({
         user_id: this.state.user_id,
         current: this.state.current,
@@ -144,6 +149,7 @@ class AddEducation extends Component {
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
+                <div className="form__field-label">* School</div>
                 <TextFieldGroup
                   placeholder="* School"
                   name="school"
@@ -151,6 +157,7 @@ class AddEducation extends Component {
                   value={this.state.school}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Degree</div>
                 <TextFieldGroup
                   placeholder="* Degree"
                   name="degree"
@@ -158,13 +165,15 @@ class AddEducation extends Component {
                   value={this.state.degree}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Field of Study</div>
                 <TextFieldGroup
                   placeholder="Field of Study"
                   name="fieldofstudy"
+                  required
                   value={this.state.fieldofstudy}
                   onChange={this.onChange}
                 />
-                <h6>* From Date</h6>
+                <div className="form__field-label">* Start Date</div>
                 <TextFieldGroup
                   placeholder="from"
                   name="start_date"
@@ -173,7 +182,7 @@ class AddEducation extends Component {
                   value={this.state.start_date}
                   onChange={this.onChange}
                 />
-                <h6>* To Date</h6>
+                <div className="form__field-label">* End Date</div>
                 <TextFieldGroup
                   placeholder="to"
                   name="end_date"
@@ -197,6 +206,7 @@ class AddEducation extends Component {
                     Current Degree
                   </label>
                 </div>
+                <div className="form__field-label">Description</div>
                 <TextAreaFieldGroup
                   placeholder="Study Description"
                   name="description"

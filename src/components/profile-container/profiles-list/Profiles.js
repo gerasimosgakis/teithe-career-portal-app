@@ -8,22 +8,24 @@ import Search from "../search-profiles/Search";
 
 class Profiles extends Component {
   componentDidMount() {
-    this.props.getProfiles();
+    this.props.getProfiles(); // Gets all profiles when the component mounts
   }
 
   render() {
-    const { profiles, loading } = this.props.profiles;
-    let profileItems;
+    const { profiles, loading } = this.props.profiles; // retrieves profiles and loading status from redux
+    let profileItems; // variable to store the content to display
 
     if (profiles === null || loading) {
+      // If there are no profiles, show the spinner
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
+        // If there are profiles display them
         profileItems = (
           <div className="flex group-contain">
             {profiles.map(
               profile =>
-                profile.type !== "recruiter" && (
+                profile.type !== "recruiter" && ( // Makes sure we don't show recruiters profiles
                   <ProfileItem key={profile.id} profile={profile} />
                 )
             )}
