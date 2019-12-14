@@ -403,21 +403,27 @@ class JobSearch extends Component {
                       onClick={this.onFavoriteClick}
                     ></JobItem>
                   ))}
-                  {this.state.jobs.map(
-                    (job, index) =>
-                      this.state.favoriteJobsDetails &&
-                      !this.state.favoriteJobs.includes(
-                        job.jobId.toString()
-                      ) && (
-                        <JobItem
-                          key={index + this.state.favoriteJobsDetails.length}
-                          job={job}
-                          favoriteJob={this.state.favoriteJobs.includes(
-                            job.jobId.toString()
-                          )}
-                          onClick={this.onFavoriteClick}
-                        ></JobItem>
-                      )
+                  {this.state.jobs.length > 0 ? (
+                    this.state.jobs.map(
+                      (job, index) =>
+                        this.state.favoriteJobsDetails &&
+                        !this.state.favoriteJobs.includes(
+                          job.jobId.toString()
+                        ) && (
+                          <JobItem
+                            key={index + this.state.favoriteJobsDetails.length}
+                            job={job}
+                            favoriteJob={this.state.favoriteJobs.includes(
+                              job.jobId.toString()
+                            )}
+                            onClick={this.onFavoriteClick}
+                          ></JobItem>
+                        )
+                    )
+                  ) : (
+                    <div className="text-center mt4">
+                      <h2>There are no jobs to display...</h2>
+                    </div>
                   )}
                   {this.state.jobs.length > 0 && (
                     <div className="btn-group right">
