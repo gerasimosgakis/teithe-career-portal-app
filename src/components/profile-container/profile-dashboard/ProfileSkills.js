@@ -6,7 +6,6 @@ import isEmpty from "../../../shared/functions/isEmpty";
 class ProfileSkills extends Component {
   render() {
     const { profile } = this.props;
-    console.log(profile);
 
     // Get first name
     const firstName = profile.name.trim().split(" ")[0];

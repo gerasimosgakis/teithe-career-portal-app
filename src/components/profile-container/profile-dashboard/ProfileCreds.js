@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Moment from "react-moment";
 import AddExperience from "../add-experience/AddExperience";
 import AddEducation from "../add-education/AddEducation";
@@ -8,85 +9,127 @@ import {
   deleteEducation
 } from "../../../redux/actions/profileActions";
 import titleCase from "../../../shared/functions/titleCase";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 class ProfileCreds extends Component {
   constructor(props) {
     super(props);
 
+    const { experience, education, userId } = this.props;
+
+    // Add the experience details into the state
+    // currentExperienceIndex and currentEducationIndex are used for passing it into the AddExperience and AddEducation components respectively. It stores the index of the item to be edited, or if it is -1, it means we add
     this.state = {
-      exp_userId: this.props.userId,
-      exp_id:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].id
-          : null,
+      exp_userId: userId,
+      exp_id: experience && experience.length > 0 ? experience[0].id : null,
       exp_current:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].current
-          : null,
+        experience && experience.length > 0 ? experience[0].current : null,
       exp_location:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].location
-          : null,
+        experience && experience.length > 0 ? experience[0].location : null,
       exp_description:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].description
-          : null,
+        experience && experience.length > 0 ? experience[0].description : null,
       exp_title:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].title
-          : null,
+        experience && experience.length > 0 ? experience[0].title : null,
       exp_start_date:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].start_date
-          : null,
+        experience && experience.length > 0 ? experience[0].start_date : null,
       exp_end_date:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].end_date
-          : null,
+        experience && experience.length > 0 ? experience[0].end_date : null,
       exp_company:
-        this.props.experience && this.props.experience.length > 0
-          ? this.props.experience[0].company
-          : null,
+        experience && experience.length > 0 ? experience[0].company : null,
       currentExperienceIndex: -1,
-      edu_userId: this.props.userId,
-      edu_id:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].id
-          : null,
+      edu_userId: userId,
+      edu_id: education && education.length > 0 ? education[0].id : null,
       edu_current:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].current
-          : null,
+        education && education.length > 0 ? education[0].current : null,
       edu_fieldofstudy:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].fieldofstudy
-          : null,
+        education && education.length > 0 ? education[0].fieldofstudy : null,
       edu_description:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].description
-          : null,
+        education && education.length > 0 ? education[0].description : null,
       edu_degree:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].degree
-          : null,
+        education && education.length > 0 ? education[0].degree : null,
       edu_start_date:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].start_date
-          : null,
+        education && education.length > 0 ? education[0].start_date : null,
       edu_end_date:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].end_date
-          : null,
+        education && education.length > 0 ? education[0].end_date : null,
       edu_school:
-        this.props.education && this.props.education.length > 0
-          ? this.props.education[0].school
-          : null,
+        education && education.length > 0 ? education[0].school : null,
       currentEducationIndex: -1
     };
   }
 
+  /**
+   * On Delete Experience
+   * Show confirm modal and call the delete experience function
+   * @param {*} id - The experience id
+   */
+  onDeleteExperience(id) {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui card card-body text-center">
+            <h2>Are you sure?</h2>
+            <p>You want to delete this experience?</p>
+            <div className="text-center">
+              <button
+                className="button button--small transparent-btn mr1"
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className="button button--small danger-btn"
+                onClick={() => {
+                  this.props.deleteExperience(id);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        );
+      }
+    });
+  }
+
+  /**
+   * On Delete Education
+   * Show confirm modal and call the delete education function
+   * @param {*} id - The education id
+   */
+  onDeleteEducation(id) {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui card card-body text-center">
+            <h2>Are you sure?</h2>
+            <p>You want to delete this education?</p>
+            <div className="text-center">
+              <button
+                className="button button--small transparent-btn mr1"
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className="button button--small danger-btn"
+                onClick={() => {
+                  this.props.deleteEducation(id);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        );
+      }
+    });
+  }
+
   render() {
-    const { experience, education } = this.props;
+    const { experience, education, edit } = this.props;
     const expItems = experience.map((exp, index) => (
       <li key={index} className="list-group-item profile-creds__cred">
         <div className="profile-creds__cred-info">
@@ -96,39 +139,47 @@ class ProfileCreds extends Component {
           <span className="profile-creds__cred-info-details">
             <p>
               {titleCase(exp.title)}{" "}
-              <button
-                className="icon-button"
-                data-toggle="modal"
-                data-target="#expModal"
-                onClick={() => {
-                  // this.currentExperienceIndex = index;
-                  this.setState({
-                    exp_userId: this.props.userId || "",
-                    exp_id: this.props.experience[index].id || "",
-                    exp_current: this.props.experience[index].current || false,
-                    exp_location: this.props.experience[index].location || "",
-                    exp_description:
-                      this.props.experience[index].description || "",
-                    exp_title: this.props.experience[index].title || "",
-                    exp_start_date:
-                      this.props.experience[index].start_date || "",
-                    exp_end_date: this.props.experience[index].end_date || "",
-                    exp_company: this.props.experience[index].company || "",
-                    currentExperienceIndex: index
-                  });
-                  // console.log(this.currentExperienceIndex);
-                }}
-              >
-                <i className="fas fa-edit"></i>
-              </button>
-              <button
-                className="icon-button"
-                onClick={() => {
-                  this.props.deleteExperience(exp.id);
-                }}
-              >
-                <i className="fas fa-times"></i>
-              </button>
+              {/* Button to open experience modal and update the state with the details of the item or the fallback value */}
+              {edit && ( // Show it only if it is the current user's profile
+                <span>
+                  <button
+                    className="icon-button"
+                    data-toggle="modal"
+                    data-target="#expModal"
+                    onClick={() => {
+                      this.setState({
+                        exp_userId: this.props.userId || "",
+                        exp_id: this.props.experience[index].id || "",
+                        exp_current:
+                          this.props.experience[index].current || false,
+                        exp_location:
+                          this.props.experience[index].location || "",
+                        exp_description:
+                          this.props.experience[index].description || "",
+                        exp_title: this.props.experience[index].title || "",
+                        exp_start_date:
+                          this.props.experience[index].start_date || "",
+                        exp_end_date:
+                          this.props.experience[index].end_date || "",
+                        exp_company: this.props.experience[index].company || "",
+                        currentExperienceIndex: index
+                      });
+                    }}
+                  >
+                    <i className="fas fa-edit"></i>
+                  </button>
+
+                  {/* Opens on delete confirmation modal */}
+                  <button
+                    className="icon-button"
+                    onClick={() => {
+                      this.onDeleteExperience(exp.id);
+                    }}
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                </span>
+              )}
             </p>
             <p>{titleCase(exp.company)}</p>
             <p className="help-text">
@@ -156,40 +207,46 @@ class ProfileCreds extends Component {
           <span className="profile-creds__cred-info-details">
             <p>
               {titleCase(edu.degree)}{" "}
-              <button
-                className="icon-button"
-                data-toggle="modal"
-                data-target="#eduModal"
-                onClick={() => {
-                  // this.currentExperienceIndex = index;
-                  this.setState({
-                    edu_userId: this.props.user_id || "",
-                    edu_id: this.props.education[index].id || "",
-                    edu_current: this.props.education[index].current || false,
-                    edu_school: this.props.education[index].school || "",
-                    edu_description:
-                      this.props.education[index].description || "",
-                    edu_degree: this.props.education[index].degree || "",
-                    edu_start_date:
-                      this.props.education[index].start_date || "",
-                    edu_end_date: this.props.education[index].end_date || "",
-                    edu_fieldofstudy:
-                      this.props.education[index].fieldofstudy || "",
-                    currentEducationIndex: index
-                  });
-                  // console.log(this.currentExperienceIndex);
-                }}
-              >
-                <i className="fas fa-edit"></i>
-              </button>
-              <button
-                className="icon-button"
-                onClick={() => {
-                  this.props.deleteEducation(edu.id);
-                }}
-              >
-                <i className="fas fa-times"></i>
-              </button>
+              {/* Button to open education modal and update the state with the details of the item or the fallback value */}
+              {edit && ( // Show it only if it is the current user's profile
+                <span>
+                  <button
+                    className="icon-button"
+                    data-toggle="modal"
+                    data-target="#eduModal"
+                    onClick={() => {
+                      this.setState({
+                        edu_userId: this.props.user_id || "",
+                        edu_id: this.props.education[index].id || "",
+                        edu_current:
+                          this.props.education[index].current || false,
+                        edu_school: this.props.education[index].school || "",
+                        edu_description:
+                          this.props.education[index].description || "",
+                        edu_degree: this.props.education[index].degree || "",
+                        edu_start_date:
+                          this.props.education[index].start_date || "",
+                        edu_end_date:
+                          this.props.education[index].end_date || "",
+                        edu_fieldofstudy:
+                          this.props.education[index].fieldofstudy || "",
+                        currentEducationIndex: index
+                      });
+                    }}
+                  >
+                    <i className="fas fa-edit"></i>
+                  </button>
+                  {/* Opens on delete confirmation modal */}
+                  <button
+                    className="icon-button"
+                    onClick={() => {
+                      this.onDeleteEducation(edu.id);
+                    }}
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                </span>
+              )}
             </p>
             <p>{titleCase(edu.school)}</p>
             <p className="help-text">
@@ -208,69 +265,17 @@ class ProfileCreds extends Component {
       </li>
     ));
 
-    // const eduItems = education.map(edu => (
-    //   <li key={edu.id} className="list-group-item profile-creds__cred">
-    //     <div className="profile-creds__cred-info">
-    //       <div className="profile-creds__cred-info-icon">
-    //         <i className="fas fa-graduation-cap fa-3x" />
-    //       </div>
-    //       <span className="profile-creds__cred-info-details">
-    //         <p>{edu.degree}</p>
-    //         <p>{edu.school}</p>
-    //         <p className="help-text">
-    //           <Moment format="MMMM YYYY">{edu.from}</Moment> -{" "}
-    //           {edu.to === null ? (
-    //             "Now"
-    //           ) : (
-    //             <Moment format="MMMM YYYY">{edu.to}</Moment>
-    //           )}
-    //         </p>
-    //       </span>
-    //     </div>
-    //     <div className="profile-creds__cred-info-description">
-    //       {edu.description}
-    //     </div>
-    //   </li>
-    // ));
-
-    // const eduItems = education.map(edu => (
-    //   <li key={edu._id}>
-    //     <h4>{edu.school}</h4>
-    //     <p>
-    //       <Moment format="MMMM YYYY">{edu.from}</Moment> -{" "}
-    //       {edu.to === null ? (
-    //         "Now"
-    //       ) : (
-    //         <Moment format="MMMM YYYY">{edu.to}</Moment>
-    //       )}
-    //     </p>
-    //     <p>
-    //       <strong>Degree:</strong> {edu.degree}
-    //     </p>
-    //     <p>
-    //       <strong>Field of Study:</strong> {edu.fieldofstudy}
-    //     </p>
-    //     <p>
-    //       {edu.description === "" ? null : (
-    //         <span>
-    //           <strong>Description:</strong> {edu.description}
-    //         </span>
-    //       )}
-    //     </p>
-    //   </li>
-    // ));
-
     return (
       <div className="profile-creds">
         <h3>
           Experience <span>&nbsp;</span>
-          {this.props.edit && (
+          {/* Show the button only if it is the current user's profile */}
+          {edit && (
             <button
               className="icon-button"
               data-toggle="modal"
               data-target="#expModal"
               onClick={() => {
-                // this.currentExperienceIndex = index;
                 this.setState({
                   currentExperienceIndex: -1
                 });
@@ -287,7 +292,7 @@ class ProfileCreds extends Component {
         )}
         <h3>
           Education <span>&nbsp;</span>
-          {this.props.edit && (
+          {edit && (
             <button
               className="icon-button"
               data-toggle="modal"
@@ -320,7 +325,8 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentExperienceIndex >= 0 ? (
+                {this.state.currentExperienceIndex >= 0 ? ( // Checks if we are editing
+                  // If yes, provides the details to the AddExperience component
                   <AddExperience
                     userId={this.props.userId}
                     id={this.state.exp_id}
@@ -334,6 +340,7 @@ class ProfileCreds extends Component {
                     currentExperienceIndex={this.state.currentExperienceIndex}
                   ></AddExperience>
                 ) : (
+                  // If not, passes initial values
                   <AddExperience
                     userId={this.props.userId}
                     id={""}
@@ -344,32 +351,8 @@ class ProfileCreds extends Component {
                     start_date={""}
                     end_date={""}
                     company={""}
-                    // currentExperienceIndex={null}
                   ></AddExperience>
                 )}
-                {/* <AddExperience
-                  userId={this.state.exp_userId}
-                  id={this.state.exp_id}
-                  current={this.state.exp_current}
-                  _location={this.state.exp_location}
-                  description={this.state.exp_description}
-                  title={this.state.exp_title}
-                  start_date={this.state.exp_start_date}
-                  end_date={this.state.exp_end_date}
-                  company={this.state.exp_company}
-                  currentExperienceIndex={this.state.currentExperienceIndex}
-                ></AddExperience> */}
-                {/* <AddExperience
-                  id={this.state.id}
-                  current={this.state.current}
-                  _location={this.state.location}
-                  description={this.state.description}
-                  title={this.state.title}
-                  start_date={this.state.start_date}
-                  end_date={this.state.end_date}
-                  company={this.state.company}
-                  currentExperienceIndex={this.state.currentExperienceIndex}
-                ></AddExperience> */}
               </div>
               <div className="modal-footer">
                 <button
@@ -395,7 +378,8 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentEducationIndex >= 0 ? (
+                {this.state.currentEducationIndex >= 0 ? ( // Checks if we are editing
+                  // If yes, provides the details to the AddEducation component
                   <AddEducation
                     userId={this.props.userId}
                     id={this.state.edu_id}
@@ -409,6 +393,7 @@ class ProfileCreds extends Component {
                     currentEducationIndex={this.state.currentEducationIndex}
                   ></AddEducation>
                 ) : (
+                  // If not, passes initial values
                   <AddEducation
                     userId={this.props.userId}
                     id={""}
@@ -419,7 +404,6 @@ class ProfileCreds extends Component {
                     start_date={""}
                     end_date={""}
                     fieldofstudy={""}
-                    // currentExperienceIndex={null}
                   ></AddEducation>
                 )}
               </div>
@@ -436,29 +420,16 @@ class ProfileCreds extends Component {
           </div>
         </div>
       </div>
-
-      // <div className="row">
-      //   <div className="col-md-6">
-      //     <h3>Experience</h3>
-      // {expItems.length > 0 ? (
-      //   <ul className="list-group">{expItems}</ul>
-      // ) : (
-      //   <p className="text-center">No Experience Listed</p>
-      // )}
-      //   </div>
-
-      //   <div className="col-md-6">
-      //     <h3 className="text-center text-info">Education</h3>
-      //     {eduItems.length > 0 ? (
-      //       <ul className="list-group">{eduItems}</ul>
-      //     ) : (
-      //       <p className="text-center">No Education Listed</p>
-      //     )}
-      //   </div>
-      // </div>
     );
   }
 }
+
+ProfileCreds.propTypes = {
+  userId: PropTypes.string.isRequired,
+  experience: PropTypes.object.isRequired,
+  education: PropTypes.object.isRequired,
+  edit: PropTypes.bool
+};
 
 export default connect(null, { deleteExperience, deleteEducation })(
   ProfileCreds

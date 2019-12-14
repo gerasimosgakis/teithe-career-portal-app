@@ -26,19 +26,21 @@ class AddExperience extends Component {
       currentExperienceIndex
     } = this.props;
 
-    // Initialise state with the received props
+    // Initialise state with the received props or fallback
     this.state = {
-      user_id: userId,
-      id,
-      current,
+      user_id: userId ? userId : "",
+      id: id ? id : "",
+      current: current ? current : false,
       disabled: current ? true : false,
-      _location,
-      description,
-      title,
+      _location: _location ? _location : "",
+      description: description ? description : "",
+      title: title ? title : "",
       start_date: start_date ? start_date.slice(0, 7) : null,
       end_date: end_date ? end_date.slice(0, 7) : null,
-      company: company,
-      currentExperienceIndex
+      company: company ? company : "",
+      currentExperienceIndex: currentExperienceIndex
+        ? currentExperienceIndex
+        : -1
     };
   }
 
@@ -62,7 +64,6 @@ class AddExperience extends Component {
         start_date: "",
         end_date: "",
         company: ""
-        // currentExperienceIndex: null
       };
     } else if (
       props.currentExperienceIndex !== -1 &&
@@ -78,7 +79,7 @@ class AddExperience extends Component {
         description: props.description,
         title: props.title,
         start_date: props.start_date.slice(0, 7),
-        end_date: props.current ? null : props.end_date.slice(0, 7),
+        end_date: props.current ? "" : props.end_date.slice(0, 7),
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };
@@ -102,8 +103,9 @@ class AddExperience extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    if (this.state.id) {
+    // Check if we are editing an experience
+    if (this.state.id && this.state.id !== "") {
+      // call the edit function
       this.props.editExperience({
         user_id: this.state.user_id,
         id: this.state.id,
@@ -118,6 +120,7 @@ class AddExperience extends Component {
         company: this.state.company
       });
     } else {
+      // Otherwise call the add function
       this.props.addExperience({
         user_id: this.state.user_id,
         current: this.state.current,
