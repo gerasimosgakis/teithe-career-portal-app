@@ -1,11 +1,11 @@
 .profile-item {
   min-width: 100pt;
-  width: calc(25% - 12pt);
+  width: calc(25%);
   border: 1px solid lightgray;
   text-align: center;
-  &:not(:last-child) {
-    margin-right: 16pt;
-  }
+  // &:not(:last-child) {
+  //   margin-right: 16pt;
+  // }
   &__image-container {
     padding: 8pt;
     &-image {

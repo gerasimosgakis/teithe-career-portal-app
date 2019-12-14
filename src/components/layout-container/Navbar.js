@@ -148,14 +148,14 @@ class Navbar extends Component {
             </Link>
           </li>
           <li className="nav-item">
-            <a
+            <button
               data-toggle="modal"
               data-target="#cvModal"
               rel="noopener noreferrer"
-              className="nav-link"
+              className="nav-link button button--small"
             >
               Add CV
-            </a>
+            </button>
           </li>
         </Fragment>
       );
