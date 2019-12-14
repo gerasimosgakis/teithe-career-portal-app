@@ -78,8 +78,12 @@ class AddExperience extends Component {
         _location: props._location !== null ? props._location : null,
         description: props.description,
         title: props.title,
-        start_date: props.start_date.slice(0, 7),
-        end_date: props.current ? "" : props.end_date.slice(0, 7),
+        start_date: props.start_date ? props.start_date.slice(0, 7) : "",
+        end_date: props.current
+          ? ""
+          : props.end_date
+          ? props.end_date.slice(0, 7)
+          : "",
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };

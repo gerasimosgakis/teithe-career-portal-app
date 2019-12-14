@@ -185,7 +185,7 @@ class Navbar extends Component {
             <Link className="nav-link" to="/profile">
               <Avatar
                 email={auth.user.attributes.email}
-                name={auth.user.attributes.name}
+                name={auth.user.attributes.name.toLowerCase()}
                 round={true}
                 size="30"
               />

@@ -59,7 +59,7 @@ class CreateProfile extends Component {
       status: this.state.status.toLowerCase(),
       skills: this.state.skills.toLowerCase(),
       githubusername: this.state.githubusername.toLowerCase(),
-      bio: this.state.bio.toLowerCase(),
+      bio: this.state.bio,
       twitter: this.state.twitter.toLowerCase(),
       facebook: this.state.facebook.toLowerCase(),
       linkedin: this.state.linkedin.toLowerCase(),

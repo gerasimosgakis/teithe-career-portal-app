@@ -76,8 +76,12 @@ class AddEducation extends Component {
         school: props.school !== null ? props.school : null,
         description: props.description,
         degree: props.degree,
-        start_date: props.start_date.slice(0, 7),
-        end_date: props.current ? "" : props.end_date.slice(0, 7),
+        start_date: props.start_date ? props.start_date.slice(0, 7) : "",
+        end_date: props.current
+          ? ""
+          : props.end_date
+          ? props.end_date.slice(0, 7)
+          : "",
         fieldofstudy: props.fieldofstudy,
         currentEducationIndex: props.currentEducationIndex
       };
