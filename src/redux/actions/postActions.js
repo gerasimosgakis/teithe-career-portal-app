@@ -12,7 +12,9 @@ import {
   ADD_COMMENT_SUCCESS,
   SET_LOADING,
   GET_COMMENTS_BY_POST_SUCCESS,
-  GET_COMMENTS_BY_POST_FAIL
+  GET_COMMENTS_BY_POST_FAIL,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAIL
 } from "./types";
 // Get All Posts
 export const getPosts = () => async dispatch => {
@@ -156,6 +158,27 @@ export const getCommentsByPost = (postId, postIndex) => async dispatch => {
     dispatch({
       type: GET_COMMENTS_BY_POST_FAIL,
       payload: err
+    });
+  }
+};
+
+// Delete Comment
+export const deleteComment = id => async dispatch => {
+  try {
+    dispatch({
+      type: SET_LOADING
+    });
+    await API.del("teithe-career-portal-posts-api", `/comments/delete/${id}`);
+
+    dispatch({
+      type: DELETE_COMMENT_SUCCESS,
+      payload: id
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: DELETE_COMMENT_FAIL,
+      payload: error
     });
   }
 };

@@ -13,10 +13,6 @@ class CommentFeed extends Component {
     };
   }
 
-  componentWillUpdate() {
-    console.log();
-  }
-
   render() {
     console.log(this.props.comments);
     // const { comments } = this.props;
@@ -30,4 +26,8 @@ class CommentFeed extends Component {
   }
 }
 
-export default CommentFeed;
+const mapStateToProps = state => ({
+  posts: state.posts
+});
+
+export default connect(mapStateToProps, null)(CommentFeed);

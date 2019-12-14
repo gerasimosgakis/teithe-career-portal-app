@@ -11,7 +11,9 @@ import {
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAIL,
   GET_COMMENTS_BY_POST_SUCCESS,
-  GET_COMMENTS_BY_POST_FAIL
+  GET_COMMENTS_BY_POST_FAIL,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -52,12 +54,12 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case DELETE_POST_SUCCESS:
-      const postsdAfterDelete = [...state.posts].filter(post => {
+      const postsAfterDelete = [...state.posts].filter(post => {
         return post.id !== action.payload;
       });
       return {
         ...state,
-        posts: postsdAfterDelete,
+        posts: postsAfterDelete,
         loading: false
       };
     case DELETE_POST_FAIL:
@@ -109,10 +111,6 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case GET_COMMENTS_BY_POST_SUCCESS:
-      console.log(action.payload);
-      // const postsWithComments = ([...state.posts][action.payload.postIndex][
-      //   "comments"
-      // ] = [...action.payload.comments]);
       const postsWithComments = [...state.posts];
       postsWithComments[action.payload.postIndex]["comments"] =
         action.payload.comments;
@@ -122,6 +120,17 @@ export default function(state = initialState, action) {
         loading: false
       };
     case GET_COMMENTS_BY_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case DELETE_COMMENT_FAIL:
       return {
         ...state,
         loading: false,

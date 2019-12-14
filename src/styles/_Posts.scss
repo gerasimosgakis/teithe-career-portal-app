@@ -45,8 +45,14 @@
 }
 
 .comments {
+  position: relative;
   &__comment {
     display: flex;
     flex-direction: row;
+  }
+  &__delete-button {
+    position: absolute;
+    top: 2pt;
+    right: 2pt;
   }
 }

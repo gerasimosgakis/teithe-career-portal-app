@@ -1,8 +1,43 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import titleCase from "../../shared/functions/titleCase";
 import Linkify from "react-linkify";
 import Avatar from "react-avatar";
-export default class CommentItem extends Component {
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { deleteComment } from "../../redux/actions/postActions";
+class CommentItem extends Component {
+  onDeleteClick(id) {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui card card-body text-center">
+            <h2>Are you sure?</h2>
+            <p>You want to delete this comment?</p>
+            <div className="text-center">
+              <button
+                className="button button--small transparent-btn mr1"
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className="button button--small danger-btn"
+                onClick={() => {
+                  console.log(id);
+                  this.props.deleteComment(id);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        );
+      }
+    });
+  }
+
   render() {
     return (
       <div className="comments">
@@ -21,7 +56,6 @@ export default class CommentItem extends Component {
               size="30"
             />
           </span>
-          {/* <p>{titleCase(this.props.comment.user_name)}</p> */}
           <p>
             <span className="mr1 bolded">
               {titleCase(this.props.comment.user_name)}
@@ -34,7 +68,15 @@ export default class CommentItem extends Component {
             </p>
           </p>
         </div>
+        <button
+          className="comments__delete-button icon-button icon-button--small icon-button--danger"
+          onClick={() => this.onDeleteClick(this.props.comment.id)}
+        >
+          <i className="fas fa-times"></i>
+        </button>
       </div>
     );
   }
 }
+
+export default connect(null, { deleteComment })(CommentItem);
