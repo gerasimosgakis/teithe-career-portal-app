@@ -105,7 +105,7 @@ class ProfileCreds extends Component {
                   this.setState({
                     exp_userId: this.props.userId || "",
                     exp_id: this.props.experience[index].id || "",
-                    exp_current: this.props.experience[index].current || "",
+                    exp_current: this.props.experience[index].current || false,
                     exp_location: this.props.experience[index].location || "",
                     exp_description:
                       this.props.experience[index].description || "",
@@ -165,7 +165,7 @@ class ProfileCreds extends Component {
                   this.setState({
                     edu_userId: this.props.user_id || "",
                     edu_id: this.props.education[index].id || "",
-                    edu_current: this.props.education[index].current || "",
+                    edu_current: this.props.education[index].current || false,
                     edu_school: this.props.education[index].school || "",
                     edu_description:
                       this.props.education[index].description || "",
