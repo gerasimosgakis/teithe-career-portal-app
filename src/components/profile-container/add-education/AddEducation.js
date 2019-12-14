@@ -149,6 +149,7 @@ class AddEducation extends Component {
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
+                <div className="form__field-label">* School</div>
                 <TextFieldGroup
                   placeholder="* School"
                   name="school"
@@ -156,6 +157,7 @@ class AddEducation extends Component {
                   value={this.state.school}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Degree</div>
                 <TextFieldGroup
                   placeholder="* Degree"
                   name="degree"
@@ -163,6 +165,7 @@ class AddEducation extends Component {
                   value={this.state.degree}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Field of Study</div>
                 <TextFieldGroup
                   placeholder="Field of Study"
                   name="fieldofstudy"
@@ -170,7 +173,7 @@ class AddEducation extends Component {
                   value={this.state.fieldofstudy}
                   onChange={this.onChange}
                 />
-                <h6>* From Date</h6>
+                <div className="form__field-label">* Start Date</div>
                 <TextFieldGroup
                   placeholder="from"
                   name="start_date"
@@ -179,7 +182,7 @@ class AddEducation extends Component {
                   value={this.state.start_date}
                   onChange={this.onChange}
                 />
-                <h6>* To Date</h6>
+                <div className="form__field-label">* End Date</div>
                 <TextFieldGroup
                   placeholder="to"
                   name="end_date"
@@ -203,6 +206,7 @@ class AddEducation extends Component {
                     Current Degree
                   </label>
                 </div>
+                <div className="form__field-label">Description</div>
                 <TextAreaFieldGroup
                   placeholder="Study Description"
                   name="description"

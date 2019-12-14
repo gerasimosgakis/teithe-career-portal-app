@@ -148,6 +148,7 @@ class AddExperience extends Component {
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
+                <div className="form__field-label">* Company</div>
                 <TextFieldGroup
                   placeholder="* Company"
                   name="company"
@@ -155,6 +156,7 @@ class AddExperience extends Component {
                   value={this.state.company}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Title</div>
                 <TextFieldGroup
                   placeholder="* Job Title"
                   name="title"
@@ -162,6 +164,7 @@ class AddExperience extends Component {
                   value={this.state.title}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Location</div>
                 <TextFieldGroup
                   placeholder="Location"
                   name="_location"
@@ -169,7 +172,7 @@ class AddExperience extends Component {
                   value={this.state._location}
                   onChange={this.onChange}
                 />
-                <h6>* From Date</h6>
+                <div className="form__field-label">* Start Date</div>
                 <TextFieldGroup
                   placeholder="from"
                   name="start_date"
@@ -178,7 +181,7 @@ class AddExperience extends Component {
                   value={this.state.start_date}
                   onChange={this.onChange}
                 />
-                <h6>* To Date</h6>
+                <div className="form__field-label">* End Date</div>
                 <TextFieldGroup
                   placeholder="to"
                   name="end_date"
@@ -202,6 +205,7 @@ class AddExperience extends Component {
                     Current Job
                   </label>
                 </div>
+                <div className="form__field-label">Description</div>
                 <TextAreaFieldGroup
                   placeholder="Job Description"
                   name="description"
