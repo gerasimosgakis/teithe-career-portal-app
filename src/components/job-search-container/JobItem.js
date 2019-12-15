@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import moment from "moment";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 
 import { connect } from "react-redux";
 import { addJob } from "../../redux/actions/jobActions";
@@ -36,11 +31,11 @@ class JobItem extends Component {
       jobUrl,
       jobId
     } = this.state.job;
-    const transformedDate = date
-      ? moment(new Date(date))
-          .add(365, "day")
-          .format("LL")
-      : null;
+    // const transformedDate = date
+    //   ? moment(new Date(date))
+    //       .add(365, "day")
+    //       .format("LL")
+    //   : null;
     return (
       <div className="card mb2 job-item">
         <div className="card-body job-item__body">
@@ -55,7 +50,12 @@ class JobItem extends Component {
             <i className="fas fa-star"></i>
           </button>
           <h2>
-            <a className="link-decoration" href={jobUrl} target="_blank">
+            <a
+              className="link-decoration"
+              href={jobUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {jobTitle}
             </a>
           </h2>

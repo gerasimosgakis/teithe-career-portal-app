@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import CVForm from "./CVForm";
-import { API, Storage } from "aws-amplify";
+// import { Storage } from "aws-amplify";
 import { connect } from "react-redux";
-import CVFormNew from "./CVFormNew";
 import config from "../../config";
 import { s3Upload } from "../../shared/functions/aws";
 import Spinner from "../shared/Spinner";
@@ -54,7 +52,7 @@ class AddCV extends Component {
     try {
       await s3Upload(this.state.file, this.state.user);
       this.setState({ saved: true, loading: false });
-      const cvURL = await Storage.get(this.props.auth.user.username);
+      // const cvURL = await Storage.get(this.props.auth.user.username);
       this.props.addCVToProfile(
         this.state.user,
         this.state.file.name,

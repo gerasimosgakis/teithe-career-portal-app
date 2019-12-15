@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import banner from "../../../banner.jpg";
-import { logo } from "../../../logo_tei.jpg";
 import CreateProfile from "../create-profile/CreateProfile";
 import titleCase from "../../../shared/functions/titleCase";
 import isEmpty from "../../../shared/functions/isEmpty";

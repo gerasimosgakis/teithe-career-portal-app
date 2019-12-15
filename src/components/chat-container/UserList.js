@@ -1,13 +1,12 @@
 import React from "react";
 import Avatar from "react-avatar";
-import TextFieldGroup from "../shared/TextFieldGroup";
 import titleCase from "../../shared/functions/titleCase";
 
 const UserList = props => {
   const allUsers = props.users.map(
     (user, index) =>
       user.handle !== props.userName && (
-        <a
+        <button
           className="UserList__container__list__item__link"
           onClick={() => props.onClick(user.id)}
         >
@@ -33,7 +32,7 @@ const UserList = props => {
               </p>
             </div>
           </li>
-        </a>
+        </button>
       )
   );
   return (

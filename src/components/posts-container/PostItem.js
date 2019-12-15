@@ -74,11 +74,11 @@ class PostItem extends Component {
   };
 
   render() {
-    const { post, auth, profile, showActions } = this.props;
-    const currentUserId = this.props.auth.user.username;
-    const currentUserName = this.props.auth.user.attributes.name;
-    const currentUserEmail = this.props.auth.user.attributes.email;
-    const avatar = this.props.auth.user.avatar;
+    const { post, auth } = this.props;
+    const currentUserId = auth.user.username;
+    const currentUserName = auth.user.attributes.name;
+    const currentUserEmail = auth.user.attributes.email;
+    // const avatar = auth.user.avatar;
     return (
       <div className="card posts__post-item mb2">
         <div className="card-body card posts__post-item-body">
@@ -139,7 +139,7 @@ class PostItem extends Component {
                 currentUserId={currentUserId}
                 currentUserName={currentUserName}
                 currentUserEmail={currentUserEmail}
-                avatar={avatar}
+                // avatar={avatar}
               />
               {this.state.post.comments && this.state.post.comments.length > 0 && (
                 <div className="mt2">

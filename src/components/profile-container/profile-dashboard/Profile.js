@@ -17,9 +17,6 @@ import AddEducation from "../add-education/AddEducation";
 import AddExperience from "../add-experience/AddExperience";
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount = async () => {
     if (this.props.match.params.id) {
       // If there is an id in the url parameters, retrieve the profile using that

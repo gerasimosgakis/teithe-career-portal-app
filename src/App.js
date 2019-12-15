@@ -14,7 +14,6 @@ import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
 import Chat from "./components/chat-container/Chat";
-import AppliedRoute from "./AppliedRoute";
 import Posts from "./components/posts-container/Posts";
 import JobSearch from "./components/job-search-container/JobSearch";
 import AddCV from "./components/add-cv-container/AddCV";

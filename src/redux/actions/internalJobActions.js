@@ -14,7 +14,6 @@ import {
   SEARCH_JOB_POSTS_FAIL,
   SEARCH_JOB_POSTS_SUCCESS
 } from "./types";
-import { actionButton } from "@aws-amplify/ui";
 
 // Get All Internal Jobs
 export const getInternalJobs = () => async dispatch => {
