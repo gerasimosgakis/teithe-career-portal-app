@@ -5,6 +5,7 @@
 @import "styles/spacing";
 @import "styles/layout";
 @import "styles/utils";
+@import "styles/Navbar";
 @import "styles/ProfileItem";
 @import "styles/Chat";
 @import "styles/Login";
@@ -22,8 +23,8 @@
 @import "styles/utils";
 @import "styles/Forms";
 
-$color_1: #bbb;
-$background_color_1: rgba(0, 0, 0, 0.7);
+// $color_1: #bbb;
+// $background_color_1: rgba(0, 0, 0, 0.7);
 
 body,
 html {
@@ -40,52 +41,15 @@ html {
   background: white;
 }
 
-a {
-  text-decoration: none;
-  cursor: pointer;
-  color: $anchor;
-  font-weight: 500;
-  &:hover {
-    color: $anchor;
-    text-decoration: none;
-  }
-  &:visited {
-    color: $anchor;
-    text-decoration: none;
-  }
-}
-
-.navbar {
-  background: $main-color;
-}
-
-.nav-item {
-  a {
-    display: inline-block;
-    position: relative;
-    z-index: 1;
-    padding: 8pt;
-  }
-}
-
-.landing {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  margin-top: -24px;
-  margin-bottom: -50px;
-}
-
-.card-form {
-  opacity: 0.9;
-}
-.latest-profiles-img {
-  width: 40px;
-  height: 40px;
-}
-.form-control {
-  &::placeholder {
-    color: $color_1 !important;
-  }
-}
+// .card-form {
+//   opacity: 0.9;
+// }
+// .latest-profiles-img {
+//   width: 40px;
+//   height: 40px;
+// }
+// .form-control {
+//   &::placeholder {
+//     color: $color_1 !important;
+//   }
+// }
