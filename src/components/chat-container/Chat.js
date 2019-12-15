@@ -4,6 +4,7 @@ import Chatkit from "@pusher/chatkit-server";
 import { API } from "aws-amplify";
 import UserList from "./UserList";
 import Messages from "./Messages";
+import TextFieldGroup from "../shared/TextFieldGroup";
 // import "./Chat.scss";
 // Chatkit constants
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
@@ -74,7 +75,7 @@ class Chat extends Component {
           });
         }
         const userId = profile.id;
-        const userName = profile.handle;
+        const userName = profile.name;
         this.createUser(userId, userName);
         users.push({
           id: profile.id,
@@ -106,6 +107,7 @@ class Chat extends Component {
         <div className="Chat__chatwindow">
           <UserList
             userName={this.state.currentUserName}
+            otherUserId={this.state.otherUserId}
             users={this.state.users}
             onClick={this.handleChildClick}
           />

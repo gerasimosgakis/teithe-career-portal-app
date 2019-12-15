@@ -1,5 +1,7 @@
 import React from "react";
 import Avatar from "react-avatar";
+import TextFieldGroup from "../shared/TextFieldGroup";
+import titleCase from "../../shared/functions/titleCase";
 
 const UserList = props => {
   const allUsers = props.users.map(
@@ -9,7 +11,14 @@ const UserList = props => {
           className="UserList__container__list__item__link"
           onClick={() => props.onClick(user.id)}
         >
-          <li className="UserList__container__list__item" key={index}>
+          <li
+            key={index}
+            className={
+              props.otherUserId === user.id
+                ? "UserList__container__list__item user-bg"
+                : "UserList__container__list__item"
+            }
+          >
             <div>
               <Avatar
                 email={user.email}
@@ -20,7 +29,7 @@ const UserList = props => {
             </div>
             <div className="UserList__container__list__item__content">
               <p className="UserList__container__list__item__content__name">
-                {user.handle}
+                {titleCase(user.name)}
               </p>
             </div>
           </li>
