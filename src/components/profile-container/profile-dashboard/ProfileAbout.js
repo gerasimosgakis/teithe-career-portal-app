@@ -4,10 +4,6 @@ import { getCV } from "../../../shared/functions/aws";
 import { withRouter } from "react-router-dom";
 import isEmpty from "../../../shared/functions/isEmpty";
 class ProfileAbout extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { profile } = this.props;
 

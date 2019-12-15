@@ -118,14 +118,13 @@ class JobSearch extends Component {
       fullTime,
       minimumSalary,
       maximumSalary,
-      graduate,
       resultsToTake,
       resultsToSkip
     } = this.state;
     try {
       const jobs = await axios.get(
         `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=${distanceFromLocation ||
-          15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
+          15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&permanent=${permanent}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
         {
           headers: {
             Authorization:
@@ -187,7 +186,7 @@ class JobSearch extends Component {
   };
 
   loadMore = async () => {
-    const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
+    // const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
     await this.setState({
       ...this.state,
       resultsToSkip: this.state.jobs.length,

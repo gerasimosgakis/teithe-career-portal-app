@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import { addPost } from "../../redux/actions/postActions";
-import gravatar from "gravatar";
 
 class PostForm extends Component {
   constructor(props) {

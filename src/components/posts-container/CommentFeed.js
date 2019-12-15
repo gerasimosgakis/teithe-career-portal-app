@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Spinner from "../shared/Spinner";
 import CommentItem from "./CommentItem";
 
 class CommentFeed extends Component {

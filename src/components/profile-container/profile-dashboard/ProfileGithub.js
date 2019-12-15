@@ -36,7 +36,7 @@ class ProfileGithub extends Component {
         <div className="profile-github__repo-title">
           <i className="fab fa-github fa-2x mr2" />
           <h4>
-            <a href={repo.html_url} target="_blank">
+            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
               {repo.name}
             </a>
           </h4>

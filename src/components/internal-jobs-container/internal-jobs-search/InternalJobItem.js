@@ -1,24 +1,16 @@
 import React, { Component } from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 import titleCase from "../../../shared/functions/titleCase";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 
 class InternalJobItem extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { job } = this.props;
-    const transformedDate = job.created_at
-      ? moment(new Date(job.created_at))
-          .add(365, "day")
-          .format("LL")
-      : null;
+    // const transformedDate = job.created_at
+    //   ? moment(new Date(job.created_at))
+    //       .add(365, "day")
+    //       .format("LL")
+    //   : null;
     return (
       <div className="card mb2 job-item">
         <div className="card-body job-item__body">

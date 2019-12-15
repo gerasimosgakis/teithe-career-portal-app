@@ -160,21 +160,7 @@ class Navbar extends Component {
         </Fragment>
       );
     } else {
-      leftLinks = (
-        <li
-          onClick={() => this.setState({ activeTabClassName: "graduates" })}
-          className={
-            this.state.activeTabClassName === "graduates"
-              ? "nav-item active"
-              : "nav-item"
-          }
-        >
-          <Link className="nav-link" to="/graduates">
-            {" "}
-            Graduates
-          </Link>
-        </li>
-      );
+      leftLinks = "";
     }
 
     // Right Links
