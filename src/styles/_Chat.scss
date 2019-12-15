@@ -12,6 +12,34 @@
   height: 700px;
 }
 
+.Chat__chatwindow-users {
+  margin-top: 4pt;
+  &-search {
+    position: relative;
+  }
+  &-search-input {
+    padding-left: 2em;
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid $font;
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    &:active {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+  &-search-icon {
+    position: absolute;
+    top: 8pt;
+    left: 4pt;
+    color: $help;
+  }
+}
+
 .UserList {
   border-right: 1px solid #e0e0e0;
   background: #fefefe;

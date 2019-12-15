@@ -28,6 +28,7 @@ class Chat extends Component {
       currentUserName: "",
       otherUserId: "",
       users: [],
+      searchUsers: null,
       show: true
     };
   }
@@ -101,16 +102,59 @@ class Chat extends Component {
     return this.state.users.filter(user => user.id === userId)[0];
   };
 
+  onUserSearch = event => {
+    if (event.key === "Enter") {
+      if (
+        this.state.users.filter(user =>
+          user.name.startsWith(event.target.value)
+        ).length <= 0
+      ) {
+        return;
+      }
+      this.setState({
+        searchUsers: this.state.users.filter(user =>
+          user.name.startsWith(event.target.value)
+        ),
+        otherUserId: this.state.users.filter(user =>
+          user.name.startsWith(event.target.value)
+        )[0].id,
+        show: false
+      });
+
+      setTimeout(() => {
+        this.setState({ show: true });
+      }, 200);
+    }
+  };
+
   render() {
     return (
       <div className="Chat">
         <div className="Chat__chatwindow">
-          <UserList
-            userName={this.state.currentUserName}
-            otherUserId={this.state.otherUserId}
-            users={this.state.users}
-            onClick={this.handleChildClick}
-          />
+          <div className="Chat__chatwindow-users">
+            <div className="Chat__chatwindow-users-search">
+              <input
+                className="form-control Chat__chatwindow-users-search-input"
+                type="text"
+                onKeyPress={this.onUserSearch}
+              />
+              <span className="Chat__chatwindow-users-search-icon">
+                <i className="fas fa-search"></i>
+              </span>
+            </div>
+            {/* <TextFieldGroup onKeyPress={this.onUserSearch}></TextFieldGroup> */}
+            <UserList
+              userName={this.state.currentUserName}
+              otherUserId={this.state.otherUserId}
+              users={
+                this.state.searchUsers
+                  ? this.state.searchUsers
+                  : this.state.users
+              }
+              onClick={this.handleChildClick}
+            />
+          </div>
+
           {this.state.otherUserId && this.state.show && this.state.users ? (
             <ChatkitProvider
               instanceLocator={instanceLocator}
