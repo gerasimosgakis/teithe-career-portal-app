@@ -6,7 +6,7 @@ const UserList = props => {
   const allUsers = props.users.map(
     (user, index) =>
       user.handle !== props.userName && (
-        <button
+        <a
           className="UserList__container__list__item__link"
           onClick={() => props.onClick(user.id)}
         >
@@ -32,7 +32,7 @@ const UserList = props => {
               </p>
             </div>
           </li>
-        </button>
+        </a>
       )
   );
   return (
