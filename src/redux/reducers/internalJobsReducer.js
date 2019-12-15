@@ -9,7 +9,9 @@ import {
   GET_JOB_POSTS_BY_USER_SUCCESS,
   GET_JOB_POSTS_BY_USER_FAIL,
   DELETE_JOB_POST_SUCCESS,
-  DELETE_JOB_POST_FAIL
+  DELETE_JOB_POST_FAIL,
+  SEARCH_JOB_POSTS_SUCCESS,
+  SEARCH_JOB_POSTS_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -98,19 +100,18 @@ export default function(state = initialState, action) {
         loading: false,
         errors: action.payload
       };
-    // case GET_FAVORITE_JOBS_SUCCESS:
-    //   const favoriteJobs = [...action.payload].map(item => item.job_id);
-    //   return {
-    //     ...state,
-    //     favoriteJobs,
-    //     loading: false
-    //   };
-    // case GET_FAVORITE_JOBS_FAIL:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     errors: action.payload
-    //   };
+    case SEARCH_JOB_POSTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        internalJobs: [...action.payload]
+      };
+    case SEARCH_JOB_POSTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
     default:
       return state;
   }

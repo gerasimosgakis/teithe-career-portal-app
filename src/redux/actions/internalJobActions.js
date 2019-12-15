@@ -10,7 +10,9 @@ import {
   EDIT_JOB_POST_SUCCESS,
   EDIT_JOB_POST_FAIL,
   DELETE_JOB_POST_SUCCESS,
-  DELETE_JOB_POST_FAIL
+  DELETE_JOB_POST_FAIL,
+  SEARCH_JOB_POSTS_FAIL,
+  SEARCH_JOB_POSTS_SUCCESS
 } from "./types";
 import { actionButton } from "@aws-amplify/ui";
 
@@ -112,6 +114,28 @@ export const deleteInternalJob = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: DELETE_JOB_POST_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Search Job Posts
+export const searchJobPosts = keys => async dispatch => {
+  try {
+    const jobs = await API.post(
+      "teithe-career-portal-posts-api",
+      "/job-posts/search",
+      {
+        body: keys
+      }
+    );
+    dispatch({
+      type: SEARCH_JOB_POSTS_SUCCESS,
+      payload: jobs.data
+    });
+  } catch (err) {
+    dispatch({
+      type: SEARCH_JOB_POSTS_FAIL,
       payload: err
     });
   }

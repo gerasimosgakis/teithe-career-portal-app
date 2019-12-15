@@ -4,7 +4,8 @@ import { geolocated } from "react-geolocated";
 import axios from "axios";
 import {
   getInternalJobs,
-  deleteInternalJob
+  deleteInternalJob,
+  searchJobPosts
 } from "../../../redux/actions/internalJobActions";
 import Spinner from "../../shared/Spinner";
 import InternalJobItem from "./InternalJobItem";
@@ -49,16 +50,13 @@ class InternalJobs extends Component {
       keywords: "",
       locationName: "",
       distanceFromLocation: 15,
-      permanent: "",
-      contract: "",
-      temp: "",
-      partTime: "",
-      fullTime: "",
-      minimumSalary: 0,
-      maximumSalary: 100000,
-      graduate: "",
-      resultsToTake: 20,
-      resultsToSkip: 0,
+      permanent: null,
+      contract: null,
+      temp: null,
+      partTime: null,
+      fullTime: null,
+      minimumSalary: null,
+      maximumSalary: null,
       jobs: null,
       loading: false,
       moreLoading: false,
@@ -102,38 +100,92 @@ class InternalJobs extends Component {
     });
   }
 
-  async getLocation(latitude, longitude) {
-    var apikey = "d68690d89dff4842a10bc42493a2a90e";
+  // async getLocation(latitude, longitude) {
+  //   var apikey = "d68690d89dff4842a10bc42493a2a90e";
 
-    var api_url = "https://api.opencagedata.com/geocode/v1/json";
+  //   var api_url = "https://api.opencagedata.com/geocode/v1/json";
 
-    var request_url =
-      api_url +
-      "?" +
-      "key=" +
-      apikey +
-      "&q=" +
-      encodeURIComponent(latitude + "," + longitude) +
-      "&pretty=1" +
-      "&no_annotations=1";
-    try {
-      const location = await axios.get(request_url);
-      return location.data.results[0].components.postcode;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //   var request_url =
+  //     api_url +
+  //     "?" +
+  //     "key=" +
+  //     apikey +
+  //     "&q=" +
+  //     encodeURIComponent(latitude + "," + longitude) +
+  //     "&pretty=1" +
+  //     "&no_annotations=1";
+  //   try {
+  //     const location = await axios.get(request_url);
+  //     return location.data.results[0].components.postcode;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  setLocation = async coords => {
-    const postcode = await this.getLocation(coords.latitude, coords.longitude);
-    this.setState({
-      locationName: postcode
-    });
-  };
+  // setLocation = async coords => {
+  //   const postcode = await this.getLocation(coords.latitude, coords.longitude);
+  //   this.setState({
+  //     locationName: postcode
+  //   });
+  // };
 
   onChange = async e => {
     await this.setState({ [e.target.name]: e.target.value });
     console.log(this.state.minimumSalary);
+    // this.onSearchSubmit();
+  };
+
+  onCheck = async e => {
+    await this.setState({
+      [e]: this.state[e] === "" || !this.state[e] ? true : false
+    });
+    // const jobs = await this.getJobs();
+    // console.log(jobs);
+    // this.setState({
+    //   loading: false,
+    //   jobs,
+    //   resultsToSkip: 20
+    // });
+    this.onSearchSubmit();
+  };
+
+  keyPressed = async event => {
+    if (event.key === "Enter") {
+      // await this.setState({
+      //   resultsToSkip: 0,
+      //   loading: true
+      // });
+      this.onSearchSubmit();
+    }
+  };
+
+  onSearchSubmit = event => {
+    if (event) {
+      event.preventDefault();
+    }
+    console.log(this.state);
+    const {
+      keywords,
+      locationName,
+      minimumSalary,
+      maximumSalary,
+      permanent,
+      temp,
+      contract,
+      fullTime,
+      partTime
+    } = this.state;
+    this.props.searchJobPosts({
+      title: keywords,
+      location: locationName,
+      min_salary: minimumSalary,
+      max_salary: maximumSalary,
+      permanent,
+      temp,
+      contract,
+      full_time: fullTime,
+      part_time: partTime
+    });
   };
 
   render() {
@@ -195,7 +247,7 @@ class InternalJobs extends Component {
         )}
         {/* Form */}
         <div className="search-jobs__form mb2">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSearchSubmit}>
             <div className="search-jobs__form-basic">
               <div className="search-jobs__form-basic-field mr2">
                 <div className="form__field-label">Role</div>
@@ -203,7 +255,6 @@ class InternalJobs extends Component {
                   placeholder="Role"
                   name="keywords"
                   value={this.state.keywords}
-                  required
                   onChange={this.onChange}
                 />
               </div>
@@ -216,16 +267,15 @@ class InternalJobs extends Component {
                     placeholder="Location"
                     name="locationName"
                     value={this.state.locationName}
-                    required
                     onChange={this.onChange}
                   />
-                  <button
+                  {/* <button
                     className="icon-button search-jobs__form-basic-field-location-button"
                     disabled={!this.props.coords}
                     onClick={() => this.setLocation(this.props.coords)}
                   >
                     <i className="fas fa-search-location fa-2x"></i>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -384,11 +434,8 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default geolocated({
-  positionOptions: {
-    enableHighAccuracy: false
-  },
-  userDecisionTimeout: 5000
-})(
-  connect(mapStateToProps, { getInternalJobs, deleteInternalJob })(InternalJobs)
-);
+export default connect(mapStateToProps, {
+  getInternalJobs,
+  deleteInternalJob,
+  searchJobPosts
+})(InternalJobs);
