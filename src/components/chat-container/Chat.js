@@ -66,13 +66,15 @@ class Chat extends Component {
         }
         const userId = profile.id;
         const userName = profile.name;
-        this.createUser(userId, userName);
-        users.push({
-          id: profile.id,
-          handle: profile.handle,
-          name: profile.name,
-          email: profile.email
-        });
+        if (userId) {
+          this.createUser(userId, userName);
+          users.push({
+            id: profile.id,
+            handle: profile.handle,
+            name: profile.name,
+            email: profile.email
+          });
+        }
       });
       this.setState({ users });
     } catch (error) {

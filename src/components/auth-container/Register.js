@@ -51,7 +51,7 @@ class Register extends Component {
     this.setState({ isLoading: true });
 
     const userConfirm = {
-      email: this.props.auth.user.username,
+      email: this.props.auth.username,
       confirmationCode: this.state.confirmationCode
     };
 
@@ -153,7 +153,6 @@ class Register extends Component {
           <p className="header-label">Create your Career Portal profile</p>
           <div className="register__form">
             {auth &&
-            auth.user &&
             auth.username &&
             !auth.isAuthenticated &&
             !auth.userConfirmed
