@@ -30,7 +30,6 @@ class AddJobPost extends Component {
   onSubmit = event => {
     event.preventDefault();
     const userId = this.props.auth.user.username;
-    console.log(this.state, userId);
     this.props.addInternalJob({
       user_id: userId,
       title: this.state.title,

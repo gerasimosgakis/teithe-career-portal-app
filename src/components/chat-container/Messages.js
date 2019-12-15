@@ -3,10 +3,8 @@ import React, { useState, useEffect } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
 import Avatar from "react-avatar";
-import TextFieldGroup from "../shared/TextFieldGroup";
 
 function Messages(props) {
-  console.log(props);
   const [pendingMessage, setPendingMessage] = useState("");
   const messageList = React.createRef();
 

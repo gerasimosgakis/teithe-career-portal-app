@@ -38,7 +38,6 @@ class JobSearch extends Component {
     const currentUserId = this.props.auth.user.username;
     await this.props.getFavJobs(currentUserId);
     this.setState({ favoriteJobs: this.props.favoriteJobs });
-    console.log(this.state);
     this.setState({
       loading: true
     });
@@ -102,14 +101,12 @@ class JobSearch extends Component {
       this.setState({
         favoriteJobsDetails: [...favoriteJobsDetails]
       });
-      console.log(this.state.favoriteJobsDetails);
     } catch (error) {
       console.log(error);
     }
   };
 
   getJobs = async () => {
-    console.log(this.props.favoriteJobs);
     const {
       keywords,
       locationName,
@@ -149,29 +146,24 @@ class JobSearch extends Component {
       loading: true
     });
     const jobs = await this.getJobs();
-    console.log(jobs);
     await this.setState({
       loading: false,
       jobs,
       resultsToSkip: 20
     });
-    console.log(this.state);
   };
 
   onChange = async e => {
     await this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.minimumSalary);
   };
 
   keyPressed = async event => {
-    console.log(event.key);
     if (event.key === "Enter") {
       await this.setState({
         resultsToSkip: 0,
         loading: true
       });
       const jobs = await this.getJobs();
-      console.log(jobs);
       this.setState({
         loading: false,
         jobs,
@@ -187,7 +179,6 @@ class JobSearch extends Component {
       loading: true
     });
     const jobs = await this.getJobs();
-    console.log(jobs);
     this.setState({
       loading: false,
       jobs,
@@ -203,23 +194,17 @@ class JobSearch extends Component {
       moreLoading: true
     });
     const moreJobs = await this.getJobs();
-    console.log(moreJobs);
-    console.log(this.state);
     this.setState({
       jobs: [...this.state.jobs, ...moreJobs],
       moreLoading: false
     });
-    console.log(this.state);
   };
 
   onFavoriteClick = jobId => {
-    console.log(jobId);
     const currentUserId = this.props.auth.user.username;
-    console.log(jobId, currentUserId);
     const jobIndex = this.state.favoriteJobs.findIndex(
       item => item === jobId.toString()
     );
-    console.log(jobIndex, this.state.favoriteJobs);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
       this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
@@ -227,7 +212,6 @@ class JobSearch extends Component {
       this.setState({
         favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
       });
-      console.log(this.state);
       this.props.removeJob(jobId);
     }
   };

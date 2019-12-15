@@ -19,7 +19,6 @@ export const getFavJobs = userId => async dispatch => {
       "teithe-career-portal-api",
       `/favorite-jobs/${userId}`
     );
-    console.log(jobs);
     dispatch({
       type: GET_FAVORITE_JOBS_SUCCESS,
       payload: jobs
@@ -34,13 +33,11 @@ export const getFavJobs = userId => async dispatch => {
 
 // Add Favorite Job
 export const addJob = data => async dispatch => {
-  console.log(data);
   try {
     const result = await API.post("teithe-career-portal-api", "/favorite-job", {
       body: data
     });
 
-    console.log(result);
     dispatch({
       type: ADD_FAVORITE_JOB_SUCCESS,
       payload: result

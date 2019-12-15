@@ -23,7 +23,6 @@ export const getInternalJobs = () => async dispatch => {
       type: SET_LOADING
     });
     const jobs = await API.get("teithe-career-portal-posts-api", "/job-posts");
-    console.log(jobs);
     dispatch({
       type: GET_JOB_POSTS_SUCCESS,
       payload: jobs
@@ -65,7 +64,6 @@ export const addInternalJob = data => async dispatch => {
     const job = await API.post("teithe-career-portal-posts-api", "/job-posts", {
       body: data
     });
-    console.log(job);
     dispatch({
       type: ADD_JOB_POST_SUCCESS,
       payload: job.data
@@ -89,7 +87,6 @@ export const editInternalJob = (id, data) => async dispatch => {
         body: data
       }
     );
-    console.log(job);
     dispatch({
       type: EDIT_JOB_POST_SUCCESS,
       payload: { id, data: job.data }

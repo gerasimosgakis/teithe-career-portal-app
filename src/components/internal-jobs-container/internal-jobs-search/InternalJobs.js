@@ -131,30 +131,17 @@ class InternalJobs extends Component {
 
   onChange = async e => {
     await this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.minimumSalary);
-    // this.onSearchSubmit();
   };
 
   onCheck = async e => {
     await this.setState({
       [e]: this.state[e] === "" || !this.state[e] ? true : false
     });
-    // const jobs = await this.getJobs();
-    // console.log(jobs);
-    // this.setState({
-    //   loading: false,
-    //   jobs,
-    //   resultsToSkip: 20
-    // });
     this.onSearchSubmit();
   };
 
   keyPressed = async event => {
     if (event.key === "Enter") {
-      // await this.setState({
-      //   resultsToSkip: 0,
-      //   loading: true
-      // });
       this.onSearchSubmit();
     }
   };
@@ -163,7 +150,6 @@ class InternalJobs extends Component {
     if (event) {
       event.preventDefault();
     }
-    console.log(this.state);
     const {
       keywords,
       locationName,

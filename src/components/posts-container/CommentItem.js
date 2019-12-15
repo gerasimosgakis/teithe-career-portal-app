@@ -24,7 +24,6 @@ class CommentItem extends Component {
               <button
                 className="button button--small danger-btn"
                 onClick={() => {
-                  console.log(id);
                   this.props.deleteComment(id);
                   onClose();
                 }}

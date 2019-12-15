@@ -67,7 +67,6 @@ class Chat extends Component {
       } else {
         this.setState({ otherUserId: profiles[1].id });
       }
-      console.log(this.state);
       profiles.map(profile => {
         if (profile.id === this.props.userId) {
           this.setState({
@@ -91,19 +90,13 @@ class Chat extends Component {
   }
 
   handleChildClick = id => {
-    console.log(id);
     this.setState({ otherUserId: id, show: false });
     setTimeout(() => {
       this.setState({ show: true });
     }, 200);
-    console.log(this.state);
   };
 
   findUser = userId => {
-    console.log(
-      this.state,
-      this.state.users.filter(user => user.id === userId)
-    );
     return this.state.users.filter(user => user.id === userId)[0];
   };
 

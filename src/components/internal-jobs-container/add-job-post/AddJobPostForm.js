@@ -21,8 +21,6 @@ class AddJobPostForm extends Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props);
-
     const {
       id,
       currentJobIndex,
@@ -51,7 +49,6 @@ class AddJobPostForm extends Component {
   onSubmit = event => {
     event.preventDefault();
     const userId = this.props.auth.user.username;
-    console.log(this.state.id);
     if (this.state.id) {
       this.props.editInternalJob(this.state.id, {
         user_id: userId,
@@ -83,7 +80,6 @@ class AddJobPostForm extends Component {
    *  different job to edit
    */
   static getDerivedStateFromProps(props, current_state) {
-    console.log(props, current_state);
     if (current_state.currentJobIndex !== -1 && props.currentJobIndex < 0) {
       return {
         id: props.id,

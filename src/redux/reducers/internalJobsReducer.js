@@ -42,7 +42,6 @@ export default function(state = initialState, action) {
       const jobIndex = state.internalJobs.findIndex(item => {
         return item.id === action.payload.id;
       });
-      console.log(jobIndex);
       const updatedJobs = [...state.internalJobs];
       updatedJobs[jobIndex] = { ...action.payload.data };
       return {
@@ -57,14 +56,11 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case DELETE_JOB_POST_SUCCESS:
-      console.log(action.payload);
       const deletedJobIndex = state.internalJobs.findIndex(item => {
         return item.id === action.payload;
       });
-      console.log(action.payload, deletedJobIndex);
       const newUpdatedJobs = [...state.internalJobs];
       newUpdatedJobs.splice(deletedJobIndex, 1);
-      // updatedJobs[jobIndex] = { ...action.payload.data };
       return {
         ...state,
         loading: false,

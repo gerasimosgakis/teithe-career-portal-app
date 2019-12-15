@@ -53,10 +53,8 @@ class AddCV extends Component {
 
     try {
       await s3Upload(this.state.file, this.state.user);
-      // file = null;
       this.setState({ saved: true, loading: false });
       const cvURL = await Storage.get(this.props.auth.user.username);
-      console.log(this.state.user, this.state.file.name, cvURL);
       this.props.addCVToProfile(
         this.state.user,
         this.state.file.name,

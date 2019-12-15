@@ -79,7 +79,6 @@ export default function(state = initialState, action) {
       } else if (action.payload.action === "removed") {
         posts[postIndex].likes -= 1;
       }
-      console.log(posts);
       return {
         ...state,
         posts
@@ -90,11 +89,9 @@ export default function(state = initialState, action) {
         errors: action.payload
       };
     case ADD_COMMENT_SUCCESS:
-      console.log(action.payload);
       const commentedPostIndex = state.posts.findIndex(
         post => post.id === action.payload.post_id
       );
-      console.log(commentedPostIndex);
       const newPosts = [...state.posts];
       if (!newPosts[commentedPostIndex].comments) {
         newPosts[commentedPostIndex].comments = [];
