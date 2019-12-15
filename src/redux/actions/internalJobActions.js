@@ -8,9 +8,12 @@ import {
   GET_JOB_POSTS_BY_USER_SUCCESS,
   GET_JOB_POSTS_BY_USER_FAIL,
   EDIT_JOB_POST_SUCCESS,
-  EDIT_JOB_POST_FAIL
+  EDIT_JOB_POST_FAIL,
+  DELETE_JOB_POST_SUCCESS,
+  DELETE_JOB_POST_FAIL,
+  SEARCH_JOB_POSTS_FAIL,
+  SEARCH_JOB_POSTS_SUCCESS
 } from "./types";
-import { actionButton } from "@aws-amplify/ui";
 
 // Get All Internal Jobs
 export const getInternalJobs = () => async dispatch => {
@@ -19,7 +22,6 @@ export const getInternalJobs = () => async dispatch => {
       type: SET_LOADING
     });
     const jobs = await API.get("teithe-career-portal-posts-api", "/job-posts");
-    console.log(jobs);
     dispatch({
       type: GET_JOB_POSTS_SUCCESS,
       payload: jobs
@@ -61,7 +63,6 @@ export const addInternalJob = data => async dispatch => {
     const job = await API.post("teithe-career-portal-posts-api", "/job-posts", {
       body: data
     });
-    console.log(job);
     dispatch({
       type: ADD_JOB_POST_SUCCESS,
       payload: job.data
@@ -75,7 +76,7 @@ export const addInternalJob = data => async dispatch => {
   }
 };
 
-// Edit new internal job
+// Edit internal job
 export const editInternalJob = (id, data) => async dispatch => {
   try {
     const job = await API.put(
@@ -85,7 +86,6 @@ export const editInternalJob = (id, data) => async dispatch => {
         body: data
       }
     );
-    console.log(job);
     dispatch({
       type: EDIT_JOB_POST_SUCCESS,
       payload: { id, data: job.data }
@@ -94,6 +94,44 @@ export const editInternalJob = (id, data) => async dispatch => {
     console.log(err);
     dispatch({
       type: EDIT_JOB_POST_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Delete internal job
+export const deleteInternalJob = id => async dispatch => {
+  try {
+    await API.del("teithe-career-portal-posts-api", `/job-posts/delete/${id}`);
+    dispatch({
+      type: DELETE_JOB_POST_SUCCESS,
+      payload: id
+    });
+  } catch (err) {
+    dispatch({
+      type: DELETE_JOB_POST_FAIL,
+      payload: err
+    });
+  }
+};
+
+// Search Job Posts
+export const searchJobPosts = keys => async dispatch => {
+  try {
+    const jobs = await API.post(
+      "teithe-career-portal-posts-api",
+      "/job-posts/search",
+      {
+        body: keys
+      }
+    );
+    dispatch({
+      type: SEARCH_JOB_POSTS_SUCCESS,
+      payload: jobs.data
+    });
+  } catch (err) {
+    dispatch({
+      type: SEARCH_JOB_POSTS_FAIL,
       payload: err
     });
   }

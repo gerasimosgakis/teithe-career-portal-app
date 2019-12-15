@@ -20,10 +20,29 @@
 .logo {
   width: 50pt;
   height: 50pt;
-  background: red;
+  // background: red;
   border-radius: 100%;
   text-align: center;
   font-size: 2em;
   padding-top: 12pt;
   color: white;
+}
+
+.text--danger {
+  color: $danger-btn;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: $anchor;
+  font-weight: 500;
+  &:hover {
+    color: $anchor;
+    text-decoration: none;
+  }
+  &:visited {
+    color: $anchor;
+    text-decoration: none;
+  }
 }

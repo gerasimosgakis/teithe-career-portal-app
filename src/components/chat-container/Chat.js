@@ -4,8 +4,6 @@ import Chatkit from "@pusher/chatkit-server";
 import { API } from "aws-amplify";
 import UserList from "./UserList";
 import Messages from "./Messages";
-// import "./Chat.scss";
-// Chatkit constants
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
 
 const tokenProvider = new TokenProvider({
@@ -27,6 +25,7 @@ class Chat extends Component {
       currentUserName: "",
       otherUserId: "",
       users: [],
+      searchUsers: null,
       show: true
     };
   }
@@ -38,22 +37,14 @@ class Chat extends Component {
       })
       .then(currentUser => {
         console.log(currentUser);
-        // this.setState({
-        //   currentUsername: username,
-        //   currentId: username,
-        //   currentView: "chatApp"
-        // });
       })
       .catch(err => {
         if (err.status === 400) {
           console.log(err);
-          // this.setState({
-          //   currentUsername: username,
-          //   currentId: username,
-          //   currentView: "chatApp"
-          // });
+          return;
         } else {
           console.log(err.status);
+          return;
         }
       });
   };
@@ -67,22 +58,23 @@ class Chat extends Component {
       } else {
         this.setState({ otherUserId: profiles[1].id });
       }
-      console.log(this.state);
-      profiles.map(profile => {
+      profiles.forEach(profile => {
         if (profile.id === this.props.userId) {
           this.setState({
             currentUserName: profile.handle
           });
         }
         const userId = profile.id;
-        const userName = profile.handle;
-        this.createUser(userId, userName);
-        users.push({
-          id: profile.id,
-          handle: profile.handle,
-          name: profile.name,
-          email: profile.email
-        });
+        const userName = profile.name;
+        if (userId) {
+          this.createUser(userId, userName);
+          users.push({
+            id: profile.id,
+            handle: profile.handle,
+            name: profile.name,
+            email: profile.email
+          });
+        }
       });
       this.setState({ users });
     } catch (error) {
@@ -91,31 +83,72 @@ class Chat extends Component {
   }
 
   handleChildClick = id => {
-    console.log(id);
     this.setState({ otherUserId: id, show: false });
     setTimeout(() => {
       this.setState({ show: true });
     }, 200);
-    console.log(this.state);
   };
 
   findUser = userId => {
-    console.log(
-      this.state,
-      this.state.users.filter(user => user.id === userId)
-    );
     return this.state.users.filter(user => user.id === userId)[0];
+  };
+
+  onUserSearch = event => {
+    if (event.key === "Enter") {
+      if (
+        this.state.users.filter(user =>
+          user.name.startsWith(event.target.value)
+        ).length <= 0
+      ) {
+        return;
+      }
+      this.setState({
+        searchUsers: this.state.users.filter(user =>
+          user.name.startsWith(event.target.value)
+        ),
+        otherUserId: this.state.users.filter(user =>
+          user.name.startsWith(event.target.value)
+        )[0].id,
+        show: false
+      });
+
+      setTimeout(() => {
+        this.setState({ show: true });
+      }, 200);
+    }
   };
 
   render() {
     return (
       <div className="Chat">
         <div className="Chat__chatwindow">
-          <UserList
-            userName={this.state.currentUserName}
-            users={this.state.users}
-            onClick={this.handleChildClick}
-          />
+          <div className="Chat__chatwindow-users">
+            {((this.state.users && this.state.users.length > 0) ||
+              (this.state.searchUsers &&
+                this.state.searchUsers.length > 0)) && (
+              <div className="Chat__chatwindow-users-search">
+                <input
+                  className="form-control Chat__chatwindow-users-search-input"
+                  type="text"
+                  onKeyPress={this.onUserSearch}
+                />
+                <span className="Chat__chatwindow-users-search-icon">
+                  <i className="fas fa-search"></i>
+                </span>
+              </div>
+            )}
+            <UserList
+              userName={this.state.currentUserName}
+              otherUserId={this.state.otherUserId}
+              users={
+                this.state.searchUsers
+                  ? this.state.searchUsers
+                  : this.state.users
+              }
+              onClick={this.handleChildClick}
+            />
+          </div>
+
           {this.state.otherUserId && this.state.show && this.state.users ? (
             <ChatkitProvider
               instanceLocator={instanceLocator}

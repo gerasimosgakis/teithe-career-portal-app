@@ -49,8 +49,6 @@ export const getProfiles = () => async dispatch => {
 
 // Get Profile By Id
 export const getProfileById = id => async dispatch => {
-  console.log(id);
-
   try {
     dispatch({
       type: "SET_LOADING",
@@ -65,7 +63,6 @@ export const getProfileById = id => async dispatch => {
       "teithe-career-portal-api",
       `/experiences/${id}`
     );
-    console.log(profile);
     dispatch({
       type: GET_PROFILE_SUCCESS,
       payload: {
@@ -102,7 +99,6 @@ export const getProfileByHandle = handle => async dispatch => {
       `/experiences/${profile[0].id}`
     );
 
-    console.log(educations);
     dispatch({
       type: GET_PROFILE_SUCCESS,
       payload: {
@@ -111,7 +107,6 @@ export const getProfileByHandle = handle => async dispatch => {
         experiences
       }
     });
-    console.log(profile);
   } catch (error) {
     console.log(error);
     dispatch({
@@ -147,7 +142,6 @@ export const createProfile = (
   profileData,
   history
 ) => async dispatch => {
-  console.log(typeof profileData.skills, profileData);
   //profileData.skills = profileData.skills ? profileData.skills.split(",") : [];
   profileData.id = user;
   // if (profileData.skills && typeof profileData.skills === "string") {
@@ -162,9 +156,7 @@ export const createProfile = (
     r: "pg", // rating
     d: "mm" //default
   });
-  console.log(avatar);
   profileData.avatar = avatar;
-  console.log(profileData);
   try {
     const result = await API.post("teithe-career-portal-api", `/profiles`, {
       body: profileData
@@ -173,7 +165,6 @@ export const createProfile = (
       //   "cognito-identity-id": user
       // }
     });
-    console.log(result);
     dispatch({
       type: CREATE_PROFILE_SUCCESS,
       payload: { profile: result.data }
@@ -195,7 +186,6 @@ export const editProfile = (
   profileData,
   history
 ) => async dispatch => {
-  console.log(typeof profileData.skills, profileData);
   //profileData.skills = profileData.skills ? profileData.skills.split(",") : [];
   profileData.id = user;
   // if (profileData.skills && typeof profileData.skills === "string") {
@@ -210,9 +200,7 @@ export const editProfile = (
     r: "pg", // rating
     d: "mm" //default
   });
-  console.log(avatar);
   profileData.avatar = avatar;
-  console.log(profileData);
   try {
     const editProfileResponse = await API.put(
       "teithe-career-portal-api",
@@ -240,8 +228,6 @@ export const editProfile = (
 
 // Add Experience
 export const addExperience = expData => async dispatch => {
-  console.log(expData);
-
   try {
     const response = await API.post(
       "teithe-career-portal-api",
@@ -254,7 +240,6 @@ export const addExperience = expData => async dispatch => {
         // }
       }
     );
-    console.log(response);
     dispatch({
       type: ADD_EXPERIENCE_SUCCESS,
       payload: response.data
@@ -270,8 +255,6 @@ export const addExperience = expData => async dispatch => {
 
 // Edit Experience
 export const editExperience = expData => async dispatch => {
-  console.log(expData);
-
   try {
     await API.put(
       "teithe-career-portal-api",
@@ -316,8 +299,6 @@ export const deleteExperience = id => async dispatch => {
 
 // Add Education
 export const addEducation = eduData => async dispatch => {
-  console.log(eduData);
-
   try {
     const response = await API.post("teithe-career-portal-api", `/educations`, {
       body: eduData
@@ -326,7 +307,6 @@ export const addEducation = eduData => async dispatch => {
       //   "cognito-identity-id": user
       // }
     });
-    console.log(response);
     dispatch({
       type: ADD_EDUCATION_SUCCESS,
       payload: response.data
@@ -342,8 +322,6 @@ export const addEducation = eduData => async dispatch => {
 
 // Edit Education
 export const editEducation = eduData => async dispatch => {
-  console.log(eduData);
-
   try {
     await API.put(
       "teithe-career-portal-api",

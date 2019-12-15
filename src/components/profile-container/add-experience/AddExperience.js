@@ -26,19 +26,21 @@ class AddExperience extends Component {
       currentExperienceIndex
     } = this.props;
 
-    // Initialise state with the received props
+    // Initialise state with the received props or fallback
     this.state = {
-      user_id: userId,
-      id,
-      current,
+      user_id: userId ? userId : "",
+      id: id ? id : "",
+      current: current ? current : false,
       disabled: current ? true : false,
-      _location,
-      description,
-      title,
+      _location: _location ? _location : "",
+      description: description ? description : "",
+      title: title ? title : "",
       start_date: start_date ? start_date.slice(0, 7) : null,
       end_date: end_date ? end_date.slice(0, 7) : null,
-      company: company,
-      currentExperienceIndex
+      company: company ? company : "",
+      currentExperienceIndex: currentExperienceIndex
+        ? currentExperienceIndex
+        : -1
     };
   }
 
@@ -62,7 +64,6 @@ class AddExperience extends Component {
         start_date: "",
         end_date: "",
         company: ""
-        // currentExperienceIndex: null
       };
     } else if (
       props.currentExperienceIndex !== -1 &&
@@ -77,8 +78,12 @@ class AddExperience extends Component {
         _location: props._location !== null ? props._location : null,
         description: props.description,
         title: props.title,
-        start_date: props.start_date.slice(0, 7),
-        end_date: props.current ? null : props.end_date.slice(0, 7),
+        start_date: props.start_date ? props.start_date.slice(0, 7) : "",
+        end_date: props.current
+          ? ""
+          : props.end_date
+          ? props.end_date.slice(0, 7)
+          : "",
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };
@@ -102,8 +107,9 @@ class AddExperience extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    if (this.state.id) {
+    // Check if we are editing an experience
+    if (this.state.id && this.state.id !== "") {
+      // call the edit function
       this.props.editExperience({
         user_id: this.state.user_id,
         id: this.state.id,
@@ -118,6 +124,7 @@ class AddExperience extends Component {
         company: this.state.company
       });
     } else {
+      // Otherwise call the add function
       this.props.addExperience({
         user_id: this.state.user_id,
         current: this.state.current,
@@ -145,6 +152,7 @@ class AddExperience extends Component {
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
+                <div className="form__field-label">* Company</div>
                 <TextFieldGroup
                   placeholder="* Company"
                   name="company"
@@ -152,6 +160,7 @@ class AddExperience extends Component {
                   value={this.state.company}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Title</div>
                 <TextFieldGroup
                   placeholder="* Job Title"
                   name="title"
@@ -159,6 +168,7 @@ class AddExperience extends Component {
                   value={this.state.title}
                   onChange={this.onChange}
                 />
+                <div className="form__field-label">* Location</div>
                 <TextFieldGroup
                   placeholder="Location"
                   name="_location"
@@ -166,7 +176,7 @@ class AddExperience extends Component {
                   value={this.state._location}
                   onChange={this.onChange}
                 />
-                <h6>* From Date</h6>
+                <div className="form__field-label">* Start Date</div>
                 <TextFieldGroup
                   placeholder="from"
                   name="start_date"
@@ -175,7 +185,7 @@ class AddExperience extends Component {
                   value={this.state.start_date}
                   onChange={this.onChange}
                 />
-                <h6>* To Date</h6>
+                <div className="form__field-label">* End Date</div>
                 <TextFieldGroup
                   placeholder="to"
                   name="end_date"
@@ -193,12 +203,13 @@ class AddExperience extends Component {
                     value={this.state.current}
                     checked={this.state.current}
                     onChange={this.onCheck}
-                    id="current"
+                    id="currentExp"
                   />
                   <label htmlFor="current" className="form-check-label">
                     Current Job
                   </label>
                 </div>
+                <div className="form__field-label">Description</div>
                 <TextAreaFieldGroup
                   placeholder="Job Description"
                   name="description"

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Spinner from "../shared/Spinner";
 import CommentItem from "./CommentItem";
 
 class CommentFeed extends Component {
@@ -13,21 +12,19 @@ class CommentFeed extends Component {
     };
   }
 
-  componentWillUpdate() {
-    console.log();
-  }
-
   render() {
-    console.log(this.props.comments);
-    // const { comments } = this.props;
     return (
       <div>
-        {this.props.comments.map(comment => (
-          <CommentItem comment={comment} />
+        {this.props.comments.map((comment, index) => (
+          <CommentItem key={index} comment={comment} />
         ))}
       </div>
     );
   }
 }
 
-export default CommentFeed;
+const mapStateToProps = state => ({
+  posts: state.posts
+});
+
+export default connect(mapStateToProps, null)(CommentFeed);

@@ -6,8 +6,10 @@ import {
   getProfiles
 } from "../../../redux/actions/profileActions";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 const initialState = {
+  // Initial state, so we can reset the form after submit
   handle: "",
   name: "",
   school: "",
@@ -17,10 +19,9 @@ const initialState = {
   status: "",
   skills: "",
   degree: "",
-  expandFields: false
+  expandFields: false // if true we show all the search fields
 };
 
-let expandFields = false;
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -28,8 +29,13 @@ class Search extends Component {
     this.state = initialState;
   }
 
+  /**
+   * On Submit Search Form
+   * Submits search form
+   */
   onSubmit = e => {
     e.preventDefault();
+    // Retrieves search data from state
     const searchData = {
       handle: this.state.handle.toLowerCase(),
       name: this.state.name.toLowerCase(),
@@ -41,25 +47,32 @@ class Search extends Component {
       skills: this.state.skills.toLowerCase(),
       degree: this.state.degree.toLowerCase()
     };
+    // Converts dates into a date format
     searchData.graduate_date_before = moment(
       this.state.graduate_date_before
     ).toDate();
     searchData.graduate_date_after = moment(
       this.state.graduate_date_after
     ).toDate();
-    this.props.searchGraduates(searchData);
-    this.setState({ ...initialState });
+    this.props.searchGraduates(searchData); // Call the searchGraduates function to get the searched graduates in redux
+    this.setState({ ...initialState }); // Clear state
   };
 
+  /**
+   * Retrieve all the profiles
+   */
   getAllProfiles = () => {
     this.props.getProfiles();
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
   };
 
+  /**
+   * On Click expand button for search
+   * It reveals all the search inputs
+   */
   onExpand = () => {
     this.setState({ expandFields: !this.state.expandFields });
   };
@@ -155,12 +168,6 @@ class Search extends Component {
             ""
           )}
           <div className="btn-group right">
-            {/* <input
-              type="button"
-              value="Get All"
-              className="btn btn-info btn-block mt-4 mb-4"
-              onClick={this.getAllProfiles}
-            /> */}
             <button
               type="button"
               className="button transparent-btn mr1"
@@ -175,5 +182,10 @@ class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  searchGraduates: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired
+};
 
 export default connect(null, { searchGraduates, getProfiles })(Search);

@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
 import Avatar from "react-avatar";
-import TextFieldGroup from "../shared/TextFieldGroup";
+import titleCase from "../../shared/functions/titleCase";
 
 function Messages(props) {
-  console.log(props);
   const [pendingMessage, setPendingMessage] = useState("");
   const messageList = React.createRef();
 
@@ -62,7 +61,7 @@ function Messages(props) {
           <span>
             {props.chatkit.isLoading
               ? "Loading..."
-              : props.chatkit.otherUser.name}
+              : titleCase(props.chatkit.otherUser.name)}
           </span>
         </div>
       </div>

@@ -14,7 +14,6 @@ import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
 import gravatar from "gravatar";
 import Chat from "./components/chat-container/Chat";
-import AppliedRoute from "./AppliedRoute";
 import Posts from "./components/posts-container/Posts";
 import JobSearch from "./components/job-search-container/JobSearch";
 import AddCV from "./components/add-cv-container/AddCV";
@@ -24,6 +23,7 @@ import CreateProfile from "./components/profile-container/create-profile/CreateP
 import Profiles from "./components/profile-container/profiles-list/Profiles";
 import Profile from "./components/profile-container/profile-dashboard/Profile";
 // import Profile from "./components/profile-container/";
+import PrivateRoute from "./components/shared/PrivateRoute";
 
 class App extends Component {
   constructor(props) {
@@ -46,7 +46,6 @@ class App extends Component {
         r: "pg", // rating
         d: "mm" //default
       });
-      console.log(avatar);
       currentAuthenticatedUser.avatar = avatar;
       store.dispatch({
         type: SET_USER,
@@ -79,30 +78,43 @@ class App extends Component {
               <Switch>
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
-                <Route
+                <PrivateRoute
                   exact
                   path="/create-profile"
                   component={() => (
                     <CreateProfile header={true}></CreateProfile>
                   )}
-                ></Route>
-                <Route exact path="/graduates" component={Profiles} />
-                <Route exact path="/graduates/:id" component={Profile} />
-                <Route exact path="/profile" component={Profile} />
-                <AppliedRoute
+                />
+                <PrivateRoute exact path="/graduates" component={Profiles} />
+                <PrivateRoute exact path="/graduates/:id" component={Profile} />
+                <PrivateRoute exact path="/profile" component={Profile} />
+                {/* <AppliedRoute
                   exact
                   path="/chat"
                   props={{ userId: this.state.userId }}
                   component={Chat}
+                /> */}
+                <PrivateRoute
+                  exact
+                  path="/chat"
+                  component={() => <Chat userId={this.state.userId} />}
                 />
-                <Route exact path="/feed" component={Posts} />
-                {/* <Route exact path="/post/:id" component={Post} /> */}
-                <Route exact path="/create-profile" component={CreateProfile} />
-                <Route exact path="/job-search" component={JobSearch} />
-                <Route exact path="/add-cv" component={AddCV} />
-                <Route exact path="/add-job-post" component={AddJobPost} />
+                <PrivateRoute exact path="/feed" component={Posts} />
+                {/* <PrivateRoute exact path="/post/:id" component={Post} /> */}
+                <PrivateRoute
+                  exact
+                  path="/create-profile"
+                  component={CreateProfile}
+                />
+                <PrivateRoute exact path="/job-search" component={JobSearch} />
+                <PrivateRoute exact path="/add-cv" component={AddCV} />
+                <PrivateRoute
+                  exact
+                  path="/add-job-post"
+                  component={AddJobPost}
+                />
                 {/* <Route exact path="/internal-jobs" component={InternalJobs} /> */}
-                <Route
+                {/* <Route
                   exact
                   path="/internal-jobs"
                   component={() => (
@@ -110,7 +122,16 @@ class App extends Component {
                       <InternalJobs header={true} />
                     </div>
                   )}
-                ></Route>
+                ></Route> */}
+                <PrivateRoute
+                  exact
+                  path="/internal-jobs"
+                  component={() => (
+                    <div class="contain">
+                      <InternalJobs header={true} />
+                    </div>
+                  )}
+                />
               </Switch>
             </div>
           </div>

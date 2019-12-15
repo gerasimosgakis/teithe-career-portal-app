@@ -7,7 +7,11 @@ import {
   GET_JOB_POSTS_SUCCESS,
   GET_JOB_POSTS_FAIL,
   GET_JOB_POSTS_BY_USER_SUCCESS,
-  GET_JOB_POSTS_BY_USER_FAIL
+  GET_JOB_POSTS_BY_USER_FAIL,
+  DELETE_JOB_POST_SUCCESS,
+  DELETE_JOB_POST_FAIL,
+  SEARCH_JOB_POSTS_SUCCESS,
+  SEARCH_JOB_POSTS_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -38,7 +42,6 @@ export default function(state = initialState, action) {
       const jobIndex = state.internalJobs.findIndex(item => {
         return item.id === action.payload.id;
       });
-      console.log(jobIndex);
       const updatedJobs = [...state.internalJobs];
       updatedJobs[jobIndex] = { ...action.payload.data };
       return {
@@ -47,6 +50,23 @@ export default function(state = initialState, action) {
         internalJobs: updatedJobs
       };
     case EDIT_JOB_POST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
+    case DELETE_JOB_POST_SUCCESS:
+      const deletedJobIndex = state.internalJobs.findIndex(item => {
+        return item.id === action.payload;
+      });
+      const newUpdatedJobs = [...state.internalJobs];
+      newUpdatedJobs.splice(deletedJobIndex, 1);
+      return {
+        ...state,
+        loading: false,
+        internalJobs: newUpdatedJobs
+      };
+    case DELETE_JOB_POST_FAIL:
       return {
         ...state,
         loading: false,
@@ -76,19 +96,18 @@ export default function(state = initialState, action) {
         loading: false,
         errors: action.payload
       };
-    // case GET_FAVORITE_JOBS_SUCCESS:
-    //   const favoriteJobs = [...action.payload].map(item => item.job_id);
-    //   return {
-    //     ...state,
-    //     favoriteJobs,
-    //     loading: false
-    //   };
-    // case GET_FAVORITE_JOBS_FAIL:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     errors: action.payload
-    //   };
+    case SEARCH_JOB_POSTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        internalJobs: [...action.payload]
+      };
+    case SEARCH_JOB_POSTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload
+      };
     default:
       return state;
   }

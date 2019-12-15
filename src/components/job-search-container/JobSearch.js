@@ -38,7 +38,6 @@ class JobSearch extends Component {
     const currentUserId = this.props.auth.user.username;
     await this.props.getFavJobs(currentUserId);
     this.setState({ favoriteJobs: this.props.favoriteJobs });
-    console.log(this.state);
     this.setState({
       loading: true
     });
@@ -102,14 +101,12 @@ class JobSearch extends Component {
       this.setState({
         favoriteJobsDetails: [...favoriteJobsDetails]
       });
-      console.log(this.state.favoriteJobsDetails);
     } catch (error) {
       console.log(error);
     }
   };
 
   getJobs = async () => {
-    console.log(this.props.favoriteJobs);
     const {
       keywords,
       locationName,
@@ -121,14 +118,13 @@ class JobSearch extends Component {
       fullTime,
       minimumSalary,
       maximumSalary,
-      graduate,
       resultsToTake,
       resultsToSkip
     } = this.state;
     try {
       const jobs = await axios.get(
         `https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/search?keywords=${keywords}&locationName=${locationName}&distancefromlocation=${distanceFromLocation ||
-          15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
+          15}&minimumSalary=${minimumSalary}&maximumSalary=${maximumSalary}&permanent=${permanent}&fullTime=${fullTime}&temp=${temp}&partTime=${partTime}&contract=${contract}&resultsToTake=${resultsToTake}&resultsToSkip=${resultsToSkip}`,
         {
           headers: {
             Authorization:
@@ -149,29 +145,24 @@ class JobSearch extends Component {
       loading: true
     });
     const jobs = await this.getJobs();
-    console.log(jobs);
     await this.setState({
       loading: false,
       jobs,
       resultsToSkip: 20
     });
-    console.log(this.state);
   };
 
   onChange = async e => {
     await this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.minimumSalary);
   };
 
   keyPressed = async event => {
-    console.log(event.key);
     if (event.key === "Enter") {
       await this.setState({
         resultsToSkip: 0,
         loading: true
       });
       const jobs = await this.getJobs();
-      console.log(jobs);
       this.setState({
         loading: false,
         jobs,
@@ -187,7 +178,6 @@ class JobSearch extends Component {
       loading: true
     });
     const jobs = await this.getJobs();
-    console.log(jobs);
     this.setState({
       loading: false,
       jobs,
@@ -196,30 +186,24 @@ class JobSearch extends Component {
   };
 
   loadMore = async () => {
-    const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
+    // const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
     await this.setState({
       ...this.state,
       resultsToSkip: this.state.jobs.length,
       moreLoading: true
     });
     const moreJobs = await this.getJobs();
-    console.log(moreJobs);
-    console.log(this.state);
     this.setState({
       jobs: [...this.state.jobs, ...moreJobs],
       moreLoading: false
     });
-    console.log(this.state);
   };
 
   onFavoriteClick = jobId => {
-    console.log(jobId);
     const currentUserId = this.props.auth.user.username;
-    console.log(jobId, currentUserId);
     const jobIndex = this.state.favoriteJobs.findIndex(
       item => item === jobId.toString()
     );
-    console.log(jobIndex, this.state.favoriteJobs);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
       this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
@@ -227,7 +211,6 @@ class JobSearch extends Component {
       this.setState({
         favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
       });
-      console.log(this.state);
       this.props.removeJob(jobId);
     }
   };
@@ -403,21 +386,27 @@ class JobSearch extends Component {
                       onClick={this.onFavoriteClick}
                     ></JobItem>
                   ))}
-                  {this.state.jobs.map(
-                    (job, index) =>
-                      this.state.favoriteJobsDetails &&
-                      !this.state.favoriteJobs.includes(
-                        job.jobId.toString()
-                      ) && (
-                        <JobItem
-                          key={index + this.state.favoriteJobsDetails.length}
-                          job={job}
-                          favoriteJob={this.state.favoriteJobs.includes(
-                            job.jobId.toString()
-                          )}
-                          onClick={this.onFavoriteClick}
-                        ></JobItem>
-                      )
+                  {this.state.jobs.length > 0 ? (
+                    this.state.jobs.map(
+                      (job, index) =>
+                        this.state.favoriteJobsDetails &&
+                        !this.state.favoriteJobs.includes(
+                          job.jobId.toString()
+                        ) && (
+                          <JobItem
+                            key={index + this.state.favoriteJobsDetails.length}
+                            job={job}
+                            favoriteJob={this.state.favoriteJobs.includes(
+                              job.jobId.toString()
+                            )}
+                            onClick={this.onFavoriteClick}
+                          ></JobItem>
+                        )
+                    )
+                  ) : (
+                    <div className="text-center mt4">
+                      <h2>There are no jobs to display...</h2>
+                    </div>
                   )}
                   {this.state.jobs.length > 0 && (
                     <div className="btn-group right">

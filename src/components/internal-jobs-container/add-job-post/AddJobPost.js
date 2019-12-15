@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import TextFieldGroup from "../../shared/TextFieldGroup";
-import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import { addInternalJob } from "../../../redux/actions/internalJobActions";
 import { getInternalJobsByUser } from "../../../redux/actions/internalJobActions";
 import InternalJobs from "../internal-jobs-search/InternalJobs";
@@ -30,7 +28,6 @@ class AddJobPost extends Component {
   onSubmit = event => {
     event.preventDefault();
     const userId = this.props.auth.user.username;
-    console.log(this.state, userId);
     this.props.addInternalJob({
       user_id: userId,
       title: this.state.title,

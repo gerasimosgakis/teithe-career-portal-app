@@ -1,0 +1,12 @@
+.navbar {
+  background: $main-color;
+}
+
+.nav-item {
+  a {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding: 8pt;
+  }
+}

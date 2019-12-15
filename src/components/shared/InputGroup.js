@@ -3,7 +3,6 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 
 const InputGroup = ({ name, placeholder, value, icon, type, onChange }) => {
-  console.log(value);
   return (
     <div className="input-group mb-3">
       <div className="input-group-prepend">
