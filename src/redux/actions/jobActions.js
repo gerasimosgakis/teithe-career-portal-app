@@ -43,7 +43,6 @@ export const addJob = data => async dispatch => {
       payload: result
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: ADD_FAVORITE_JOB_FAIL,
       payload: error
@@ -64,7 +63,6 @@ export const removeJob = jobId => async dispatch => {
       payload: result
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: REMOVE_FAVORITE_JOB_FAIL,
       payload: error

@@ -51,7 +51,6 @@ export const addPost = data => async dispatch => {
       payload: post.data
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: ADD_POST_FAIL,
       payload: error
@@ -75,7 +74,6 @@ export const deletePost = id => async dispatch => {
       payload: response.id
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: DELETE_POST_FAIL,
       payload: error
@@ -100,7 +98,6 @@ export const addLike = (postId, userId, username, liked) => async dispatch => {
       payload: { data: addLike.data, action: addLike.action }
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: ADD_LIKE_FAIL,
       payload: error
@@ -123,7 +120,6 @@ export const addComment = data => async dispatch => {
       payload: response.data
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: ADD_COMMENT_FAIL,
       payload: err
@@ -134,9 +130,6 @@ export const addComment = data => async dispatch => {
 // Get Comments by Post
 export const getCommentsByPost = (postId, postIndex) => async dispatch => {
   try {
-    // dispatch({
-    //   type: SET_LOADING
-    // });
     const response = await API.get(
       "teithe-career-portal-posts-api",
       `/comments/${postId}`
@@ -147,7 +140,6 @@ export const getCommentsByPost = (postId, postIndex) => async dispatch => {
       payload: { comments: response.data, postIndex }
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: GET_COMMENTS_BY_POST_FAIL,
       payload: err
@@ -168,7 +160,6 @@ export const deleteComment = id => async dispatch => {
       payload: id
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: DELETE_COMMENT_FAIL,
       payload: error

@@ -186,7 +186,6 @@ class JobSearch extends Component {
   };
 
   loadMore = async () => {
-    // const { keywords, locationName, resultsToTake, resultsToSkip } = this.state;
     await this.setState({
       ...this.state,
       resultsToSkip: this.state.jobs.length,

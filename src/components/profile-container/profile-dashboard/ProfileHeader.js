@@ -9,9 +9,7 @@ class ProfileHeader extends Component {
     const { profile } = this.props;
     return (
       <div className="profile-header">
-        <div className="profile-header__banner">
-          {/* <img src={banner} alt="" className="profile-header__banner-pic" /> */}
-        </div>
+        <div className="profile-header__banner"></div>
         <div className="profile-header__logo">
           <Avatar
             email={profile.email}

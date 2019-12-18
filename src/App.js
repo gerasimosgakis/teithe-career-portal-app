@@ -22,7 +22,6 @@ import InternalJobs from "./components/internal-jobs-container/internal-jobs-sea
 import CreateProfile from "./components/profile-container/create-profile/CreateProfile";
 import Profiles from "./components/profile-container/profiles-list/Profiles";
 import Profile from "./components/profile-container/profile-dashboard/Profile";
-// import Profile from "./components/profile-container/";
 import PrivateRoute from "./components/shared/PrivateRoute";
 
 class App extends Component {
@@ -88,19 +87,12 @@ class App extends Component {
                 <PrivateRoute exact path="/graduates" component={Profiles} />
                 <PrivateRoute exact path="/graduates/:id" component={Profile} />
                 <PrivateRoute exact path="/profile" component={Profile} />
-                {/* <AppliedRoute
-                  exact
-                  path="/chat"
-                  props={{ userId: this.state.userId }}
-                  component={Chat}
-                /> */}
                 <PrivateRoute
                   exact
                   path="/chat"
                   component={() => <Chat userId={this.state.userId} />}
                 />
                 <PrivateRoute exact path="/feed" component={Posts} />
-                {/* <PrivateRoute exact path="/post/:id" component={Post} /> */}
                 <PrivateRoute
                   exact
                   path="/create-profile"
@@ -113,16 +105,6 @@ class App extends Component {
                   path="/add-job-post"
                   component={AddJobPost}
                 />
-                {/* <Route exact path="/internal-jobs" component={InternalJobs} /> */}
-                {/* <Route
-                  exact
-                  path="/internal-jobs"
-                  component={() => (
-                    <div class="contain">
-                      <InternalJobs header={true} />
-                    </div>
-                  )}
-                ></Route> */}
                 <PrivateRoute
                   exact
                   path="/internal-jobs"

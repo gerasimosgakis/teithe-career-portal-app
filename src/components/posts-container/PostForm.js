@@ -13,22 +13,11 @@ class PostForm extends Component {
     };
   }
 
-  // UNSAFE_componentWillReceiveProps(newProps) {
-  //   if (newProps.errors) {
-  //     this.setState({ errors: newProps.errors });
-  //   }
-  // }
-
   onSubmit = e => {
     e.preventDefault();
 
     const currentUserId = this.props.auth.user.username;
     const email = this.props.auth.user.attributes.email;
-    // const avatar = gravatar.url(email, {
-    //   s: "150", // size
-    //   r: "pg", // rating
-    //   d: "mm" //default});
-    // });
     const postData = {
       user_id: currentUserId,
       text: this.state.text,
