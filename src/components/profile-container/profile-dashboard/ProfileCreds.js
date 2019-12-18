@@ -190,6 +190,7 @@ class ProfileCreds extends Component {
                 <Moment format="MMMM YYYY">{exp.end_date}</Moment>
               )}
             </p>
+            <p className="help-text">{exp.location}</p>
           </span>
         </div>
         <div className="profile-creds__cred-info-description">
