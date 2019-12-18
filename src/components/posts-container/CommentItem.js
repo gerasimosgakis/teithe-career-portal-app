@@ -50,7 +50,7 @@ class CommentItem extends Component {
             /> */}
             <Avatar
               email={this.props.comment.user_email}
-              name={this.props.comment.user_name}
+              name={this.props.comment.user_name.toLowerCase()}
               round={true}
               size="30"
             />

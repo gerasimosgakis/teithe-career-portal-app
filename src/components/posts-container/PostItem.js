@@ -86,7 +86,7 @@ class PostItem extends Component {
             <span className="mb-2">
               <Avatar
                 email={this.state.post.user_email}
-                name={this.state.post.user_name}
+                name={this.state.post.user_name.toLowerCase()}
                 round={true}
                 size="50"
               />
