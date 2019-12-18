@@ -36,20 +36,12 @@ function Messages(props) {
     id: m.id,
     isOwnMessage: m.sender.id === props.chatkit.currentUser.id,
     createdAt: m.createdAt,
-    // This will only work with simple messages.
-    // To learn more about displaying multi-part messages see
-    // https://pusher.com/docs/chatkit/reference/javascript#messages
     textContent: m.parts[0].payload.content
   }));
 
   return (
     <div className="Messages">
       <div className="Messages__titlebar">
-        {/* <img
-          src={props && props.user ? props.user.avatar : defaultAvatar}
-          className="Messages__titlebar__avatar"
-          alt="avatar"
-        /> */}
         <Avatar
           email={props && props.user ? props.user.email : null}
           name={props && props.user ? props.user.name : null}
@@ -57,7 +49,6 @@ function Messages(props) {
           size="30"
         />
         <div className="Messages__titlebar__details ml1">
-          {/*TODO: Get other user's name from Chatkit */}
           <span>
             {props.chatkit.isLoading
               ? "Loading..."

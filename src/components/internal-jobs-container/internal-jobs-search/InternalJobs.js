@@ -98,35 +98,6 @@ class InternalJobs extends Component {
     });
   }
 
-  // async getLocation(latitude, longitude) {
-  //   var apikey = "d68690d89dff4842a10bc42493a2a90e";
-
-  //   var api_url = "https://api.opencagedata.com/geocode/v1/json";
-
-  //   var request_url =
-  //     api_url +
-  //     "?" +
-  //     "key=" +
-  //     apikey +
-  //     "&q=" +
-  //     encodeURIComponent(latitude + "," + longitude) +
-  //     "&pretty=1" +
-  //     "&no_annotations=1";
-  //   try {
-  //     const location = await axios.get(request_url);
-  //     return location.data.results[0].components.postcode;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // setLocation = async coords => {
-  //   const postcode = await this.getLocation(coords.latitude, coords.longitude);
-  //   this.setState({
-  //     locationName: postcode
-  //   });
-  // };
-
   onChange = async e => {
     await this.setState({ [e.target.name]: e.target.value });
   };
@@ -180,7 +151,7 @@ class InternalJobs extends Component {
       content = <Spinner />;
     } else {
       content = internalJobs.map((job, index) => (
-        <div className="internal-jobs__job">
+        <div key={index} className="internal-jobs__job">
           <InternalJobItem job={job}></InternalJobItem>
           {this.props.auth.user.username === job.user_id && (
             <div className="internal-jobs__job-edit-buttons">
@@ -189,7 +160,6 @@ class InternalJobs extends Component {
                 data-toggle="modal"
                 data-target="#editModal"
                 onClick={() => {
-                  // this.currentExperienceIndex = index;
                   this.setState({
                     id: job.id,
                     title: job.title,
@@ -201,7 +171,6 @@ class InternalJobs extends Component {
                     description: job.description,
                     currentJobIndex: index
                   });
-                  // console.log(this.currentExperienceIndex);
                 }}
               >
                 <i className="fas fa-edit"></i>
@@ -215,7 +184,6 @@ class InternalJobs extends Component {
                 <i className="fas fa-times"></i>
               </button>
             </div>
-            // job-posts/delete/{id}
           )}
         </div>
       ));
@@ -253,13 +221,6 @@ class InternalJobs extends Component {
                     value={this.state.locationName}
                     onChange={this.onChange}
                   />
-                  {/* <button
-                    className="icon-button search-jobs__form-basic-field-location-button"
-                    disabled={!this.props.coords}
-                    onClick={() => this.setLocation(this.props.coords)}
-                  >
-                    <i className="fas fa-search-location fa-2x"></i>
-                  </button> */}
                 </div>
               </div>
             </div>
@@ -279,6 +240,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Minimum Salary"
                   name="minimumSalary"
+                  type="number"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
                   onKeyPress={this.keyPressed}
@@ -287,6 +249,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Maximum Salary"
                   name="maximumSalary"
+                  type="number"
                   value={this.state.maximumSalary}
                   required
                   onChange={this.onChange}
@@ -378,7 +341,7 @@ class InternalJobs extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentJobIndex >= 0 ? (
+                {/* {this.state.currentJobIndex >= 0 ? (
                   <AddJobPostForm
                     id={this.state.id}
                     title={this.state.title}
@@ -392,7 +355,18 @@ class InternalJobs extends Component {
                   />
                 ) : (
                   <AddJobPostForm title={""} />
-                )}
+                )} */}
+                <AddJobPostForm
+                  id={this.state.id}
+                  title={this.state.title}
+                  recruiter={this.state.recruiter}
+                  location={this.state.location}
+                  type={this.state.type}
+                  min_salary={this.state.min_salary}
+                  max_salary={this.state.max_salary}
+                  description={this.state.description}
+                  currentJobIndex={this.state.currentJobIndex}
+                />
               </div>
               <div className="modal-footer">
                 <button

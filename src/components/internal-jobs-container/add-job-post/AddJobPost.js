@@ -72,7 +72,7 @@ class AddJobPost extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentJobIndex >= 0 ? (
+                {/* {this.state.currentJobIndex >= 0 ? (
                   <AddJobPostForm
                   // title={''}
                   // recruiter={''}
@@ -84,7 +84,8 @@ class AddJobPost extends Component {
                   />
                 ) : (
                   <AddJobPostForm title={""} />
-                )}
+                )} */}
+                <AddJobPostForm />
               </div>
               <div className="modal-footer">
                 <button

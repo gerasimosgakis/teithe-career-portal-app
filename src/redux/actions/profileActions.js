@@ -108,7 +108,6 @@ export const getProfileByHandle = handle => async dispatch => {
       }
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: GET_PROFILE_FAIL,
       payload: error
@@ -127,7 +126,6 @@ export const searchGraduates = params => async dispatch => {
       payload: { profiles }
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: SEARCH_GRADUATES_FAIL,
       payload: err
@@ -142,15 +140,7 @@ export const createProfile = (
   profileData,
   history
 ) => async dispatch => {
-  //profileData.skills = profileData.skills ? profileData.skills.split(",") : [];
   profileData.id = user;
-  // if (profileData.skills && typeof profileData.skills === "string") {
-  //   profileData.skills = profileData.skills.split(",");
-  // } else if (profileData.skills && typeof profileData.skills === "object") {
-  //   profileData.skills = profileData.skills;
-  // } else {
-  //   profileData.skills = [];
-  // }
   const avatar = gravatar.url(email, {
     s: "300", // size
     r: "pg", // rating
@@ -160,18 +150,12 @@ export const createProfile = (
   try {
     const result = await API.post("teithe-career-portal-api", `/profiles`, {
       body: profileData
-      // headers: {
-      //   // set custom header id for testing
-      //   "cognito-identity-id": user
-      // }
     });
     dispatch({
       type: CREATE_PROFILE_SUCCESS,
       payload: { profile: result.data }
     });
-    // history.push("/profile");
   } catch (err) {
-    console.log(err);
     dispatch({
       type: CREATE_PROFILE_FAIL,
       payload: err
@@ -186,15 +170,7 @@ export const editProfile = (
   profileData,
   history
 ) => async dispatch => {
-  //profileData.skills = profileData.skills ? profileData.skills.split(",") : [];
   profileData.id = user;
-  // if (profileData.skills && typeof profileData.skills === "string") {
-  //   profileData.skills = profileData.skills.split(",");
-  // } else if (profileData.skills && typeof profileData.skills === "object") {
-  //   profileData.skills = profileData.skills;
-  // } else {
-  //   profileData.skills = [];
-  // }
   const avatar = gravatar.url(email, {
     s: "300", // size
     r: "pg", // rating
@@ -207,10 +183,6 @@ export const editProfile = (
       `/profiles/${profileData.id}`,
       {
         body: profileData
-        // headers: {
-        //   // set custom header id for testing
-        //   "cognito-identity-id": user
-        // }
       }
     );
     dispatch({
@@ -218,7 +190,6 @@ export const editProfile = (
       payload: editProfileResponse
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: EDIT_PROFILE_FAIL,
       payload: err
@@ -234,10 +205,6 @@ export const addExperience = expData => async dispatch => {
       `/experiences`,
       {
         body: expData
-        // headers: {
-        //   // set custom header id for testing
-        //   "cognito-identity-id": user
-        // }
       }
     );
     dispatch({
@@ -245,7 +212,6 @@ export const addExperience = expData => async dispatch => {
       payload: response.data
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: ADD_EXPERIENCE_FAIL,
       payload: err
@@ -261,10 +227,6 @@ export const editExperience = expData => async dispatch => {
       `/experiences/update/${expData.id}`,
       {
         body: expData
-        // headers: {
-        //   // set custom header id for testing
-        //   "cognito-identity-id": user
-        // }
       }
     );
     dispatch({
@@ -272,7 +234,6 @@ export const editExperience = expData => async dispatch => {
       payload: expData
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: EDIT_EXPERIENCE_FAIL,
       payload: err
@@ -289,7 +250,6 @@ export const deleteExperience = id => async dispatch => {
       payload: id
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: DELETE_EXPERIENCE_FAIL,
       payload: err
@@ -302,17 +262,12 @@ export const addEducation = eduData => async dispatch => {
   try {
     const response = await API.post("teithe-career-portal-api", `/educations`, {
       body: eduData
-      // headers: {
-      //   // set custom header id for testing
-      //   "cognito-identity-id": user
-      // }
     });
     dispatch({
       type: ADD_EDUCATION_SUCCESS,
       payload: response.data
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: ADD_EDUCATION_FAIL,
       payload: err
@@ -328,10 +283,6 @@ export const editEducation = eduData => async dispatch => {
       `/educations/update/${eduData.id}`,
       {
         body: eduData
-        // headers: {
-        //   // set custom header id for testing
-        //   "cognito-identity-id": user
-        // }
       }
     );
     dispatch({
@@ -339,7 +290,6 @@ export const editEducation = eduData => async dispatch => {
       payload: eduData
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: EDIT_EDUCATION_FAIL,
       payload: err
@@ -356,7 +306,6 @@ export const deleteEducation = id => async dispatch => {
       payload: id
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: DELETE_EDUCATION_FAIL,
       payload: err

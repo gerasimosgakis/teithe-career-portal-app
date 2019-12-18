@@ -125,15 +125,6 @@ class Register extends Component {
           value={this.state.confirmPassword}
           onChange={this.onChange}
         />
-        {/* <LoaderButton
-          block
-          bsSize="large"
-          disabled={!this.validateForm()}
-          type="submit"
-          isLoading={this.state.isLoading}
-          text="Signup"
-          loadingText="Signing up…"
-        /> */}
         <div className="btn-group right">
           <Link to="/" className="button back-btn mr-1">
             Back

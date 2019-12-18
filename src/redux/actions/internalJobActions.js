@@ -31,7 +31,6 @@ export const getInternalJobs = () => async dispatch => {
       type: GET_JOB_POSTS_FAIL,
       payload: err
     });
-    console.log(err);
   }
 };
 
@@ -68,7 +67,6 @@ export const addInternalJob = data => async dispatch => {
       payload: job.data
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: ADD_JOB_POST_FAIL,
       payload: err
@@ -91,7 +89,6 @@ export const editInternalJob = (id, data) => async dispatch => {
       payload: { id, data: job.data }
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: EDIT_JOB_POST_FAIL,
       payload: err
