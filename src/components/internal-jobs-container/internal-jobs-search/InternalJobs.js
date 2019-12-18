@@ -180,7 +180,7 @@ class InternalJobs extends Component {
       content = <Spinner />;
     } else {
       content = internalJobs.map((job, index) => (
-        <div className="internal-jobs__job">
+        <div key={index} className="internal-jobs__job">
           <InternalJobItem job={job}></InternalJobItem>
           {this.props.auth.user.username === job.user_id && (
             <div className="internal-jobs__job-edit-buttons">
@@ -279,6 +279,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Minimum Salary"
                   name="minimumSalary"
+                  type="number"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
                   onKeyPress={this.keyPressed}
@@ -287,6 +288,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Maximum Salary"
                   name="maximumSalary"
+                  type="number"
                   value={this.state.maximumSalary}
                   required
                   onChange={this.onChange}

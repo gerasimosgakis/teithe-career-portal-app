@@ -127,7 +127,7 @@ class App extends Component {
                   exact
                   path="/internal-jobs"
                   component={() => (
-                    <div class="contain">
+                    <div className="contain">
                       <InternalJobs header={true} />
                     </div>
                   )}
