@@ -341,21 +341,6 @@ class InternalJobs extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/* {this.state.currentJobIndex >= 0 ? (
-                  <AddJobPostForm
-                    id={this.state.id}
-                    title={this.state.title}
-                    recruiter={this.state.recruiter}
-                    location={this.state.location}
-                    type={this.state.type}
-                    min_salary={this.state.min_salary}
-                    max_salary={this.state.max_salary}
-                    description={this.state.description}
-                    currentJobIndex={this.state.currentJobIndex}
-                  />
-                ) : (
-                  <AddJobPostForm title={""} />
-                )} */}
                 <AddJobPostForm
                   id={this.state.id}
                   title={this.state.title}

@@ -33,6 +33,7 @@ class Login extends Component {
   };
 
   render() {
+    const { auth } = this.props;
     return (
       <div className="login contain">
         <div className="login__header mb2">
@@ -59,8 +60,8 @@ class Login extends Component {
               onChange={this.onChange}
               required
               error={
-                this.state && this.state.errors && this.state.errors.message
-                  ? this.state.errors.message
+                auth && auth.errors && auth.errors.message
+                  ? auth.errors.message.message
                   : ""
               }
             />

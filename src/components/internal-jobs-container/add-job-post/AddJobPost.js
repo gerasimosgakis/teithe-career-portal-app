@@ -72,19 +72,6 @@ class AddJobPost extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/* {this.state.currentJobIndex >= 0 ? (
-                  <AddJobPostForm
-                  // title={''}
-                  // recruiter={''}
-                  // location={this.state.location}
-                  // min_salary={this.state.min_salary}
-                  // max_salary={this.state.max_salary}
-                  // description={this.state.description}
-                  // currentJobIndex={this.state.currentJobIndex}
-                  />
-                ) : (
-                  <AddJobPostForm title={""} />
-                )} */}
                 <AddJobPostForm />
               </div>
               <div className="modal-footer">
