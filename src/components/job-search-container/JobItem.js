@@ -31,11 +31,6 @@ class JobItem extends Component {
       jobUrl,
       jobId
     } = this.state.job;
-    // const transformedDate = date
-    //   ? moment(new Date(date))
-    //       .add(365, "day")
-    //       .format("LL")
-    //   : null;
     return (
       <div className="card mb2 job-item">
         <div className="card-body job-item__body">

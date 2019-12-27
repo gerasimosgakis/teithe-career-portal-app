@@ -35,9 +35,7 @@ class Chat extends Component {
         id: userId,
         name: userName
       })
-      .then(currentUser => {
-        console.log(currentUser);
-      })
+      .then(currentUser => {})
       .catch(err => {
         if (err.status === 400) {
           console.log(err);

@@ -16,7 +16,6 @@ class CVFormNew extends Component {
   }
 
   handleFileChange = event => {
-    // file.current = event.target.files[0];
     this.setState({ file: event.target.files[0] });
   };
 
@@ -33,7 +32,6 @@ class CVFormNew extends Component {
 
     try {
       await s3Upload(this.state.file, this.state.user);
-      // file = null;
       this.setState({ file: null, loading: false });
       alert("saved");
     } catch (error) {

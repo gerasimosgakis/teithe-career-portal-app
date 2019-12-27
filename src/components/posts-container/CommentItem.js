@@ -42,15 +42,9 @@ class CommentItem extends Component {
       <div className="comments">
         <div className="comments__comment">
           <span className="mb2 mr2">
-            {/* <img
-              className="rounded-circle"
-              width="30px"
-              src={this.props.comment.avatar}
-              alt=""
-            /> */}
             <Avatar
               email={this.props.comment.user_email}
-              name={this.props.comment.user_name}
+              name={this.props.comment.user_name.toLowerCase()}
               round={true}
               size="30"
             />

@@ -6,11 +6,6 @@ import ReactHtmlParser from "react-html-parser";
 class InternalJobItem extends Component {
   render() {
     const { job } = this.props;
-    // const transformedDate = job.created_at
-    //   ? moment(new Date(job.created_at))
-    //       .add(365, "day")
-    //       .format("LL")
-    //   : null;
     return (
       <div className="card mb2 job-item">
         <div className="card-body job-item__body">

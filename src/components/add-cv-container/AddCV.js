@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Storage } from "aws-amplify";
 import { connect } from "react-redux";
 import config from "../../config";
 import { s3Upload } from "../../shared/functions/aws";
@@ -52,7 +51,6 @@ class AddCV extends Component {
     try {
       await s3Upload(this.state.file, this.state.user);
       this.setState({ saved: true, loading: false });
-      // const cvURL = await Storage.get(this.props.auth.user.username);
       this.props.addCVToProfile(
         this.state.user,
         this.state.file.name,
@@ -64,26 +62,9 @@ class AddCV extends Component {
     }
   };
 
-  // listCVs = async () => {
-  //   console.log(this.props.auth.user.username);
-  //   const cvURL = await Storage.get(this.props.auth.user.username);
-  //   this.setState({ cvURL });
-  // };
-
-  // downloadFile = () => {
-  //   // const data = new Blob([this.state.cvURL], { type: "text/csv" });
-  //   // const csvURL = window.URL.createObjectURL(data);
-  //   // const tempLink = document.createElement("a");
-  //   // tempLink.href = csvURL;
-  //   // tempLink.setAttribute("download", "filename.csv");
-  //   // tempLink.click();
-  //   return new Blob([this.state.cvURL], { type: "text/csv" });
-  // };
-
   render() {
     return (
       <div className="contain">
-        {/* <CVFormNew user={this.props.auth.user.username}></CVFormNew> */}
         <div>
           {this.state.loading ? (
             <Spinner></Spinner>
