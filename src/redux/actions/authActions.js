@@ -11,7 +11,7 @@ import {
 } from "./types";
 import gravatar from "gravatar";
 
-export const registerUser = (userData, history) => async dispatch => {
+export const registerUser = userData => async dispatch => {
   if (userData.password !== userData.confirmPassword) {
     dispatch({
       type: REGISTER_FAIL,

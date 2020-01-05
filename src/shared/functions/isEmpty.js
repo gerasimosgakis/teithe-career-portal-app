@@ -1,3 +1,8 @@
+/**
+ * IsEmpty Function
+ * Checks if value is null or empty string
+ * @param {*} value
+ */
 const isEmpty = value =>
   value === undefined ||
   value === null ||

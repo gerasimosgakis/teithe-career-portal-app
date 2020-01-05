@@ -8,7 +8,7 @@ import Login from "./components/auth-container/Login";
 import Register from "./components/auth-container/Register";
 // Redux
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./redux/store";
 import { Auth } from "aws-amplify";
 import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";

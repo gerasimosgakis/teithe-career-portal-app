@@ -40,7 +40,7 @@ class Register extends Component {
       confirmPassword: this.state.confirmPassword
     };
 
-    this.props.registerUser(newUser, this.props.history);
+    this.props.registerUser(newUser);
 
     this.setState({ isLoading: false });
   };
