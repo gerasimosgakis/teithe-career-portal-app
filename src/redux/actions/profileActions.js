@@ -27,7 +27,9 @@ import {
   ADD_CV_SUCCESS
 } from "./types";
 
-// Get All Profiles
+/**
+ * Gets All Profiles
+ */
 export const getProfiles = () => async dispatch => {
   try {
     dispatch({
@@ -47,7 +49,10 @@ export const getProfiles = () => async dispatch => {
   }
 };
 
-// Get Profile By Id
+/**
+ * Gets Profile By Id
+ * @param {*} id - Profile id
+ */
 export const getProfileById = id => async dispatch => {
   try {
     dispatch({
@@ -79,7 +84,10 @@ export const getProfileById = id => async dispatch => {
   }
 };
 
-// Get profile by handle
+/**
+ * Gets profile by handle
+ * @param {*} handle
+ */
 export const getProfileByHandle = handle => async dispatch => {
   try {
     dispatch({
@@ -115,7 +123,10 @@ export const getProfileByHandle = handle => async dispatch => {
   }
 };
 
-// Search Graduates
+/**
+ * Searches Graduates
+ * @param {*} params - Search Params
+ */
 export const searchGraduates = params => async dispatch => {
   try {
     const profiles = await API.post("teithe-career-portal-api", "/search", {
@@ -133,13 +144,13 @@ export const searchGraduates = params => async dispatch => {
   }
 };
 
-// Create Profile
-export const createProfile = (
-  user,
-  email,
-  profileData,
-  history
-) => async dispatch => {
+/**
+ * Creates Profile
+ * @param {*} user
+ * @param {*} email
+ * @param {*} profileData
+ */
+export const createProfile = (user, email, profileData) => async dispatch => {
   profileData.id = user;
   const avatar = gravatar.url(email, {
     s: "300", // size
@@ -163,13 +174,13 @@ export const createProfile = (
   }
 };
 
-// Edit Profile
-export const editProfile = (
-  user,
-  email,
-  profileData,
-  history
-) => async dispatch => {
+/**
+ * Edits Profile
+ * @param {*} user
+ * @param {*} email
+ * @param {*} profileData
+ */
+export const editProfile = (user, email, profileData) => async dispatch => {
   profileData.id = user;
   const avatar = gravatar.url(email, {
     s: "300", // size
@@ -197,7 +208,10 @@ export const editProfile = (
   }
 };
 
-// Add Experience
+/**
+ * Adds Experience
+ * @param {*} expData
+ */
 export const addExperience = expData => async dispatch => {
   try {
     const response = await API.post(
@@ -219,7 +233,10 @@ export const addExperience = expData => async dispatch => {
   }
 };
 
-// Edit Experience
+/**
+ * Edits Experience
+ * @param {*} expData
+ */
 export const editExperience = expData => async dispatch => {
   try {
     await API.put(
@@ -241,7 +258,10 @@ export const editExperience = expData => async dispatch => {
   }
 };
 
-// Delete Experience
+/**
+ * Deletes Experience
+ * @param {*} id - Experience id
+ */
 export const deleteExperience = id => async dispatch => {
   try {
     await API.del("teithe-career-portal-api", `/experiences/delete/${id}`);
@@ -257,7 +277,10 @@ export const deleteExperience = id => async dispatch => {
   }
 };
 
-// Add Education
+/**
+ * Adds Education
+ * @param {*} eduData
+ */
 export const addEducation = eduData => async dispatch => {
   try {
     const response = await API.post("teithe-career-portal-api", `/educations`, {
@@ -275,7 +298,10 @@ export const addEducation = eduData => async dispatch => {
   }
 };
 
-// Edit Education
+/**
+ * Edits Education
+ * @param {*} eduData
+ */
 export const editEducation = eduData => async dispatch => {
   try {
     await API.put(
@@ -297,7 +323,10 @@ export const editEducation = eduData => async dispatch => {
   }
 };
 
-// Delete Education
+/**
+ * Deletes Education
+ * @param {*} id - Education id
+ */
 export const deleteEducation = id => async dispatch => {
   try {
     await API.del("teithe-career-portal-api", `/educations/delete/${id}`);
@@ -313,7 +342,12 @@ export const deleteEducation = id => async dispatch => {
   }
 };
 
-// Save cv url
+/**
+ * Saves cv url
+ * @param {*} user
+ * @param {*} cvName
+ * @param {*} cvURL
+ */
 export const addCVToProfile = (user, cvName, cvURL) => async dispatch => {
   try {
     const response = await API.put(

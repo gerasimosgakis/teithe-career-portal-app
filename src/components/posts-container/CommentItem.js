@@ -7,6 +7,10 @@ import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { deleteComment } from "../../redux/actions/postActions";
 class CommentItem extends Component {
+  /**
+   * Deletes comment
+   * @param {*} id - comment id
+   */
   onDeleteClick(id) {
     confirmAlert({
       customUI: ({ onClose }) => {

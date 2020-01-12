@@ -29,6 +29,12 @@ class Chat extends Component {
       show: true
     };
   }
+
+  /**
+   * Creates user
+   * @param {*} userId
+   * @param {*} userName
+   */
   createUser = (userId, userName) => {
     chatkit
       .createUser({
@@ -80,17 +86,29 @@ class Chat extends Component {
     }
   }
 
-  handleChildClick = id => {
+  /**
+   * Handles User Click
+   * On User click sets the user in the state
+   * @param {*} id - user id
+   */
+  handleUserClick = id => {
     this.setState({ otherUserId: id, show: false });
     setTimeout(() => {
       this.setState({ show: true });
     }, 200);
   };
 
+  /**
+   * Helper function to find the user in the state
+   * @param {*} userId - the id of the user to find
+   */
   findUser = userId => {
     return this.state.users.filter(user => user.id === userId)[0];
   };
 
+  /**
+   * Searches for user when we type the name in the search field
+   */
   onUserSearch = event => {
     if (event.key === "Enter") {
       if (
@@ -143,7 +161,7 @@ class Chat extends Component {
                   ? this.state.searchUsers
                   : this.state.users
               }
-              onClick={this.handleChildClick}
+              onClick={this.handleUserClick}
             />
           </div>
 

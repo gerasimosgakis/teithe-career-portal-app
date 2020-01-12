@@ -15,7 +15,9 @@ import {
   SEARCH_JOB_POSTS_SUCCESS
 } from "./types";
 
-// Get All Internal Jobs
+/**
+ * Get All Internal Jobs
+ */
 export const getInternalJobs = () => async dispatch => {
   try {
     dispatch({
@@ -34,7 +36,11 @@ export const getInternalJobs = () => async dispatch => {
   }
 };
 
-// Get All Internal Jobs By User
+/**
+ * getInternalJobsByUser
+ * Gets All Internal Jobs By User
+ * @param {*} userId
+ */
 export const getInternalJobsByUser = userId => async dispatch => {
   try {
     dispatch({
@@ -56,7 +62,10 @@ export const getInternalJobsByUser = userId => async dispatch => {
   }
 };
 
-// Add new internal job
+/**
+ * Adds new internal job
+ * @param {*} data - Job data
+ */
 export const addInternalJob = data => async dispatch => {
   try {
     const job = await API.post("teithe-career-portal-posts-api", "/job-posts", {
@@ -74,7 +83,11 @@ export const addInternalJob = data => async dispatch => {
   }
 };
 
-// Edit internal job
+/**
+ * Edits internal job
+ * @param {*} id - Job id
+ * @param {*} data - data for job to be editted
+ */
 export const editInternalJob = (id, data) => async dispatch => {
   try {
     const job = await API.put(
@@ -96,7 +109,10 @@ export const editInternalJob = (id, data) => async dispatch => {
   }
 };
 
-// Delete internal job
+/**
+ * Deletes internal job
+ * @param {*} id - job to be deleted id
+ */
 export const deleteInternalJob = id => async dispatch => {
   try {
     await API.del("teithe-career-portal-posts-api", `/job-posts/delete/${id}`);
@@ -112,7 +128,10 @@ export const deleteInternalJob = id => async dispatch => {
   }
 };
 
-// Search Job Posts
+/**
+ * Searches Job Posts
+ * @param {*} keys - Search key parameters
+ */
 export const searchJobPosts = keys => async dispatch => {
   try {
     const jobs = await API.post(

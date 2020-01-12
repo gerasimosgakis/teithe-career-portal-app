@@ -8,7 +8,10 @@ import {
   GET_FAVORITE_JOBS_FAIL
 } from "./types";
 
-// Get All Favorite Jobs
+/**
+ * Gets All Favorite Jobs
+ * @param {*} userId - current user id
+ */
 export const getFavJobs = userId => async dispatch => {
   try {
     dispatch({
@@ -31,7 +34,10 @@ export const getFavJobs = userId => async dispatch => {
   }
 };
 
-// Add Favorite Job
+/**
+ * Adds Favorite Job
+ * @param {*} data - job data
+ */
 export const addJob = data => async dispatch => {
   try {
     const result = await API.post("teithe-career-portal-api", "/favorite-job", {
@@ -50,7 +56,10 @@ export const addJob = data => async dispatch => {
   }
 };
 
-// Remove Favorite Job
+/**
+ * Removes Favorite Job
+ * @param {*} jobId - Job to be removed id
+ */
 export const removeJob = jobId => async dispatch => {
   try {
     const result = await API.del(

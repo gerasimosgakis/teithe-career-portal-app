@@ -13,6 +13,9 @@ class PostForm extends Component {
     };
   }
 
+  /**
+   * Adds post
+   */
   onSubmit = e => {
     e.preventDefault();
 

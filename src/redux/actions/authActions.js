@@ -11,7 +11,12 @@ import {
 } from "./types";
 import gravatar from "gravatar";
 
-export const registerUser = (userData, history) => async dispatch => {
+/**
+ * registerUser
+ * Registers user
+ * @param {*} userData - the data for the user to be registered
+ */
+export const registerUser = userData => async dispatch => {
   if (userData.password !== userData.confirmPassword) {
     dispatch({
       type: REGISTER_FAIL,
@@ -56,6 +61,12 @@ export const registerUser = (userData, history) => async dispatch => {
   }
 };
 
+/**
+ * confirmUser
+ * Confirms registered user using the confirmation code
+ * @param {*} userData - Data for user to be confirmed
+ * @param {*} history
+ */
 export const confirmUser = (userData, history) => async dispatch => {
   try {
     await Auth.confirmSignUp(userData.email, userData.confirmationCode);
@@ -71,6 +82,12 @@ export const confirmUser = (userData, history) => async dispatch => {
   }
 };
 
+/**
+ * loginUser
+ * Signs user in
+ * @param {*} userData - data for user to be logged in
+ * @param {*} history
+ */
 export const loginUser = (userData, history) => async dispatch => {
   dispatch({
     type: "SET_LOADING",
@@ -123,6 +140,11 @@ export const loginUser = (userData, history) => async dispatch => {
   }
 };
 
+/**
+ * logoutUser
+ * Signs user out
+ * @param {*} history
+ */
 export const logoutUser = history => async dispatch => {
   try {
     await Auth.signOut();

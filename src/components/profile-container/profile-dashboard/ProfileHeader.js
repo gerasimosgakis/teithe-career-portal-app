@@ -48,7 +48,14 @@ class ProfileHeader extends Component {
             )}
             {isEmpty(profile.email) ? null : (
               <p className="help-text">
-                <i className="fas fa-at mr1"></i> {profile.email}
+                <a
+                  className="pr2 help-text"
+                  href={`mailto:${profile.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fas fa-at mr1"></i> {profile.email}
+                </a>
               </p>
             )}
             <p>

@@ -19,6 +19,10 @@ class AddCV extends Component {
     };
   }
 
+  /**
+   * Secures the file type is one of the allowed ones
+   * @param {*} filename
+   */
   validateForm = filename => {
     return (
       filename.endsWith(".pdf") ||
