@@ -322,7 +322,11 @@ class ProfileCreds extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">Edit Experience</h4>
+                <h4 className="modal-title">
+                  {this.state.currentExperienceIndex >= 0
+                    ? "Edit Experience"
+                    : "Add Experience"}
+                </h4>
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
@@ -375,7 +379,11 @@ class ProfileCreds extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">Edit Education</h4>
+                <h4 className="modal-title">
+                  {this.state.currentEducationIndex >= 0
+                    ? "Edit Education"
+                    : "Add Education"}
+                </h4>
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>

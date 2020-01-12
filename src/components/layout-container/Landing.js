@@ -21,8 +21,8 @@ class Landing extends Component {
         </div>
         <div className="landing__slogan mt-4">
           <p className="landing__slogan-text lead-text">
-            The best platform for developers and recruiters - Communicate and
-            find your dream career
+            The best career portal for alumni - Stay in touch with the
+            institution and let your career take off
           </p>
           {auth.isAuthenticated ? (
             <Link to="/profile">
