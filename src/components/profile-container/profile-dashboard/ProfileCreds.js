@@ -207,7 +207,9 @@ class ProfileCreds extends Component {
           </div>
           <span className="profile-creds__cred-info-details">
             <p>
-              {titleCase(edu.degree)}{" "}
+              {titleCase(`${edu.degree.trim()}`)}
+              {", "}
+              {titleCase(`${edu.fieldofstudy.trim()}`)}
               {/* Button to open education modal and update the state with the details of the item or the fallback value */}
               {edit && ( // Show it only if it is the current user's profile
                 <span>
