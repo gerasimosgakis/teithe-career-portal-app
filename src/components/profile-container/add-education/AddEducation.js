@@ -8,6 +8,7 @@ import {
   addEducation,
   editEducation
 } from "../../../redux/actions/profileActions";
+import checkDate from "../../../shared/functions/checkDate";
 class AddEducation extends Component {
   constructor(props) {
     super(props);
@@ -35,12 +36,8 @@ class AddEducation extends Component {
       school: school ? school : "",
       description: description ? description : "",
       degree: degree ? degree : "",
-      start_date:
-        start_date && typeof start_date === "string"
-          ? start_date.slice(0, 7)
-          : null,
-      end_date:
-        end_date && typeof end_date === "string" ? end_date.slice(0, 7) : null,
+      start_date: checkDate(start_date),
+      end_date: checkDate(end_date),
       fieldofstudy: fieldofstudy ? fieldofstudy : "",
       currentEducationIndex: currentEducationIndex ? currentEducationIndex : -1
     };
@@ -80,15 +77,8 @@ class AddEducation extends Component {
         school: props.school !== null ? props.school : null,
         description: props.description,
         degree: props.degree,
-        start_date:
-          props.start_date && typeof props.start_date === "string"
-            ? props.start_date.slice(0, 7)
-            : props.start_date,
-        end_date: props.current
-          ? ""
-          : props.end_date && typeof props.end_date === "string"
-          ? props.end_date.slice(0, 7)
-          : props.start_date,
+        start_date: checkDate(props.start_date),
+        end_date: props.current ? "" : checkDate(props.end_date),
         fieldofstudy: props.fieldofstudy,
         currentEducationIndex: props.currentEducationIndex
       };
