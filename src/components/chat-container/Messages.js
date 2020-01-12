@@ -9,6 +9,10 @@ function Messages(props) {
   const [pendingMessage, setPendingMessage] = useState("");
   const messageList = React.createRef();
 
+  /**
+   * Calls handleSendMessage on Enter
+   * @param {*} event
+   */
   const handleMessageKeyDown = event => {
     if (event.key === "Enter") {
       handleSendMessage();
@@ -19,11 +23,13 @@ function Messages(props) {
     setPendingMessage(event.target.value);
   };
 
+  /**
+   * Sends Message to chatKit
+   */
   const handleSendMessage = () => {
     if (pendingMessage === "") {
       return;
     }
-    // TODO: Send message to Chatkit
     props.chatkit.sendSimpleMessage({ text: pendingMessage });
     setPendingMessage("");
   };
@@ -57,8 +63,8 @@ function Messages(props) {
         </div>
       </div>
       <div className="Messages__messages" ref={messageList}>
-        {messages.map(m => (
-          <Message key={m.id} {...m} />
+        {messages.map(message => (
+          <Message key={message.id} {...message} />
         ))}
       </div>
       <div className="Messages__compose">

@@ -21,6 +21,9 @@ class CommentForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  /**
+   * Adds comment
+   */
   onCommentSubmit = event => {
     event.preventDefault();
     this.props.addComment(this.state);

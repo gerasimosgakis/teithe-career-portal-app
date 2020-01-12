@@ -16,6 +16,9 @@ class Navbar extends Component {
     };
   }
 
+  /**
+   * Logs user out
+   */
   onLogout = async e => {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
@@ -31,19 +34,6 @@ class Navbar extends Component {
     ) {
       leftLinks = (
         <Fragment>
-          <li
-            onClick={() => this.setState({ activeTabClassName: "chat" })}
-            className={
-              this.state.activeTabClassName === "chat"
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/chat">
-              {" "}
-              Chat
-            </Link>
-          </li>
           <li
             onClick={() => this.setState({ activeTabClassName: "job-search" })}
             className={

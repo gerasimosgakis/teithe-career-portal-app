@@ -68,6 +68,10 @@ class InternalJobs extends Component {
     this.props.getInternalJobs();
   }
 
+  /**
+   * On Delete click, it shows the delete prompt
+   * @param {*} id - job id
+   */
   onDeleteClick(id) {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -109,12 +113,18 @@ class InternalJobs extends Component {
     this.onSearchSubmit();
   };
 
+  /**
+   * On Enter press, calls onSearchSubmit
+   */
   keyPressed = async event => {
     if (event.key === "Enter") {
       this.onSearchSubmit();
     }
   };
 
+  /**
+   * Searches jobs
+   */
   onSearchSubmit = event => {
     if (event) {
       event.preventDefault();

@@ -16,7 +16,10 @@ import {
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAIL
 } from "./types";
-// Get All Posts
+
+/**
+ * Gets All Posts
+ */
 export const getPosts = () => async dispatch => {
   try {
     dispatch({
@@ -36,7 +39,10 @@ export const getPosts = () => async dispatch => {
   }
 };
 
-// Add new Post
+/**
+ * Adds new Post
+ * @param {*} data - post data
+ */
 export const addPost = data => async dispatch => {
   try {
     dispatch({
@@ -58,7 +64,10 @@ export const addPost = data => async dispatch => {
   }
 };
 
-// Delete Post
+/**
+ * Deletes Post
+ * @param {*} id - post id
+ */
 export const deletePost = id => async dispatch => {
   try {
     dispatch({
@@ -81,7 +90,13 @@ export const deletePost = id => async dispatch => {
   }
 };
 
-// Add new Like
+/**
+ * Adds new Like
+ * @param {*} postId
+ * @param {*} userId
+ * @param {*} username
+ * @param {*} liked - boolean used for add/remove like
+ */
 export const addLike = (postId, userId, username, liked) => async dispatch => {
   try {
     const addLike = await API.post("teithe-career-portal-posts-api", "/likes", {
@@ -105,7 +120,10 @@ export const addLike = (postId, userId, username, liked) => async dispatch => {
   }
 };
 
-// Add comment
+/**
+ * Adds comment
+ * @param {*} data - Comment data
+ */
 export const addComment = data => async dispatch => {
   try {
     const response = await API.post(
@@ -127,7 +145,11 @@ export const addComment = data => async dispatch => {
   }
 };
 
-// Get Comments by Post
+/**
+ * Gets Comments by Post
+ * @param {*} postId - Post id
+ * @param {*} postIndex - Index of post in the array
+ */
 export const getCommentsByPost = (postId, postIndex) => async dispatch => {
   try {
     const response = await API.get(
@@ -147,7 +169,10 @@ export const getCommentsByPost = (postId, postIndex) => async dispatch => {
   }
 };
 
-// Delete Comment
+/**
+ * Deletes Comment
+ * @param {*} id - Comment id
+ */
 export const deleteComment = id => async dispatch => {
   try {
     dispatch({

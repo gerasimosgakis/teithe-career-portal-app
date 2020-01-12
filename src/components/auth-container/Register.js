@@ -27,6 +27,9 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  /**
+   * Submits signup form
+   */
   onSubmit = async e => {
     e.preventDefault();
 
@@ -45,6 +48,9 @@ class Register extends Component {
     this.setState({ isLoading: false });
   };
 
+  /**
+   * Submits confirmation form
+   */
   onConfirmationSubmit = async e => {
     e.preventDefault();
 

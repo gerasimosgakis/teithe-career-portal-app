@@ -10,6 +10,7 @@ import {
   createProfile,
   editProfile
 } from "../../../redux/actions/profileActions";
+import webify from "../../../shared/functions/webify";
 
 class CreateProfile extends Component {
   edit =
@@ -52,7 +53,7 @@ class CreateProfile extends Component {
       handle: this.state.handle.toLowerCase(),
       name: this.props.auth.user.attributes.name.toLowerCase(),
       company: this.state.company.toLowerCase(),
-      website: this.state.website.toLowerCase(),
+      website: webify(this.state.website),
       location: this.state.location.toLowerCase(),
       phone: this.state.phone.toLowerCase(),
       email: this.state.email.toLowerCase(),
@@ -60,11 +61,11 @@ class CreateProfile extends Component {
       skills: this.state.skills.toLowerCase(),
       githubusername: this.state.githubusername.toLowerCase(),
       bio: this.state.bio,
-      twitter: this.state.twitter.toLowerCase(),
-      facebook: this.state.facebook.toLowerCase(),
-      linkedin: this.state.linkedin.toLowerCase(),
-      youtube: this.state.youtube.toLowerCase(),
-      instagram: this.state.instagram.toLowerCase(),
+      twitter: webify(this.state.twitter),
+      facebook: webify(this.state.facebook),
+      linkedin: webify(this.state.linkedin),
+      youtube: webify(this.state.youtube),
+      instagram: webify(this.state.instagram),
       type: this.props.auth.user.attributes["custom:role"]
     };
 
@@ -72,12 +73,7 @@ class CreateProfile extends Component {
     const email = this.props.auth.user.attributes.email;
 
     this.edit
-      ? this.props.editProfile(
-          currentUserId,
-          email,
-          profileData,
-          this.props.history
-        )
+      ? this.props.editProfile(currentUserId, email, profileData)
       : this.props.createProfile(
           currentUserId,
           email,
@@ -88,6 +84,7 @@ class CreateProfile extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.instagram);
   };
 
   render() {
