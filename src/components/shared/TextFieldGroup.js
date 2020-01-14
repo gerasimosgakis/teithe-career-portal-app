@@ -12,13 +12,18 @@ const TextFieldGroup = ({
   onChange,
   onKeyPress,
   required,
-  disabled
+  disabled,
+  small
 }) => {
   return (
     <div className="form-group">
       <input
         type={type}
-        className={classnames("form-control form-control-lg")}
+        className={
+          !small
+            ? classnames("form-control form-control-lg")
+            : classnames("form-control form-control-sm")
+        }
         placeholder={placeholder}
         name={name}
         value={value}

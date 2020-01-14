@@ -250,6 +250,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Minimum Salary"
                   name="minimumSalary"
+                  small="true"
                   type="number"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
@@ -259,6 +260,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Maximum Salary"
                   name="maximumSalary"
+                  small="true"
                   type="number"
                   value={this.state.maximumSalary}
                   required

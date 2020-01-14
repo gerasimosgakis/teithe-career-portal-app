@@ -299,6 +299,7 @@ class JobSearch extends Component {
                 <TextFieldGroup
                   placeholder="Minimum Salary"
                   name="minimumSalary"
+                  small="true"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
                   onKeyPress={this.keyPressed}
@@ -307,6 +308,7 @@ class JobSearch extends Component {
                 <TextFieldGroup
                   placeholder="Maximum Salary"
                   name="maximumSalary"
+                  small="true"
                   value={this.state.maximumSalary}
                   required
                   onChange={this.onChange}
@@ -391,15 +393,12 @@ class JobSearch extends Component {
                 <Spinner />
               ) : this.state.error ? (
                 <div>
-                  <h2>Jobs</h2>
                   <div className="card card-body">
                     <p className="error-text">There was an error...</p>
                   </div>
                 </div>
               ) : (
                 <div>
-                  {(this.state.jobs.length > 0 ||
-                    this.state.favoriteJobsDetails.length > 0) && <h2>Jobs</h2>}
                   {this.state.favoriteJobsDetails.map((job, index) => (
                     <JobItem
                       key={index}

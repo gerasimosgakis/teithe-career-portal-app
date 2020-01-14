@@ -35,7 +35,7 @@ class Chat extends Component {
    * @param {*} userId
    * @param {*} userName
    */
-  createUser = (userId, userName) => {
+  createChatUser = (userId, userName) => {
     chatkit
       .createUser({
         id: userId,
@@ -70,8 +70,8 @@ class Chat extends Component {
         }
         const userId = profile.id;
         const userName = profile.name;
-        if (userId) {
-          this.createUser(userId, userName);
+        if (userId && typeof userId === "string") {
+          this.createChatUser(userId, userName);
           users.push({
             id: profile.id,
             handle: profile.handle,
