@@ -8,7 +8,8 @@ import {
   SET_USER,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-  SET_LOADING
+  SET_LOADING,
+  CLEAR_AUTH_ERRORS
 } from "../actions/types";
 
 const initialState = {
@@ -96,6 +97,11 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         errors: payload
+      };
+    case CLEAR_AUTH_ERRORS:
+      return {
+        ...state,
+        errors: {}
       };
     default:
       return state;

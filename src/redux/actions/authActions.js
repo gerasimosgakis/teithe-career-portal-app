@@ -7,7 +7,8 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   CONFIRM_REGISTER_SUCCESS,
-  CONFIRM_REGISTER_FAIL
+  CONFIRM_REGISTER_FAIL,
+  CLEAR_AUTH_ERRORS
 } from "./types";
 import gravatar from "gravatar";
 
@@ -158,4 +159,10 @@ export const logoutUser = history => async dispatch => {
       payload: error
     });
   }
+};
+
+export const clearErrors = () => dispatch => {
+  dispatch({
+    type: CLEAR_AUTH_ERRORS
+  });
 };

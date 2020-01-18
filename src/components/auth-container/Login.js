@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import TextFieldGroup from "../shared/TextFieldGroup";
-import { loginUser } from "../../redux/actions/authActions";
+import { loginUser, clearErrors } from "../../redux/actions/authActions";
 
 class Login extends Component {
   constructor(props) {
@@ -14,6 +14,10 @@ class Login extends Component {
       password: "",
       errors: {}
     };
+  }
+
+  componentDidMount() {
+    this.props.clearErrors();
   }
 
   onChange = e => {
@@ -88,4 +92,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { loginUser })(withRouter(Login));
+export default connect(mapStateToProps, { loginUser, clearErrors })(
+  withRouter(Login)
+);

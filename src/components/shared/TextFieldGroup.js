@@ -33,7 +33,7 @@ const TextFieldGroup = ({
         required={required}
       />
       {info && <small className="form-text text-muted">{info}</small>}
-      {error && <div className="error-text">{error}</div>}
+      {error && <div className="error-text mt1">{error}</div>}
     </div>
   );
 };
