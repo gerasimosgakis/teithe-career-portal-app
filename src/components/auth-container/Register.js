@@ -66,7 +66,7 @@ class Register extends Component {
 
   renderConfirmationForm() {
     return (
-      <form onSubmit={this.onConfirmationSubmit}>
+      <form>
         <TextFieldGroup
           placeholder="Confirmation Code"
           name="confirmationCode"
@@ -74,7 +74,11 @@ class Register extends Component {
           value={this.state.confirmationCode}
           onChange={this.onChange}
         />
-        <button className="register__form-buttons button submit-btn">
+        <button
+          className="register__form-buttons button submit-btn"
+          type="button"
+          onClick={this.onConfirmationSubmit}
+        >
           Submit
         </button>
       </form>
@@ -89,7 +93,7 @@ class Register extends Component {
       { label: "Recruiter", value: "recruiter" }
     ];
     return (
-      <form onSubmit={this.onSubmit}>
+      <form>
         <div className="form__field-label">Name</div>
         <TextFieldGroup
           placeholder="Name"
@@ -135,7 +139,13 @@ class Register extends Component {
           <Link to="/" className="button back-btn mr-1">
             Back
           </Link>
-          <button className="button submit-btn">Sign Up</button>
+          <button
+            className="button submit-btn"
+            type="button"
+            onClick={this.onSubmit}
+          >
+            Sign Up
+          </button>
         </div>
       </form>
     );
@@ -150,7 +160,7 @@ class Register extends Component {
           <p className="header-label">Create your Career Portal profile</p>
           <div className="register__form">
             {auth &&
-            auth.username &&
+            ((auth.user && auth.user.username) || auth.username) &&
             !auth.isAuthenticated &&
             !auth.userConfirmed
               ? this.renderConfirmationForm()
