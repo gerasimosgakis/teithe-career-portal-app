@@ -335,6 +335,7 @@ class ProfileCreds extends Component {
                 {this.state.currentExperienceIndex >= 0 ? ( // Checks if we are editing
                   // If yes, provides the details to the AddExperience component
                   <AddExperience
+                    small={true}
                     userId={this.props.userId}
                     id={this.state.exp_id}
                     current={this.state.exp_current}
@@ -349,6 +350,7 @@ class ProfileCreds extends Component {
                 ) : (
                   // If not, passes initial values
                   <AddExperience
+                    small={true}
                     userId={this.props.userId}
                     id={""}
                     current={false}
@@ -392,6 +394,7 @@ class ProfileCreds extends Component {
                 {this.state.currentEducationIndex >= 0 ? ( // Checks if we are editing
                   // If yes, provides the details to the AddEducation component
                   <AddEducation
+                    small={true}
                     userId={this.props.userId}
                     id={this.state.edu_id}
                     current={this.state.edu_current}
@@ -406,6 +409,7 @@ class ProfileCreds extends Component {
                 ) : (
                   // If not, passes initial values
                   <AddEducation
+                    small={true}
                     userId={this.props.userId}
                     id={""}
                     current={false}

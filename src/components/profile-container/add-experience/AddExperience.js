@@ -214,11 +214,15 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   info="Tell us about your position"
                 />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
+                {!this.props.small ? (
+                  <div className="btn-group right">
+                    <button className="button submit-btn">Submit</button>
+                  </div>
+                ) : (
+                  <button className="button btn-block submit-btn">
+                    Submit
+                  </button>
+                )}
               </form>
             </div>
           </div>
