@@ -8,6 +8,7 @@ import {
   addExperience,
   editExperience
 } from "../../../redux/actions/profileActions";
+import checkDate from "../../../shared/functions/checkDate";
 class AddExperience extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +36,8 @@ class AddExperience extends Component {
       _location: _location ? _location : "",
       description: description ? description : "",
       title: title ? title : "",
-      start_date: start_date ? start_date.slice(0, 7) : null,
-      end_date: end_date ? end_date.slice(0, 7) : null,
+      start_date: checkDate(start_date),
+      end_date: checkDate(end_date),
       company: company ? company : "",
       currentExperienceIndex: currentExperienceIndex
         ? currentExperienceIndex
@@ -78,12 +79,8 @@ class AddExperience extends Component {
         _location: props._location !== null ? props._location : null,
         description: props.description,
         title: props.title,
-        start_date: props.start_date ? props.start_date.slice(0, 7) : "",
-        end_date: props.current
-          ? ""
-          : props.end_date
-          ? props.end_date.slice(0, 7)
-          : "",
+        start_date: checkDate(props.start_date),
+        end_date: props.current ? "" : checkDate(props.end_date),
         company: props.company,
         currentExperienceIndex: props.currentExperienceIndex
       };
@@ -217,11 +214,15 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   info="Tell us about your position"
                 />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
+                {!this.props.small ? (
+                  <div className="btn-group right">
+                    <button className="button submit-btn">Submit</button>
+                  </div>
+                ) : (
+                  <button className="button btn-block submit-btn">
+                    Submit
+                  </button>
+                )}
               </form>
             </div>
           </div>

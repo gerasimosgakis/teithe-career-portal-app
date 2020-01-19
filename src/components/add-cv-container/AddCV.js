@@ -19,6 +19,10 @@ class AddCV extends Component {
     };
   }
 
+  /**
+   * Secures the file type is one of the allowed ones
+   * @param {*} filename
+   */
   validateForm = filename => {
     return (
       filename.endsWith(".pdf") ||
@@ -70,7 +74,6 @@ class AddCV extends Component {
             <Spinner></Spinner>
           ) : (
             <form onSubmit={this.handleSubmit}>
-              <div className="form__field-label">CV</div>
               <input
                 type="file"
                 className="inputfile mr2"

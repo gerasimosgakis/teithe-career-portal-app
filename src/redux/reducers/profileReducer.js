@@ -36,7 +36,7 @@ export default function(state = initialState, action) {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       };
     case GET_PROFILES_SUCCESS:
       return {
@@ -123,7 +123,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          experiences: [...state.profile.experiences, action.payload]
+          experiences: [action.payload, ...state.profile.experiences]
         },
         loading: false
       };
@@ -180,7 +180,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          educations: [...state.profile.educations, action.payload]
+          educations: [action.payload, ...state.profile.educations]
         },
         loading: false
       };

@@ -24,6 +24,10 @@ class PostItem extends Component {
     };
   }
 
+  /**
+   * Deletes post
+   * @param {*} id - Post to be deleted id
+   */
   onDeleteClick(id) {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -59,12 +63,6 @@ class PostItem extends Component {
     const currentUserName = this.props.auth.user.attributes.name;
     this.props.addLike(id, currentUserId, currentUserName, liked);
   };
-
-  onUnlikeClick(id) {
-    const currentUserId = this.props.auth.user.username;
-    const currentUserName = this.props.auth.user.attributes.name;
-    this.props.removeLike(id, currentUserId, currentUserName);
-  }
 
   showComments = () => {
     if (!this.state.showComments) {

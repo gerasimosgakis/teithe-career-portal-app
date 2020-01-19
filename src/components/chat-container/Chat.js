@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { ChatkitProvider, TokenProvider } from "@pusher/chatkit-client-react";
 import Chatkit from "@pusher/chatkit-server";
 import { API } from "aws-amplify";
 import UserList from "./UserList";
 import Messages from "./Messages";
+import Spinner from "../shared/Spinner";
 const instanceLocator = "v1:us1:57ccaf34-e6f3-4a0e-af85-44768690c634";
 
 const tokenProvider = new TokenProvider({
@@ -26,10 +28,17 @@ class Chat extends Component {
       otherUserId: "",
       users: [],
       searchUsers: null,
-      show: true
+      show: true,
+      loading: true
     };
   }
-  createUser = (userId, userName) => {
+
+  /**
+   * Creates user
+   * @param {*} userId
+   * @param {*} userName
+   */
+  createChatUser = (userId, userName) => {
     chatkit
       .createUser({
         id: userId,
@@ -48,24 +57,25 @@ class Chat extends Component {
   };
 
   async componentDidMount() {
+    const { auth } = this.props;
     try {
       const profiles = await API.get("teithe-career-portal-api", "/profiles");
       const users = [];
-      if (profiles[0].id !== this.props.userId) {
+      if (profiles[0].id !== auth.user.username) {
         this.setState({ otherUserId: profiles[0].id });
       } else {
         this.setState({ otherUserId: profiles[1].id });
       }
       profiles.forEach(profile => {
-        if (profile.id === this.props.userId) {
+        if (profile.id === auth.user.username) {
           this.setState({
             currentUserName: profile.handle
           });
         }
         const userId = profile.id;
         const userName = profile.name;
-        if (userId) {
-          this.createUser(userId, userName);
+        if (userId && typeof userId === "string") {
+          this.createChatUser(userId, userName);
           users.push({
             id: profile.id,
             handle: profile.handle,
@@ -74,23 +84,35 @@ class Chat extends Component {
           });
         }
       });
-      this.setState({ users });
+      this.setState({ users, loading: false });
     } catch (error) {
       console.log(error);
     }
   }
 
-  handleChildClick = id => {
+  /**
+   * Handles User Click
+   * On User click sets the user in the state
+   * @param {*} id - user id
+   */
+  handleUserClick = id => {
     this.setState({ otherUserId: id, show: false });
     setTimeout(() => {
       this.setState({ show: true });
     }, 200);
   };
 
+  /**
+   * Helper function to find the user in the state
+   * @param {*} userId - the id of the user to find
+   */
   findUser = userId => {
     return this.state.users.filter(user => user.id === userId)[0];
   };
 
+  /**
+   * Searches for user when we type the name in the search field
+   */
   onUserSearch = event => {
     if (event.key === "Enter") {
       if (
@@ -117,54 +139,67 @@ class Chat extends Component {
   };
 
   render() {
+    const { auth } = this.props;
     return (
-      <div className="Chat">
-        <div className="Chat__chatwindow">
-          <div className="Chat__chatwindow-users">
-            {((this.state.users && this.state.users.length > 0) ||
-              (this.state.searchUsers &&
-                this.state.searchUsers.length > 0)) && (
-              <div className="Chat__chatwindow-users-search">
-                <input
-                  className="form-control Chat__chatwindow-users-search-input"
-                  type="text"
-                  onKeyPress={this.onUserSearch}
-                />
-                <span className="Chat__chatwindow-users-search-icon">
-                  <i className="fas fa-search"></i>
-                </span>
-              </div>
-            )}
-            <UserList
-              userName={this.state.currentUserName}
-              otherUserId={this.state.otherUserId}
-              users={
-                this.state.searchUsers
-                  ? this.state.searchUsers
-                  : this.state.users
-              }
-              onClick={this.handleChildClick}
-            />
-          </div>
-
-          {this.state.otherUserId && this.state.show && this.state.users ? (
-            <ChatkitProvider
-              instanceLocator={instanceLocator}
-              tokenProvider={tokenProvider}
-              userId={this.props.userId}
-            >
-              <Messages
+      <div>
+        {this.state.loading ? (
+          <Spinner />
+        ) : (
+          <div className="chat">
+            <div className="chat__users">
+              {((this.state.users && this.state.users.length > 0) ||
+                (this.state.searchUsers &&
+                  this.state.searchUsers.length > 0)) && (
+                <div className="chat__users-search">
+                  <input
+                    className="form-control chat__users-search-input"
+                    type="text"
+                    onKeyPress={this.onUserSearch}
+                  />
+                  <span className="chat__users-search-icon">
+                    <i className="fas fa-search"></i>
+                  </span>
+                </div>
+              )}
+              <UserList
+                userName={auth.user.username}
                 otherUserId={this.state.otherUserId}
-                user={this.findUser(this.state.otherUserId)}
+                users={
+                  this.state.searchUsers
+                    ? this.state.searchUsers
+                    : this.state.users
+                }
+                onClick={this.handleUserClick}
               />
-            </ChatkitProvider>
-          ) : (
-            ""
-          )}
-        </div>
+            </div>
+            <div className="chat__chatwindow">
+              {auth.user.username &&
+              this.state.otherUserId &&
+              this.state.show &&
+              this.state.users ? (
+                <ChatkitProvider
+                  instanceLocator={instanceLocator}
+                  tokenProvider={tokenProvider}
+                  userId={auth.user.username}
+                >
+                  <Messages
+                    otherUserId={this.state.otherUserId}
+                    user={this.findUser(this.state.otherUserId)}
+                  />
+                </ChatkitProvider>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-export default Chat;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(Chat);

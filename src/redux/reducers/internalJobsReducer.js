@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       };
     case ADD_JOB_POST_SUCCESS:
       return {

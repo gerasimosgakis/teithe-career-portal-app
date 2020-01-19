@@ -9,6 +9,10 @@ function Messages(props) {
   const [pendingMessage, setPendingMessage] = useState("");
   const messageList = React.createRef();
 
+  /**
+   * Calls handleSendMessage on Enter
+   * @param {*} event
+   */
   const handleMessageKeyDown = event => {
     if (event.key === "Enter") {
       handleSendMessage();
@@ -19,11 +23,13 @@ function Messages(props) {
     setPendingMessage(event.target.value);
   };
 
+  /**
+   * Sends Message to chatKit
+   */
   const handleSendMessage = () => {
     if (pendingMessage === "") {
       return;
     }
-    // TODO: Send message to Chatkit
     props.chatkit.sendSimpleMessage({ text: pendingMessage });
     setPendingMessage("");
   };
@@ -40,15 +46,15 @@ function Messages(props) {
   }));
 
   return (
-    <div className="Messages">
-      <div className="Messages__titlebar">
+    <div className="messages">
+      <div className="messages__titlebar">
         <Avatar
           email={props && props.user ? props.user.email : null}
           name={props && props.user ? props.user.name : null}
           round={true}
           size="30"
         />
-        <div className="Messages__titlebar__details ml1">
+        <div className="messages__titlebar__details ml1">
           <span>
             {props.chatkit.isLoading
               ? "Loading..."
@@ -56,14 +62,14 @@ function Messages(props) {
           </span>
         </div>
       </div>
-      <div className="Messages__messages" ref={messageList}>
-        {messages.map(m => (
-          <Message key={m.id} {...m} />
+      <div className="messages__messages" ref={messageList}>
+        {messages.map(message => (
+          <Message key={message.id} {...message} />
         ))}
       </div>
-      <div className="Messages__compose">
+      <div className="messages__compose">
         <input
-          className="Messages__compose__input mr1"
+          className="messages__compose__input mr1"
           type="text"
           placeholder="Type a message..."
           value={pendingMessage}
@@ -83,22 +89,22 @@ function Message({ isOwnMessage, isLatestMessage, createdAt, textContent }) {
     <div
       className={
         isOwnMessage
-          ? "Messages__messages__message__wrapper Messages__messages__message__wrapper--self"
-          : "Messages__messages__message__wrapper Messages__messages__message__wrapper--other"
+          ? "messages__messages__message__wrapper messages__messages__message__wrapper--self"
+          : "messages__messages__message__wrapper messages__messages__message__wrapper--other"
       }
     >
-      <div className="Messages__messages__message__wrapper__inner">
+      <div className="messages__messages__message__wrapper__inner">
         <div
           className={
             isOwnMessage
-              ? "Messages__messages__message Messages__messages__message--self"
-              : "Messages__messages__message Messages__messages__message--other"
+              ? "messages__messages__message messages__messages__message--self"
+              : "messages__messages__message messages__messages__message--other"
           }
         >
-          <div className="Messages__messages__message__content">
+          <div className="messages__messages__message__content">
             {textContent}
           </div>
-          <div className="Messages__messages__message__time">
+          <div className="messages__messages__message__time">
             <Moment
               calendar={{
                 sameDay: "LT",
@@ -112,8 +118,8 @@ function Message({ isOwnMessage, isLatestMessage, createdAt, textContent }) {
           <div
             className={
               isOwnMessage
-                ? "Messages__messages__message__arrow alt"
-                : "Messages__messages__message__arrow"
+                ? "messages__messages__message__arrow alt"
+                : "messages__messages__message__arrow"
             }
           />
         </div>

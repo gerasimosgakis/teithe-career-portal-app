@@ -47,6 +47,11 @@ class JobSearch extends Component {
     });
   }
 
+  /**
+   * Gets location
+   * @param {*} latitude
+   * @param {*} longitude
+   */
   async getLocation(latitude, longitude) {
     var apikey = "d68690d89dff4842a10bc42493a2a90e";
 
@@ -69,6 +74,10 @@ class JobSearch extends Component {
     }
   }
 
+  /**
+   * Uses getLocation and adds location to the state
+   * @param {*} coords - coordinates
+   */
   setLocation = async coords => {
     const postcode = await this.getLocation(coords.latitude, coords.longitude);
     this.setState({
@@ -76,6 +85,9 @@ class JobSearch extends Component {
     });
   };
 
+  /**
+   * Gets favorite jobs details
+   */
   getFavoriteJobsDetails = async () => {
     try {
       const favoriteJobs = await Promise.all(
@@ -106,6 +118,9 @@ class JobSearch extends Component {
     }
   };
 
+  /**
+   * Gets jobs
+   */
   getJobs = async () => {
     const {
       keywords,
@@ -156,6 +171,9 @@ class JobSearch extends Component {
     await this.setState({ [e.target.name]: e.target.value });
   };
 
+  /**
+   * On Enter gets jobs using the parameters the user added in the search fields
+   */
   keyPressed = async event => {
     if (event.key === "Enter") {
       await this.setState({
@@ -185,6 +203,9 @@ class JobSearch extends Component {
     });
   };
 
+  /**
+   * Loads more jobs
+   */
   loadMore = async () => {
     await this.setState({
       ...this.state,
@@ -198,6 +219,10 @@ class JobSearch extends Component {
     });
   };
 
+  /**
+   * On Favorite Click adds job into the favorite jobs or removes it if it was already added
+   * @param {*} jobId
+   */
   onFavoriteClick = jobId => {
     const currentUserId = this.props.auth.user.username;
     const jobIndex = this.state.favoriteJobs.findIndex(
@@ -274,6 +299,7 @@ class JobSearch extends Component {
                 <TextFieldGroup
                   placeholder="Minimum Salary"
                   name="minimumSalary"
+                  small="true"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
                   onKeyPress={this.keyPressed}
@@ -282,6 +308,7 @@ class JobSearch extends Component {
                 <TextFieldGroup
                   placeholder="Maximum Salary"
                   name="maximumSalary"
+                  small="true"
                   value={this.state.maximumSalary}
                   required
                   onChange={this.onChange}
@@ -366,15 +393,12 @@ class JobSearch extends Component {
                 <Spinner />
               ) : this.state.error ? (
                 <div>
-                  <h2>Jobs</h2>
                   <div className="card card-body">
                     <p className="error-text">There was an error...</p>
                   </div>
                 </div>
               ) : (
                 <div>
-                  {(this.state.jobs.length > 0 ||
-                    this.state.favoriteJobsDetails.length > 0) && <h2>Jobs</h2>}
                   {this.state.favoriteJobsDetails.map((job, index) => (
                     <JobItem
                       key={index}

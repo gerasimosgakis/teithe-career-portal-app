@@ -14,6 +14,10 @@ class JobItem extends Component {
     };
   }
 
+  /**
+   * Adds or removes favorite job
+   * @param {*} jobId
+   */
   addRemoveFav = jobId => {
     this.setState({ liked: !this.state.liked });
     this.props.onClick(jobId);

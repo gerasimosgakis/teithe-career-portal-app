@@ -16,13 +16,13 @@ class ProfileAbout extends Component {
           {isEmpty(profile.bio) ? (
             <span>{firstName} does not have a bio</span>
           ) : (
-            <span>{profile.bio}</span>
+            <span className="profile-about__bio">{profile.bio}</span>
           )}
         </p>
         {profile.cv_name && (
           <div>
             <button
-              className="icon-button icon-button--small"
+              className="transparent-btn transparent-btn--small"
               onClick={() => getCV(profile.cv_url)}
             >
               <i className="fas fa-download"></i> Download CV

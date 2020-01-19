@@ -12,13 +12,18 @@ const TextFieldGroup = ({
   onChange,
   onKeyPress,
   required,
-  disabled
+  disabled,
+  small
 }) => {
   return (
     <div className="form-group">
       <input
         type={type}
-        className={classnames("form-control form-control-lg")}
+        className={
+          !small
+            ? classnames("form-control form-control-lg")
+            : classnames("form-control form-control-sm")
+        }
         placeholder={placeholder}
         name={name}
         value={value}
@@ -28,7 +33,7 @@ const TextFieldGroup = ({
         required={required}
       />
       {info && <small className="form-text text-muted">{info}</small>}
-      {error && <div className="error-text">{error}</div>}
+      {error && <div className="error-text mt1">{error}</div>}
     </div>
   );
 };

@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import TextFieldGroup from "../shared/TextFieldGroup";
-import { loginUser } from "../../redux/actions/authActions";
+import { loginUser, clearErrors } from "../../redux/actions/authActions";
+import Spinner from "../shared/Spinner";
+import LoadingText from "../shared/LoadingText";
 
 class Login extends Component {
   constructor(props) {
@@ -14,6 +16,10 @@ class Login extends Component {
       password: "",
       errors: {}
     };
+  }
+
+  componentDidMount() {
+    this.props.clearErrors();
   }
 
   onChange = e => {
@@ -69,7 +75,9 @@ class Login extends Component {
               <Link to="/" className="button back-btn mr-1">
                 Back
               </Link>
-              <button className="button submit-btn">Log In</button>
+              <button className="button submit-btn">
+                <LoadingText text="Log In" show={auth.loading} />
+              </button>
             </div>
           </form>
         </div>
@@ -88,4 +96,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { loginUser })(withRouter(Login));
+export default connect(mapStateToProps, { loginUser, clearErrors })(
+  withRouter(Login)
+);

@@ -25,20 +25,6 @@ class AddJobPost extends Component {
     this.props.getInternalJobsByUser(this.props.auth.user.username);
   }
 
-  onSubmit = event => {
-    event.preventDefault();
-    const userId = this.props.auth.user.username;
-    this.props.addInternalJob({
-      user_id: userId,
-      title: this.state.title,
-      recruiter: this.state.recruiter,
-      min_salary: this.state.minSalary,
-      max_salary: this.state.maxSalary,
-      description: this.state.description,
-      location: this.state.location
-    });
-  };
-
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -47,7 +33,6 @@ class AddJobPost extends Component {
     return (
       <div className="contain">
         <h1 className="display-4 text-center">Job Posts</h1>
-        {this.state.showForm && <AddJobPostForm />}
         <div className="mt2">
           <h2>
             My Jobs{" "}
@@ -91,7 +76,7 @@ class AddJobPost extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     auth: state.auth
   };

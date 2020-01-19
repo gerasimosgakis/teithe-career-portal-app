@@ -6,6 +6,7 @@ import config from "./config";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.scss";
 
+// Amplify configuration
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
@@ -27,18 +28,18 @@ Amplify.configure({
       //   region: config.apiGateway.REGION
       // },
       // {
-      //   name: "teithe-career-portal-posts-api",
+      //   name: "teithe-career-portal-api-part-2",
       //   endpoint: "http://localhost:3002",
       //   region: config.apiGateway.REGION
       // }
       // prod environment
       {
         name: "teithe-career-portal-api",
-        endpoint: "https://tc44jbacuh.execute-api.us-east-1.amazonaws.com/dev",
+        endpoint: "http://localhost:3001",
         region: config.apiGateway.REGION
       },
       {
-        name: "teithe-career-portal-posts-api",
+        name: "teithe-career-portal-api-part-2",
         endpoint: "https://vka3j9daw5.execute-api.us-east-1.amazonaws.com/dev",
         region: config.apiGateway.REGION
       }

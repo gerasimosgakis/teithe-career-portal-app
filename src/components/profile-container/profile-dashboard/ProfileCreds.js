@@ -207,7 +207,9 @@ class ProfileCreds extends Component {
           </div>
           <span className="profile-creds__cred-info-details">
             <p>
-              {titleCase(edu.degree)}{" "}
+              {titleCase(`${edu.degree.trim()}`)}
+              {", "}
+              {titleCase(`${edu.fieldofstudy.trim()}`)}
               {/* Button to open education modal and update the state with the details of the item or the fallback value */}
               {edit && ( // Show it only if it is the current user's profile
                 <span>
@@ -320,7 +322,11 @@ class ProfileCreds extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">Edit Experience</h4>
+                <h4 className="modal-title">
+                  {this.state.currentExperienceIndex >= 0
+                    ? "Edit Experience"
+                    : "Add Experience"}
+                </h4>
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
@@ -329,6 +335,7 @@ class ProfileCreds extends Component {
                 {this.state.currentExperienceIndex >= 0 ? ( // Checks if we are editing
                   // If yes, provides the details to the AddExperience component
                   <AddExperience
+                    small={true}
                     userId={this.props.userId}
                     id={this.state.exp_id}
                     current={this.state.exp_current}
@@ -343,6 +350,7 @@ class ProfileCreds extends Component {
                 ) : (
                   // If not, passes initial values
                   <AddExperience
+                    small={true}
                     userId={this.props.userId}
                     id={""}
                     current={false}
@@ -373,7 +381,11 @@ class ProfileCreds extends Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">Edit Education</h4>
+                <h4 className="modal-title">
+                  {this.state.currentEducationIndex >= 0
+                    ? "Edit Education"
+                    : "Add Education"}
+                </h4>
                 <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
@@ -382,6 +394,7 @@ class ProfileCreds extends Component {
                 {this.state.currentEducationIndex >= 0 ? ( // Checks if we are editing
                   // If yes, provides the details to the AddEducation component
                   <AddEducation
+                    small={true}
                     userId={this.props.userId}
                     id={this.state.edu_id}
                     current={this.state.edu_current}
@@ -396,6 +409,7 @@ class ProfileCreds extends Component {
                 ) : (
                   // If not, passes initial values
                   <AddEducation
+                    small={true}
                     userId={this.props.userId}
                     id={""}
                     current={false}

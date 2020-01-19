@@ -68,6 +68,10 @@ class InternalJobs extends Component {
     this.props.getInternalJobs();
   }
 
+  /**
+   * On Delete click, it shows the delete prompt
+   * @param {*} id - job id
+   */
   onDeleteClick(id) {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -109,12 +113,18 @@ class InternalJobs extends Component {
     this.onSearchSubmit();
   };
 
+  /**
+   * On Enter press, calls onSearchSubmit
+   */
   keyPressed = async event => {
     if (event.key === "Enter") {
       this.onSearchSubmit();
     }
   };
 
+  /**
+   * Searches jobs
+   */
   onSearchSubmit = event => {
     if (event) {
       event.preventDefault();
@@ -240,6 +250,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Minimum Salary"
                   name="minimumSalary"
+                  small="true"
                   type="number"
                   value={this.state.minimumSalary}
                   onChange={this.onChange}
@@ -249,6 +260,7 @@ class InternalJobs extends Component {
                 <TextFieldGroup
                   placeholder="Maximum Salary"
                   name="maximumSalary"
+                  small="true"
                   type="number"
                   value={this.state.maximumSalary}
                   required
