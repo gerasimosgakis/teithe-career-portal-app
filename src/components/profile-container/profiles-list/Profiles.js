@@ -26,7 +26,9 @@ class Profiles extends Component {
             {profiles.map(
               profile =>
                 profile.type !== "recruiter" && ( // Makes sure we don't show recruiters profiles
-                  <ProfileItem key={profile.id} profile={profile} />
+                  <div class="profile__item">
+                    <ProfileItem key={profile.id} profile={profile} />
+                  </div>
                 )
             )}
           </div>

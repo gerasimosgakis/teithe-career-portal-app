@@ -1,8 +1,16 @@
-.profile-item {
-  min-width: 100pt;
+.profile__item {
   width: calc(25%);
+  height: 250pt;
+  margin-bottom: 20pt;
+}
+
+.profile__item-content {
+  min-width: 100pt;
+  height: 100%;
+  width: 90%;
   border: 1px solid lightgray;
   text-align: center;
+  margin: 10pt;
   &__image-container {
     padding: 8pt;
     &-image {
