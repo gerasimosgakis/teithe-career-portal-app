@@ -155,7 +155,7 @@ class Chat extends Component {
             </div>
           )}
           <UserList
-            userName={this.state.currentUsername}
+            userName={this.props.auth.user.username}
             otherUserId={this.state.otherUserId}
             users={
               this.state.searchUsers ? this.state.searchUsers : this.state.users

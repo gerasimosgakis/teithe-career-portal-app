@@ -6,7 +6,7 @@ const UserList = props => {
   console.log(props.userName, props.users);
   const allUsers = props.users.map(
     (user, index) =>
-      user.handle !== props.userName && (
+      user.id !== props.userName && (
         <a
           className="userList__container__list__item__link"
           onClick={() => props.onClick(user.id)}
