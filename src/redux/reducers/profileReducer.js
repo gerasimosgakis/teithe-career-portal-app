@@ -22,7 +22,8 @@ import {
   DELETE_EDUCATION_FAIL,
   SEARCH_GRADUATES_SUCCESS,
   ADD_CV_SUCCESS,
-  ADD_CV_FAIL
+  ADD_CV_FAIL,
+  CLEAR_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -88,14 +89,20 @@ export default function(state = initialState, action) {
         profile: {
           ...action.payload.data,
           experiences: [...state.profile.experiences],
-          educations: [...state.profile.educations]
+          educations: [...state.profile.educations],
+          success: true
         },
         loading: false
       };
     case EDIT_PROFILE_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
+
         errors: action.payload
       };
     case EDIT_EXPERIENCE_SUCCESS:
@@ -231,6 +238,14 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         errors: action.payload
+      };
+    case CLEAR_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        }
       };
     default:
       return state;

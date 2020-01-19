@@ -48,6 +48,7 @@ class CreateProfile extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    this.props.onClick();
     const profileData = {
       id: this.props.auth.user.username,
       handle: this.state.handle.toLowerCase(),
@@ -276,7 +277,8 @@ const mapStateToProps = (state, ownProps) => {
     header: ownProps.header,
     auth: state.auth,
     profiles: state.profiles,
-    errors: state.errors
+    errors: state.errors,
+    onClick: ownProps.onClick
   };
 };
 

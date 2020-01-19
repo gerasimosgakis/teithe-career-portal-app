@@ -24,7 +24,9 @@ import {
   SEARCH_GRADUATES_SUCCESS,
   SEARCH_GRADUATES_FAIL,
   ADD_CV_FAIL,
-  ADD_CV_SUCCESS
+  ADD_CV_SUCCESS,
+  SET_LOADING,
+  CLEAR_SUCCESS
 } from "./types";
 
 /**
@@ -238,6 +240,10 @@ export const addExperience = expData => async dispatch => {
  * @param {*} expData
  */
 export const editExperience = expData => async dispatch => {
+  dispatch({
+    type: SET_LOADING,
+    payload: true
+  });
   try {
     await API.put(
       "teithe-career-portal-api",
@@ -367,4 +373,10 @@ export const addCVToProfile = (user, cvName, cvURL) => async dispatch => {
       payload: error
     });
   }
+};
+
+export const clearSuccess = () => dispatch => {
+  dispatch({
+    type: CLEAR_SUCCESS
+  });
 };

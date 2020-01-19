@@ -10,7 +10,8 @@ import Spinner from "../../shared/Spinner";
 import {
   getProfileByHandle,
   getProfileById,
-  deleteExperience
+  deleteExperience,
+  clearSuccess
 } from "../../../redux/actions/profileActions";
 import CreateProfile from "../create-profile/CreateProfile";
 import AddEducation from "../add-education/AddEducation";
@@ -25,6 +26,11 @@ class Profile extends Component {
       // Otherwise get the id from the auth store (it means it is the current user's profile)
       this.props.getProfileById(this.props.auth.user.username);
     }
+  };
+
+  modalOpen = () => {
+    console.log("modalOpen");
+    this.props.clearSuccess();
   };
 
   render() {
@@ -66,6 +72,7 @@ class Profile extends Component {
             profile={profile}
             user={user}
             edit={profile.id === user.username}
+            onModalOpen={() => this.modalOpen()}
           />
           <ProfileAbout profile={profile} />
           {user.attributes["custom:role"] !== "recruiter" && (
@@ -109,5 +116,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getProfileByHandle,
   getProfileById,
-  deleteExperience
+  deleteExperience,
+  clearSuccess
 })(Profile);
