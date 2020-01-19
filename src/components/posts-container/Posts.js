@@ -24,7 +24,7 @@ class Posts extends Component {
     return (
       <div className="feed contain">
         <h1 className="display-4 text-center">Posts</h1>{" "}
-        <p className="lead text-center">Communicate with other developers </p>
+        <p className="lead text-center">Communicate with other alumni </p>
         <PostForm />
         {postContent}
       </div>
