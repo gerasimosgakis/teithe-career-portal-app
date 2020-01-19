@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { registerUser, confirmUser } from "../../redux/actions/authActions";
+import {
+  registerUser,
+  confirmUser,
+  setLoading
+} from "../../redux/actions/authActions";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import SelectListGroup from "../shared/SelectListGroup";
+import LoadingText from "../shared/LoadingText";
 
 class Register extends Component {
   constructor(props) {
@@ -21,6 +26,10 @@ class Register extends Component {
       user: null,
       errors: {}
     };
+  }
+
+  componentDidMount() {
+    this.props.setLoading(false);
   }
 
   onChange = e => {
@@ -57,7 +66,9 @@ class Register extends Component {
     this.setState({ isLoading: true });
 
     const userConfirm = {
-      email: this.props.auth.username,
+      email: this.props.auth.username
+        ? this.props.auth.username
+        : this.props.auth.user.username,
       confirmationCode: this.state.confirmationCode
     };
 
@@ -92,6 +103,7 @@ class Register extends Component {
       { label: "Alumni", value: "alumni" },
       { label: "Recruiter", value: "recruiter" }
     ];
+    const { auth } = this.props;
     return (
       <form>
         <div className="form__field-label">Name</div>
@@ -144,7 +156,7 @@ class Register extends Component {
             type="button"
             onClick={this.onSubmit}
           >
-            Sign Up
+            <LoadingText text="Sign Up" show={auth.loading} />
           </button>
         </div>
       </form>
@@ -183,6 +195,8 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser, confirmUser })(
-  withRouter(Register)
-);
+export default connect(mapStateToProps, {
+  registerUser,
+  confirmUser,
+  setLoading
+})(withRouter(Register));

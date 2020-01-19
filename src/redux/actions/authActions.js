@@ -8,7 +8,8 @@ import {
   LOGOUT_FAIL,
   CONFIRM_REGISTER_SUCCESS,
   CONFIRM_REGISTER_FAIL,
-  CLEAR_AUTH_ERRORS
+  CLEAR_AUTH_ERRORS,
+  SET_LOADING
 } from "./types";
 import gravatar from "gravatar";
 
@@ -18,6 +19,10 @@ import gravatar from "gravatar";
  * @param {*} userData - the data for the user to be registered
  */
 export const registerUser = userData => async dispatch => {
+  dispatch({
+    type: SET_LOADING,
+    payload: true
+  });
   if (userData.password !== userData.confirmPassword) {
     dispatch({
       type: REGISTER_FAIL,
@@ -164,5 +169,12 @@ export const logoutUser = history => async dispatch => {
 export const clearErrors = () => dispatch => {
   dispatch({
     type: CLEAR_AUTH_ERRORS
+  });
+};
+
+export const setLoading = loading => dispatch => {
+  dispatch({
+    type: SET_LOADING,
+    payload: loading
   });
 };

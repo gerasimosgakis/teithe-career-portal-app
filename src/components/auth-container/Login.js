@@ -4,6 +4,8 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import { loginUser, clearErrors } from "../../redux/actions/authActions";
+import Spinner from "../shared/Spinner";
+import LoadingText from "../shared/LoadingText";
 
 class Login extends Component {
   constructor(props) {
@@ -73,7 +75,9 @@ class Login extends Component {
               <Link to="/" className="button back-btn mr-1">
                 Back
               </Link>
-              <button className="button submit-btn">Log In</button>
+              <button className="button submit-btn">
+                <LoadingText text="Log In" show={auth.loading} />
+              </button>
             </div>
           </form>
         </div>

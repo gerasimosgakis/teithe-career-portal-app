@@ -36,7 +36,7 @@ export default function(state = initialState, action) {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       };
     case GET_PROFILES_SUCCESS:
       return {

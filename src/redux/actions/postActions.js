@@ -26,7 +26,7 @@ export const getPosts = () => async dispatch => {
       type: "SET_LOADING",
       payload: true
     });
-    const posts = await API.get("teithe-career-portal-posts-api", "/posts");
+    const posts = await API.get("teithe-career-portal-api-part-2", "/posts");
     dispatch({
       type: GET_POSTS_SUCCESS,
       payload: posts
@@ -46,9 +46,10 @@ export const getPosts = () => async dispatch => {
 export const addPost = data => async dispatch => {
   try {
     dispatch({
-      type: SET_LOADING
+      type: SET_LOADING,
+      payload: true
     });
-    const post = await API.post("teithe-career-portal-posts-api", "/posts", {
+    const post = await API.post("teithe-career-portal-api-part-2", "/posts", {
       body: data
     });
 
@@ -71,10 +72,11 @@ export const addPost = data => async dispatch => {
 export const deletePost = id => async dispatch => {
   try {
     dispatch({
-      type: SET_LOADING
+      type: SET_LOADING,
+      payload: true
     });
     const response = await API.del(
-      "teithe-career-portal-posts-api",
+      "teithe-career-portal-api-part-2",
       `/posts/${id}`
     );
 
@@ -99,14 +101,18 @@ export const deletePost = id => async dispatch => {
  */
 export const addLike = (postId, userId, username, liked) => async dispatch => {
   try {
-    const addLike = await API.post("teithe-career-portal-posts-api", "/likes", {
-      body: {
-        post_id: postId,
-        user_id: userId,
-        username,
-        liked
+    const addLike = await API.post(
+      "teithe-career-portal-api-part-2",
+      "/likes",
+      {
+        body: {
+          post_id: postId,
+          user_id: userId,
+          username,
+          liked
+        }
       }
-    });
+    );
 
     dispatch({
       type: ADD_LIKE_SUCCESS,
@@ -127,7 +133,7 @@ export const addLike = (postId, userId, username, liked) => async dispatch => {
 export const addComment = data => async dispatch => {
   try {
     const response = await API.post(
-      "teithe-career-portal-posts-api",
+      "teithe-career-portal-api-part-2",
       "/comments",
       {
         body: data
@@ -153,7 +159,7 @@ export const addComment = data => async dispatch => {
 export const getCommentsByPost = (postId, postIndex) => async dispatch => {
   try {
     const response = await API.get(
-      "teithe-career-portal-posts-api",
+      "teithe-career-portal-api-part-2",
       `/comments/${postId}`
     );
 
@@ -176,9 +182,10 @@ export const getCommentsByPost = (postId, postIndex) => async dispatch => {
 export const deleteComment = id => async dispatch => {
   try {
     dispatch({
-      type: SET_LOADING
+      type: SET_LOADING,
+      payload: true
     });
-    await API.del("teithe-career-portal-posts-api", `/comments/delete/${id}`);
+    await API.del("teithe-career-portal-api-part-2", `/comments/delete/${id}`);
 
     dispatch({
       type: DELETE_COMMENT_SUCCESS,

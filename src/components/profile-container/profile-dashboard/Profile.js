@@ -37,7 +37,7 @@ class Profile extends Component {
       profileContent = <Spinner />;
     } else if (profile && !profile.name) {
       // If there a profile object but not a name, it means the user has nott created a profile yet
-      profileContent = <CreateProfile></CreateProfile>; // Render create profile form
+      profileContent = <CreateProfile header={true}></CreateProfile>; // Render create profile form
     } else if (
       // If there is a profile but no educations and the user is not a recruiter
       profile &&
