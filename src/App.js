@@ -30,7 +30,8 @@ class App extends Component {
 
     this.state = {
       isAuthenticated: false,
-      isAuthenticating: true
+      isAuthenticating: true,
+      userId: ""
     };
   }
 
@@ -38,6 +39,7 @@ class App extends Component {
     try {
       // Gets the current user
       const currentAuthenticatedUser = await Auth.currentAuthenticatedUser();
+      console.log(currentAuthenticatedUser);
 
       this.userHasAuthenticated(true); // If the above succeeds it calls userHasAuthenticated function
       const avatar = gravatar.url(currentAuthenticatedUser.attributes.email, {

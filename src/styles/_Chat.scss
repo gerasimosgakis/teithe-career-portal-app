@@ -1,17 +1,20 @@
-.Chat {
+.chat {
   display: flex;
   justify-content: center;
 }
 
-.Chat__chatwindow {
+.chat__chatwindow {
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
   display: flex;
   width: 100%;
   height: 700px;
 }
 
-.Chat__chatwindow-users {
+.chat__users {
   margin-top: 4pt;
+  height: 700px;
+  min-width: 250px;
+  overflow: auto;
   &-search {
     position: relative;
   }
@@ -39,7 +42,7 @@
   }
 }
 
-.UserList {
+.userList {
   border-right: 1px solid #e0e0e0;
   background: #fefefe;
   height: 100%;
@@ -49,7 +52,7 @@
   cursor: not-allowed;
 }
 
-.UserList__titlebar {
+.userList__titlebar {
   display: flex;
   align-items: center;
   background: #ededed;
@@ -57,57 +60,58 @@
   height: 4rem;
 }
 
-.UserList__titlebar__avatar {
+.userList__titlebar__avatar {
   width: 3rem;
   border-radius: 1.5rem;
 }
 
-.UserList__titlebar__logged-in-as {
+.userList__titlebar__logged-in-as {
   margin: 0 0 0 0.5rem;
 }
 
-.UserList__container {
+.userList__container {
   display: flex;
   flex-direction: column;
 }
 
-.UserList__container__list {
+.userList__container__list {
   list-style: none;
   padding: 0;
   margin: 0;
+  // overflow: auto;
 }
 
-.UserList__container__list__item {
+.userList__container__list__item {
   display: flex;
   padding: 1rem;
 }
 
-.UserList__container__list__item__link {
+.userList__container__list__item__link {
   display: inline;
 }
 
-.UserList__container__list__item--selected {
+.userList__container__list__item--selected {
   background: #f2f2f2;
 }
 
-.UserList__container__list__item__avatar {
+.userList__container__list__item__avatar {
   height: 4.2rem;
   border-radius: 2.1rem;
   margin-right: 1rem;
 }
 
-.UserList__container__list__item__content {
+.userList__container__list__item__content {
   padding: 0.5rem;
   flex-shrink: 1;
   overflow: hidden;
 }
 
-.UserList__container__list__item__content__name {
+.userList__container__list__item__content__name {
   font-weight: bold;
   margin: 0;
 }
 
-.UserList__container__list__item__content__text {
+.userList__container__list__item__content__text {
   color: #606060;
   margin: 0;
   margin-top: 0.5rem;
@@ -116,21 +120,21 @@
   text-overflow: ellipsis;
 }
 
-.UserList__container__list__item__time {
+.userList__container__list__item__time {
   color: #a0a0a0;
   padding: 0.5rem;
   flex-grow: 1;
   text-align: right;
 }
 
-.Messages {
+.messages {
   height: 100%;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.Messages__titlebar {
+.messages__titlebar {
   display: flex;
   align-items: center;
   background: #ededed;
@@ -138,47 +142,47 @@
   height: 4rem;
 }
 
-.Messages__titlebar__avatar {
+.messages__titlebar__avatar {
   width: 3rem;
   border-radius: 1.5rem;
   margin-right: 1rem;
 }
 
-.Messages__titlebar__details {
+.messages__titlebar__details {
   display: flex;
   flex-direction: column;
 }
 
-.Messages__titlebar__details__presence {
+.messages__titlebar__details__presence {
   font-size: 0.8em;
   opacity: 0.5;
   margin-top: 0.2rem;
 }
 
-.Messages__messages {
+.messages__messages {
   background-image: linear-gradient(#d3d3d3, #d0d0d0);
   flex: 1;
   padding: 2rem 4rem;
   overflow-y: scroll;
 }
 
-.Messages__messages__message__wrapper {
+.messages__messages__message__wrapper {
   display: flex;
 }
 
-.Messages__messages__message__wrapper--other {
+.messages__messages__message__wrapper--other {
   justify-content: flex-start;
 }
 
-.Messages__messages__message__wrapper--self {
+.messages__messages__message__wrapper--self {
   justify-content: flex-end;
 }
 
-.Messages__messages__message__wrapper__inner {
+.messages__messages__message__wrapper__inner {
   margin-bottom: 1rem;
 }
 
-.Messages__messages__message {
+.messages__messages__message {
   border-radius: 0.5rem;
   padding: 1rem;
   padding-bottom: 0.5rem;
@@ -188,7 +192,7 @@
   position: relative;
 }
 
-.Messages__messages__message__seen {
+.messages__messages__message__seen {
   text-align: right;
   padding-top: 0.2rem;
   padding-right: 0.5rem;
@@ -196,7 +200,7 @@
   opacity: 0.7;
 }
 
-.Messages__messages__message__arrow {
+.messages__messages__message__arrow {
   position: absolute;
   width: 0;
   bottom: 42px;
@@ -204,13 +208,13 @@
   height: 0;
 }
 
-.Messages__messages__message__arrow.alt {
+.messages__messages__message__arrow.alt {
   right: -2px;
   bottom: 40px;
   left: auto;
 }
 
-.Messages__messages__message__arrow:after {
+.messages__messages__message__arrow:after {
   content: "";
   position: absolute;
   border: 0 solid transparent;
@@ -221,34 +225,34 @@
   transform: rotate(145deg);
 }
 
-.Messages__messages__message__arrow.alt:after {
+.messages__messages__message__arrow.alt:after {
   transform: rotate(45deg) scaleY(-1);
   border-top: 9px solid #236d7f;
 }
 
-.Messages__messages__message--other {
+.messages__messages__message--other {
   background: #fefefe;
 }
 
-.Messages__messages__message--self {
+.messages__messages__message--self {
   background: #236d7f;
   color: #ffffff;
 }
 
-.Messages__messages__message__time {
+.messages__messages__message__time {
   text-align: right;
   font-size: 0.9em;
   opacity: 0.7;
 }
 
-.Messages__compose {
+.messages__compose {
   box-sizing: border-box;
   padding: 1rem;
   background: #ededed;
   display: flex;
 }
 
-.Messages__compose__input {
+.messages__compose__input {
   box-sizing: border-box;
   border: none;
   padding: 0.75rem;
@@ -262,10 +266,10 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .UserList {
+  .userList {
     display: none;
   }
-  .Chat__chatwindow {
+  .chat__chatwindow {
     margin-top: 0;
     width: 100%;
     height: 100vh;
