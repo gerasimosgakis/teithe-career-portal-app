@@ -72,10 +72,10 @@ class Login extends Component {
               }
             />
             <div className="btn-group right">
-              <Link to="/" className="button back-btn mr-1">
+              <Link to="/" className="button button--wide back-btn mr-1">
                 Back
               </Link>
-              <button className="button submit-btn">
+              <button className="button button--wide submit-btn">
                 <LoadingText text="Log In" show={auth.loading} />
               </button>
             </div>

@@ -127,7 +127,9 @@ class AddJobPostForm extends Component {
       { label: "Part-time", value: "part-time" }
     ];
     return (
-      <div>
+      <div className="container">
+        <h1 className="display-4 text-center">Job</h1>
+        <p className="lead text-center">Add a job post</p>
         <small className="small-text">* = required fields</small>
         <form className="mt1" onSubmit={this.onSubmit}>
           <div className="form__field-label">* Title</div>
@@ -185,11 +187,7 @@ class AddJobPostForm extends Component {
             value={this.state.description}
             onChange={this.onChange}
           />
-          <input
-            type="submit"
-            value="Submit"
-            className="btn btn-info btn-block mt-4"
-          />
+          <button className="button btn-block submit-btn">Submit</button>
         </form>
       </div>
     );

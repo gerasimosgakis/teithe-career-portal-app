@@ -136,7 +136,7 @@ class ProfileHeader extends Component {
               </div>
               <div className="modal-body">
                 {/* CreateProfile is also used for editing */}
-                <CreateProfile></CreateProfile>
+                <CreateProfile header={true}></CreateProfile>
               </div>
               <div className="modal-footer">
                 <button

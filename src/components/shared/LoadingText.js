@@ -1,5 +1,4 @@
 import React from "react";
-import spinner from "./spinner.gif";
 
 export default function LoadingText(props) {
   console.log(props);

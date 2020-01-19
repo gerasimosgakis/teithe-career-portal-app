@@ -41,7 +41,9 @@ class Profiles extends Component {
     return (
       <div className="profiles contain">
         <h1 className="display-4 text-center">Alumni Profiles</h1>{" "}
-        <p className="lead text-center">Browse and connect with developers </p>
+        <p className="lead text-center">
+          Browse and connect with alumni students{" "}
+        </p>
         <Search></Search>
         {profileItems}
       </div>

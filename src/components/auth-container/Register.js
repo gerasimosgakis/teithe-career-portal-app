@@ -148,11 +148,11 @@ class Register extends Component {
           onChange={this.onChange}
         />
         <div className="btn-group right">
-          <Link to="/" className="button back-btn mr-1">
+          <Link to="/" className="button button--wide back-btn mr-1">
             Back
           </Link>
           <button
-            className="button submit-btn"
+            className="button button--wide submit-btn"
             type="button"
             onClick={this.onSubmit}
           >
