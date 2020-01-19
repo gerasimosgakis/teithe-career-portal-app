@@ -4,6 +4,8 @@ import CreateProfile from "../create-profile/CreateProfile";
 import titleCase from "../../../shared/functions/titleCase";
 import isEmpty from "../../../shared/functions/isEmpty";
 import Avatar from "react-avatar";
+import { Modal } from "react-bootstrap";
+import SuccessIcon from "../../shared/SuccessIcon";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
@@ -27,6 +29,9 @@ class ProfileHeader extends Component {
                   className="icon-button"
                   data-toggle="modal"
                   data-target="#profileModal"
+                  onClick={() => {
+                    this.props.onModalOpen();
+                  }}
                 >
                   <i className="fas fa-edit"></i>
                 </button>
@@ -135,8 +140,11 @@ class ProfileHeader extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/* CreateProfile is also used for editing */}
-                <CreateProfile></CreateProfile>
+                {profile.success ? (
+                  <SuccessIcon />
+                ) : (
+                  <CreateProfile header={true}></CreateProfile>
+                )}
               </div>
               <div className="modal-footer">
                 <button
@@ -150,6 +158,7 @@ class ProfileHeader extends Component {
             </div>
           </div>
         </div>
+        {/* / Profile Edit Modal */}
       </div>
     );
   }

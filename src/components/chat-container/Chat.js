@@ -47,10 +47,8 @@ class Chat extends Component {
       .then(currentUser => {})
       .catch(err => {
         if (err.status === 400) {
-          console.log(err);
           return;
         } else {
-          console.log(err.status);
           return;
         }
       });

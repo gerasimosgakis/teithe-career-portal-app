@@ -141,91 +141,85 @@ class AddExperience extends Component {
     return (
       <div className="add-experience">
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Experience</h1>
-              <p className="lead text-center">
-                Add any job or position that you have had in the past or current
-              </p>
-              <small className="d-block pb-3">* = required fields</small>
-              <form onSubmit={this.onSubmit}>
-                <div className="form__field-label">* Company</div>
-                <TextFieldGroup
-                  placeholder="* Company"
-                  name="company"
-                  required
-                  value={this.state.company}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* Title</div>
-                <TextFieldGroup
-                  placeholder="* Job Title"
-                  name="title"
-                  required
-                  value={this.state.title}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* Location</div>
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="_location"
-                  required
-                  value={this.state._location}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* Start Date</div>
-                <TextFieldGroup
-                  placeholder="from"
-                  name="start_date"
-                  type="month"
-                  required
-                  value={this.state.start_date}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* End Date</div>
-                <TextFieldGroup
-                  placeholder="to"
-                  name="end_date"
-                  type="month"
-                  required
-                  value={this.state.end_date}
-                  onChange={this.onChange}
-                  disabled={this.state.disabled ? "disabled" : ""}
-                />
-                <div className="form-check mb-4">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    name="current"
-                    value={this.state.current}
-                    checked={this.state.current}
-                    onChange={this.onCheck}
-                    id="currentExp"
-                  />
-                  <label htmlFor="current" className="form-check-label">
-                    Current Job
-                  </label>
-                </div>
-                <div className="form__field-label">Description</div>
-                <TextAreaFieldGroup
-                  placeholder="Job Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.onChange}
-                  info="Tell us about your position"
-                />
-                {!this.props.small ? (
-                  <div className="btn-group right">
-                    <button className="button submit-btn">Submit</button>
-                  </div>
-                ) : (
-                  <button className="button btn-block submit-btn">
-                    Submit
-                  </button>
-                )}
-              </form>
+          <h1 className="display-4 text-center">Experience</h1>
+          <p className="lead text-center">
+            Add any job or position that you have had in the past or current
+          </p>
+          <small className="d-block pb-3">* = required fields</small>
+          <form onSubmit={this.onSubmit}>
+            <div className="form__field-label">* Company</div>
+            <TextFieldGroup
+              placeholder="* Company"
+              name="company"
+              required
+              value={this.state.company}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Title</div>
+            <TextFieldGroup
+              placeholder="* Job Title"
+              name="title"
+              required
+              value={this.state.title}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Location</div>
+            <TextFieldGroup
+              placeholder="Location"
+              name="_location"
+              required
+              value={this.state._location}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Start Date</div>
+            <TextFieldGroup
+              placeholder="from"
+              name="start_date"
+              type="month"
+              required
+              value={this.state.start_date}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* End Date</div>
+            <TextFieldGroup
+              placeholder="to"
+              name="end_date"
+              type="month"
+              required
+              value={this.state.end_date}
+              onChange={this.onChange}
+              disabled={this.state.disabled ? "disabled" : ""}
+            />
+            <div className="form__check mb-4">
+              <input
+                type="checkbox"
+                className="form__check-input"
+                name="current"
+                value={this.state.current}
+                checked={this.state.current}
+                onChange={this.onCheck}
+                id="currentExp"
+              />
+              <label htmlFor="current" className="form__check-label">
+                Current Job
+              </label>
             </div>
-          </div>
+            <div className="form__field-label">Description</div>
+            <TextAreaFieldGroup
+              placeholder="Job Description"
+              name="description"
+              value={this.state.description}
+              onChange={this.onChange}
+              info="Tell us about your position"
+            />
+            {!this.props.small ? (
+              <div className="btn-group right">
+                <button className="button submit-btn">Submit</button>
+              </div>
+            ) : (
+              <button className="button btn-block submit-btn">Submit</button>
+            )}
+          </form>
         </div>
       </div>
     );

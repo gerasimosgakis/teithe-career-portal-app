@@ -24,7 +24,9 @@ import {
   SEARCH_GRADUATES_SUCCESS,
   SEARCH_GRADUATES_FAIL,
   ADD_CV_FAIL,
-  ADD_CV_SUCCESS
+  ADD_CV_SUCCESS,
+  SET_LOADING,
+  CLEAR_SUCCESS
 } from "./types";
 
 /**
@@ -367,4 +369,10 @@ export const addCVToProfile = (user, cvName, cvURL) => async dispatch => {
       payload: error
     });
   }
+};
+
+export const clearSuccess = () => dispatch => {
+  dispatch({
+    type: CLEAR_SUCCESS
+  });
 };

@@ -276,7 +276,8 @@ const mapStateToProps = (state, ownProps) => {
     header: ownProps.header,
     auth: state.auth,
     profiles: state.profiles,
-    errors: state.errors
+    errors: state.errors,
+    onClick: ownProps.onClick
   };
 };
 

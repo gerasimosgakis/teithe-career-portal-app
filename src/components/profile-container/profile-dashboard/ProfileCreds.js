@@ -6,11 +6,14 @@ import AddExperience from "../add-experience/AddExperience";
 import AddEducation from "../add-education/AddEducation";
 import {
   deleteExperience,
-  deleteEducation
+  deleteEducation,
+  clearSuccess
 } from "../../../redux/actions/profileActions";
 import titleCase from "../../../shared/functions/titleCase";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import profileReducer from "../../../redux/reducers/profileReducer";
+import SuccessIcon from "../../shared/SuccessIcon";
 
 class ProfileCreds extends Component {
   constructor(props) {
@@ -147,6 +150,7 @@ class ProfileCreds extends Component {
                     data-toggle="modal"
                     data-target="#expModal"
                     onClick={() => {
+                      this.props.onModalOpen();
                       this.setState({
                         exp_userId: this.props.userId || "",
                         exp_id: this.props.experience[index].id || "",
@@ -218,6 +222,7 @@ class ProfileCreds extends Component {
                     data-toggle="modal"
                     data-target="#eduModal"
                     onClick={() => {
+                      this.props.onModalOpen();
                       this.setState({
                         edu_userId: this.props.user_id || "",
                         edu_id: this.props.education[index].id || "",
@@ -279,6 +284,7 @@ class ProfileCreds extends Component {
               data-toggle="modal"
               data-target="#expModal"
               onClick={() => {
+                this.props.onModalOpen();
                 this.setState({
                   currentExperienceIndex: -1
                 });
@@ -301,7 +307,7 @@ class ProfileCreds extends Component {
               data-toggle="modal"
               data-target="#eduModal"
               onClick={() => {
-                // this.currentExperienceIndex = index;
+                this.props.onModalOpen();
                 this.setState({
                   currentEducationIndex: -1
                 });
@@ -332,7 +338,9 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentExperienceIndex >= 0 ? ( // Checks if we are editing
+                {this.props.success ? (
+                  <SuccessIcon />
+                ) : this.state.currentExperienceIndex >= 0 ? ( // Checks if we are editing
                   // If yes, provides the details to the AddExperience component
                   <AddExperience
                     small={true}
@@ -391,7 +399,9 @@ class ProfileCreds extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {this.state.currentEducationIndex >= 0 ? ( // Checks if we are editing
+                {this.props.success ? (
+                  <SuccessIcon />
+                ) : this.state.currentEducationIndex >= 0 ? ( // Checks if we are editing
                   // If yes, provides the details to the AddEducation component
                   <AddEducation
                     small={true}
@@ -446,6 +456,8 @@ ProfileCreds.propTypes = {
   edit: PropTypes.bool
 };
 
-export default connect(null, { deleteExperience, deleteEducation })(
-  ProfileCreds
-);
+export default connect(null, {
+  deleteExperience,
+  deleteEducation,
+  clearSuccess
+})(ProfileCreds);

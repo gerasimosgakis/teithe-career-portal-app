@@ -31,10 +31,14 @@ class Landing extends Component {
           ) : (
             <Fragment>
               <Link to="/register">
-                <button className="button submit-btn mr1">Sign Up</button>
+                <button className="button button--wide submit-btn mr1">
+                  Sign Up
+                </button>
               </Link>
               <Link to="/login">
-                <button className="button transparent-btn">Login</button>
+                <button className="button button--wide transparent-btn">
+                  Login
+                </button>
               </Link>
             </Fragment>
           )}

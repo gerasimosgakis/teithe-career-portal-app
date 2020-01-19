@@ -10,7 +10,8 @@ import Spinner from "../../shared/Spinner";
 import {
   getProfileByHandle,
   getProfileById,
-  deleteExperience
+  deleteExperience,
+  clearSuccess
 } from "../../../redux/actions/profileActions";
 import CreateProfile from "../create-profile/CreateProfile";
 import AddEducation from "../add-education/AddEducation";
@@ -25,6 +26,13 @@ class Profile extends Component {
       // Otherwise get the id from the auth store (it means it is the current user's profile)
       this.props.getProfileById(this.props.auth.user.username);
     }
+  };
+
+  /**
+   * It is called when the modal is opened and it sets success to false so the status icon won't be shown
+   */
+  onModalOpen = () => {
+    this.props.clearSuccess();
   };
 
   render() {
@@ -66,14 +74,17 @@ class Profile extends Component {
             profile={profile}
             user={user}
             edit={profile.id === user.username}
+            onModalOpen={() => this.onModalOpen()}
           />
           <ProfileAbout profile={profile} />
           {user.attributes["custom:role"] !== "recruiter" && (
             <ProfileCreds
+              success={profile.success}
               userId={user.username}
               education={profile.educations}
               experience={profile.experiences}
               edit={profile.id === user.username}
+              onModalOpen={() => this.onModalOpen()}
             />
           )}
           {user.attributes["custom:role"] !== "recruiter" && (
@@ -109,5 +120,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getProfileByHandle,
   getProfileById,
-  deleteExperience
+  deleteExperience,
+  clearSuccess
 })(Profile);
