@@ -2,3 +2,16 @@
   margin-bottom: 8pt;
   color: $font;
 }
+
+.form__check {
+  display: flex;
+}
+
+.form__check-input {
+  align-self: center;
+}
+
+.form__check-label {
+  align-self: center;
+  margin: 0 5pt;
+}
