@@ -19,48 +19,48 @@ class InternalJobs extends Component {
       title:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].title
-          : null,
+          : "",
       recruiter:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].recruiter
-          : null,
+          : "",
       location:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].location
-          : null,
+          : "",
       type:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].type
-          : null,
+          : "",
       min_salary:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].min_salary
-          : null,
+          : "",
       max_salary:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].max_salary
-          : null,
+          : "",
       description:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].description
-          : null,
+          : "",
       // Search
       keywords: "",
       locationName: "",
       distanceFromLocation: 15,
-      permanent: null,
-      contract: null,
-      temp: null,
-      partTime: null,
-      fullTime: null,
-      minimumSalary: null,
-      maximumSalary: null,
-      jobs: null,
+      permanent: "",
+      contract: "",
+      temp: "",
+      partTime: "",
+      fullTime: "",
+      minimumSalary: "",
+      maximumSalary: "",
+      jobs: "",
       loading: false,
       moreLoading: false,
       favoriteJobs: [],
       favoriteJobsDetails: [],
-      error: null
+      error: ""
     };
   }
 
