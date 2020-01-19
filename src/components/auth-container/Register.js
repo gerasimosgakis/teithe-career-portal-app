@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { registerUser, confirmUser } from "../../redux/actions/authActions";
+import {
+  registerUser,
+  confirmUser,
+  setLoading
+} from "../../redux/actions/authActions";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import SelectListGroup from "../shared/SelectListGroup";
+import LoadingText from "../shared/LoadingText";
 
 class Register extends Component {
   constructor(props) {
@@ -21,6 +26,10 @@ class Register extends Component {
       user: null,
       errors: {}
     };
+  }
+
+  componentDidMount() {
+    this.props.setLoading(false);
   }
 
   onChange = e => {
@@ -57,7 +66,9 @@ class Register extends Component {
     this.setState({ isLoading: true });
 
     const userConfirm = {
-      email: this.props.auth.username,
+      email: this.props.auth.username
+        ? this.props.auth.username
+        : this.props.auth.user.username,
       confirmationCode: this.state.confirmationCode
     };
 
@@ -66,7 +77,7 @@ class Register extends Component {
 
   renderConfirmationForm() {
     return (
-      <form onSubmit={this.onConfirmationSubmit}>
+      <form>
         <TextFieldGroup
           placeholder="Confirmation Code"
           name="confirmationCode"
@@ -74,7 +85,11 @@ class Register extends Component {
           value={this.state.confirmationCode}
           onChange={this.onChange}
         />
-        <button className="register__form-buttons button submit-btn">
+        <button
+          className="register__form-buttons button submit-btn"
+          type="button"
+          onClick={this.onConfirmationSubmit}
+        >
           Submit
         </button>
       </form>
@@ -88,8 +103,9 @@ class Register extends Component {
       { label: "Alumni", value: "alumni" },
       { label: "Recruiter", value: "recruiter" }
     ];
+    const { auth } = this.props;
     return (
-      <form onSubmit={this.onSubmit}>
+      <form>
         <div className="form__field-label">Name</div>
         <TextFieldGroup
           placeholder="Name"
@@ -135,7 +151,13 @@ class Register extends Component {
           <Link to="/" className="button back-btn mr-1">
             Back
           </Link>
-          <button className="button submit-btn">Sign Up</button>
+          <button
+            className="button submit-btn"
+            type="button"
+            onClick={this.onSubmit}
+          >
+            <LoadingText text="Sign Up" show={auth.loading} />
+          </button>
         </div>
       </form>
     );
@@ -150,7 +172,7 @@ class Register extends Component {
           <p className="header-label">Create your Career Portal profile</p>
           <div className="register__form">
             {auth &&
-            auth.username &&
+            ((auth.user && auth.user.username) || auth.username) &&
             !auth.isAuthenticated &&
             !auth.userConfirmed
               ? this.renderConfirmationForm()
@@ -173,6 +195,8 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser, confirmUser })(
-  withRouter(Register)
-);
+export default connect(mapStateToProps, {
+  registerUser,
+  confirmUser,
+  setLoading
+})(withRouter(Register));

@@ -21,9 +21,10 @@ import {
 export const getInternalJobs = () => async dispatch => {
   try {
     dispatch({
-      type: SET_LOADING
+      type: SET_LOADING,
+      payload: true
     });
-    const jobs = await API.get("teithe-career-portal-posts-api", "/job-posts");
+    const jobs = await API.get("teithe-career-portal-api-part-2", "/job-posts");
     dispatch({
       type: GET_JOB_POSTS_SUCCESS,
       payload: jobs
@@ -44,10 +45,11 @@ export const getInternalJobs = () => async dispatch => {
 export const getInternalJobsByUser = userId => async dispatch => {
   try {
     dispatch({
-      type: SET_LOADING
+      type: SET_LOADING,
+      payload: true
     });
     const jobs = await API.get(
-      "teithe-career-portal-posts-api",
+      "teithe-career-portal-api-part-2",
       `/job-posts/${userId}`
     );
     dispatch({
@@ -68,9 +70,13 @@ export const getInternalJobsByUser = userId => async dispatch => {
  */
 export const addInternalJob = data => async dispatch => {
   try {
-    const job = await API.post("teithe-career-portal-posts-api", "/job-posts", {
-      body: data
-    });
+    const job = await API.post(
+      "teithe-career-portal-api-part-2",
+      "/job-posts",
+      {
+        body: data
+      }
+    );
     dispatch({
       type: ADD_JOB_POST_SUCCESS,
       payload: job.data
@@ -91,7 +97,7 @@ export const addInternalJob = data => async dispatch => {
 export const editInternalJob = (id, data) => async dispatch => {
   try {
     const job = await API.put(
-      "teithe-career-portal-posts-api",
+      "teithe-career-portal-api-part-2",
       `/job-posts/update/${id}`,
       {
         body: data
@@ -115,7 +121,7 @@ export const editInternalJob = (id, data) => async dispatch => {
  */
 export const deleteInternalJob = id => async dispatch => {
   try {
-    await API.del("teithe-career-portal-posts-api", `/job-posts/delete/${id}`);
+    await API.del("teithe-career-portal-api-part-2", `/job-posts/delete/${id}`);
     dispatch({
       type: DELETE_JOB_POST_SUCCESS,
       payload: id
@@ -135,7 +141,7 @@ export const deleteInternalJob = id => async dispatch => {
 export const searchJobPosts = keys => async dispatch => {
   try {
     const jobs = await API.post(
-      "teithe-career-portal-posts-api",
+      "teithe-career-portal-api-part-2",
       "/job-posts/search",
       {
         body: keys

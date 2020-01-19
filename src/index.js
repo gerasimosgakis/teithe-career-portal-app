@@ -28,7 +28,7 @@ Amplify.configure({
         region: config.apiGateway.REGION
       },
       {
-        name: "teithe-career-portal-posts-api",
+        name: "teithe-career-portal-api-part-2",
         endpoint: "http://localhost:3002",
         region: config.apiGateway.REGION
       }
@@ -39,7 +39,7 @@ Amplify.configure({
       //   region: config.apiGateway.REGION
       // },
       // {
-      //   name: "teithe-career-portal-posts-api",
+      //   name: "teithe-career-portal-api-part-2",
       //   endpoint: "https://vka3j9daw5.execute-api.us-east-1.amazonaws.com/dev",
       //   region: config.apiGateway.REGION
       // }

@@ -8,7 +8,8 @@ import {
   SET_USER,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
-  SET_LOADING
+  SET_LOADING,
+  CLEAR_AUTH_ERRORS
 } from "../actions/types";
 
 const initialState = {
@@ -26,7 +27,7 @@ export default function(state = initialState, action) {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       };
     case SET_USER:
       return {
@@ -34,7 +35,8 @@ export default function(state = initialState, action) {
         user: {
           ...payload
         },
-        isAuthenticated: true
+        isAuthenticated: true,
+        loading: false
       };
     case REGISTER_SUCCESS:
       return {
@@ -96,6 +98,12 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         errors: payload
+      };
+    case CLEAR_AUTH_ERRORS:
+      return {
+        ...state,
+        errors: {},
+        loading: false
       };
     default:
       return state;
