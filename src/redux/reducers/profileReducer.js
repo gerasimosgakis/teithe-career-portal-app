@@ -115,13 +115,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          experiences
+          experiences,
+          success: true
         },
         loading: false
       };
     case EDIT_EXPERIENCE_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -130,13 +135,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          experiences: [action.payload, ...state.profile.experiences]
+          experiences: [action.payload, ...state.profile.experiences],
+          success: true
         },
         loading: false
       };
     case ADD_EXPERIENCE_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -172,13 +182,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          educations
+          educations,
+          success: true
         },
         loading: false
       };
     case EDIT_EDUCATION_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -187,13 +202,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          educations: [action.payload, ...state.profile.educations]
+          educations: [action.payload, ...state.profile.educations],
+          success: true
         },
         loading: false
       };
     case ADD_EDUCATION_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };

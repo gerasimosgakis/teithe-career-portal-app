@@ -48,7 +48,6 @@ class CreateProfile extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.onClick();
     const profileData = {
       id: this.props.auth.user.username,
       handle: this.state.handle.toLowerCase(),

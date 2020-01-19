@@ -7,17 +7,6 @@ import Avatar from "react-avatar";
 import { Modal } from "react-bootstrap";
 import SuccessIcon from "../../shared/SuccessIcon";
 class ProfileHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      success: false
-    };
-  }
-  onProfileSubmit = () => {
-    console.log("submitted");
-    this.setState({ success: true });
-  };
-
   render() {
     const { profile } = this.props;
     return (
@@ -154,10 +143,7 @@ class ProfileHeader extends Component {
                 {profile.success ? (
                   <SuccessIcon />
                 ) : (
-                  <CreateProfile
-                    header={true}
-                    onClick={this.onProfileSubmit}
-                  ></CreateProfile>
+                  <CreateProfile header={true}></CreateProfile>
                 )}
               </div>
               <div className="modal-footer">

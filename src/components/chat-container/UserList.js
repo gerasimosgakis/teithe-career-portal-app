@@ -8,11 +8,11 @@ const UserList = props => {
     (user, index) =>
       user.id !== props.userName && (
         <a
+          key={index}
           className="userList__container__list__item__link"
           onClick={() => props.onClick(user.id)}
         >
           <li
-            key={index}
             className={
               props.otherUserId === user.id
                 ? "userList__container__list__item user-bg"

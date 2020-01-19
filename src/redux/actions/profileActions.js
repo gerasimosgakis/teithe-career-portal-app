@@ -240,10 +240,6 @@ export const addExperience = expData => async dispatch => {
  * @param {*} expData
  */
 export const editExperience = expData => async dispatch => {
-  dispatch({
-    type: SET_LOADING,
-    payload: true
-  });
   try {
     await API.put(
       "teithe-career-portal-api",

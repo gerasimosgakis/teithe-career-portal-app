@@ -28,8 +28,10 @@ class Profile extends Component {
     }
   };
 
-  modalOpen = () => {
-    console.log("modalOpen");
+  /**
+   * It is called when the modal is opened and it sets success to false so the status icon won't be shown
+   */
+  onModalOpen = () => {
     this.props.clearSuccess();
   };
 
@@ -72,15 +74,17 @@ class Profile extends Component {
             profile={profile}
             user={user}
             edit={profile.id === user.username}
-            onModalOpen={() => this.modalOpen()}
+            onModalOpen={() => this.onModalOpen()}
           />
           <ProfileAbout profile={profile} />
           {user.attributes["custom:role"] !== "recruiter" && (
             <ProfileCreds
+              success={profile.success}
               userId={user.username}
               education={profile.educations}
               experience={profile.experiences}
               edit={profile.id === user.username}
+              onModalOpen={() => this.onModalOpen()}
             />
           )}
           {user.attributes["custom:role"] !== "recruiter" && (
