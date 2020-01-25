@@ -8,7 +8,6 @@ import ProfileGithub from "./ProfileGithub";
 import ProfileSkills from "./ProfileSkills";
 import Spinner from "../../shared/Spinner";
 import {
-  // getProfileByHandle,
   getProfileById,
   deleteExperience,
   clearSuccess
@@ -103,22 +102,18 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  // getProfileByHandle: PropTypes.func.isRequired,
   getProfileById: PropTypes.func.isRequired,
-  // profiles: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  // profiles: state.profiles,
   loading: state.profiles.loading,
   profile: state.profiles.profile,
   auth: state.auth
 });
 
 export default connect(mapStateToProps, {
-  // getProfileByHandle,
   getProfileById,
   deleteExperience,
   clearSuccess

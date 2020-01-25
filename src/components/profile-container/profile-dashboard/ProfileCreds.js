@@ -175,7 +175,7 @@ class ProfileCreds extends Component {
 
                   {/* Opens on delete confirmation modal */}
                   <button
-                    className="icon-button"
+                    className="icon-button icon-button--danger"
                     onClick={() => {
                       this.onDeleteExperience(exp.id);
                     }}
@@ -246,7 +246,7 @@ class ProfileCreds extends Component {
                   </button>
                   {/* Opens on delete confirmation modal */}
                   <button
-                    className="icon-button"
+                    className="icon-button icon-button--danger"
                     onClick={() => {
                       this.onDeleteEducation(edu.id);
                     }}
@@ -275,12 +275,14 @@ class ProfileCreds extends Component {
 
     return (
       <div className="profile-creds">
-        <h3>
-          Experience <span>&nbsp;</span>
+        <div className="d-flex justify-space-between">
+          <h3>
+            Experience <span>&nbsp;</span>
+          </h3>
           {/* Show the button only if it is the current user's profile */}
           {edit && (
             <button
-              className="icon-button"
+              className="btn transparent-btn"
               data-toggle="modal"
               data-target="#expModal"
               onClick={() => {
@@ -290,20 +292,22 @@ class ProfileCreds extends Component {
                 });
               }}
             >
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus"></i> Add New
             </button>
           )}
-        </h3>
+        </div>
         {expItems.length > 0 ? (
           <ul className="list-group">{expItems}</ul>
         ) : (
           <p className="text-center">No Experience Listed</p>
         )}
-        <h3>
-          Education <span>&nbsp;</span>
+        <div className="d-flex justify-space-between">
+          <h3>
+            Education <span>&nbsp;</span>
+          </h3>
           {edit && (
             <button
-              className="icon-button"
+              className="btn transparent-btn"
               data-toggle="modal"
               data-target="#eduModal"
               onClick={() => {
@@ -313,10 +317,10 @@ class ProfileCreds extends Component {
                 });
               }}
             >
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus"></i> Add New
             </button>
           )}
-        </h3>
+        </div>
         {eduItems.length > 0 ? (
           <ul className="list-group">{eduItems}</ul>
         ) : (
