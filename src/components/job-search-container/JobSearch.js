@@ -243,7 +243,7 @@ class JobSearch extends Component {
     return (
       <div className="search-jobs contain">
         <div className="search-jobs__header mb4">
-          <h1>Job Search</h1>
+          <h1>External Job Search</h1>
           <p className="header-label">Let's get hired!</p>
         </div>
 

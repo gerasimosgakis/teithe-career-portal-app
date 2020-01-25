@@ -34,16 +34,16 @@ class AddJobPost extends Component {
       <div className="contain">
         <h1 className="display-4 text-center">Job Posts</h1>
         <div className="mt2">
-          <h2>
-            My Jobs{" "}
+          <div className="d-flex justify-space-between mb2">
+            <h2>My Jobs </h2>
             <button
               className="button transparent-btn transparent-btn--small ml1"
               data-toggle="modal"
               data-target="#addModal"
             >
-              Add new
+              Add New
             </button>
-          </h2>
+          </div>
           <InternalJobs />
         </div>
         {/* Job Add Modal */}

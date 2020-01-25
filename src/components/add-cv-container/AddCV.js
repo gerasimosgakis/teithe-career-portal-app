@@ -79,9 +79,7 @@ class AddCV extends Component {
                 className="inputfile mr2"
                 onChange={this.handleFileChange}
               />
-              {/* <div className="btn-group right mt-half"> */}
               <button className="button submit-btn">Submit</button>
-              {/* </div> */}
             </form>
           )}
         </div>
