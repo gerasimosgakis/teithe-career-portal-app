@@ -71,7 +71,7 @@ class JobSearch extends Component {
       const location = await axios.get(request_url);
       return location.data.results[0].components.postcode;
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     }
   }
 
@@ -115,7 +115,7 @@ class JobSearch extends Component {
         favoriteJobsDetails: [...favoriteJobsDetails]
       });
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     }
   };
 
