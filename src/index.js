@@ -35,7 +35,7 @@ Amplify.configure({
       // prod environment
       {
         name: "teithe-career-portal-api",
-        endpoint: "http://localhost:3001",
+        endpoint: "https://tc44jbacuh.execute-api.us-east-1.amazonaws.com/dev",
         region: config.apiGateway.REGION
       },
       {
