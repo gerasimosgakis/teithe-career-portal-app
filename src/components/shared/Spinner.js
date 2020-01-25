@@ -1,14 +1,25 @@
 import React from "react";
-import spinner from "./spinner.gif";
 
 export default function Spinner() {
   return (
-    <div>
-      <img
-        src={spinner}
-        style={{ width: "200px", margin: "auto", display: "block" }}
-        alt="Loading..."
-      />
+    <div className="text-center">
+      <svg
+        class="spinner"
+        width="65px"
+        height="200px"
+        viewBox="0 0 66 66"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          class="path"
+          fill="none"
+          stroke-width="6"
+          stroke-linecap="round"
+          cx="33"
+          cy="33"
+          r="30"
+        ></circle>
+      </svg>
     </div>
   );
 }

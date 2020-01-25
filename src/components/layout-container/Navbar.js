@@ -57,7 +57,7 @@ class Navbar extends Component {
           >
             <Link className="nav-link" to="/job-search">
               {" "}
-              Job Search
+              External Jobs
             </Link>
           </li>
           <li
@@ -132,7 +132,7 @@ class Navbar extends Component {
           >
             <Link className="nav-link" to="/job-search">
               {" "}
-              Job Search
+              External Jobs
             </Link>
           </li>
           <li
