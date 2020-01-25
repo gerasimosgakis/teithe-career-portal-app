@@ -22,7 +22,8 @@ import {
   DELETE_EDUCATION_FAIL,
   SEARCH_GRADUATES_SUCCESS,
   ADD_CV_SUCCESS,
-  ADD_CV_FAIL
+  ADD_CV_FAIL,
+  CLEAR_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -88,14 +89,20 @@ export default function(state = initialState, action) {
         profile: {
           ...action.payload.data,
           experiences: [...state.profile.experiences],
-          educations: [...state.profile.educations]
+          educations: [...state.profile.educations],
+          success: true
         },
         loading: false
       };
     case EDIT_PROFILE_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
+
         errors: action.payload
       };
     case EDIT_EXPERIENCE_SUCCESS:
@@ -108,13 +115,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          experiences
+          experiences,
+          success: true
         },
         loading: false
       };
     case EDIT_EXPERIENCE_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -123,13 +135,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          experiences: [action.payload, ...state.profile.experiences]
+          experiences: [action.payload, ...state.profile.experiences],
+          success: true
         },
         loading: false
       };
     case ADD_EXPERIENCE_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -165,13 +182,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          educations
+          educations,
+          success: true
         },
         loading: false
       };
     case EDIT_EDUCATION_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -180,13 +202,18 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          educations: [action.payload, ...state.profile.educations]
+          educations: [action.payload, ...state.profile.educations],
+          success: true
         },
         loading: false
       };
     case ADD_EDUCATION_FAIL:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        },
         loading: false,
         errors: action.payload
       };
@@ -231,6 +258,14 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         errors: action.payload
+      };
+    case CLEAR_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          success: false
+        }
       };
     default:
       return state;

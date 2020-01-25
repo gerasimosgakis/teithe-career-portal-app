@@ -5,6 +5,7 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import JobItem from "./JobItem";
 import Spinner from "../shared/Spinner";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { getFavJobs, addJob, removeJob } from "../../redux/actions/jobActions";
 
 class JobSearch extends Component {
@@ -243,7 +244,7 @@ class JobSearch extends Component {
     return (
       <div className="search-jobs contain">
         <div className="search-jobs__header mb4">
-          <h1>Job Search</h1>
+          <h1>External Job Search</h1>
           <p className="header-label">Let's get hired!</p>
         </div>
 
@@ -317,68 +318,68 @@ class JobSearch extends Component {
 
                 {/* <fieldset> */}
                 <div className="form__field-label">Job Type</div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="permanent"
                     checked={this.state.permanent}
                     onChange={() => this.onCheck("permanent")}
                     id="permanent"
                   />
-                  <label className="form-check-label" htmlFor="permanent">
+                  <label className="form__check-label" htmlFor="permanent">
                     Permanent
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="temp"
                     checked={this.state.temp}
                     onChange={() => this.onCheck("temp")}
                     value={this.state.temp}
                   />
-                  <label className="form-check-label" htmlFor="temp">
+                  <label className="form__check-label" htmlFor="temp">
                     Temporary
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="contract"
                     checked={this.state.contract}
                     onChange={() => this.onCheck("contract")}
                     value={this.state.contract}
                   />
-                  <label className="form-check-label" htmlFor="contract">
+                  <label className="form__check-label" htmlFor="contract">
                     Contract
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="fullTime"
                     checked={this.state.fullTime}
                     onChange={() => this.onCheck("fullTime")}
                     value={this.state.fullTime}
                   />
-                  <label className="form-check-label" htmlFor="fullTime">
+                  <label className="form__check-label" htmlFor="fullTime">
                     Full-time
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="partTime"
                     checked={this.state.partTime}
                     onChange={() => this.onCheck("partTime")}
                     value={this.state.partTime}
                   />
-                  <label className="form-check-label" htmlFor="partTime">
+                  <label className="form__check-label" htmlFor="partTime">
                     Part-time
                   </label>
                 </div>
@@ -451,6 +452,15 @@ class JobSearch extends Component {
     );
   }
 }
+
+JobSearch.propTypes = {
+  auth: PropTypes.object.isRequired,
+  favoriteJobs: PropTypes.array,
+  errors: PropTypes.object,
+  getFavJobs: PropTypes.func.isRequired,
+  addJob: PropTypes.func.isRequired,
+  removeJob: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

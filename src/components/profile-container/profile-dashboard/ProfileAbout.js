@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getCV } from "../../../shared/functions/aws";
 import { withRouter } from "react-router-dom";
 import isEmpty from "../../../shared/functions/isEmpty";
 class ProfileAbout extends Component {
@@ -19,16 +18,6 @@ class ProfileAbout extends Component {
             <span className="profile-about__bio">{profile.bio}</span>
           )}
         </p>
-        {profile.cv_name && (
-          <div>
-            <button
-              className="transparent-btn transparent-btn--small"
-              onClick={() => getCV(profile.cv_url)}
-            >
-              <i className="fas fa-download"></i> Download CV
-            </button>
-          </div>
-        )}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
   getInternalJobs,
   deleteInternalJob,
@@ -19,48 +20,48 @@ class InternalJobs extends Component {
       title:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].title
-          : null,
+          : "",
       recruiter:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].recruiter
-          : null,
+          : "",
       location:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].location
-          : null,
+          : "",
       type:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].type
-          : null,
+          : "",
       min_salary:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].min_salary
-          : null,
+          : "",
       max_salary:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].max_salary
-          : null,
+          : "",
       description:
         this.props.internalJobs && this.props.internalJobs.length > 0
           ? this.props.internalJobs[0].description
-          : null,
+          : "",
       // Search
       keywords: "",
       locationName: "",
       distanceFromLocation: 15,
-      permanent: null,
-      contract: null,
-      temp: null,
-      partTime: null,
-      fullTime: null,
-      minimumSalary: null,
-      maximumSalary: null,
-      jobs: null,
+      permanent: "",
+      contract: "",
+      temp: "",
+      partTime: "",
+      fullTime: "",
+      minimumSalary: "",
+      maximumSalary: "",
+      jobs: "",
       loading: false,
       moreLoading: false,
       favoriteJobs: [],
       favoriteJobsDetails: [],
-      error: null
+      error: ""
     };
   }
 
@@ -270,68 +271,68 @@ class InternalJobs extends Component {
 
                 {/* <fieldset> */}
                 <div className="form__field-label">Job Type</div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="permanent"
                     checked={this.state.permanent}
                     onChange={() => this.onCheck("permanent")}
                     id="permanent"
                   />
-                  <label className="form-check-label" htmlFor="permanent">
+                  <label className="form__check-label" htmlFor="permanent">
                     Permanent
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="temp"
                     checked={this.state.temp}
                     onChange={() => this.onCheck("temp")}
                     value={this.state.temp}
                   />
-                  <label className="form-check-label" htmlFor="temp">
+                  <label className="form__check-label" htmlFor="temp">
                     Temporary
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="contract"
                     checked={this.state.contract}
                     onChange={() => this.onCheck("contract")}
                     value={this.state.contract}
                   />
-                  <label className="form-check-label" htmlFor="contract">
+                  <label className="form__check-label" htmlFor="contract">
                     Contract
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="fullTime"
                     checked={this.state.fullTime}
                     onChange={() => this.onCheck("fullTime")}
                     value={this.state.fullTime}
                   />
-                  <label className="form-check-label" htmlFor="fullTime">
+                  <label className="form__check-label" htmlFor="fullTime">
                     Full-time
                   </label>
                 </div>
-                <div className="form-check">
+                <div className="form__check mb1">
                   <input
-                    className="form-check-input"
+                    className="form__check-input"
                     type="checkbox"
                     name="partTime"
                     checked={this.state.partTime}
                     onChange={() => this.onCheck("partTime")}
                     value={this.state.partTime}
                   />
-                  <label className="form-check-label" htmlFor="partTime">
+                  <label className="form__check-label" htmlFor="partTime">
                     Part-time
                   </label>
                 </div>
@@ -381,6 +382,14 @@ class InternalJobs extends Component {
     );
   }
 }
+
+InternalJobs.propTypes = {
+  auth: PropTypes.object.isRequired,
+  internalJobs: PropTypes.object.isRequired,
+  getInternalJobs: PropTypes.func.isRequired,
+  deleteInternalJob: PropTypes.func.isRequired,
+  searchJobPosts: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import TextFieldGroup from "../../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import moment from "moment";
@@ -142,96 +143,95 @@ class AddEducation extends Component {
     return (
       <div className="add-experience">
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Education</h1>
-              <p className="lead text-center">
-                Add any degree that you have had in the past or current
-              </p>
-              <small className="d-block pb-3">* = required fields</small>
-              <form onSubmit={this.onSubmit}>
-                <div className="form__field-label">* School</div>
-                <TextFieldGroup
-                  placeholder="* School"
-                  name="school"
-                  required
-                  value={this.state.school}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* Degree</div>
-                <TextFieldGroup
-                  placeholder="* Degree"
-                  name="degree"
-                  required
-                  value={this.state.degree}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* Field of Study</div>
-                <TextFieldGroup
-                  placeholder="Field of Study"
-                  name="fieldofstudy"
-                  required
-                  value={this.state.fieldofstudy}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* Start Date</div>
-                <TextFieldGroup
-                  placeholder="from"
-                  name="start_date"
-                  type="month"
-                  required
-                  value={this.state.start_date}
-                  onChange={this.onChange}
-                />
-                <div className="form__field-label">* End Date</div>
-                <TextFieldGroup
-                  placeholder="to"
-                  name="end_date"
-                  type="month"
-                  required
-                  value={this.state.end_date}
-                  onChange={this.onChange}
-                  disabled={this.state.disabled ? "disabled" : ""}
-                />
-                <div className="form-check mb-4">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    name="current"
-                    value={this.state.current}
-                    checked={this.state.current}
-                    onChange={this.onCheck}
-                    id="currentEdu"
-                  />
-                  <label htmlFor="current" className="form-check-label">
-                    Current Degree
-                  </label>
-                </div>
-                <div className="form__field-label">Description</div>
-                <TextAreaFieldGroup
-                  placeholder="Study Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.onChange}
-                  info="Tell us about your position"
-                />
-                {!this.props.small ? (
-                  <div className="btn-group right">
-                    <button className="button submit-btn">Submit</button>
-                  </div>
-                ) : (
-                  <button className="button btn-block submit-btn">
-                    Submit
-                  </button>
-                )}
-              </form>
+          <h1 className="display-4 text-center">Education</h1>
+          <p className="lead text-center">
+            Add any degree that you have had in the past or current
+          </p>
+          <small className="d-block pb-3">* = required fields</small>
+          <form onSubmit={this.onSubmit}>
+            <div className="form__field-label">* School</div>
+            <TextFieldGroup
+              placeholder="* School"
+              name="school"
+              required
+              value={this.state.school}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Degree</div>
+            <TextFieldGroup
+              placeholder="* Degree"
+              name="degree"
+              required
+              value={this.state.degree}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Field of Study</div>
+            <TextFieldGroup
+              placeholder="Field of Study"
+              name="fieldofstudy"
+              required
+              value={this.state.fieldofstudy}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* Start Date</div>
+            <TextFieldGroup
+              placeholder="from"
+              name="start_date"
+              type="month"
+              required
+              value={this.state.start_date}
+              onChange={this.onChange}
+            />
+            <div className="form__field-label">* End Date</div>
+            <TextFieldGroup
+              placeholder="to"
+              name="end_date"
+              type="month"
+              required
+              value={this.state.end_date}
+              onChange={this.onChange}
+              disabled={this.state.disabled ? "disabled" : ""}
+            />
+            <div className="form__check mb-4">
+              <input
+                type="checkbox"
+                className="form__check-input"
+                name="current"
+                value={this.state.current}
+                checked={this.state.current}
+                onChange={this.onCheck}
+                id="currentEdu"
+              />
+              <label htmlFor="current" className="form__check-label">
+                Current Degree
+              </label>
             </div>
-          </div>
+            <div className="form__field-label">Description</div>
+            <TextAreaFieldGroup
+              placeholder="Study Description"
+              name="description"
+              value={this.state.description}
+              onChange={this.onChange}
+              info="Tell us about your position"
+            />
+            {!this.props.small ? (
+              <div className="btn-group right">
+                <button className="button submit-btn">Submit</button>
+              </div>
+            ) : (
+              <button className="button btn-block submit-btn">Submit</button>
+            )}
+          </form>
         </div>
       </div>
     );
   }
 }
+
+AddEducation.propTypes = {
+  addEducation: PropTypes.func.isRequired,
+  editEducation: PropTypes.func.isRequired
+};
 
 export default connect(null, { addEducation, editEducation })(
   withRouter(AddEducation)

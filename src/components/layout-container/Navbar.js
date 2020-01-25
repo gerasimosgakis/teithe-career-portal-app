@@ -193,11 +193,6 @@ class Navbar extends Component {
               Logout
             </a>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/settings">
-              <i className="fas fa-cog mt-half" />
-            </Link>
-          </li>
         </Fragment>
       );
     } else {

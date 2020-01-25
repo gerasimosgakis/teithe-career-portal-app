@@ -12,10 +12,10 @@ class ProfileItem extends Component {
     const { profile } = this.props;
 
     return (
-      <div className="profile-item mb2">
+      <div className="profile__item-content mb2">
         {/* React tooltip package import - Needed for adding tooltips in the component */}
         <ReactTooltip></ReactTooltip>
-        <div className="profile-item__image-container">
+        <div className="profile__item-content__image-container">
           <Avatar
             email={profile.email}
             name={profile.name}
@@ -23,7 +23,7 @@ class ProfileItem extends Component {
             size="100"
           />
         </div>
-        <div className="profile-item__title-container">
+        <div className="profile__item-content__title-container">
           <h2>{titleCase(profile.name)}</h2>
           <p className="help-text">
             {titleCase(profile.status)}{" "}
@@ -32,7 +32,7 @@ class ProfileItem extends Component {
             )}
           </p>
         </div>
-        <div className="profile-item__skills-container">
+        <div className="profile__item-content__skills-container">
           {profile.skills
             .split(",")
             .slice(0, 2)
@@ -46,7 +46,7 @@ class ProfileItem extends Component {
             <span data-tip={profile.skills}>...</span>
           )}
         </div>
-        <div className="profile-item__cv-container mt2">
+        <div className="profile__item-content__cv-container mt2">
           {profile.cv_name && (
             <div>
               <button
@@ -58,10 +58,10 @@ class ProfileItem extends Component {
             </div>
           )}
         </div>
-        <div className="profile-item__button-container">
+        <div className="profile__item-content__button-container">
           <Link
             to={`/graduates/${profile.id}`}
-            className="profile-item__button-container-button button button--small transparent-btn"
+            className="profile__item-content__button-container-button button button--small transparent-btn"
           >
             Visit
           </Link>

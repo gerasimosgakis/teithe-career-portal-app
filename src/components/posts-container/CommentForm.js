@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import { addComment } from "../../redux/actions/postActions";
 
@@ -50,5 +51,9 @@ class CommentForm extends Component {
     );
   }
 }
+
+CommentForm.propTypes = {
+  addComment: PropTypes.func.isRequired
+};
 
 export default connect(null, { addComment })(CommentForm);

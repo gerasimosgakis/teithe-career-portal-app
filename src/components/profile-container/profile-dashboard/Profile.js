@@ -8,9 +8,8 @@ import ProfileGithub from "./ProfileGithub";
 import ProfileSkills from "./ProfileSkills";
 import Spinner from "../../shared/Spinner";
 import {
-  getProfileByHandle,
   getProfileById,
-  deleteExperience
+  clearSuccess
 } from "../../../redux/actions/profileActions";
 import CreateProfile from "../create-profile/CreateProfile";
 import AddEducation from "../add-education/AddEducation";
@@ -25,6 +24,13 @@ class Profile extends Component {
       // Otherwise get the id from the auth store (it means it is the current user's profile)
       this.props.getProfileById(this.props.auth.user.username);
     }
+  };
+
+  /**
+   * It is called when the modal is opened and it sets success to false so the status icon won't be shown
+   */
+  onModalOpen = () => {
+    this.props.clearSuccess();
   };
 
   render() {
@@ -66,14 +72,17 @@ class Profile extends Component {
             profile={profile}
             user={user}
             edit={profile.id === user.username}
+            onModalOpen={() => this.onModalOpen()}
           />
           <ProfileAbout profile={profile} />
           {user.attributes["custom:role"] !== "recruiter" && (
             <ProfileCreds
+              success={profile.success}
               userId={user.username}
               education={profile.educations}
               experience={profile.experiences}
               edit={profile.id === user.username}
+              onModalOpen={() => this.onModalOpen()}
             />
           )}
           {user.attributes["custom:role"] !== "recruiter" && (
@@ -92,22 +101,19 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  getProfileByHandle: PropTypes.func.isRequired,
-  getProfileById: PropTypes.func.isRequired,
-  // profiles: PropTypes.object.isRequired,
   loading: PropTypes.bool,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object,
+  getProfileById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  // profiles: state.profiles,
   loading: state.profiles.loading,
   profile: state.profiles.profile,
   auth: state.auth
 });
 
 export default connect(mapStateToProps, {
-  getProfileByHandle,
   getProfileById,
-  deleteExperience
+  clearSuccess
 })(Profile);

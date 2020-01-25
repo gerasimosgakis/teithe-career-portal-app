@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { ChatkitProvider, TokenProvider } from "@pusher/chatkit-client-react";
 import Chatkit from "@pusher/chatkit-server";
 import { API } from "aws-amplify";
@@ -47,10 +48,8 @@ class Chat extends Component {
       .then(currentUser => {})
       .catch(err => {
         if (err.status === 400) {
-          console.log(err);
           return;
         } else {
-          console.log(err.status);
           return;
         }
       });
@@ -197,6 +196,10 @@ class Chat extends Component {
     );
   }
 }
+
+Chat.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

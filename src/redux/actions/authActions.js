@@ -166,12 +166,19 @@ export const logoutUser = history => async dispatch => {
   }
 };
 
+/**
+ * Clears errors
+ */
 export const clearErrors = () => dispatch => {
   dispatch({
     type: CLEAR_AUTH_ERRORS
   });
 };
 
+/**
+ * Sets loading
+ * @param {*} loading - boolean
+ */
 export const setLoading = loading => dispatch => {
   dispatch({
     type: SET_LOADING,

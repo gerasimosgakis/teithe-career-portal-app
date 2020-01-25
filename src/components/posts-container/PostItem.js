@@ -76,7 +76,6 @@ class PostItem extends Component {
     const currentUserId = auth.user.username;
     const currentUserName = auth.user.attributes.name;
     const currentUserEmail = auth.user.attributes.email;
-    // const avatar = auth.user.avatar;
     return (
       <div className="card posts__post-item mb2">
         <div className="card-body card posts__post-item-body">
@@ -94,7 +93,10 @@ class PostItem extends Component {
           <div className="posts__post-item-body-main">
             <Linkify>{post.text}</Linkify>
             <p className="mt1 help-text">
-              {new Date(parseInt(post.created_at)).toLocaleDateString()}
+              {new Date(parseInt(post.created_at)).toLocaleDateString()},{" "}
+              {new Date(parseInt(post.created_at))
+                .toLocaleTimeString()
+                .slice(0, 5)}
             </p>
           </div>
         </div>
@@ -137,7 +139,6 @@ class PostItem extends Component {
                 currentUserId={currentUserId}
                 currentUserName={currentUserName}
                 currentUserEmail={currentUserEmail}
-                // avatar={avatar}
               />
               {this.state.post.comments && this.state.post.comments.length > 0 && (
                 <div className="mt2">
@@ -157,8 +158,12 @@ PostItem.defaultProps = {
 };
 
 PostItem.propTypes = {
-  post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  getCommentsByPost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -24,7 +24,9 @@ import {
   SEARCH_GRADUATES_SUCCESS,
   SEARCH_GRADUATES_FAIL,
   ADD_CV_FAIL,
-  ADD_CV_SUCCESS
+  ADD_CV_SUCCESS,
+  SET_LOADING,
+  CLEAR_SUCCESS
 } from "./types";
 
 /**
@@ -72,45 +74,6 @@ export const getProfileById = id => async dispatch => {
       type: GET_PROFILE_SUCCESS,
       payload: {
         profile: profile,
-        educations,
-        experiences
-      }
-    });
-  } catch (error) {
-    dispatch({
-      type: GET_PROFILE_FAIL,
-      payload: error
-    });
-  }
-};
-
-/**
- * Gets profile by handle
- * @param {*} handle
- */
-export const getProfileByHandle = handle => async dispatch => {
-  try {
-    dispatch({
-      type: "SET_LOADING",
-      payload: true
-    });
-    const profile = await API.get(
-      "teithe-career-portal-api",
-      `/profiles/handle/${handle}`
-    );
-    const educations = await API.get(
-      "teithe-career-portal-api",
-      `/educations/${profile[0].id}`
-    );
-    const experiences = await API.get(
-      "teithe-career-portal-api",
-      `/experiences/${profile[0].id}`
-    );
-
-    dispatch({
-      type: GET_PROFILE_SUCCESS,
-      payload: {
-        profile: profile[0],
         educations,
         experiences
       }
@@ -367,4 +330,13 @@ export const addCVToProfile = (user, cvName, cvURL) => async dispatch => {
       payload: error
     });
   }
+};
+
+/**
+ * Clears success in state
+ */
+export const clearSuccess = () => dispatch => {
+  dispatch({
+    type: CLEAR_SUCCESS
+  });
 };

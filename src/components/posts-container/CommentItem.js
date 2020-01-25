@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import titleCase from "../../shared/functions/titleCase";
 import Linkify from "react-linkify";
 import Avatar from "react-avatar";
@@ -75,5 +76,9 @@ class CommentItem extends Component {
     );
   }
 }
+
+CommentItem.propTypes = {
+  deleteComment: PropTypes.func.isRequired
+};
 
 export default connect(null, { deleteComment })(CommentItem);

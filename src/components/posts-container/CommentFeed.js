@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import CommentItem from "./CommentItem";
 
 class CommentFeed extends Component {
@@ -22,6 +23,10 @@ class CommentFeed extends Component {
     );
   }
 }
+
+CommentFeed.propTypes = {
+  posts: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   posts: state.posts

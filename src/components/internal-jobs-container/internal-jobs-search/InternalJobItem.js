@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import titleCase from "../../../shared/functions/titleCase";
 import ReactHtmlParser from "react-html-parser";
 
@@ -49,6 +50,12 @@ class InternalJobItem extends Component {
     );
   }
 }
+
+InternalJobItem.propTypes = {
+  auth: PropTypes.object.isRequired,
+  job: PropTypes.object.isRequired,
+  errors: PropTypes.object
+};
 
 const mapStateToProps = (state, ownProps) => ({
   auth: state.auth,
