@@ -268,18 +268,22 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  profiles: PropTypes.object.isRequired
+  header: PropTypes.bool,
+  auth: PropTypes.object.isRequired,
+  profiles: PropTypes.object.isRequired,
+  errors: PropTypes.object,
+  onClick: PropTypes.func,
+  createProfile: PropTypes.func.isRequired,
+  editProfile: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    header: ownProps.header,
-    auth: state.auth,
-    profiles: state.profiles,
-    errors: state.errors,
-    onClick: ownProps.onClick
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  header: ownProps.header,
+  auth: state.auth,
+  profiles: state.profiles,
+  errors: state.errors,
+  onClick: ownProps.onClick
+});
 
 export default connect(mapStateToProps, { createProfile, editProfile })(
   withRouter(CreateProfile)

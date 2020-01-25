@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { addInternalJob } from "../../../redux/actions/internalJobActions";
 import { getInternalJobsByUser } from "../../../redux/actions/internalJobActions";
@@ -75,6 +76,12 @@ class AddJobPost extends Component {
     );
   }
 }
+
+AddJobPost.propTypes = {
+  auth: PropTypes.object.isRequired,
+  addInternalJob: PropTypes.func.isRequired,
+  getInternalJobsByUser: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
   return {

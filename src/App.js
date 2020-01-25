@@ -59,6 +59,9 @@ class App extends Component {
     this.setState({ isAuthenticating: false });
   }
 
+  /**
+   * Sets isAuthenticated in state
+   */
   userHasAuthenticated = authenticated => {
     this.setState({ isAuthenticated: authenticated });
   };

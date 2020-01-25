@@ -5,6 +5,7 @@ import TextFieldGroup from "../shared/TextFieldGroup";
 import JobItem from "./JobItem";
 import Spinner from "../shared/Spinner";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { getFavJobs, addJob, removeJob } from "../../redux/actions/jobActions";
 
 class JobSearch extends Component {
@@ -451,6 +452,15 @@ class JobSearch extends Component {
     );
   }
 }
+
+JobSearch.propTypes = {
+  auth: PropTypes.object.isRequired,
+  favoriteJobs: PropTypes.array,
+  errors: PropTypes.object,
+  getFavJobs: PropTypes.func.isRequired,
+  addJob: PropTypes.func.isRequired,
+  removeJob: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

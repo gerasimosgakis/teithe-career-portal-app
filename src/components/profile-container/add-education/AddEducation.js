@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import TextFieldGroup from "../../shared/TextFieldGroup";
 import TextAreaFieldGroup from "../../shared/TextAreaFieldGroup";
 import moment from "moment";
@@ -226,6 +227,11 @@ class AddEducation extends Component {
     );
   }
 }
+
+AddEducation.propTypes = {
+  addEducation: PropTypes.func.isRequired,
+  editEducation: PropTypes.func.isRequired
+};
 
 export default connect(null, { addEducation, editEducation })(
   withRouter(AddEducation)

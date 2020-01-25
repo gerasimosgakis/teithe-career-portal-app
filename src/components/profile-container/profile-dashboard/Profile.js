@@ -9,7 +9,6 @@ import ProfileSkills from "./ProfileSkills";
 import Spinner from "../../shared/Spinner";
 import {
   getProfileById,
-  deleteExperience,
   clearSuccess
 } from "../../../redux/actions/profileActions";
 import CreateProfile from "../create-profile/CreateProfile";
@@ -102,9 +101,10 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
   loading: PropTypes.bool,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object,
+  getProfileById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -115,6 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   getProfileById,
-  deleteExperience,
   clearSuccess
 })(Profile);

@@ -4,7 +4,6 @@ import CreateProfile from "../create-profile/CreateProfile";
 import titleCase from "../../../shared/functions/titleCase";
 import isEmpty from "../../../shared/functions/isEmpty";
 import Avatar from "react-avatar";
-import { Modal } from "react-bootstrap";
 import SuccessIcon from "../../shared/SuccessIcon";
 import { getCV } from "../../../shared/functions/aws";
 class ProfileHeader extends Component {
@@ -177,7 +176,8 @@ class ProfileHeader extends Component {
 }
 
 ProfileHeader.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  getCV: PropTypes.func
 };
 
 export default ProfileHeader;

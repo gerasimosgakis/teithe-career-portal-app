@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactHtmlParser from "react-html-parser";
-
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { addJob } from "../../redux/actions/jobActions";
 
 class JobItem extends Component {
@@ -85,6 +85,12 @@ class JobItem extends Component {
     );
   }
 }
+
+JobItem.propTypes = {
+  auth: PropTypes.object.isRequired,
+  favoriteJob: PropTypes.bool,
+  errors: PropTypes.object
+};
 
 const mapStateToProps = (state, ownProps) => ({
   auth: state.auth,

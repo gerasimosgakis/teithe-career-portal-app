@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
   getInternalJobs,
   deleteInternalJob,
@@ -381,6 +382,14 @@ class InternalJobs extends Component {
     );
   }
 }
+
+InternalJobs.propTypes = {
+  auth: PropTypes.object.isRequired,
+  internalJobs: PropTypes.object.isRequired,
+  getInternalJobs: PropTypes.func.isRequired,
+  deleteInternalJob: PropTypes.func.isRequired,
+  searchJobPosts: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

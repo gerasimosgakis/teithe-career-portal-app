@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
   addInternalJob,
   editInternalJob
@@ -194,7 +195,13 @@ class AddJobPostForm extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+AddJobPostForm.propTypes = {
+  auth: PropTypes.object.isRequired,
+  addInternalJob: PropTypes.func.isRequired,
+  editInternalJob: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => {
   return {
     auth: state.auth
   };

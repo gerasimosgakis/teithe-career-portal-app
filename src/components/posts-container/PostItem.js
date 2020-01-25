@@ -158,8 +158,12 @@ PostItem.defaultProps = {
 };
 
 PostItem.propTypes = {
-  post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  getCommentsByPost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

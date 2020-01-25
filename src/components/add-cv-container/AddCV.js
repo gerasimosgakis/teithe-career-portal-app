@@ -76,7 +76,7 @@ class AddCV extends Component {
             <form className="d-flex" onSubmit={this.handleSubmit}>
               <input
                 type="file"
-                className="inputfile mr2"
+                className="inputfile mr1"
                 onChange={this.handleFileChange}
               />
               <button className="button submit-btn">Submit</button>
