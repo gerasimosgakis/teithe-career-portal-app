@@ -241,6 +241,66 @@ class JobSearch extends Component {
   };
 
   render() {
+    let jobsResultsContent; // The content of the job results
+    if (this.state.loading) {
+      jobsResultsContent = <Spinner />;
+    } else {
+      if (this.state.error) {
+        jobsResultsContent = (
+          <div>
+            <div className="card card-body">
+              <p className="error-text">There was an error...</p>
+            </div>
+          </div>
+        );
+      } else {
+        jobsResultsContent = (
+          <div>
+            {this.state.favoriteJobsDetails.map((job, index) => (
+              <JobItem
+                key={index}
+                job={job}
+                favoriteJob={this.state.favoriteJobs.includes(
+                  job.jobId.toString()
+                )}
+                onClick={this.onFavoriteClick}
+              ></JobItem>
+            ))}
+            {this.state.jobs.length > 0 ? (
+              this.state.jobs.map(
+                (job, index) =>
+                  this.state.favoriteJobsDetails &&
+                  !this.state.favoriteJobs.includes(job.jobId.toString()) && (
+                    <JobItem
+                      key={index + this.state.favoriteJobsDetails.length}
+                      job={job}
+                      favoriteJob={this.state.favoriteJobs.includes(
+                        job.jobId.toString()
+                      )}
+                      onClick={this.onFavoriteClick}
+                    ></JobItem>
+                  )
+              )
+            ) : (
+              <div className="text-center mt4">
+                <h2>There are no jobs to display...</h2>
+              </div>
+            )}
+            {this.state.jobs.length > 0 && (
+              <div className="btn-group right">
+                <button
+                  className="button transparent-btn"
+                  disabled={this.state.moreLoading}
+                  onClick={this.loadMore}
+                >
+                  {this.state.moreLoading ? "Loading..." : "Load More"}
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      }
+    }
     return (
       <div className="search-jobs contain">
         <div className="search-jobs__header mb4">
@@ -289,6 +349,7 @@ class JobSearch extends Component {
             </div>
           </form>
         </div>
+        {/* / Form */}
 
         <div className="search-jobs__results">
           <div className="search-jobs__results-side">
@@ -316,7 +377,6 @@ class JobSearch extends Component {
                   onKeyPress={this.keyPressed}
                 />
 
-                {/* <fieldset> */}
                 <div className="form__field-label">Job Type</div>
                 <div className="form__check mb1">
                   <input
@@ -383,69 +443,16 @@ class JobSearch extends Component {
                     Part-time
                   </label>
                 </div>
-                {/* </fieldset> */}
               </form>
             </div>
+            {/* / Filters */}
           </div>
           <div className="search-jobs__results-main">
             {/* Items */}
             <div className="search-jobs__results-main-jobs">
-              {this.state.loading ? (
-                <Spinner />
-              ) : this.state.error ? (
-                <div>
-                  <div className="card card-body">
-                    <p className="error-text">There was an error...</p>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  {this.state.favoriteJobsDetails.map((job, index) => (
-                    <JobItem
-                      key={index}
-                      job={job}
-                      favoriteJob={this.state.favoriteJobs.includes(
-                        job.jobId.toString()
-                      )}
-                      onClick={this.onFavoriteClick}
-                    ></JobItem>
-                  ))}
-                  {this.state.jobs.length > 0 ? (
-                    this.state.jobs.map(
-                      (job, index) =>
-                        this.state.favoriteJobsDetails &&
-                        !this.state.favoriteJobs.includes(
-                          job.jobId.toString()
-                        ) && (
-                          <JobItem
-                            key={index + this.state.favoriteJobsDetails.length}
-                            job={job}
-                            favoriteJob={this.state.favoriteJobs.includes(
-                              job.jobId.toString()
-                            )}
-                            onClick={this.onFavoriteClick}
-                          ></JobItem>
-                        )
-                    )
-                  ) : (
-                    <div className="text-center mt4">
-                      <h2>There are no jobs to display...</h2>
-                    </div>
-                  )}
-                  {this.state.jobs.length > 0 && (
-                    <div className="btn-group right">
-                      <button
-                        className="button transparent-btn"
-                        disabled={this.state.moreLoading}
-                        onClick={this.loadMore}
-                      >
-                        {this.state.moreLoading ? "Loading..." : "Load More"}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
+              {jobsResultsContent}
             </div>
+            {/* / Items */}
           </div>
         </div>
       </div>
