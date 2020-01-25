@@ -6,9 +6,22 @@ import isEmpty from "../../../shared/functions/isEmpty";
 import Avatar from "react-avatar";
 import SuccessIcon from "../../shared/SuccessIcon";
 import { getCV } from "../../../shared/functions/aws";
+import ErrorIcon from "../../shared/ErrorIcon";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
+    let modalBodyContent; // Edit profile modal body content
+    if (profile.success) {
+      modalBodyContent = (
+        <SuccessIcon text="The profile has been successfully edited" />
+      );
+    } else if (profile.fail) {
+      modalBodyContent = (
+        <ErrorIcon text="The profile has not been edited. Please try again" />
+      );
+    } else {
+      modalBodyContent = <CreateProfile header={true} />;
+    }
     return (
       <div className="profile-header">
         <div className="profile-header__banner">
@@ -150,13 +163,7 @@ class ProfileHeader extends Component {
                   &times;
                 </button>
               </div>
-              <div className="modal-body">
-                {profile.success ? (
-                  <SuccessIcon />
-                ) : (
-                  <CreateProfile header={true}></CreateProfile>
-                )}
-              </div>
+              <div className="modal-body">{modalBodyContent}</div>
               <div className="modal-footer">
                 <button
                   type="button"

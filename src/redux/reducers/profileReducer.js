@@ -23,7 +23,7 @@ import {
   SEARCH_GRADUATES_SUCCESS,
   ADD_CV_SUCCESS,
   ADD_CV_FAIL,
-  CLEAR_SUCCESS
+  CLEAR_SUCCESS_FAILURE
 } from "../actions/types";
 
 const initialState = {
@@ -99,7 +99,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          success: false
+          fail: true
         },
         loading: false,
 
@@ -125,7 +125,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          success: false
+          fail: true
         },
         loading: false,
         errors: action.payload
@@ -145,7 +145,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          success: false
+          fail: true
         },
         loading: false,
         errors: action.payload
@@ -192,7 +192,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          success: false
+          fail: true
         },
         loading: false,
         errors: action.payload
@@ -212,7 +212,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: {
           ...state.profile,
-          success: false
+          fail: true
         },
         loading: false,
         errors: action.payload
@@ -259,12 +259,13 @@ export default function(state = initialState, action) {
         loading: false,
         errors: action.payload
       };
-    case CLEAR_SUCCESS:
+    case CLEAR_SUCCESS_FAILURE:
       return {
         ...state,
         profile: {
           ...state.profile,
-          success: false
+          success: false,
+          fail: false
         }
       };
     default:

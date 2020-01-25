@@ -26,7 +26,7 @@ import {
   ADD_CV_FAIL,
   ADD_CV_SUCCESS,
   SET_LOADING,
-  CLEAR_SUCCESS
+  CLEAR_SUCCESS_FAILURE
 } from "./types";
 
 /**
@@ -337,6 +337,6 @@ export const addCVToProfile = (user, cvName, cvURL) => async dispatch => {
  */
 export const clearSuccess = () => dispatch => {
   dispatch({
-    type: CLEAR_SUCCESS
+    type: CLEAR_SUCCESS_FAILURE
   });
 };

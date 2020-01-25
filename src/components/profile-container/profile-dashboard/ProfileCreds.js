@@ -131,6 +131,10 @@ class ProfileCreds extends Component {
   }
 
   render() {
+    let experienceContent;
+    if (this.props.success) {
+      experienceContent = <SuccessIcon />;
+    }
     const { experience, education, edit } = this.props;
     const expItems = experience.map((exp, index) => (
       <li key={index} className="list-group-item profile-creds__cred">
