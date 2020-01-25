@@ -73,15 +73,15 @@ class AddCV extends Component {
           {this.state.loading ? (
             <Spinner></Spinner>
           ) : (
-            <form onSubmit={this.handleSubmit}>
+            <form className="d-flex" onSubmit={this.handleSubmit}>
               <input
                 type="file"
                 className="inputfile mr2"
                 onChange={this.handleFileChange}
               />
-              <div className="btn-group right mt-half">
-                <button className="button submit-btn">Submit</button>
-              </div>
+              {/* <div className="btn-group right mt-half"> */}
+              <button className="button submit-btn">Submit</button>
+              {/* </div> */}
             </form>
           )}
         </div>
