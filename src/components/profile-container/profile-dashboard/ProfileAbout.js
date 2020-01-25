@@ -19,16 +19,16 @@ class ProfileAbout extends Component {
             <span className="profile-about__bio">{profile.bio}</span>
           )}
         </p>
-        {profile.cv_name && (
+        {/* {profile.cv_name && (
           <div>
             <button
-              className="transparent-btn transparent-btn--small"
+              className="btn transparent-btn"
               onClick={() => getCV(profile.cv_url)}
             >
               <i className="fas fa-download"></i> Download CV
             </button>
           </div>
-        )}
+        )} */}
       </div>
     );
   }

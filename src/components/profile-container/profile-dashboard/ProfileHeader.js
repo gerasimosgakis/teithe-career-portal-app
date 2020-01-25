@@ -6,12 +6,24 @@ import isEmpty from "../../../shared/functions/isEmpty";
 import Avatar from "react-avatar";
 import { Modal } from "react-bootstrap";
 import SuccessIcon from "../../shared/SuccessIcon";
+import { getCV } from "../../../shared/functions/aws";
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
     return (
       <div className="profile-header">
-        <div className="profile-header__banner"></div>
+        <div className="profile-header__banner">
+          {profile.cv_name && (
+            <div>
+              <button
+                className="btn submit-btn profile-header__banner-button"
+                onClick={() => getCV(profile.cv_url)}
+              >
+                <i className="fas fa-download"></i> Download CV
+              </button>
+            </div>
+          )}
+        </div>
         <div className="profile-header__logo">
           <Avatar
             email={profile.email}
@@ -22,21 +34,21 @@ class ProfileHeader extends Component {
         </div>
         <div className="contain">
           <div className="profile-header__heading">
-            <h2>
-              {titleCase(profile.name)}
+            <div className="d-flex justify-space-between">
+              <h2>{titleCase(profile.name)}</h2>
               {this.props.edit && (
                 <button
-                  className="icon-button"
+                  className="btn transparent-btn"
                   data-toggle="modal"
                   data-target="#profileModal"
                   onClick={() => {
                     this.props.onModalOpen();
                   }}
                 >
-                  <i className="fas fa-edit"></i>
+                  <i className="fas fa-edit"></i> Edit Profile
                 </button>
               )}
-            </h2>
+            </div>
             <p className="lead-text">
               {titleCase(profile.status)}{" "}
               {isEmpty(profile.company) ? null : (
