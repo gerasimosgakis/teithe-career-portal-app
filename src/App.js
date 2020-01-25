@@ -53,7 +53,7 @@ class App extends Component {
       });
       this.setState({ userId: currentAuthenticatedUser.username });
     } catch (error) {
-      if (error !== "No current user") console.log(error);
+      if (error !== "No current user") console.warn(error);
     }
 
     this.setState({ isAuthenticating: false });

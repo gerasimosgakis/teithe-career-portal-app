@@ -3,7 +3,6 @@ import Avatar from "react-avatar";
 import titleCase from "../../shared/functions/titleCase";
 
 const UserList = props => {
-  console.log(props.userName, props.users);
   const allUsers = props.users.map(
     (user, index) =>
       user.id !== props.userName && (

@@ -13,6 +13,7 @@ import titleCase from "../../../shared/functions/titleCase";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import SuccessIcon from "../../shared/SuccessIcon";
+import ErrorIcon from "../../shared/ErrorIcon";
 
 class ProfileCreds extends Component {
   constructor(props) {
@@ -131,6 +132,97 @@ class ProfileCreds extends Component {
   }
 
   render() {
+    let experienceContent; // experience modal content
+    if (this.props.success) {
+      experienceContent = (
+        <SuccessIcon text="The experiences have been updated" />
+      );
+    } else if (this.props.fail) {
+      experienceContent = (
+        <ErrorIcon text="The experience has not been saved" />
+      );
+    } else {
+      if (this.state.currentExperienceIndex >= 0) {
+        // Checks if we are editing
+        // If yes, provides the details to the AddExperience component
+        experienceContent = (
+          <AddExperience
+            small={true}
+            userId={this.props.userId}
+            id={this.state.exp_id}
+            current={this.state.exp_current}
+            _location={this.state.exp_location}
+            description={this.state.exp_description}
+            title={this.state.exp_title}
+            start_date={this.state.exp_start_date}
+            end_date={this.state.exp_end_date}
+            company={this.state.exp_company}
+            currentExperienceIndex={this.state.currentExperienceIndex}
+          ></AddExperience>
+        );
+      } else {
+        // If not, passes initial values
+        experienceContent = (
+          <AddExperience
+            small={true}
+            userId={this.props.userId}
+            id={""}
+            current={false}
+            _location={""}
+            description={""}
+            title={""}
+            start_date={""}
+            end_date={""}
+            company={""}
+          ></AddExperience>
+        );
+      }
+    }
+    let educationContent; // education modal content
+    if (this.props.success) {
+      educationContent = (
+        <SuccessIcon text="The educations have been updated" />
+      );
+    } else if (this.props.fail) {
+      educationContent = <ErrorIcon text="The education has not been saved" />;
+    } else {
+      if (this.state.currentEducationIndex >= 0) {
+        // Checks if we are editing
+        // If yes, provides the details to the AddEducation component
+        educationContent = (
+          <AddEducation
+            small={true}
+            userId={this.props.userId}
+            id={this.state.edu_id}
+            current={this.state.edu_current}
+            school={this.state.edu_school}
+            description={this.state.edu_description}
+            degree={this.state.edu_degree}
+            start_date={this.state.edu_start_date}
+            end_date={this.state.edu_end_date}
+            fieldofstudy={this.state.edu_fieldofstudy}
+            currentEducationIndex={this.state.currentEducationIndex}
+          ></AddEducation>
+        );
+      } else {
+        // If not, passes initial values
+        educationContent = (
+          <AddEducation
+            small={true}
+            userId={this.props.userId}
+            id={""}
+            current={false}
+            school={""}
+            description={""}
+            degree={""}
+            start_date={""}
+            end_date={""}
+            fieldofstudy={""}
+          ></AddEducation>
+        );
+      }
+    }
+
     const { experience, education, edit } = this.props;
     const expItems = experience.map((exp, index) => (
       <li key={index} className="list-group-item profile-creds__cred">
@@ -340,40 +432,7 @@ class ProfileCreds extends Component {
                   &times;
                 </button>
               </div>
-              <div className="modal-body">
-                {this.props.success ? (
-                  <SuccessIcon />
-                ) : this.state.currentExperienceIndex >= 0 ? ( // Checks if we are editing
-                  // If yes, provides the details to the AddExperience component
-                  <AddExperience
-                    small={true}
-                    userId={this.props.userId}
-                    id={this.state.exp_id}
-                    current={this.state.exp_current}
-                    _location={this.state.exp_location}
-                    description={this.state.exp_description}
-                    title={this.state.exp_title}
-                    start_date={this.state.exp_start_date}
-                    end_date={this.state.exp_end_date}
-                    company={this.state.exp_company}
-                    currentExperienceIndex={this.state.currentExperienceIndex}
-                  ></AddExperience>
-                ) : (
-                  // If not, passes initial values
-                  <AddExperience
-                    small={true}
-                    userId={this.props.userId}
-                    id={""}
-                    current={false}
-                    _location={""}
-                    description={""}
-                    title={""}
-                    start_date={""}
-                    end_date={""}
-                    company={""}
-                  ></AddExperience>
-                )}
-              </div>
+              <div className="modal-body">{experienceContent}</div>
               <div className="modal-footer">
                 <button
                   type="button"
@@ -401,40 +460,7 @@ class ProfileCreds extends Component {
                   &times;
                 </button>
               </div>
-              <div className="modal-body">
-                {this.props.success ? (
-                  <SuccessIcon />
-                ) : this.state.currentEducationIndex >= 0 ? ( // Checks if we are editing
-                  // If yes, provides the details to the AddEducation component
-                  <AddEducation
-                    small={true}
-                    userId={this.props.userId}
-                    id={this.state.edu_id}
-                    current={this.state.edu_current}
-                    school={this.state.edu_school}
-                    description={this.state.edu_description}
-                    degree={this.state.edu_degree}
-                    start_date={this.state.edu_start_date}
-                    end_date={this.state.edu_end_date}
-                    fieldofstudy={this.state.edu_fieldofstudy}
-                    currentEducationIndex={this.state.currentEducationIndex}
-                  ></AddEducation>
-                ) : (
-                  // If not, passes initial values
-                  <AddEducation
-                    small={true}
-                    userId={this.props.userId}
-                    id={""}
-                    current={false}
-                    school={""}
-                    description={""}
-                    degree={""}
-                    start_date={""}
-                    end_date={""}
-                    fieldofstudy={""}
-                  ></AddEducation>
-                )}
-              </div>
+              <div className="modal-body">{educationContent}</div>
               <div className="modal-footer">
                 <button
                   type="button"

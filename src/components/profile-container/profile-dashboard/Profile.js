@@ -78,6 +78,7 @@ class Profile extends Component {
           {user.attributes["custom:role"] !== "recruiter" && (
             <ProfileCreds
               success={profile.success}
+              fail={profile.fail}
               userId={user.username}
               education={profile.educations}
               experience={profile.experiences}

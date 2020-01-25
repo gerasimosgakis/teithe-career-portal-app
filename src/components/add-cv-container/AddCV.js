@@ -61,9 +61,9 @@ class AddCV extends Component {
     try {
       await s3Upload(this.state.file, this.state.user);
       this.setState({ saved: true, loading: false });
-      // setTimeout(() => {
-      //   this.setState({ saved: false });
-      // }, 2000);
+      setTimeout(() => {
+        this.setState({ saved: false });
+      }, 2000);
       this.props.addCVToProfile(
         this.state.user,
         this.state.file.name,
