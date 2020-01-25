@@ -12,7 +12,7 @@
 > If your `README` has a lot of info, section headers might be nice.
 
 - [Installation](#installation)
-- [Available Scripts](#available scripts)
+- [Available Scripts](#scripts)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -48,7 +48,7 @@ npm start
 
 ---
 
-## Available Scripts
+## <a name="scripts"></a>Available Scripts
 
 In the project directory, you can run:
 
