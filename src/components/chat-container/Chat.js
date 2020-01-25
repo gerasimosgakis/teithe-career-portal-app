@@ -85,7 +85,7 @@ class Chat extends Component {
       });
       this.setState({ users, loading: false });
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     }
   }
 

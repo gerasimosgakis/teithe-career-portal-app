@@ -1,6 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Career Portal Front End
 
-## Available Scripts
+> This is the ReactJS Frontend
+
+- This is the frontend for the Career Portal Application. An app, which allows graduates of an institution
+  to connect, create a profile with all their credentials and information, communicate with each other and find their dream job.
+
+---
+
+## Table of Contents (Optional)
+
+> If your `README` has a lot of info, section headers might be nice.
+
+- [Installation](#installation)
+- [Available Scripts](#scripts)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Installation
+
+> Please download and install the following backend repos first:
+
+- [teithe-career-portal-api](https://github.com/gerasimosgakis/teithe-career-portal-api)
+- [teithe-career-portal-api-part-2](https://github.com/gerasimosgakis/teithe-career-portal-api-part-2)
+
+### Clone
+
+```bash
+git clone https://github.com/gerasimosgakis/teithe-career-portal-app.git
+```
+
+### Setup
+
+```bash
+# Change into the api directory
+cd teithe-career-portal-api
+# Install packages
+npm install
+```
+
+### Run
+
+```bash
+npm start
+```
+
+---
+
+## <a name="scripts"></a>Available Scripts
 
 In the project directory, you can run:
 
@@ -27,42 +75,34 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Contributing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> To get started...
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Step 1
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Option 1**
 
-## Learn More
+  - 🍴 Fork this repo!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Option 2**
+  - 👯 Clone this repo to your local machine using `https://github.com/gerasimosgakis/teithe-career-portal-app.git`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Step 2
 
-### Code Splitting
+- **HACK AWAY!** 🔨🔨🔨
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Step 3
 
-### Analyzing the Bundle Size
+- 🔃 Create a new pull request using <a href="https://github.com/gerasimosgakis/teithe-career-portal-app/compare" target="_blank">`https://github.com/gerasimosgakis/teithe-career-portal-app/compare`</a>.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+---
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2020 © <a href="http://gerasimosgakis.com" target="_blank">Gerasimos Gakis</a>.

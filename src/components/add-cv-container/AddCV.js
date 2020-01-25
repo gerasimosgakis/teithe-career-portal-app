@@ -4,6 +4,8 @@ import config from "../../config";
 import { s3Upload } from "../../shared/functions/aws";
 import Spinner from "../shared/Spinner";
 import { addCVToProfile } from "../../redux/actions/profileActions";
+import SuccessIcon from "../shared/SuccessIcon";
+import ErrorIcon from "../shared/ErrorIcon";
 
 class AddCV extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class AddCV extends Component {
       file: null,
       user: this.props.auth.user ? this.props.auth.user.username : null,
       saved: false,
+      failed: false,
       loading: false
     };
   }
@@ -39,7 +42,10 @@ class AddCV extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    if (!this.validateForm(this.state.file.name)) {
+    if (!this.state.file) {
+      alert("Please choose a file");
+      return;
+    } else if (!this.validateForm(this.state.file.name)) {
       alert("This is not a valid type of file...");
       return;
     }
@@ -55,42 +61,46 @@ class AddCV extends Component {
     try {
       await s3Upload(this.state.file, this.state.user);
       this.setState({ saved: true, loading: false });
+      setTimeout(() => {
+        this.setState({ saved: false });
+      }, 2000);
       this.props.addCVToProfile(
         this.state.user,
         this.state.file.name,
         this.state.user
       );
     } catch (error) {
-      this.setState({ loading: false });
+      this.setState({ failed: true, loading: false });
+      setTimeout(() => {
+        this.setState({ failed: false });
+      }, 2000);
       alert(error);
     }
   };
 
   render() {
-    return (
-      <div className="contain">
-        <div>
-          {this.state.loading ? (
-            <Spinner></Spinner>
-          ) : (
-            <form className="d-flex" onSubmit={this.handleSubmit}>
-              <input
-                type="file"
-                className="inputfile mr1"
-                onChange={this.handleFileChange}
-              />
-              <button className="button submit-btn">Submit</button>
-            </form>
-          )}
-        </div>
-        {this.state.saved && (
-          <p className="mt4 text-center">
-            <i className="fas fa-check-circle green-text"></i> The cv has been
-            successfully submitted.
-          </p>
-        )}
-      </div>
-    );
+    let content;
+    if (this.state.loading) {
+      content = <Spinner />;
+    } else if (this.state.saved) {
+      content = <SuccessIcon text="The CV has been saved" />;
+    } else if (this.state.failed) {
+      content = (
+        <ErrorIcon text="The CV has not been saved. Please try again..." />
+      );
+    } else {
+      content = (
+        <form className="d-flex" onSubmit={this.handleSubmit}>
+          <input
+            type="file"
+            className="inputfile mr1"
+            onChange={this.handleFileChange}
+          />
+          <button className="button submit-btn">Submit</button>
+        </form>
+      );
+    }
+    return <div className="contain">{content}</div>;
   }
 }
 

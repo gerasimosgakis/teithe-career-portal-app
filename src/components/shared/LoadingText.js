@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function LoadingText(props) {
-  console.log(props);
   return (
     <span className="loading-text">
       {props.show ? (
