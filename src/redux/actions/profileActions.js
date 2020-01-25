@@ -86,44 +86,44 @@ export const getProfileById = id => async dispatch => {
   }
 };
 
-/**
- * Gets profile by handle
- * @param {*} handle
- */
-export const getProfileByHandle = handle => async dispatch => {
-  try {
-    dispatch({
-      type: "SET_LOADING",
-      payload: true
-    });
-    const profile = await API.get(
-      "teithe-career-portal-api",
-      `/profiles/handle/${handle}`
-    );
-    const educations = await API.get(
-      "teithe-career-portal-api",
-      `/educations/${profile[0].id}`
-    );
-    const experiences = await API.get(
-      "teithe-career-portal-api",
-      `/experiences/${profile[0].id}`
-    );
+// /**
+//  * Gets profile by handle
+//  * @param {*} handle
+//  */
+// export const getProfileByHandle = handle => async dispatch => {
+//   try {
+//     dispatch({
+//       type: "SET_LOADING",
+//       payload: true
+//     });
+//     const profile = await API.get(
+//       "teithe-career-portal-api",
+//       `/profiles/handle/${handle}`
+//     );
+//     const educations = await API.get(
+//       "teithe-career-portal-api",
+//       `/educations/${profile[0].id}`
+//     );
+//     const experiences = await API.get(
+//       "teithe-career-portal-api",
+//       `/experiences/${profile[0].id}`
+//     );
 
-    dispatch({
-      type: GET_PROFILE_SUCCESS,
-      payload: {
-        profile: profile[0],
-        educations,
-        experiences
-      }
-    });
-  } catch (error) {
-    dispatch({
-      type: GET_PROFILE_FAIL,
-      payload: error
-    });
-  }
-};
+//     dispatch({
+//       type: GET_PROFILE_SUCCESS,
+//       payload: {
+//         profile: profile[0],
+//         educations,
+//         experiences
+//       }
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: GET_PROFILE_FAIL,
+//       payload: error
+//     });
+//   }
+// };
 
 /**
  * Searches Graduates
