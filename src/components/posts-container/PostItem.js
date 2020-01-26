@@ -105,7 +105,11 @@ class PostItem extends Component {
             <div className="posts__post-item-footer-buttons-button">
               <span className="mr1">
                 <button
-                  className="thumbs-button"
+                  className={
+                    post.likes > 0
+                      ? "thumbs-button green-text"
+                      : "thumbs-button help-text"
+                  }
                   onClick={() => {
                     this.onLikeClick(post.id, true);
                   }}

@@ -3,15 +3,29 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../shared/TextAreaFieldGroup";
 import { addPost } from "../../redux/actions/postActions";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
+      showEmoji: false,
       errors: {}
     };
   }
+
+  toggleEmojiPicker = () => {
+    this.setState({ showEmoji: !this.state.showEmoji });
+  };
+
+  addEmoji = e => {
+    let emoji = e.native;
+    this.setState({
+      text: this.state.text + emoji
+    });
+  };
 
   /**
    * Adds post
@@ -53,7 +67,18 @@ class PostForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              <div className="btn-group right">
+              <div className="d-flex justify-space-between">
+                <button
+                  type="button"
+                  className={
+                    this.state.showEmoji
+                      ? "button posts__post-form-emoji-button lead-text"
+                      : "button posts__post-form-emoji-button help-text"
+                  }
+                  onClick={this.toggleEmojiPicker}
+                >
+                  <i className="far fa-grin"></i>
+                </button>
                 <button type="submit" className="button submit-btn">
                   Submit
                 </button>
@@ -61,6 +86,15 @@ class PostForm extends Component {
             </form>
           </div>
         </div>
+        <span
+          className={
+            this.state.showEmoji
+              ? "posts__post-form-emoji-picker posts__post-form-emoji-picker--show"
+              : "posts__post-form-emoji-picker posts__post-form-emoji-picker--hide"
+          }
+        >
+          <Picker onSelect={this.addEmoji} />
+        </span>
       </div>
     );
   }
