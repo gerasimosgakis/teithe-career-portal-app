@@ -3,6 +3,21 @@
     &-header {
       background: $main-color;
     }
+
+    &-emoji-button {
+      font-size: 16pt;
+    }
+
+    &-emoji-picker {
+      &--show {
+        position: absolute;
+        z-index: 1;
+      }
+      &--hide {
+        position: absolute;
+        top: -1000pt;
+      }
+    }
   }
 
   &__post-item {

@@ -22,7 +22,7 @@ class Profiles extends Component {
       if (profiles.length > 0) {
         // If there are profiles display them
         profileItems = (
-          <div className="flex group-contain">
+          <div className="flex">
             {profiles.map(
               profile =>
                 profile.type !== "recruiter" && ( // Makes sure we don't show recruiters profiles
@@ -45,6 +45,7 @@ class Profiles extends Component {
           Browse and connect with alumni students{" "}
         </p>
         <Search></Search>
+        <hr />
         {profileItems}
       </div>
     );
