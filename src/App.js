@@ -12,7 +12,6 @@ import store from "./redux/store";
 import { Auth } from "aws-amplify";
 import Spinner from "./components/shared/Spinner";
 import { SET_USER } from "./redux/actions/types";
-import gravatar from "gravatar";
 import Chat from "./components/chat-container/Chat";
 import Posts from "./components/posts-container/Posts";
 import JobSearch from "./components/job-search-container/JobSearch";
@@ -41,12 +40,6 @@ class App extends Component {
       const currentAuthenticatedUser = await Auth.currentAuthenticatedUser();
 
       this.userHasAuthenticated(true); // If the above succeeds it calls userHasAuthenticated function
-      const avatar = gravatar.url(currentAuthenticatedUser.attributes.email, {
-        s: "30", // size
-        r: "pg", // rating
-        d: "mm" //default
-      });
-      currentAuthenticatedUser.avatar = avatar;
       store.dispatch({
         type: SET_USER,
         payload: currentAuthenticatedUser
