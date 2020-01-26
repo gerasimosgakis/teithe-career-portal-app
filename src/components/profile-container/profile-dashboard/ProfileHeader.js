@@ -20,7 +20,7 @@ class ProfileHeader extends Component {
         <ErrorIcon text="The profile has not been edited. Please try again" />
       );
     } else {
-      modalBodyContent = <CreateProfile header={true} />;
+      modalBodyContent = <CreateProfile header={true} small={true} />;
     }
     return (
       <div className="profile-header">
@@ -164,7 +164,6 @@ class ProfileHeader extends Component {
               </div>
             </div>
           </div>
-          <hr />
         </div>
 
         {/* Profile Edit Modal */}
