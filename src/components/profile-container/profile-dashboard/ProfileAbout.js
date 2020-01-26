@@ -10,7 +10,7 @@ class ProfileAbout extends Component {
     const firstName = profile.name.trim().split(" ")[0];
 
     return (
-      <div className="profile-about contain">
+      <div className="profile-about contain mb-2">
         <p className="lead">
           {isEmpty(profile.bio) ? (
             <span>{firstName} does not have a bio</span>

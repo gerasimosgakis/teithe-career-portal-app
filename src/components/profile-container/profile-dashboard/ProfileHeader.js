@@ -61,13 +61,13 @@ class ProfileHeader extends Component {
                 </button>
               )}
             </div>
-            <p className="lead-text">
+            <p className="lead-text mb3">
               {titleCase(profile.status)}{" "}
               {isEmpty(profile.company) ? null : (
                 <span>at {titleCase(profile.company)}</span>
               )}
             </p>
-            <div className="d-flex justify-space-between">
+            <div className="d-flex justify-space-between mb3">
               <div>
                 {isEmpty(profile.location) ? null : (
                   <p className="help-text">{titleCase(profile.location)}</p>
