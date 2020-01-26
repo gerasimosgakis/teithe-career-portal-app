@@ -121,6 +121,14 @@ class App extends Component {
               </Switch>
             </div>
           </div>
+          <footer className="footer text-center mt2 mb2 help-text">
+            <div>
+              <small>
+                &copy; Career Portal {new Date().getFullYear()} | Version 1.0.0
+              </small>
+            </div>
+            <small>Developed by Gerasimos Gakis</small>
+          </footer>
         </Provider>
       )
     );

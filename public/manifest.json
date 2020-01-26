@@ -1,7 +1,7 @@
 {
   "short_name": "DevPals",
   "name": "DevPals - Code together code better",
-  "icons": [],
+  "icons": [{ "src": "favicon.ico" }],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
