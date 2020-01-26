@@ -11,7 +11,7 @@ class ProfileAbout extends Component {
 
     return (
       <div className="profile-about contain mb-2">
-        <p className="lead">
+        <p>
           {isEmpty(profile.bio) ? (
             <span>{firstName} does not have a bio</span>
           ) : (
