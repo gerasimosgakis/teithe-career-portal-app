@@ -198,14 +198,13 @@ class Navbar extends Component {
             className="nav-item"
             onClick={() => this.setState({ activeTabClassName: "" })}
           >
-            <a
-              href="_target"
-              rel="noopener noreferrer"
-              className="nav-link"
+            <button
+              type="button"
+              className="nav-link nav-button"
               onClick={this.onLogout}
             >
               Logout
-            </a>
+            </button>
           </li>
         </Fragment>
       );
