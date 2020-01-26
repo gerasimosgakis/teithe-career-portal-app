@@ -1,6 +1,5 @@
 .profile__item {
   width: calc(25%);
-  height: 250pt;
   margin-bottom: 20pt;
 }
 
@@ -10,6 +9,7 @@
   width: 90%;
   border: 1px solid lightgray;
   text-align: center;
+  padding: 0 4pt;
   margin: 10pt;
   &__image-container {
     padding: 8pt;
@@ -18,7 +18,7 @@
     }
   }
   &__button-container {
-    padding: 16pt;
+    padding: 16pt 16pt 0 16pt;
     &-button {
       width: 100%;
     }

@@ -90,6 +90,7 @@ class AddCV extends Component {
       );
     } else {
       content = (
+        // File upload Input
         <form className="d-flex" onSubmit={this.handleSubmit}>
           <input
             type="file"
