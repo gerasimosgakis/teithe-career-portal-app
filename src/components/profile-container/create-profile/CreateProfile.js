@@ -131,20 +131,8 @@ class CreateProfile extends Component {
         </div>
       );
     }
-    // Select options for status
-    const options = [
-      { label: "Select Professional Status", value: 0 },
-      { label: "Developer", value: "developer" },
-      { label: "Junior Developer", value: "junior developer" },
-      { label: "Senior Developer", value: "senior developer" },
-      { label: "Manager", value: "manager" },
-      { label: "Student / Learning", value: "student / learning" },
-      { label: "Instructor / Teacher", value: "instructor / teacher" },
-      { label: "Intern", value: "intern" },
-      { label: "Other", value: "other" }
-    ];
     return (
-      <div className="create-profile">
+      <div className="create-profile contain">
         {this.props.header && (
           <div className="create-profile__header">
             <h1>Create Your Profile</h1>
@@ -167,11 +155,11 @@ class CreateProfile extends Component {
               info="A unique handle for your profile URL. Your full name, company name. nickname"
             />
             <div className="form__field-label">Professional Status</div>
-            <SelectListGroup
-              placeholder="Status"
+            <TextFieldGroup
+              placeholder="* Status"
               name="status"
               value={this.state.status}
-              options={options}
+              required
               onChange={this.onChange}
               info="Where are you at in your career"
             />
@@ -255,11 +243,18 @@ class CreateProfile extends Component {
               <span className="text-muted">Optional</span>
             </div>
             {socialInputs}
-            <input
+            {/* <input
               type="submit"
               value="Submit"
               className="btn btn-info btn-block mt-4"
-            />
+            /> */}
+            {!this.props.small ? (
+              <div className="btn-group right">
+                <button className="button submit-btn">Submit</button>
+              </div>
+            ) : (
+              <button className="button btn-block submit-btn">Submit</button>
+            )}
           </form>
         </div>
       </div>

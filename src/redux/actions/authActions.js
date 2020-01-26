@@ -11,7 +11,6 @@ import {
   CLEAR_AUTH_ERRORS,
   SET_LOADING
 } from "./types";
-import gravatar from "gravatar";
 
 /**
  * registerUser
@@ -104,12 +103,6 @@ export const loginUser = (userData, history) => async dispatch => {
     const user = await Auth.currentAuthenticatedUser({
       bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     });
-    const avatar = gravatar.url(userData.email, {
-      s: "30", // size
-      r: "pg", // rating
-      d: "mm" //default
-    });
-    user.avatar = avatar;
     dispatch({
       type: LOGIN_SUCCESS,
       payload: user

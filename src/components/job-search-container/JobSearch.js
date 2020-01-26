@@ -318,7 +318,6 @@ class JobSearch extends Component {
                   placeholder="Role"
                   name="keywords"
                   value={this.state.keywords}
-                  required
                   onChange={this.onChange}
                 />
               </div>
@@ -331,10 +330,10 @@ class JobSearch extends Component {
                     placeholder="Location"
                     name="locationName"
                     value={this.state.locationName}
-                    required
                     onChange={this.onChange}
                   />
                   <button
+                    type="button"
                     className="icon-button search-jobs__form-basic-field-location-button"
                     disabled={!this.props.coords}
                     onClick={() => this.setLocation(this.props.coords)}

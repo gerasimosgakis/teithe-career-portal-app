@@ -20,7 +20,7 @@ class ProfileHeader extends Component {
         <ErrorIcon text="The profile has not been edited. Please try again" />
       );
     } else {
-      modalBodyContent = <CreateProfile header={true} />;
+      modalBodyContent = <CreateProfile header={true} small={true} />;
     }
     return (
       <div className="profile-header">
@@ -47,7 +47,7 @@ class ProfileHeader extends Component {
         <div className="contain">
           <div className="profile-header__heading">
             <div className="d-flex justify-space-between">
-              <h2>{titleCase(profile.name)}</h2>
+              <h2 className="bolded">{titleCase(profile.name)}</h2>
               {this.props.edit && (
                 <button
                   className="btn transparent-btn"
@@ -61,16 +61,18 @@ class ProfileHeader extends Component {
                 </button>
               )}
             </div>
-            <p className="lead-text mb3">
+            <h4 className="lead-text mb3">
               {titleCase(profile.status)}{" "}
               {isEmpty(profile.company) ? null : (
                 <span>at {titleCase(profile.company)}</span>
               )}
-            </p>
+            </h4>
             <div className="d-flex justify-space-between mb3">
               <div>
                 {isEmpty(profile.location) ? null : (
-                  <p className="help-text">{titleCase(profile.location)}</p>
+                  <p className="lead help-text">
+                    {titleCase(profile.location)}
+                  </p>
                 )}
                 {isEmpty(profile.phone) ? null : (
                   <p className="help-text">
@@ -152,19 +154,20 @@ class ProfileHeader extends Component {
                   )}
                 </p>
               </div>
-              <div className="help-text">
-                <div className="mb1">
-                  <i className="fas fa-graduation-cap fa-1x mr1" />
-                  {titleCase(profile.educations[0].school)}
+              {this.props.user.attributes["custom:role"] !== "recruiter" && (
+                <div className="help-text">
+                  <div className="mb1">
+                    <i className="fas fa-graduation-cap fa-1x mr1" />
+                    {titleCase(profile.educations[0].school)}
+                  </div>
+                  <div>
+                    <i className="fa fa-briefcase fa-1x mr1" />
+                    &nbsp;{titleCase(profile.experiences[0].company)}
+                  </div>
                 </div>
-                <div>
-                  <i className="fa fa-briefcase fa-1x mr1" />
-                  &nbsp;{titleCase(profile.experiences[0].company)}
-                </div>
-              </div>
+              )}
             </div>
           </div>
-          <hr />
         </div>
 
         {/* Profile Edit Modal */}

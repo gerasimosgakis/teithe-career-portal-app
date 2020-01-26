@@ -4,29 +4,31 @@
   margin: 0 2em;
   &__cred {
     border: none;
-    padding: 2em 0;
+    border-top: none;
     &-info {
       display: flex;
       flex-direction: row;
 
       &-icon {
-        position: relative;
-        display: flex;
-        color: $lead;
         width: 5em;
         height: 5em;
         margin-right: 16pt;
-        align-items: center;
-        justify-content: center;
+        &--green {
+          color: seagreen;
+        }
+        &--golden {
+          color: darkgoldenrod;
+        }
       }
       &-details {
         display: flex;
         flex-direction: column;
       }
       &-description {
-        border-bottom: 1px solid $back-btn;
         padding-bottom: 16pt;
-        white-space: pre-line;
+        &--preserve {
+          white-space: pre-line;
+        }
       }
     }
   }

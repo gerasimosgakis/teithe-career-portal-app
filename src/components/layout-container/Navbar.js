@@ -5,6 +5,7 @@ import { logoutUser } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import AddCV from "../add-cv-container/AddCV";
 import Avatar from "react-avatar";
+import { getProfileById } from "../../redux/actions/profileActions";
 
 class Navbar extends Component {
   constructor(props) {
@@ -22,6 +23,15 @@ class Navbar extends Component {
   onLogout = async e => {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
+  };
+
+  /**
+   * Gets specific user's profile data
+   */
+  getProfileData = () => {
+    this.props.getProfileById(this.props.auth.user.username);
+    this.props.history.push("/profile");
+    this.setState({ activeTabClassName: "" });
   };
 
   render() {
@@ -45,19 +55,6 @@ class Navbar extends Component {
             <Link className="nav-link" to="/graduates">
               {" "}
               Graduates
-            </Link>
-          </li>
-          <li
-            onClick={() => this.setState({ activeTabClassName: "job-search" })}
-            className={
-              this.state.activeTabClassName === "job-search"
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/job-search">
-              {" "}
-              External Jobs
             </Link>
           </li>
           <li
@@ -171,27 +168,30 @@ class Navbar extends Component {
       rightLinks = (
         <Fragment>
           <li className="nav-item">
-            <Link className="nav-link" to="/profile">
+            <button
+              type="button"
+              className="nav-link nav-button mt0"
+              onClick={this.getProfileData}
+            >
               <Avatar
                 email={auth.user.attributes.email}
                 name={auth.user.attributes.name.toLowerCase()}
                 round={true}
                 size="30"
               />
-            </Link>
+            </button>
           </li>
           <li
             className="nav-item"
             onClick={() => this.setState({ activeTabClassName: "" })}
           >
-            <a
-              href="_target"
-              rel="noopener noreferrer"
-              className="nav-link mt-half"
+            <button
+              type="button"
+              className="nav-link nav-button"
               onClick={this.onLogout}
             >
               Logout
-            </a>
+            </button>
           </li>
         </Fragment>
       );
@@ -294,4 +294,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
+export default connect(mapStateToProps, { logoutUser, getProfileById })(
+  withRouter(Navbar)
+);

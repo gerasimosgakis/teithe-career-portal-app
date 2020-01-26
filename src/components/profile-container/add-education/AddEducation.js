@@ -141,12 +141,12 @@ class AddEducation extends Component {
 
   render() {
     return (
-      <div className="add-experience">
-        <div className="container">
-          <h1 className="display-4 text-center">Education</h1>
-          <p className="lead text-center">
-            Add any degree that you have had in the past or current
-          </p>
+      <div className="add-education contain">
+        <h1 className="display-4 text-center">Education</h1>
+        <p className="lead text-center">
+          Add any degree that you have had in the past or current
+        </p>
+        <div className="add-education__form">
           <small className="d-block pb-3">* = required fields</small>
           <form onSubmit={this.onSubmit}>
             <div className="form__field-label">* School</div>

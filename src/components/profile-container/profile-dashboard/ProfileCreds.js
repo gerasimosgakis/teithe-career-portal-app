@@ -226,140 +226,158 @@ class ProfileCreds extends Component {
     const { experience, education, edit } = this.props;
     const expItems = experience.map((exp, index) => (
       <li key={index} className="list-group-item profile-creds__cred">
-        <div className="profile-creds__cred-info">
-          <div className="profile-creds__cred-info-icon">
-            <i className="fa fa-briefcase fa-3x" />
+        <div className="d-flex bb">
+          <div>
+            <div className="profile-creds__cred-info-icon profile-creds__cred-info-icon--green">
+              <i className="fa fa-briefcase fa-3x" />
+            </div>
           </div>
-          <span className="profile-creds__cred-info-details">
-            <p>
-              {titleCase(exp.title)}{" "}
-              {/* Button to open experience modal and update the state with the details of the item or the fallback value */}
-              {edit && ( // Show it only if it is the current user's profile
-                <span>
-                  <button
-                    className="icon-button"
-                    data-toggle="modal"
-                    data-target="#expModal"
-                    onClick={() => {
-                      this.props.onModalOpen();
-                      this.setState({
-                        exp_userId: this.props.userId || "",
-                        exp_id: this.props.experience[index].id || "",
-                        exp_current:
-                          this.props.experience[index].current || false,
-                        exp_location:
-                          this.props.experience[index].location || "",
-                        exp_description:
-                          this.props.experience[index].description || "",
-                        exp_title: this.props.experience[index].title || "",
-                        exp_start_date:
-                          this.props.experience[index].start_date || "",
-                        exp_end_date:
-                          this.props.experience[index].end_date || "",
-                        exp_company: this.props.experience[index].company || "",
-                        currentExperienceIndex: index
-                      });
-                    }}
-                  >
-                    <i className="fas fa-edit"></i>
-                  </button>
+          <div>
+            <div className="profile-creds__cred-info">
+              <span className="profile-creds__cred-info-details">
+                <span className="mb-half">
+                  {titleCase(exp.title)}{" "}
+                  {/* Button to open experience modal and update the state with the details of the item or the fallback value */}
+                  {edit && ( // Show it only if it is the current user's profile
+                    <span>
+                      <button
+                        className="icon-button"
+                        data-toggle="modal"
+                        data-target="#expModal"
+                        onClick={() => {
+                          this.props.onModalOpen();
+                          this.setState({
+                            exp_userId: this.props.userId || "",
+                            exp_id: this.props.experience[index].id || "",
+                            exp_current:
+                              this.props.experience[index].current || false,
+                            exp_location:
+                              this.props.experience[index].location || "",
+                            exp_description:
+                              this.props.experience[index].description || "",
+                            exp_title: this.props.experience[index].title || "",
+                            exp_start_date:
+                              this.props.experience[index].start_date || "",
+                            exp_end_date:
+                              this.props.experience[index].end_date || "",
+                            exp_company:
+                              this.props.experience[index].company || "",
+                            currentExperienceIndex: index
+                          });
+                        }}
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
 
-                  {/* Opens on delete confirmation modal */}
-                  <button
-                    className="icon-button icon-button--danger"
-                    onClick={() => {
-                      this.onDeleteExperience(exp.id);
-                    }}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
+                      {/* Opens on delete confirmation modal */}
+                      <button
+                        className="icon-button icon-button--danger"
+                        onClick={() => {
+                          this.onDeleteExperience(exp.id);
+                        }}
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                    </span>
+                  )}
                 </span>
-              )}
-            </p>
-            <p>{titleCase(exp.company)}</p>
-            <p className="help-text">
-              <Moment format="MMMM YYYY">{exp.start_date}</Moment> -{" "}
-              {exp.end_date === null ? (
-                "Present"
-              ) : (
-                <Moment format="MMMM YYYY">{exp.end_date}</Moment>
-              )}
-            </p>
-            <p className="help-text">{exp.location}</p>
-          </span>
-        </div>
-        <div className="profile-creds__cred-info-description">
-          {exp.description}
+                <span className="mb-half">{titleCase(exp.company)}</span>
+                <span className="help-text mb-half">
+                  <Moment format="MMMM YYYY">{exp.start_date}</Moment> -{" "}
+                  {exp.end_date === null ? (
+                    "Present"
+                  ) : (
+                    <Moment format="MMMM YYYY">{exp.end_date}</Moment>
+                  )}
+                </span>
+                <p className="help-text">{exp.location}</p>
+              </span>
+            </div>
+            <div className="profile-creds__cred-info-description">
+              <p className="profile-creds__cred-info-description--preserve">
+                {exp.description}
+              </p>
+            </div>
+          </div>
         </div>
       </li>
     ));
 
     const eduItems = education.map((edu, index) => (
       <li key={edu.id} className="list-group-item profile-creds__cred">
-        <div className="profile-creds__cred-info">
-          <div className="profile-creds__cred-info-icon">
-            <i className="fas fa-graduation-cap fa-3x" />
+        <div className="d-flex bb">
+          <div>
+            <div className="profile-creds__cred-info-icon profile-creds__cred-info-icon--golden">
+              <i className="fas fa-graduation-cap fa-3x" />
+            </div>
           </div>
-          <span className="profile-creds__cred-info-details">
-            <p>
-              {titleCase(`${edu.degree.trim()}`)}
-              {", "}
-              {titleCase(`${edu.fieldofstudy.trim()}`)}
-              {/* Button to open education modal and update the state with the details of the item or the fallback value */}
-              {edit && ( // Show it only if it is the current user's profile
-                <span>
-                  <button
-                    className="icon-button"
-                    data-toggle="modal"
-                    data-target="#eduModal"
-                    onClick={() => {
-                      this.props.onModalOpen();
-                      this.setState({
-                        edu_userId: this.props.user_id || "",
-                        edu_id: this.props.education[index].id || "",
-                        edu_current:
-                          this.props.education[index].current || false,
-                        edu_school: this.props.education[index].school || "",
-                        edu_description:
-                          this.props.education[index].description || "",
-                        edu_degree: this.props.education[index].degree || "",
-                        edu_start_date:
-                          this.props.education[index].start_date || "",
-                        edu_end_date:
-                          this.props.education[index].end_date || "",
-                        edu_fieldofstudy:
-                          this.props.education[index].fieldofstudy || "",
-                        currentEducationIndex: index
-                      });
-                    }}
-                  >
-                    <i className="fas fa-edit"></i>
-                  </button>
-                  {/* Opens on delete confirmation modal */}
-                  <button
-                    className="icon-button icon-button--danger"
-                    onClick={() => {
-                      this.onDeleteEducation(edu.id);
-                    }}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
+
+          <div>
+            <div className="profile-creds__cred-info">
+              <span className="profile-creds__cred-info-details">
+                <span className="mb-half">
+                  {titleCase(`${edu.degree.trim()}`)}
+                  {", "}
+                  {titleCase(`${edu.fieldofstudy.trim()}`)}
+                  {/* Button to open education modal and update the state with the details of the item or the fallback value */}
+                  {edit && ( // Show it only if it is the current user's profile
+                    <span>
+                      <button
+                        className="icon-button"
+                        data-toggle="modal"
+                        data-target="#eduModal"
+                        onClick={() => {
+                          this.props.onModalOpen();
+                          this.setState({
+                            edu_userId: this.props.user_id || "",
+                            edu_id: this.props.education[index].id || "",
+                            edu_current:
+                              this.props.education[index].current || false,
+                            edu_school:
+                              this.props.education[index].school || "",
+                            edu_description:
+                              this.props.education[index].description || "",
+                            edu_degree:
+                              this.props.education[index].degree || "",
+                            edu_start_date:
+                              this.props.education[index].start_date || "",
+                            edu_end_date:
+                              this.props.education[index].end_date || "",
+                            edu_fieldofstudy:
+                              this.props.education[index].fieldofstudy || "",
+                            currentEducationIndex: index
+                          });
+                        }}
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                      {/* Opens on delete confirmation modal */}
+                      <button
+                        className="icon-button icon-button--danger"
+                        onClick={() => {
+                          this.onDeleteEducation(edu.id);
+                        }}
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                    </span>
+                  )}
                 </span>
-              )}
-            </p>
-            <p>{titleCase(edu.school)}</p>
-            <p className="help-text">
-              <Moment format="MMMM YYYY">{edu.start_date}</Moment> -{" "}
-              {edu.end_date === null ? (
-                "Present"
-              ) : (
-                <Moment format="MMMM YYYY">{edu.end_date}</Moment>
-              )}
-            </p>
-          </span>
-        </div>
-        <div className="profile-creds__cred-info-description">
-          {edu.description}
+                <span className="mb-half">{titleCase(edu.school)}</span>
+                <p className="help-text">
+                  <Moment format="MMMM YYYY">{edu.start_date}</Moment> -{" "}
+                  {edu.end_date === null ? (
+                    "Present"
+                  ) : (
+                    <Moment format="MMMM YYYY">{edu.end_date}</Moment>
+                  )}
+                </p>
+              </span>
+            </div>
+            <div className="profile-creds__cred-info-description">
+              {edu.description}
+            </div>
+          </div>
         </div>
       </li>
     ));

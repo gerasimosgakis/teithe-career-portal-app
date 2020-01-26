@@ -1,5 +1,4 @@
 import { API } from "aws-amplify";
-import gravatar from "gravatar";
 import {
   GET_PROFILES_SUCCESS,
   GET_PROFILES_FAIL,
@@ -25,7 +24,6 @@ import {
   SEARCH_GRADUATES_FAIL,
   ADD_CV_FAIL,
   ADD_CV_SUCCESS,
-  SET_LOADING,
   CLEAR_SUCCESS_FAILURE
 } from "./types";
 
@@ -115,12 +113,6 @@ export const searchGraduates = params => async dispatch => {
  */
 export const createProfile = (user, email, profileData) => async dispatch => {
   profileData.id = user;
-  const avatar = gravatar.url(email, {
-    s: "300", // size
-    r: "pg", // rating
-    d: "mm" //default
-  });
-  profileData.avatar = avatar;
   try {
     const result = await API.post("teithe-career-portal-api", `/profiles`, {
       body: profileData
@@ -145,12 +137,6 @@ export const createProfile = (user, email, profileData) => async dispatch => {
  */
 export const editProfile = (user, email, profileData) => async dispatch => {
   profileData.id = user;
-  const avatar = gravatar.url(email, {
-    s: "300", // size
-    r: "pg", // rating
-    d: "mm" //default
-  });
-  profileData.avatar = avatar;
   try {
     const editProfileResponse = await API.put(
       "teithe-career-portal-api",
