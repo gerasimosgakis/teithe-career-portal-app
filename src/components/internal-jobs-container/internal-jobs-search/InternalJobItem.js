@@ -44,7 +44,9 @@ class InternalJobItem extends Component {
               </div>
             )}
           </div>
-          <div>{ReactHtmlParser(job.description)}</div>
+          <div className="preserve-text">
+            {ReactHtmlParser(job.description)}
+          </div>
         </div>
       </div>
     );

@@ -154,16 +154,18 @@ class ProfileHeader extends Component {
                   )}
                 </p>
               </div>
-              <div className="help-text">
-                <div className="mb1">
-                  <i className="fas fa-graduation-cap fa-1x mr1" />
-                  {titleCase(profile.educations[0].school)}
+              {this.props.user.attributes["custom:role"] !== "recruiter" && (
+                <div className="help-text">
+                  <div className="mb1">
+                    <i className="fas fa-graduation-cap fa-1x mr1" />
+                    {titleCase(profile.educations[0].school)}
+                  </div>
+                  <div>
+                    <i className="fa fa-briefcase fa-1x mr1" />
+                    &nbsp;{titleCase(profile.experiences[0].company)}
+                  </div>
                 </div>
-                <div>
-                  <i className="fa fa-briefcase fa-1x mr1" />
-                  &nbsp;{titleCase(profile.experiences[0].company)}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

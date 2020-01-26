@@ -49,3 +49,7 @@ a {
 .bb {
   border-bottom: 1px solid $subtle-gray;
 }
+
+.preserve-text {
+  white-space: pre-line;
+}

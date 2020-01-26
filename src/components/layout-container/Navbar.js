@@ -58,19 +58,6 @@ class Navbar extends Component {
             </Link>
           </li>
           <li
-            onClick={() => this.setState({ activeTabClassName: "job-search" })}
-            className={
-              this.state.activeTabClassName === "job-search"
-                ? "nav-item active"
-                : "nav-item"
-            }
-          >
-            <Link className="nav-link" to="/job-search">
-              {" "}
-              External Jobs
-            </Link>
-          </li>
-          <li
             onClick={() =>
               this.setState({ activeTabClassName: "add-job-post" })
             }
