@@ -47,7 +47,7 @@ class ProfileHeader extends Component {
         <div className="contain">
           <div className="profile-header__heading">
             <div className="d-flex justify-space-between">
-              <h2>{titleCase(profile.name)}</h2>
+              <h2 className="bolded">{titleCase(profile.name)}</h2>
               {this.props.edit && (
                 <button
                   className="btn transparent-btn"
@@ -61,16 +61,18 @@ class ProfileHeader extends Component {
                 </button>
               )}
             </div>
-            <p className="lead-text mb3">
+            <h4 className="lead-text mb3">
               {titleCase(profile.status)}{" "}
               {isEmpty(profile.company) ? null : (
                 <span>at {titleCase(profile.company)}</span>
               )}
-            </p>
+            </h4>
             <div className="d-flex justify-space-between mb3">
               <div>
                 {isEmpty(profile.location) ? null : (
-                  <p className="help-text">{titleCase(profile.location)}</p>
+                  <p className="lead help-text">
+                    {titleCase(profile.location)}
+                  </p>
                 )}
                 {isEmpty(profile.phone) ? null : (
                   <p className="help-text">
