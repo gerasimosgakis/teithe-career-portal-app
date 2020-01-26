@@ -6,6 +6,9 @@
 
     &-emoji-button {
       font-size: 16pt;
+      &--small {
+        font-size: 12pt;
+      }
     }
 
     &-emoji-picker {
