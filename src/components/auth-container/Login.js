@@ -46,6 +46,7 @@ class Login extends Component {
           <h1>Log In</h1>
           <p className="header-label">Sign in to your career portal account</p>
         </div>
+        {/* Login Form */}
         <div className="login__form">
           <form onSubmit={this.onSubmit}>
             <div className="form__field-label">Email Address</div>
@@ -81,6 +82,7 @@ class Login extends Component {
             </div>
           </form>
         </div>
+        {/* / Login Form */}
       </div>
     );
   }

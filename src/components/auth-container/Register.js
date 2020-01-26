@@ -75,6 +75,7 @@ class Register extends Component {
     this.props.confirmUser(userConfirm, this.props.history);
   };
 
+  // Consfirmation form
   renderConfirmationForm() {
     return (
       <form>
@@ -96,6 +97,7 @@ class Register extends Component {
     );
   }
 
+  // Register Form
   renderForm() {
     // Select options for role
     const options = [

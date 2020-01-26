@@ -1,5 +1,5 @@
 import Moment from "react-moment";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
 import Avatar from "react-avatar";
@@ -33,10 +33,6 @@ function Messages(props) {
     props.chatkit.sendSimpleMessage({ text: pendingMessage });
     setPendingMessage("");
   };
-
-  useEffect(() => {
-    messageList.current.scrollTop = messageList.current.scrollHeight;
-  });
 
   const messages = props.chatkit.messages.map(m => ({
     id: m.id,
