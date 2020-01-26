@@ -131,9 +131,22 @@
 
 .messages {
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  &-emoji-picker {
+    &--show {
+      position: absolute;
+      bottom: 60pt;
+      z-index: 1;
+    }
+    &--hide {
+      position: absolute;
+      top: -1000pt;
+    }
+  }
 }
 
 .messages__titlebar {
@@ -162,7 +175,6 @@
 }
 
 .messages__messages {
-  // background-image: linear-gradient(#d3d3d3, #d0d0d0);
   flex: 1;
   padding: 2rem 4rem;
   overflow-y: scroll;
@@ -248,6 +260,7 @@
 }
 
 .messages__compose {
+  position: relative;
   box-sizing: border-box;
   padding: 1rem;
   background: #ededed;
@@ -257,10 +270,15 @@
 .messages__compose__input {
   box-sizing: border-box;
   border: none;
-  padding: 0.75rem;
+  padding: 0.75rem 3em 0.75rem 0.75rem;
   border-radius: 0.5rem;
   width: 100%;
   flex-grow: 1;
+}
+
+.messages__compose-emoji-button {
+  position: absolute;
+  right: 80pt;
 }
 
 .user-bg {

@@ -1,12 +1,14 @@
 import Moment from "react-moment";
 import React, { useState } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
-
 import Avatar from "react-avatar";
 import titleCase from "../../shared/functions/titleCase";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 function Messages(props) {
   const [pendingMessage, setPendingMessage] = useState("");
+  let [showEmoji, setShowEmoji] = useState(false);
   const messageList = React.createRef();
 
   /**
@@ -32,6 +34,22 @@ function Messages(props) {
     }
     props.chatkit.sendSimpleMessage({ text: pendingMessage });
     setPendingMessage("");
+  };
+
+  /**
+   * Shows or hides Emoji picker
+   */
+  const toggleEmojiPicker = () => {
+    setShowEmoji(!showEmoji);
+  };
+
+  /**
+   * Adds emoji to the message
+   * @param {*} e
+   */
+  const addEmoji = e => {
+    let emoji = e.native;
+    setPendingMessage(pendingMessage + emoji);
   };
 
   const messages = props.chatkit.messages.map(m => ({
@@ -63,6 +81,15 @@ function Messages(props) {
           <Message key={message.id} {...message} />
         ))}
       </div>
+      <span
+        className={
+          showEmoji
+            ? "messages-emoji-picker messages-emoji-picker--show"
+            : "messages-emoji-picker messages-emoji-picker--hide"
+        }
+      >
+        <Picker onSelect={addEmoji} />
+      </span>
       <div className="messages__compose">
         <input
           className="messages__compose__input mr1"
@@ -72,6 +99,17 @@ function Messages(props) {
           onChange={handleMessageChange}
           onKeyDown={handleMessageKeyDown}
         />
+        <button
+          type="button"
+          className={
+            showEmoji
+              ? "button messages__compose-emoji-button lead-text"
+              : "button messages__compose-emoji-button help-text"
+          }
+          onClick={toggleEmojiPicker}
+        >
+          <i className="far fa-grin"></i> {showEmoji}
+        </button>
         <button className="button transparent-btn" onClick={handleSendMessage}>
           Send
         </button>

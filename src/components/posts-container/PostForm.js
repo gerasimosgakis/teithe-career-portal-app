@@ -16,10 +16,16 @@ class PostForm extends Component {
     };
   }
 
+  /**
+   * Shows or hides Emoji picker
+   */
   toggleEmojiPicker = () => {
     this.setState({ showEmoji: !this.state.showEmoji });
   };
 
+  /**
+   * Adds the emoji into the text
+   */
   addEmoji = e => {
     let emoji = e.native;
     this.setState({
