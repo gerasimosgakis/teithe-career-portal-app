@@ -31,6 +31,7 @@ class Navbar extends Component {
   getProfileData = () => {
     this.props.getProfileById(this.props.auth.user.username);
     this.props.history.push("/profile");
+    this.setState({ activeTabClassName: "" });
   };
 
   render() {
