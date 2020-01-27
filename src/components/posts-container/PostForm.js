@@ -16,6 +16,26 @@ class PostForm extends Component {
     };
   }
 
+  componentWillMount() {
+    // Create event listener for emoji button
+    document.addEventListener("mousedown", this.handleEmojiClickOut, false);
+  }
+
+  componentWillUnmount() {
+    // Remove event listener
+    document.removeEventListener("mousedown", this.handleEmojiClickOut, false);
+  }
+
+  /**
+   * Handle Emoji click outside
+   */
+  handleEmojiClickOut = event => {
+    if (this.emojiButton.contains(event.target)) {
+      return;
+    }
+    this.setState({ showEmoji: false });
+  };
+
   /**
    * Shows or hides Emoji picker
    */
@@ -75,6 +95,7 @@ class PostForm extends Component {
               </div>
               <div className="d-flex justify-space-between">
                 <button
+                  ref={element => (this.emojiButton = element)}
                   type="button"
                   className={
                     this.state.showEmoji
