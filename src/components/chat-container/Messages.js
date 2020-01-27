@@ -1,5 +1,5 @@
 import Moment from "react-moment";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 import Avatar from "react-avatar";
 import titleCase from "../../shared/functions/titleCase";
@@ -10,6 +10,33 @@ function Messages(props) {
   const [pendingMessage, setPendingMessage] = useState("");
   let [showEmoji, setShowEmoji] = useState(false);
   const messageList = React.createRef();
+  let emojiButton;
+
+  /**
+   * UseEffect replaces lifecycle hooks
+   */
+  useEffect(() => {
+    // Create event listener for emoji button
+    document.addEventListener("mousedown", handleEmojiClickOut, false);
+    return () => {
+      // Remove event listener
+      return document.removeEventListener(
+        "mousedown",
+        handleEmojiClickOut,
+        false
+      );
+    };
+  });
+
+  /**
+   * Handle Emoji click outside
+   */
+  const handleEmojiClickOut = event => {
+    if (emojiButton.contains(event.target)) {
+      return;
+    }
+    setShowEmoji(false);
+  };
 
   /**
    * Calls handleSendMessage on Enter
@@ -100,6 +127,7 @@ function Messages(props) {
           onKeyDown={handleMessageKeyDown}
         />
         <button
+          ref={element => (emojiButton = element)}
           type="button"
           className={
             showEmoji
