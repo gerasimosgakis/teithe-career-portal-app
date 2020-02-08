@@ -156,7 +156,6 @@ class JobSearch extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
     await this.getFavoriteJobsDetails();
     await this.setState({
       loading: true
@@ -230,13 +229,16 @@ class JobSearch extends Component {
     const jobIndex = this.state.favoriteJobs.findIndex(
       item => item === jobId.toString() || item === jobId
     );
-    console.log(jobIndex);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
       this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
     } else {
+      const newFavoriteJobs = [
+        ...this.state.favoriteJobs.slice(0, jobIndex),
+        ...this.state.favoriteJobs.slice(jobIndex + 1)
+      ];
       this.setState({
-        favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
+        favoriteJobs: newFavoriteJobs
       });
       this.props.removeJob(jobId);
     }
