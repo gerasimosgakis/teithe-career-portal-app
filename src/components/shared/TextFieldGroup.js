@@ -13,7 +13,8 @@ const TextFieldGroup = ({
   onKeyPress,
   required,
   disabled,
-  small
+  small,
+  autocomplete
 }) => {
   return (
     <div className="form-group">
@@ -31,6 +32,7 @@ const TextFieldGroup = ({
         onKeyPress={onKeyPress}
         disabled={disabled}
         required={required}
+        autocomplete={autocomplete}
       />
       {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="error-text mt1">{error}</div>}
