@@ -6,6 +6,7 @@
 const titleCase = text => {
   return text
     ? text
+        .trim()
         .split(" ")
         .map(word => (word = word[0].toUpperCase() + word.slice(1)))
         .join(" ")
