@@ -156,6 +156,7 @@ class JobSearch extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
+    console.log(this.state);
     await this.getFavoriteJobsDetails();
     await this.setState({
       loading: true
@@ -227,8 +228,9 @@ class JobSearch extends Component {
   onFavoriteClick = jobId => {
     const currentUserId = this.props.auth.user.username;
     const jobIndex = this.state.favoriteJobs.findIndex(
-      item => item === jobId.toString()
+      item => item === jobId.toString() || item === jobId
     );
+    console.log(jobIndex);
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
       this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
@@ -260,9 +262,10 @@ class JobSearch extends Component {
               <JobItem
                 key={index}
                 job={job}
-                favoriteJob={this.state.favoriteJobs.includes(
-                  job.jobId.toString()
-                )}
+                favoriteJob={
+                  this.state.favoriteJobs.includes(job.jobId.toString()) ||
+                  this.state.favoriteJobs.includes(job.jobId)
+                }
                 onClick={this.onFavoriteClick}
               ></JobItem>
             ))}
@@ -275,7 +278,8 @@ class JobSearch extends Component {
                       key={index + this.state.favoriteJobsDetails.length}
                       job={job}
                       favoriteJob={this.state.favoriteJobs.includes(
-                        job.jobId.toString()
+                        job.jobId.toString() ||
+                          this.state.favoriteJobs.includes(job.jobId)
                       )}
                       onClick={this.onFavoriteClick}
                     ></JobItem>
