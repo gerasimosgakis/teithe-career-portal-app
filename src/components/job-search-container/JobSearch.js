@@ -227,14 +227,18 @@ class JobSearch extends Component {
   onFavoriteClick = jobId => {
     const currentUserId = this.props.auth.user.username;
     const jobIndex = this.state.favoriteJobs.findIndex(
-      item => item === jobId.toString()
+      item => item === jobId.toString() || item === jobId
     );
     if (jobIndex < 0) {
       this.setState({ favoriteJobs: [...this.state.favoriteJobs, jobId] });
       this.props.addJob({ user_id: currentUserId, job_id: jobId.toString() });
     } else {
+      const newFavoriteJobs = [
+        ...this.state.favoriteJobs.slice(0, jobIndex),
+        ...this.state.favoriteJobs.slice(jobIndex + 1)
+      ];
       this.setState({
-        favoriteJobs: [...this.state.favoriteJobs.splice(jobIndex, 1)]
+        favoriteJobs: newFavoriteJobs
       });
       this.props.removeJob(jobId);
     }
@@ -260,9 +264,10 @@ class JobSearch extends Component {
               <JobItem
                 key={index}
                 job={job}
-                favoriteJob={this.state.favoriteJobs.includes(
-                  job.jobId.toString()
-                )}
+                favoriteJob={
+                  this.state.favoriteJobs.includes(job.jobId.toString()) ||
+                  this.state.favoriteJobs.includes(job.jobId)
+                }
                 onClick={this.onFavoriteClick}
               ></JobItem>
             ))}
@@ -275,7 +280,8 @@ class JobSearch extends Component {
                       key={index + this.state.favoriteJobsDetails.length}
                       job={job}
                       favoriteJob={this.state.favoriteJobs.includes(
-                        job.jobId.toString()
+                        job.jobId.toString() ||
+                          this.state.favoriteJobs.includes(job.jobId)
                       )}
                       onClick={this.onFavoriteClick}
                     ></JobItem>
