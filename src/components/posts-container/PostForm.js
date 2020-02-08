@@ -30,7 +30,10 @@ class PostForm extends Component {
    * Handle Emoji click outside
    */
   handleEmojiClickOut = event => {
-    if (this.emojiButton.contains(event.target)) {
+    if (
+      this.emojiButton.contains(event.target) ||
+      this.emojiPicker.contains(event.target)
+    ) {
       return;
     }
     this.setState({ showEmoji: false });
@@ -114,6 +117,7 @@ class PostForm extends Component {
           </div>
         </div>
         <span
+          ref={element => (this.emojiPicker = element)}
           className={
             this.state.showEmoji
               ? "posts__post-form-emoji-picker posts__post-form-emoji-picker--show"

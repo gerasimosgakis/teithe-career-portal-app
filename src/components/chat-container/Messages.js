@@ -11,6 +11,7 @@ function Messages(props) {
   let [showEmoji, setShowEmoji] = useState(false);
   const messageList = React.createRef();
   let emojiButton;
+  let emojiPicker;
 
   /**
    * UseEffect replaces lifecycle hooks
@@ -32,7 +33,10 @@ function Messages(props) {
    * Handle Emoji click outside
    */
   const handleEmojiClickOut = event => {
-    if (emojiButton.contains(event.target)) {
+    if (
+      emojiButton.contains(event.target) ||
+      emojiPicker.contains(event.target)
+    ) {
       return;
     }
     setShowEmoji(false);
@@ -109,6 +113,7 @@ function Messages(props) {
         ))}
       </div>
       <span
+        ref={element => (emojiPicker = element)}
         className={
           showEmoji
             ? "messages-emoji-picker messages-emoji-picker--show"
