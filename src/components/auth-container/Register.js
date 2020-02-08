@@ -121,7 +121,6 @@ class Register extends Component {
           placeholder="Email Address"
           name="email"
           type="email"
-          autocomplete="nope"
           value={this.state.email}
           onChange={this.onChange}
         />
