@@ -40,7 +40,7 @@ Amplify.configure({
       },
       {
         name: "teithe-career-portal-api-part-2",
-        endpoint: "https://vka3j9daw5.execute-api.us-east-1.amazonaws.com/dev",
+        endpoint: "https://izfbpr8o8c.execute-api.us-east-1.amazonaws.com/dev",
         region: config.apiGateway.REGION
       }
     ]
