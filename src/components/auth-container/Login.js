@@ -4,9 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import TextFieldGroup from "../shared/TextFieldGroup";
 import { loginUser, clearErrors } from "../../redux/actions/authActions";
-import Spinner from "../shared/Spinner";
 import LoadingText from "../shared/LoadingText";
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +20,8 @@ class Login extends Component {
     this.props.clearErrors();
   }
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   onSubmit = async e => {
@@ -87,17 +85,14 @@ class Login extends Component {
     );
   }
 }
-
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object,
   errors: PropTypes.object
 };
-
 const mapStateToProps = state => ({
   auth: state.auth
 });
-
 export default connect(mapStateToProps, { loginUser, clearErrors })(
   withRouter(Login)
 );
