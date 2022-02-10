@@ -9,7 +9,7 @@
     "emoji-mart": "^2.11.2",
     "mixin-deep": "^2.0.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.9.0",
     "react-avatar": "^3.7.0",
     "react-bootstrap": "^0.32.4",
